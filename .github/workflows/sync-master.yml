@@ -1,34 +1,31 @@
-name: Auto-Sync Master from Working Copy
+name: Auto merge working_copy to master
 
 on:
-  workflow_dispatch:   # manual trigger from Actions tab
+  workflow_run:
+    workflows: ["Tests on push"]
+    types:
+      - completed
 
 jobs:
-  sync-master:
+  merge:
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'working_copy'
     runs-on: ubuntu-latest
+
     steps:
-      # 1️⃣ Checkout your repo
-      - name: Checkout repository
-        uses: actions/checkout@v5
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # fetch all branches
 
-      # 2️⃣ Configure Git
       - name: Configure Git
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
 
-      # 3️⃣ Add upstream remote (the working_copy repo)
-      - name: Add upstream remote
+      - name: Merge working_copy into master
         run: |
-          git remote remove upstream || echo "no upstream yet"
-          git remote add upstream https://github.com/gcbhoj/working_copy.git
-          git fetch upstream
-
-      # 4️⃣ Merge upstream/main into master and push
-      - name: Merge upstream into master
-        run: |
+          git fetch origin working_copy
           git checkout master || git checkout -b master
-          git merge upstream/main --ff-only || git merge upstream/main --allow-unrelated-histories -m "Auto-sync master"
+          git merge origin/working_copy --ff-only || git merge origin/working_copy --allow-unrelated-histories -m "Auto merge working_copy into master"
           git push origin master
