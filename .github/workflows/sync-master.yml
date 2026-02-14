@@ -22,7 +22,8 @@ jobs:
       # 3️⃣ Add upstream remote (the working_copy repo)
       - name: Add upstream remote
         run: |
-          git remote add upstream https://github.com/gcbhoj/ZipCartPrototype/working_copy.git
+          git remote remove upstream || echo "no upstream yet"
+          git remote add upstream https://github.com/gcbhoj/working_copy.git
           git fetch upstream
 
       # 4️⃣ Merge upstream/main into master and push
