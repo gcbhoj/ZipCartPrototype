@@ -1,27 +1,31 @@
-name: Auto-Sync Master
+name: Auto-Sync Master from Working Copy
 
 on:
-  workflow_dispatch:  # manual trigger
+  workflow_dispatch:   # manual trigger from Actions tab
 
 jobs:
   sync-master:
     runs-on: ubuntu-latest
     steps:
+      # 1️⃣ Checkout your repo
       - name: Checkout repository
         uses: actions/checkout@v5
         with:
           fetch-depth: 0  # fetch all branches
 
+      # 2️⃣ Configure Git
       - name: Configure Git
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
+      # 3️⃣ Add upstream remote (the working_copy repo)
       - name: Add upstream remote
         run: |
-          git remote add upstream https://github.com/bhojgc/working_copy.git
+          git remote add upstream https://github.com/gcbhoj/ZipCartPrototype/working_copy.git
           git fetch upstream
 
+      # 4️⃣ Merge upstream/main into master and push
       - name: Merge upstream into master
         run: |
           git checkout master || git checkout -b master
