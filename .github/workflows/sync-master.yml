@@ -21,7 +21,7 @@ jobs:
 
       - name: Add upstream remote
         run: |
-          git remote add upstream https://github.com/USERNAME/WORKING.git
+          git remote add upstream https://github.com/USERNAME/WORKING_COPY.git
           git fetch upstream
 
       - name: Merge upstream into master
