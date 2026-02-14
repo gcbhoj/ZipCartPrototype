@@ -1,0 +1,35 @@
+[
+  {
+    "System Requirements": " Python Installed",
+    "steps": [
+      {
+        "Step:1": "cd backend/pythonServices",
+        "description": "moving to python services folder "
+      },
+      {
+        "Step:2": "python -m venv .venv",
+        "description": "creating a virtual environment"
+      },
+      {
+        "Step:3": ".venv\\Scripts\\activate",
+        "description": "activating the virtual environment"
+      },
+      {
+        "Step:4": "pip install -r requirements.txt",
+        "description": "Installing the required libraries"
+      },
+      {
+        "Step:5": "python -m ipykernel install --user --name=.venv --display-name \"Python (.venv)\"",
+        "description": "registering the virtual environment"
+      },
+      {
+        "Step:5": "in Vs code on the select kernal and select juypter kernal and refresh and then select the virtual environment created.",
+        "description": "this step is only if runnig scripts in jupiter notebook"
+      },
+      {
+        "Step:6": "Make sure you are in the virtual environment and run python server.py",
+        "description": "run as flask application"
+      }
+    ]
+  }
+]
