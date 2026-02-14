@@ -2,8 +2,8 @@ name: Auto-Sync Master
 
 on:
   workflow_dispatch:   # manual trigger
-  schedule:            # optional auto-sync every hour
-    - cron: '0 * * * *'
+  # schedule:            # optional auto-sync every hour
+  #   - cron: '0 * * * *'
 
 jobs:
   sync-master:
@@ -21,7 +21,7 @@ jobs:
 
       - name: Add upstream remote
         run: |
-          git remote add upstream https://github.com/USERNAME/UPSTREAM_REPO.git
+          git remote add upstream https://github.com/USERNAME/working_copy.git
           git fetch upstream
 
       - name: Merge upstream into master
