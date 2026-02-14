@@ -1,8 +1,8 @@
 name: Auto Merge working_copy to master
 
+# Trigger automatically whenever working_copy is pushed
 on:
-  workflow_dispatch:   # manual trigger from Actions tab
-  push:                # also triggers if working_copy is pushed
+  push:
     branches:
       - working_copy
 
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout repository
+      # 1️⃣ Checkout repository with all branches
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0  # fetch all branches
