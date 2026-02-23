@@ -5,6 +5,8 @@ from models.PostWeightDTO import PostWeightDTO
 
 
 
+#The following method can be used to send post requests between sping boot applicaiton and python services
+# The following method takes the postweightdto and the path as a variable and sends the object weight
 
 def send_post_request_to_spring(postWeightDto: PostWeightDTO, springPath: str):
     payload = asdict(postWeightDto)

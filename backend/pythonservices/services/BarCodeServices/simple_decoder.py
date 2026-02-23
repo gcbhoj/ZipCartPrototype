@@ -1,7 +1,12 @@
 import cv2
 from pyzbar.pyzbar import decode
 
-# fileInputPath = "../../sample-barcodeimages/dentastick.jpg"
+
+
+
+
+# The following function takes the image as image path as argument and then 
+# cleans the image and reads barcode and returns barcode value
 
 def simple_decoder(image_path):
     # Read the image

@@ -64,3 +64,7 @@ var/
 # OS and Editor files
 .DS_Store # macOS
 Thumbs.db # Windows
+
+## Ignored Folders
+backend/pythonservices/Fruits_Vegetables/
+backend/pythonservices/MLMODELS/
