@@ -38,6 +38,9 @@ def predictImage(processedImage):
     predicted_index = np.argmax(score)
     product_name = class_names[predicted_index]
     confidence = float(score[predicted_index] * 100)
+    
+    if confidence < 75:
+        return {"Could not identify product. Please try again."}
 
 
 
