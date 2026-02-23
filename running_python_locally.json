@@ -29,26 +29,41 @@
       },
       {
         "Step": 6,
-        "Command": "In VS Code, select the Jupyter kernel, refresh, and then select the virtual environment created",
-        "Description": "This step is required only if running scripts in Jupyter Notebook"
+        "command": "https://drive.google.com/file/d/1ok7v8tNwcXUp1jY1nof5LSxYSlv31PFT/view?usp=sharing",
+        "Description": "DownLoad the Fruits_Vegetables from the above Link and unzip the Folder into python services NOTE: THE FOLDER STRUCTURE MUST BE Fruits_Vegetables/test,train,validate"
       },
       {
         "Step": 7,
+        "command": "",
+        "Description": "Create a empty Folder named MLMODELS inside pythonservices"
+      },
+      {
+        "Step": 8,
+        "Command": "Navigate to MLMODELS_ipynbfiles  and open fruits_veg_classification.ipynb file, ",
+        "Description": "In VS Code, select the Jupyter kernel, refresh, and then select the virtual environment created"
+      },
+      {
+        "Step": 9,
+        "Command": "Click on RunAll in the fruits_veg_classification.ipynb file",
+        "Description": "This process will take some time to run, once complete a new file will be generated in MLMODELS Folder"
+      },
+      {
+        "Step": 10,
         "Command": "python server.py",
         "Description": "Run the Flask application from the virtual environment"
       },
       {
-        "Step": 8,
+        "Step": 11,
         "Command": "pip install <libraryname>",
         "Description": "Install a new Python library in the activated virtual environment"
       },
       {
-        "Step": 9,
+        "Step": 12,
         "Command": "Add the library name to requirements.txt",
         "Description": "Ensure the newly added library is included for other clients"
       },
       {
-        "Step": 10,
+        "Step": 13,
         "Command": "pip freeze > requirements.txt",
         "Description": "Freeze all library versions from the virtual environment"
       }
