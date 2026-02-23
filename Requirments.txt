@@ -1,3 +1,42 @@
 //TODO FRONTEND DEV
 1. Set up Ionic Project
 2. connect with the spring to send image and retreive the list
+
+
+Step 1: Open Registry Editor as Admin
+
+Press Win + S → type regedit
+
+Right-click Registry Editor → select Run as administrator
+
+Running as admin is required to access HKEY_LOCAL_MACHINE.
+
+Step 2: Navigate Carefully
+
+In Registry Editor, expand the keys in this order:
+
+HKEY_LOCAL_MACHINE
+  └─ SYSTEM
+      └─ CurrentControlSet
+          └─ Control
+              └─ FileSystem
+
+Click each folder (triangle/arrow) to expand.
+
+Don’t type manually in the search box; the search box doesn’t always work for nested keys.
+
+Step 3: Add or Edit LongPathsEnabled
+
+Look for LongPathsEnabled in the right pane.
+
+If it exists, double-click it → set Value = 1 → click OK
+
+If it does not exist, right-click → New → DWORD (32-bit) Value
+
+Name it: LongPathsEnabled
+
+Double-click it → set Value = 1 → OK
+
+Step 4: Restart Windows
+
+Changes only take effect after a restart.

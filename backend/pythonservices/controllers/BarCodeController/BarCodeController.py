@@ -10,6 +10,8 @@ import os
 bar_code_controller = Blueprint('bar_code_controller',__name__)
 
 
+# the following block of code can be used to decode simple bar codes that spring progam is having difficulty reading with
+#  this method is to be called from sping when a user uploads a picture of the barcode
 
 
 @bar_code_controller.route('/api/py/simple_decode',methods=['POST'])

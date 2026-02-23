@@ -1,34 +1,81 @@
 [
   {
-    "System Requirements": " Python Installed",
+    "System Requirements": "Python Installed",
     "steps": [
       {
-        "Step:1": "cd backend/pythonServices",
-        "description": "moving to python services folder "
+        "Step": 1,
+        "Command": "cd backend/pythonServices",
+        "Description": "Move to the python services folder"
       },
       {
-        "Step:2": "python -m venv .venv",
-        "description": "creating a virtual environment"
+        "Step": 2,
+        "Command": "python -m venv .venv",
+        "Description": "Create a virtual environment"
       },
       {
-        "Step:3": ".venv\\Scripts\\activate",
-        "description": "activating the virtual environment"
+        "Step": 3,
+        "Command": ".venv\\Scripts\\activate",
+        "Description": "Activate the virtual environment"
       },
       {
-        "Step:4": "pip install -r requirements.txt",
-        "description": "Installing the required libraries"
+        "Step": 4,
+        "Command": "pip install -r requirements.txt",
+        "Description": "Install all required libraries"
       },
       {
-        "Step:5": "python -m ipykernel install --user --name=.venv --display-name \"Python (.venv)\"",
-        "description": "registering the virtual environment"
+        "Step": 5,
+        "Command": "python -m ipykernel install --user --name=.venv --display-name \"Python (.venv)\"",
+        "Description": "Register the virtual environment for Jupyter Notebook"
       },
       {
-        "Step:5": "in Vs code on the select kernal and select juypter kernal and refresh and then select the virtual environment created.",
-        "description": "this step is only if runnig scripts in jupiter notebook"
+        "Step": 6,
+        "Command": "In VS Code, select the Jupyter kernel, refresh, and then select the virtual environment created",
+        "Description": "This step is required only if running scripts in Jupyter Notebook"
       },
       {
-        "Step:6": "Make sure you are in the virtual environment and run python server.py",
-        "description": "run as flask application"
+        "Step": 7,
+        "Command": "python server.py",
+        "Description": "Run the Flask application from the virtual environment"
+      },
+      {
+        "Step": 8,
+        "Command": "pip install <libraryname>",
+        "Description": "Install a new Python library in the activated virtual environment"
+      },
+      {
+        "Step": 9,
+        "Command": "Add the library name to requirements.txt",
+        "Description": "Ensure the newly added library is included for other clients"
+      },
+      {
+        "Step": 10,
+        "Command": "pip freeze > requirements.txt",
+        "Description": "Freeze all library versions from the virtual environment"
+      }
+    ]
+  },
+  {
+    "Error Name": "Windows Long Path Error",
+    "Error Resolution Steps": [
+      {
+        "Step": 1,
+        "Command": "Open Registry Editor as Admin",
+        "Description": "Press Win + S → type regedit. Right-click Registry Editor → select 'Run as administrator'. Running as admin is required to access HKEY_LOCAL_MACHINE."
+      },
+      {
+        "Step": 2,
+        "Command": "Navigate Carefully",
+        "Description": "In Registry Editor, expand the keys in this order: HKEY_LOCAL_MACHINE → SYSTEM → CurrentControlSet → Control → FileSystem. Click each folder (triangle/arrow) to expand. Don’t type manually in the search box."
+      },
+      {
+        "Step": 3,
+        "Command": "Add or Edit LongPathsEnabled",
+        "Description": "Look for LongPathsEnabled in the right pane. If it exists, double-click it → set Value = 1 → OK. If it does not exist, right-click → New → DWORD (32-bit) Value, Name it 'LongPathsEnabled', double-click it → set Value = 1 → OK."
+      },
+      {
+        "Step": 4,
+        "Command": "Restart Windows",
+        "Description": "Changes only take effect after a restart."
       }
     ]
   }
