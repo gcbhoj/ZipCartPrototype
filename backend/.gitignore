@@ -66,5 +66,5 @@ var/
 Thumbs.db # Windows
 
 ## Ignored Folders
-backend/pythonservices/Fruits_Vegetables/
-backend/pythonservices/MLMODELS/
+Fruits_Vegetables/
+MLMODELS/
