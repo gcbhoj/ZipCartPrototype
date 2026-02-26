@@ -3,6 +3,10 @@ import numpy as np
 import os
 from tensorflow.keras.models import load_model
 
+from models.FruitsvegPredictResultDTO import FruitsVegPredictResults
+
+
+
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
 model_path = os.path.join(base_dir, "..", "..", "MLModels", "fruits_veg_model.keras")
@@ -41,10 +45,9 @@ def predictImage(processedImage):
     
     if confidence < 75:
         return {"Could not identify product. Please try again."}
+    
+    result = FruitsVegPredictResults(confidence,product_name)
 
 
 
-    return {
-        "productName": product_name,
-        "confidence": confidence
-    }
+    return result
