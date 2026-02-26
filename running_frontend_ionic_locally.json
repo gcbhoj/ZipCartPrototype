@@ -1,0 +1,14 @@
+[
+  {
+    "step:1": "cd:frontend\\zipcartprototype",
+    "Description": "Move to front end folder"
+  },
+  {
+    "step:2": "npm install",
+    "Description": "Installing all the necessary dependencies"
+  },
+  {
+    "step:3": "ionic serve",
+    "Description": "Opens the ionic web application in local browser at port 8100"
+  }
+]
