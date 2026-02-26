@@ -1,0 +1,7 @@
+{
+  "name": "zipcartprototype",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
