@@ -1,0 +1,26 @@
+<ion-content class="ion-padding">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>User Information</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-item>
+      <ion-input
+        placeholder="Enter user name"
+        [(ngModel)]="user.userName"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        type="email"
+        placeholder="Enter email"
+        [(ngModel)]="user.userEmailAddress"
+      ></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="addNewUser()">Submit</ion-button>
+</ion-content>
