@@ -1,0 +1,18 @@
+.row-container {
+  display: flex;
+  flex-direction: column; /* force row layout */
+  height: 100%;
+  width: 100%;
+}
+
+.panel {
+  flex: 1; /* each takes half screen */
+  padding: 10px;
+  // overflow-y: auto; /* scroll only inside panel if needed */
+}
+
+/* remove nested scrolling from child ion-content */
+app-adduser ion-content,
+app-viewalluser ion-content {
+  --overflow: hidden;
+}

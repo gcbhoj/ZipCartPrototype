@@ -1,0 +1,14 @@
+[
+  {
+    "step:1": "cd:mockserver",
+    "Description": "Move to mockserver"
+  },
+  {
+    "step:2": "npm install",
+    "Description": "Installing all the necessary dependencies"
+  },
+  {
+    "step:3": "nodemon server.js",
+    "Description": "Runs the application at port 3000"
+  }
+]

@@ -1,0 +1,46 @@
+ Dependencies
+node_modules
+/coverage
+
+# Testing
+/test/!(*.js)
+/test/*/!(*.js)
+
+# Production
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.npm
+.eslintcache
+.stylelintcache
+
+# Optional SCM
+.hg
+.mbedignore
+.dsc
+
+# IDEs and editors
+.idea
+.vscode
+*.suo
+*.user
+*.cas
+*.sap
+*.eclipselipse
+
+# Environment variables
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# Miscellaneous
+pids
+*.pid
+*.seed
+*.log
+*.swo
+.node-gyp
+.wafwaf-light
