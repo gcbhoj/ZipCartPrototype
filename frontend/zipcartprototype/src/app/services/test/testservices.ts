@@ -9,6 +9,7 @@ import { RegisterUser } from 'src/app/classes/RegisterUserDTO';
 })
 export class Testservices {
   private backendUrl: string = 'http://10.0.2.2:3000/mockServer/users/';
+  private backendUrlEmulator: string = 'http://10.0.2.2:3000/mockServer/users/';
 
   // ✅ BehaviorSubject to hold user list
   private usersSubject = new BehaviorSubject<UserDisplay[]>([]);
