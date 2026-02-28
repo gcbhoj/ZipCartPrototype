@@ -10,5 +10,21 @@
   {
     "step:3": "ionic serve",
     "Description": "Opens the ionic web application in local browser at port 8100"
+  },
+  {
+    "step:4": "to connect to emulator",
+    "Description": "In Test service change the backend url to backendEmulator"
+  },
+  {
+    "step:5": "ionic build",
+    "Description": "Builds the application ready for android NOTE: ANDROID STUDIO MYST BE INSTALLED AND CONFIGURED"
+  },
+  {
+    "step:6": "npx cap sync android",
+    "Description": "Syncs the project to android"
+  },
+  {
+    "step:7": "ionic capacitor run android -l --external and select WI-fi",
+    "Description": "Runs the application in android emulator"
   }
 ]

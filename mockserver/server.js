@@ -10,6 +10,6 @@ app.use(cors());
 
 app.use("/mockServer/users", userRoutes);
 
-app.listen(PORT, () => {
+app.listen(PORT,  () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
