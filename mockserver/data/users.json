@@ -8,20 +8,5 @@
     "userId": "1c78af65-695e-4048-835a-17d91331e147",
     "userName": "Jane Doe",
     "userEmailAddress": "janedoe@janedoe.com"
-  },
-  {
-    "userId": "ad92e0ad-bf00-4d79-a087-d1ad880258c4",
-    "userName": "hello",
-    "userEmailAddress": "hello@hello.com"
-  },
-  {
-    "userId": "13bd68c7-b76d-4321-ab11-1cd397eb8aa4",
-    "userName": "hello1",
-    "userEmailAddress": "hello1@hello1.com"
-  },
-  {
-    "userId": "87b31457-c2bd-4056-a9ed-08dea7f6a5e2",
-    "userName": "hello3",
-    "userEmailAddress": "hello3@hello.com"
   }
 ]

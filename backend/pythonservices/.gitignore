@@ -57,3 +57,4 @@ Thumbs.db # Windows
 
 Fruits_Vegetables/
 MLMODELS/
+.ipynb_checkpoints/*
