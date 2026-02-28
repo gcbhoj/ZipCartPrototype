@@ -1,5 +1,9 @@
-import RegistrationModel from "./RegistrationModel.js";
-import { retrieveAllUsers, registerNewUser } from "./UserService.js";
+import RegistrationModel from "../models/RegistrationModel.js";
+import {
+  retrieveAllUsers,
+  registerNewUser,
+  retrieveUserById,
+} from "../services/UserService.js";
 
 const addNewUser = async (req, res) => {
   try {
@@ -33,4 +37,16 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-export { addNewUser, getAllUsers };
+const logInUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const result = await retrieveUserById(userId);
+
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(500).json({ message: "internal server error" });
+  }
+};
+
+export { addNewUser, getAllUsers, logInUser };

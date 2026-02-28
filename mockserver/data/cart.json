@@ -1,0 +1,92 @@
+[
+  {
+    "cartId": "1234",
+    "storeName": "Walmart",
+    "userId": "b0cc1cf8-bbf8-4e12-9c0a-c6513a50bb9a",
+    "status": "open",
+    "hst": 3.58,
+    "totalAmount": 31.08,
+    "transactionDateAndTime": "2026-02-05",
+    "packagedProducts": [
+      {
+        "productName": "Lays Chips",
+        "itemNumber": "abc123",
+        "imageUrl": "https://www.google.com/images/laychips.jpg",
+        "quantity": 2,
+        "unitPrice": 5,
+        "totalPrice": 10
+      },
+      {
+        "productName": "Coca Cola Can",
+        "itemNumber": "cc001",
+        "imageUrl": "https://www.google.com/images/coke.jpg",
+        "quantity": 6,
+        "unitPrice": 2,
+        "totalPrice": 12
+      }
+    ],
+    "unpackagedProducts": [
+      {
+        "productName": "Bananas",
+        "itemNumber": "fruit001",
+        "imageUrl": "https://www.google.com/images/banana.jpg",
+        "weight": 5,
+        "unitPrice": 0.5,
+        "totalPrice": 2.5
+      },
+      {
+        "productName": "Tomatoes",
+        "itemNumber": "veg001",
+        "imageUrl": "https://www.google.com/images/tomato.jpg",
+        "weight": 3,
+        "unitPrice": 1,
+        "totalPrice": 3
+      }
+    ]
+  },
+  {
+    "cartId": "5678",
+    "storeName": "Costco",
+    "userId": "1c78af65-695e-4048-835a-17d91331e147",
+    "status": "open",
+    "hst": 2.78,
+    "totalAmount": 24.18,
+    "transactionDateAndTime": "2026-02-05",
+    "packagedProducts": [
+      {
+        "productName": "Kraft Cheese",
+        "itemNumber": "kc001",
+        "imageUrl": "https://www.google.com/images/cheese.jpg",
+        "quantity": 1,
+        "unitPrice": 8,
+        "totalPrice": 8
+      },
+      {
+        "productName": "Pepsi Bottle",
+        "itemNumber": "pb001",
+        "imageUrl": "https://www.google.com/images/pepsi.jpg",
+        "quantity": 2,
+        "unitPrice": 3,
+        "totalPrice": 6
+      }
+    ],
+    "unpackagedProducts": [
+      {
+        "productName": "Apples",
+        "itemNumber": "fruit002",
+        "imageUrl": "https://www.google.com/images/apple.jpg",
+        "weight": 6,
+        "unitPrice": 0.7,
+        "totalPrice": 4.2
+      },
+      {
+        "productName": "Carrots",
+        "itemNumber": "veg002",
+        "imageUrl": "https://www.google.com/images/carrot.jpg",
+        "weight": 4,
+        "unitPrice": 0.8,
+        "totalPrice": 3.2
+      }
+    ]
+  }
+]
