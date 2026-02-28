@@ -2,14 +2,15 @@ import { RegisterUser } from './../../../classes/RegisterUserDTO';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
-  IonContent,
   IonItem,
   IonInput,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
   IonList,
   IonButton,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent,
+  IonLabel,
 } from '@ionic/angular/standalone';
 import { Testservices } from 'src/app/services/test/testservices';
 
@@ -19,15 +20,16 @@ import { Testservices } from 'src/app/services/test/testservices';
   styleUrls: ['./adduser.component.scss'],
   standalone: true,
   imports: [
-    IonContent,
     IonItem,
     IonInput,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
     IonList,
     IonButton,
     FormsModule,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent,
+    IonLabel,
   ],
 })
 export class AdduserComponent implements OnInit {
