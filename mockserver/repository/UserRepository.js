@@ -1,8 +1,8 @@
-import UserModel from "./UserModel.js";
-import { readData } from "./reader.js";
-import { writeData } from "./writer.js";
-import { updateData } from "./updater.js";
-import { deleteData } from "./remover.js";
+import UserModel from "../models/UserModel.js";
+import { readData } from "../utils/reader.js";
+import { writeData } from "../utils/writer.js";
+import { updateData } from "../utils/updater.js";
+import { deleteData } from "../utils/remover.js";
 
 const filePath = "./data/users.json";
 

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Testservices } from './../../../services/test/testservices';
+import { Testservices } from '../../../services/mockserver/test/testservices';
 import { Component, OnInit } from '@angular/core';
 import {
   IonContent,

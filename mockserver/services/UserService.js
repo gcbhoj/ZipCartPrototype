@@ -1,8 +1,13 @@
 import { v4 as uuidv4 } from "uuid";
-import User from "./UserModel.js";
-import RegistrationModel from "./RegistrationModel.js";
-import RegistrationResponseModel from "./RegistrationResponseModel.js";
-import { getUserByEmail, addNewUser, getAllUsers } from "./UserRepository.js";
+import User from "../models/UserModel.js";
+import RegistrationModel from "../models/RegistrationModel.js";
+import RegistrationResponseModel from "../models/RegistrationResponseModel.js";
+import {
+  getUserByEmail,
+  addNewUser,
+  getAllUsers,
+  getUserById,
+} from "../repository/UserRepository.js";
 
 const registerNewUser = async (regModel) => {
   // 1. Validate DTO
@@ -51,6 +56,16 @@ const retrieveAllUsers = async () => {
   return responseList;
 };
 
+const retrieveUserById = async (userId) => {
+  const result = await getUserById(userId);
 
+  const response = new RegistrationResponseModel(
+    result.userId,
+    result.userName,
+    "Log in Successfull",
+  );
 
-export { retrieveAllUsers, registerNewUser };
+  return response;
+};
+
+export { retrieveAllUsers, registerNewUser, retrieveUserById };

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -7,6 +7,7 @@ import {
   IonButton,
   IonButtons,
 } from '@ionic/angular/standalone';
+import { CartComponent } from '../components/cart/cart.component';
 
 @Component({
   selector: 'app-tab2',
@@ -19,9 +20,11 @@ import {
     IonTitle,
     IonContent,
     IonButton,
-    IonButtons
-],
+    IonButtons,
+    CartComponent,
+  ],
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
   constructor() {}
+  ngOnInit() {}
 }

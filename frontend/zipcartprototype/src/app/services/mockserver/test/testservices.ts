@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
 import { UserDisplay } from 'src/app/classes/UserDisplayDTO';
 import { RegisterUser } from 'src/app/classes/RegisterUserDTO';
+import { LoginResponse } from 'src/app/classes/LoginResponseDTO';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Testservices {
-  private backendUrl: string = 'http://10.0.2.2:3000/mockServer/users/';
+  private backendUrl: string = 'http://localhost:3000/mockServer/users/';
   private backendUrlEmulator: string = 'http://10.0.2.2:3000/mockServer/users/';
 
   // ✅ BehaviorSubject to hold user list
@@ -31,6 +32,12 @@ export class Testservices {
       tap(() => {
         this.loadAllUsers(); // refresh users after add
       }),
+    );
+  }
+
+  logInUser(userId: string) {
+    return this.http.get<LoginResponse>(
+      this.backendUrl + 'authenticate/' + userId,
     );
   }
 }
