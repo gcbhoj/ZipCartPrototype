@@ -12,7 +12,10 @@ import { UnpackageditemComponent } from '../unpackageditem/unpackageditem.compon
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
   standalone: true,
-  imports: [PackageditemComponent, UnpackageditemComponent],
+  imports: [
+    PackageditemComponent,
+    UnpackageditemComponent,
+    ],
 })
 export class CartComponent implements OnInit {
   userId: string | null = '';

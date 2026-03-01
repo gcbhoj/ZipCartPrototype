@@ -45,6 +45,15 @@
         "weight": 3,
         "unitPrice": 1,
         "totalPrice": 3
+      },
+      {
+        "productId": "vwx",
+        "productName": "Carrots",
+        "itemNumber": "veg002",
+        "imageUrl": "https://www.google.com/images/carrot.jpg",
+        "weight": 4,
+        "unitPrice": 0.8,
+        "totalPrice": 3.2
       }
     ]
   },

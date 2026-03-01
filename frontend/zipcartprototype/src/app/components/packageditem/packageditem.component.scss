@@ -1,16 +1,25 @@
+ion-card {
+  margin: 5px; /* optional: reduce space between cards */
+}
+
+ion-card-content {
+  padding: 5px 8px; /* reduce top/bottom and left/right padding */
+}
+
+ion-card-content p {
+  margin: 2px 0; /* remove extra spacing between lines */
+  font-size: 0.85rem; /* smaller font */
+}
+
+ion-card-content p {
+  margin: 2px 0; /* remove extra spacing between lines */
+  font-size: 0.85rem; /* smaller font */
+}
+
 ion-avatar img {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
+  width: 40px; /* default is larger */
+  height: 40px;
 }
-
-h3 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-p {
-  margin: 2px 0;
-  font-size: 13px;
+ion-row {
+  margin-bottom: 2px; /* small gap between rows */
 }
