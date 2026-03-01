@@ -1,5 +1,5 @@
 import fs from "node:fs/promises";
-import UserModel from "./UserModel.js";
+import UserModel from "../models/UserModel.js";
 
 const writeData = async (filePath, newData) => {
   try {
@@ -29,7 +29,5 @@ const writeData = async (filePath, newData) => {
     throw error;
   }
 };
-
-
 
 export { writeData };

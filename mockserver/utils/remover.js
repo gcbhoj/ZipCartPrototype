@@ -1,5 +1,5 @@
 import fs from "node:fs/promises";
-import UserModel from "./UserModel.js";
+import UserModel from "../models/UserModel.js";
 
 const filePath = "./data/users.json";
 
@@ -41,7 +41,5 @@ const deleteData = async (filePath, documentId) => {
     return null;
   }
 };
-
-
 
 export { deleteData };

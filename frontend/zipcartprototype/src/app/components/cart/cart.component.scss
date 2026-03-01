@@ -1,0 +1,67 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent full-page scroll */
+}
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* full viewport */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* HEADER: 3 columns */
+.cart-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr; /* store-info, budget, login */
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.header-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.store-info p,
+.budget p,
+.login p {
+  margin: 0;
+}
+
+/* PRODUCTS AREA - scrollable only */
+.cart-products {
+  flex: 1; /* take remaining space */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1px; /* space between product components */
+  padding-right: 5px; /* optional: prevent scrollbar overlap */
+}
+
+/* FOOTER - fixed at bottom with 2 columns */
+.cart-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columns: taxes | total */
+  align-items: center;
+  justify-items: center;
+  padding: 10px 5px;
+  border-top: 1px solid #ccc;
+  background-color: gray;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  gap: 10px;
+}
+
+.footer-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
