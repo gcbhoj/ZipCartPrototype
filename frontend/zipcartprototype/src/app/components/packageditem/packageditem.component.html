@@ -1,3 +1,30 @@
-<p>
-  packageditem works!
-</p>
+<ion-card *ngFor="let product of products">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <!-- Product Image -->
+        <ion-col size="3">
+          <ion-avatar>
+            <img [src]="product.imageUrl" alt="{{ product.productName }}" />
+          </ion-avatar>
+        </ion-col>
+
+        <!-- Product Info -->
+        <ion-col size="6">
+          <h3>{{ product.productName }}</h3>
+          <p>Item #: {{ product.itemNumber }}</p>
+          <p>Qty: {{ product.quantity }}</p>
+          <p>Unit: ${{ product.unitPrice }}</p>
+          <p>Total: ${{ product.totalPrice }}</p>
+        </ion-col>
+
+        <!-- Action Buttons -->
+        <ion-col size="3" class="ion-text-right">
+          <ion-button size="small">+</ion-button>
+          <ion-button size="small">-</ion-button>
+          <ion-button size="small"> Remove </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

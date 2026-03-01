@@ -12,7 +12,7 @@ import {
   IonCardContent,
   IonLabel,
 } from '@ionic/angular/standalone';
-import { Testservices } from 'src/app/services/test/testservices';
+import { Testservices } from 'src/app/services/mockserver/test/testservices';
 
 @Component({
   selector: 'app-adduser',

@@ -9,6 +9,7 @@
     "transactionDateAndTime": "2026-02-05",
     "packagedProducts": [
       {
+        "productId": "abc",
         "productName": "Lays Chips",
         "itemNumber": "abc123",
         "imageUrl": "https://www.google.com/images/laychips.jpg",
@@ -17,6 +18,7 @@
         "totalPrice": 10
       },
       {
+        "productId": "def",
         "productName": "Coca Cola Can",
         "itemNumber": "cc001",
         "imageUrl": "https://www.google.com/images/coke.jpg",
@@ -27,6 +29,7 @@
     ],
     "unpackagedProducts": [
       {
+        "productId": "ghi",
         "productName": "Bananas",
         "itemNumber": "fruit001",
         "imageUrl": "https://www.google.com/images/banana.jpg",
@@ -35,6 +38,7 @@
         "totalPrice": 2.5
       },
       {
+        "productId": "jkl",
         "productName": "Tomatoes",
         "itemNumber": "veg001",
         "imageUrl": "https://www.google.com/images/tomato.jpg",
@@ -54,6 +58,7 @@
     "transactionDateAndTime": "2026-02-05",
     "packagedProducts": [
       {
+        "productId": "mno",
         "productName": "Kraft Cheese",
         "itemNumber": "kc001",
         "imageUrl": "https://www.google.com/images/cheese.jpg",
@@ -62,6 +67,7 @@
         "totalPrice": 8
       },
       {
+        "productId": "pqr",
         "productName": "Pepsi Bottle",
         "itemNumber": "pb001",
         "imageUrl": "https://www.google.com/images/pepsi.jpg",
@@ -72,6 +78,7 @@
     ],
     "unpackagedProducts": [
       {
+        "productId": "stu",
         "productName": "Apples",
         "itemNumber": "fruit002",
         "imageUrl": "https://www.google.com/images/apple.jpg",
@@ -80,6 +87,7 @@
         "totalPrice": 4.2
       },
       {
+        "productId": "vwx",
         "productName": "Carrots",
         "itemNumber": "veg002",
         "imageUrl": "https://www.google.com/images/carrot.jpg",

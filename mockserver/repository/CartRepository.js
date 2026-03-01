@@ -16,6 +16,7 @@ const getAllCarts = async () => {
     const packagedProducts = c.packagedProducts.map(
       (p) =>
         new PackagedProduct(
+          p.productId,
           p.productName,
           p.itemNumber,
           p.imageUrl,
@@ -28,6 +29,7 @@ const getAllCarts = async () => {
     const unpackagedProducts = c.unpackagedProducts.map(
       (u) =>
         new UnpackagedProduct(
+          u.productId,
           u.productName,
           u.itemNumber,
           u.imageUrl,

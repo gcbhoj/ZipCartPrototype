@@ -1,5 +1,6 @@
 class PackagedProduct {
   constructor(
+    productId,
     productName,
     itemNumber,
     imageUrl,
@@ -7,6 +8,7 @@ class PackagedProduct {
     unitPrice,
     totalPrice,
   ) {
+    this.productId = productId;
     this.productName = productName;
     this.itemNumber = itemNumber;
     this.imageUrl = imageUrl;

@@ -6,8 +6,8 @@ import {
   IonContent,
   IonButton,
 } from '@ionic/angular/standalone';
-import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Router } from '@angular/router';
+import { LoginComponent } from '../components/login/login.component';
 
 @Component({
   selector: 'app-tab1',
@@ -19,8 +19,8 @@ import { Router } from '@angular/router';
     IonToolbar,
     IonTitle,
     IonContent,
-    ExploreContainerComponent,
     IonButton,
+    LoginComponent,
   ],
 })
 export class Tab1Page {
