@@ -7,6 +7,7 @@ import {
   IonButton,
   IonButtons,
 } from '@ionic/angular/standalone';
+import { Router } from '@angular/router';
 import { CartComponent } from '../components/cart/cart.component';
 
 @Component({
@@ -25,6 +26,10 @@ import { CartComponent } from '../components/cart/cart.component';
   ],
 })
 export class Tab2Page implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
   ngOnInit() {}
+
+  goToScanItemsPage() {
+    this.router.navigate(['/scanitems']);
+  }
 }
