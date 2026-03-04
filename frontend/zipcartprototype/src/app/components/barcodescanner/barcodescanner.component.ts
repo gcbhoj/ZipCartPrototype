@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
+import { BarCodeScannerResultDTO } from 'src/app/classes/BarCodeScannerResultDTO';
+import { Datasharing } from 'src/app/services/datasharing/datasharing';
+import {
+  Barcode,
+  BarcodeScanner,
+  BarcodeFormat,
+  BarcodeValueType,
+} from '@capacitor-mlkit/barcode-scanning';
 import { AlertController } from '@ionic/angular';
 import {
   IonList,
@@ -30,8 +37,12 @@ import {
 export class BarcodescannerComponent implements OnInit {
   isSupported = false;
   barcodes: Barcode[] = [];
+  barcodeResults: BarCodeScannerResultDTO[] = [];
 
-  constructor(private alertController: AlertController) {}
+  constructor(
+    private alertController: AlertController,
+    private dataSharing: Datasharing,
+  ) {}
 
   ngOnInit() {
     BarcodeScanner.isSupported().then((result) => {
@@ -42,18 +53,24 @@ export class BarcodescannerComponent implements OnInit {
   async scan(): Promise<void> {
     const granted = await this.requestPermissions();
     if (!granted) {
-      this.presentAlert();
+      await this.presentAlert();
       return;
     }
-    const { barcodes } = await BarcodeScanner.scan();
-    this.barcodes.push(...barcodes);
 
-    const successAlert = await this.alertController.create({
-      header: 'BarCode Read Sucessfully',
-      message: this.barcodes.map((b) => b.rawValue).join(', '),
-      buttons: ['ok'],
+    const { barcodes } = await BarcodeScanner.scan();
+
+    const results = barcodes.map((b) => this.mapToDto(b));
+    this.barcodeResults.push(...results);
+    // sharing the scanned results to the scan items page to create a post request
+    this.shareScannedResults(results[0]);
+
+    const alert = await this.alertController.create({
+      header: 'Barcode Read Successfully',
+      message: JSON.stringify(results[0], null, 2),
+      buttons: ['OK'],
     });
-    await successAlert.present();
+
+    await alert.present();
   }
 
   async requestPermissions(): Promise<boolean> {
@@ -68,5 +85,18 @@ export class BarcodescannerComponent implements OnInit {
       buttons: ['OK'],
     });
     await alert.present();
+  }
+
+  mapToDto(barcode: Barcode): BarCodeScannerResultDTO {
+    return {
+      isValid: !!barcode.rawValue,
+      text: barcode.rawValue ?? '',
+      format: barcode.format?.toString(),
+      contentType: barcode.valueType?.toString(),
+    };
+  }
+
+  shareScannedResults(result: BarCodeScannerResultDTO) {
+    this.dataSharing.exchangeBarCodeScannedResults(result);
   }
 }
