@@ -11,6 +11,7 @@ import { LoginResponse } from 'src/app/classes/LoginResponseDTO';
 export class Testservices {
   private backendUrl: string = 'http://localhost:3000/mockServer/users/';
   private backendUrlEmulator: string = 'http://10.0.2.2:3000/mockServer/users/';
+  private backendUrlDevice: string = 'http://10.0.0.89:3000/mockserver/users/';
 
   // ✅ BehaviorSubject to hold user list
   private usersSubject = new BehaviorSubject<UserDisplay[]>([]);
@@ -20,15 +21,17 @@ export class Testservices {
 
   // ✅ Load users from backend and update BehaviorSubject
   loadAllUsers(): void {
-    this.http.get<UserDisplay[]>(this.backendUrl + 'get_all_users').subscribe({
-      next: (users) => this.usersSubject.next(users),
-      error: (err) => console.error('Failed to load users', err),
-    });
+    this.http
+      .get<UserDisplay[]>(this.backendUrlDevice + 'get_all_users')
+      .subscribe({
+        next: (users) => this.usersSubject.next(users),
+        error: (err) => console.error('Failed to load users', err),
+      });
   }
 
   // ✅ Add new user and refresh list automatically
   addNewUser(user: RegisterUser): Observable<any> {
-    return this.http.post<any>(this.backendUrl + 'register', user).pipe(
+    return this.http.post<any>(this.backendUrlDevice + 'register', user).pipe(
       tap(() => {
         this.loadAllUsers(); // refresh users after add
       }),
@@ -37,7 +40,7 @@ export class Testservices {
 
   logInUser(userId: string) {
     return this.http.get<LoginResponse>(
-      this.backendUrl + 'authenticate/' + userId,
+      this.backendUrlDevice + 'authenticate/' + userId,
     );
   }
 }

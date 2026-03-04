@@ -9,6 +9,7 @@ import { Cart } from 'src/app/classes/Cart';
 export class Cartservices {
   private backendUrl: string = 'http://localhost:3000/mockServer/cart/';
   private backendUrlEmulator: string = 'http://10.0.2.2:3000/mockServer/cart/';
+  private backendUrlDevice: string = 'http://10.0.0.89:3000/mockserver/cart/';
 
   private cartSubject = new BehaviorSubject<Cart | null>(null);
   cart$: Observable<Cart | null> = this.cartSubject.asObservable();
@@ -16,9 +17,11 @@ export class Cartservices {
   constructor(private http: HttpClient) {}
 
   getCartByUserId(userId: string): void {
-    this.http.get<Cart>(`${this.backendUrl}retrieve/${userId}`).subscribe({
-      next: (cart: Cart) => this.cartSubject.next(cart),
-      error: (err) => console.error('Failed to load Cart Items', err),
-    });
+    this.http
+      .get<Cart>(`${this.backendUrlDevice}retrieve/${userId}`)
+      .subscribe({
+        next: (cart: Cart) => this.cartSubject.next(cart),
+        error: (err) => console.error('Failed to load Cart Items', err),
+      });
   }
 }
