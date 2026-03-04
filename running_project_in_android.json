@@ -1,0 +1,66 @@
+[
+  {
+    "step:1": "ionic build",
+    "Description": "Builds the project with all changes"
+  },
+  {
+    "step:2": "npx cap sync android",
+    "Description": "Syncs the current project with the android"
+  },
+  {
+    "step:3": "Setting up android phone to communicate with android studio",
+    "Description": "Turning on the developer mode in android phone"
+  },
+  {
+    "step:4": "Open Settings -> About Phone -> Build Number",
+    "Description": "Open the android phone settings and then open about phone and find build number. Most phones have the build number inside software information"
+  },
+  {
+    "step:5": "tab on the build number 7 times",
+    "Description": "This enables the Developer Mode. Provide your pin or password"
+  },
+  {
+    "step:6": "Open Settings -> Developer Options",
+    "Description": "Enable USB Debugging if you wish to connect to phone via USB"
+  },
+  {
+    "step:7": "Enable Wireless Debugging",
+    "Description": "If you wish to connect to phone via wifi"
+  },
+  {
+    "step:8": "Choose Pair device with QR code",
+    "Description": "Opens up the camera to scan qr code"
+  },
+  {
+    "step:9": "Open Android Studio -> MoreActions -> Virtual Device Manager",
+    "Description": "Open the installed android studio nagivate to more actions and then virtual device manager"
+  },
+  {
+    "step:10": "click on the wifi icon -> Pair Using QR code",
+    "Description": ""
+  },
+  {
+    "step:11": "Scan the QR code using the camera generared from step:8",
+    "Description": ""
+  },
+  {
+    "step:12": "connection must be successful",
+    "Description": "Allow all permissions that are required for communication"
+  },
+  {
+    "step:13": "ionic capacitor run android -l --external",
+    "Description": "Run the command in the vs code terminal"
+  },
+  {
+    "step:14": "Select the newly paired device",
+    "Description": "When prompted select the newly paired device, i.e your android phone"
+  },
+  {
+    "step:15": "Select wifi",
+    "Description": "Connecting the device through wifi"
+  },
+  {
+    "step:16": "wait for the application to complete Building",
+    "Description": "VOILA !!!!"
+  }
+]
