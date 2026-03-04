@@ -12,7 +12,7 @@
     "Description": "Opens the ionic web application in local browser at port 8100"
   },
   {
-    "step:4": "to connect to emulator",
+    "step:4": "connecting to emulator",
     "Description": "In Test service change the backend url to backendEmulator"
   },
   {
