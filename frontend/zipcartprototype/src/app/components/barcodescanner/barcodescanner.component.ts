@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BarCodeScannerResultDTO } from 'src/app/classes/BarCodeScannerResultDTO';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
+import { Input } from '@angular/core';
 import {
   Barcode,
   BarcodeScanner,
@@ -9,32 +10,16 @@ import {
   BarcodeValueType,
 } from '@capacitor-mlkit/barcode-scanning';
 import { AlertController } from '@ionic/angular';
-import {
-  IonList,
-  IonItem,
-  IonLabel,
-  IonInput,
-  IonFab,
-  IonFabButton,
-  IonIcon,
-} from '@ionic/angular/standalone';
+import { IonFabButton, IonIcon, IonContent } from '@ionic/angular/standalone';
 @Component({
   selector: 'app-barcodescanner',
   templateUrl: './barcodescanner.component.html',
   styleUrls: ['./barcodescanner.component.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    IonList,
-    IonItem,
-    IonLabel,
-    IonInput,
-    IonFab,
-    IonFabButton,
-    IonIcon,
-  ],
+  imports: [CommonModule, IonFabButton, IonIcon, IonContent],
 })
 export class BarcodescannerComponent implements OnInit {
+  @Input() disabled = false;
   isSupported = false;
   barcodes: Barcode[] = [];
   barcodeResults: BarCodeScannerResultDTO[] = [];
@@ -52,6 +37,10 @@ export class BarcodescannerComponent implements OnInit {
 
   async scan(): Promise<void> {
     const granted = await this.requestPermissions();
+
+    if (this.disabled) {
+      return;
+    }
     if (!granted) {
       await this.presentAlert();
       return;

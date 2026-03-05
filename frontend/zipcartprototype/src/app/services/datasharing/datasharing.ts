@@ -53,6 +53,7 @@ export class Datasharing {
     this.unPackagedProductSharing.next(products);
   }
 
+  //exchanging the bar code scanned results to be used for post method
   exchangeBarCodeScannedResults(
     barCodeScanningResults: BarCodeScannerResultDTO,
   ) {

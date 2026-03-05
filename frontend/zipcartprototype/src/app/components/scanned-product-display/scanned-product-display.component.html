@@ -1,0 +1,79 @@
+<ion-card>
+  <ion-grid>
+    <!-- Image + Product Info -->
+    <ion-row class="ion-align-items-center">
+      <ion-col size="4">
+        <img
+          alt="Product Image"
+          src="https://ionicframework.com/docs/img/demos/card-media.png"
+          style="width: 100%; border-radius: 8px"
+        />
+      </ion-col>
+
+      <ion-col size="4">
+        <strong>Product Name</strong>
+        <p>Lay's Chips</p>
+
+        <strong>Price</strong>
+        <p>$0.75</p>
+      </ion-col>
+
+      <ion-col size="4">
+        <strong>Taxes</strong>
+        <p>$0.25</p>
+
+        <strong>Total</strong>
+        <p>$1.00</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Accordion Section -->
+  <ion-accordion-group>
+    <ion-accordion value="details">
+      <ion-item slot="header">
+        <ion-label><strong>Product Details</strong></ion-label>
+      </ion-item>
+
+      <div slot="content">
+        <!-- Dates -->
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6">
+              <strong>Manufacture Date</strong>
+              <p>12 Jan 2025</p>
+            </ion-col>
+
+            <ion-col size="6">
+              <strong>Expiry Date</strong>
+              <p>12 Jan 2027</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <!-- Scrollable Details -->
+        <div class="scrollable-details">
+          <ion-accordion-group>
+            <ion-accordion value="detail1">
+              <ion-item slot="header">
+                <ion-label>Product Detail 1</ion-label>
+              </ion-item>
+              <div slot="content" class="ion-padding">
+                Detailed specification
+              </div>
+            </ion-accordion>
+
+            <ion-accordion value="detail2">
+              <ion-item slot="header">
+                <ion-label>Product Detail 2</ion-label>
+              </ion-item>
+              <div slot="content" class="ion-padding">
+                Additional product info
+              </div>
+            </ion-accordion>
+          </ion-accordion-group>
+        </div>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+</ion-card>

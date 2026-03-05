@@ -1,9 +1,30 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>scanitems</ion-title>
+    <ion-title>Scan BarCode</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <app-barcodescanner></app-barcodescanner>
+<ion-content [fullscreen]="true" scrollY="false">
+  <div class="page-container">
+    <app-barcodescanner [disabled]="productDisplayed"></app-barcodescanner>
+    <app-scanned-product-display></app-scanned-product-display>
+  </div>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button expand="block" color="primary">
+            Add Item to Cart
+          </ion-button>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-button expand="block" color="medium"> Cancel </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

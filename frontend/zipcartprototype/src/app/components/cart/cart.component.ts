@@ -12,10 +12,7 @@ import { UnpackageditemComponent } from '../unpackageditem/unpackageditem.compon
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
   standalone: true,
-  imports: [
-    PackageditemComponent,
-    UnpackageditemComponent,
-    ],
+  imports: [PackageditemComponent, UnpackageditemComponent],
 })
 export class CartComponent implements OnInit {
   userId: string | null = '';
@@ -31,7 +28,7 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.receiveUserId();
   }
-
+  // Receiving user Id from sharing services
   receiveUserId() {
     this.dataSharing.currentUserId.subscribe((data) => {
       this.userId = data;
@@ -40,7 +37,7 @@ export class CartComponent implements OnInit {
       }
     });
   }
-
+  // Fetching the cart by user Id
   fetchCartByUser(userId: string) {
     this.cartService.getCartByUserId(userId);
 
@@ -56,6 +53,7 @@ export class CartComponent implements OnInit {
     });
   }
 
+  // Sharing the cart Id
   shareCartId() {
     if (this.completeCart) {
       this.cartId = this.completeCart.cartId;
@@ -63,10 +61,12 @@ export class CartComponent implements OnInit {
     }
   }
 
+  // sharing the packaged products received from the cart to display in packaged product component
   sharePackagedProduct() {
     this.dataSharing.exchangePackagedProduct(this.packagedProduct);
   }
 
+  // sharing the unpackaged products received from the cart to display in unpackaged product component
   shareUnPackagedProduct() {
     this.dataSharing.exchangeUnPackagedProduct(this.unpackagedProduct);
   }

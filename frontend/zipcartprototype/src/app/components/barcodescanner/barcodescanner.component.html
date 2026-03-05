@@ -1,16 +1,11 @@
-<ion-list *ngIf="barcodes.length > 0">
-  <ion-item *ngFor="let barcode of barcodes">
-    <ion-label position="stacked">{{ barcode.format }}</ion-label>
-    <ion-input type="text" [value]="barcode.rawValue"></ion-input>
-  </ion-item>
-</ion-list>
+<ion-content class="ion-padding">
 
-<ion-label *ngIf="barcodes.length === 0" class="ion-padding">
-  Press the scan button
-</ion-label>
+  <div class="scan-container">
+    <ion-fab-button size="large" (click)="scan()" [disabled]="!isSupported">
+      <ion-icon name="scan"></ion-icon>
+    </ion-fab-button>
 
-<ion-fab slot="fixed" vertical="bottom" horizontal="end" class="scan-fab">
-  <ion-fab-button (click)="scan()" [disabled]="!isSupported">
-    <ion-icon name="scan"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
+    <p>Tap to scan item</p>
+  </div>
+
+</ion-content>

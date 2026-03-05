@@ -37,6 +37,7 @@ export class UnpackageditemComponent implements OnInit {
     this.receiveCartId();
   }
 
+  // Receiving the cart id IF IN CASE NEEDED
   receiveCartId() {
     this.dataSharing.currentCartId.subscribe((data) => {
       this.cartId = data;
@@ -44,6 +45,7 @@ export class UnpackageditemComponent implements OnInit {
     });
   }
 
+  // Receiving the packaged products
   receiveUnPackagedProducts() {
     this.dataSharing.unPackagedProduct.subscribe((data) => {
       this.products = data;

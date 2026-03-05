@@ -6,10 +6,16 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
+  IonButton,
+  IonFooter,
+  IonGrid,
+  IonRow,
+  IonCol,
 } from '@ionic/angular/standalone';
 import { BarcodescannerComponent } from 'src/app/components/barcodescanner/barcodescanner.component';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { BarCodeScannerResultDTO } from 'src/app/classes/BarCodeScannerResultDTO';
+import { ScannedProductDisplayComponent } from 'src/app/components/scanned-product-display/scanned-product-display.component';
 
 @Component({
   selector: 'app-scanitems',
@@ -24,10 +30,16 @@ import { BarCodeScannerResultDTO } from 'src/app/classes/BarCodeScannerResultDTO
     CommonModule,
     FormsModule,
     BarcodescannerComponent,
+    ScannedProductDisplayComponent,
+    IonButton,
+    IonFooter,
+    IonGrid,
+    IonRow,
+    IonCol,
   ],
 })
 export class ScanitemsPage implements OnInit {
-  constructor(private dataSharing: Datasharing) {}
+  productDisplayed = false;
 
   barCodeResults: BarCodeScannerResultDTO = {
     isValid: false,
@@ -35,6 +47,8 @@ export class ScanitemsPage implements OnInit {
     format: '',
     contentType: '',
   };
+
+  constructor(private dataSharing: Datasharing) {}
 
   ngOnInit() {
     this.receiveBarcodeDetails();
@@ -46,5 +60,13 @@ export class ScanitemsPage implements OnInit {
         this.barCodeResults = data;
       }
     });
+  }
+
+  onProductLoaded() {
+    this.productDisplayed = true;
+  }
+
+  onProductCleared() {
+    this.productDisplayed = false;
   }
 }

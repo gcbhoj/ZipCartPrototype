@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     this.shareUserId();
   }
 
-  // temporary implementaion for login
+  // temporary implementaion for login with hardcoded user Id
   loginUser(userId: string) {
     this.testService.logInUser(userId).subscribe({
       next: (result: LoginResponse) => {
@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // sharing user id to other components
   shareUserId() {
     const userId = this.logIn.userId;
     this.dataSharing.exchangeUserId(userId);
