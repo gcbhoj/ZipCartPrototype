@@ -39,12 +39,13 @@ import { BarcodeService } from 'src/app/services/mockserver/barcodeService/barco
     IonCol,
   ],
 })
+//text: '5000112546415',
 export class ScanitemsPage implements OnInit {
   productDisplayed = false;
 
   barCodeResults: BarCodeScannerResultDTO = {
-    isValid: false,
-    text: '5000112546415"',
+    isValid: true,
+    text: '041570110000',
     format: '',
     contentType: '',
   };

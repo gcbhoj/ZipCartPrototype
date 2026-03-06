@@ -1,0 +1,403 @@
+[
+  {
+    "itemNumber": 1001,
+    "upc": "5000112546415",
+    "productName": "Coca-Cola",
+    "imageURL": "https://images.openfoodfacts.org/images/products/500/011/254/6415/front_de.137.400.jpg",
+    "price": 5.0,
+    "weight": "2 L",
+    "ingredients": [
+      "water",
+      "sugar",
+      "added-sugar",
+      "disaccharide",
+      "e290",
+      "colour",
+      "acid",
+      "e150d",
+      "e338"
+    ],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "Coca-Cola Canada",
+    "manufacturedIn": "Canada",
+    "aboutProduct": "Classic cola flavored carbonated soft drink."
+  },
+  {
+    "itemNumber": 1002,
+    "upc": "049000050158",
+    "productName": "Sprite Lemon-Lime Soda",
+    "imageURL": "https://images.openfoodfacts.org/images/products/049/000/050/158/front_en.3.400.jpg",
+    "price": 4.49,
+    "weight": "2 L",
+    "ingredients": [
+      "carbonated water",
+      "high fructose corn syrup",
+      "citric acid",
+      "natural flavors",
+      "sodium citrate",
+      "sodium benzoate"
+    ],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "The Coca-Cola Company",
+    "manufacturedIn": "USA",
+    "aboutProduct": "Lemon-lime flavored soda."
+  },
+  {
+    "itemNumber": 1003,
+    "upc": "049000028911",
+    "productName": "Fanta Orange Soda",
+    "imageURL": "https://images.openfoodfacts.org/images/products/049/000/028/911/front_en.4.400.jpg",
+    "price": 4.29,
+    "weight": "2 L",
+    "ingredients": [
+      "carbonated water",
+      "high fructose corn syrup",
+      "citric acid",
+      "natural flavors",
+      "modified food starch",
+      "sodium benzoate",
+      "color"
+    ],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "The Coca-Cola Company",
+    "manufacturedIn": "USA",
+    "aboutProduct": "Orange flavored soda drink."
+  },
+  {
+    "itemNumber": 1004,
+    "upc": "012000809151",
+    "productName": "Pepsi Cola",
+    "imageURL": "https://images.openfoodfacts.org/images/products/012/000/809/151/front_en.5.400.jpg",
+    "price": 4.59,
+    "weight": "2 L",
+    "ingredients": [
+      "carbonated water",
+      "high fructose corn syrup",
+      "caramel color",
+      "phosphoric acid",
+      "caffeine",
+      "natural flavors"
+    ],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "PepsiCo",
+    "manufacturedIn": "USA",
+    "aboutProduct": "Classic cola beverage."
+  },
+  {
+    "itemNumber": 1005,
+    "upc": "012000161938",
+    "productName": "Mountain Dew",
+    "imageURL": "https://images.openfoodfacts.org/images/products/012/000/161/938/front_en.4.400.jpg",
+    "price": 4.99,
+    "weight": "2 L",
+    "ingredients": [
+      "carbonated water",
+      "high fructose corn syrup",
+      "citric acid",
+      "natural flavor",
+      "sodium benzoate",
+      "caffeine"
+    ],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "PepsiCo",
+    "manufacturedIn": "USA",
+    "aboutProduct": "Citrus flavored soft drink."
+  },
+  {
+    "itemNumber": 1006,
+    "upc": "041508260003",
+    "productName": "Dr Pepper",
+    "imageURL": "https://images.openfoodfacts.org/images/products/041/508/260/003/front_en.3.400.jpg",
+    "price": 4.79,
+    "weight": "2 L",
+    "ingredients": [
+      "carbonated water",
+      "high fructose corn syrup",
+      "caramel color",
+      "phosphoric acid",
+      "natural flavors",
+      "caffeine"
+    ],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "Keurig Dr Pepper",
+    "manufacturedIn": "USA",
+    "aboutProduct": "Soft drink with unique blend of flavors."
+  },
+  {
+    "itemNumber": 1007,
+    "upc": "070847000328",
+    "productName": "Arizona Green Tea with Honey",
+    "imageURL": "https://images.openfoodfacts.org/images/products/070/847/000/328/front_en.4.400.jpg",
+    "price": 1.99,
+    "weight": "680 ml",
+    "ingredients": [
+      "filtered water",
+      "high fructose corn syrup",
+      "honey",
+      "citric acid",
+      "green tea extract"
+    ],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "Arizona Beverage Company",
+    "manufacturedIn": "USA",
+    "aboutProduct": "Sweetened green tea beverage with honey."
+  },
+  {
+    "itemNumber": 1008,
+    "upc": "041800000038",
+    "productName": "Gatorade Lemon Lime",
+    "imageURL": "https://images.openfoodfacts.org/images/products/041/800/000/038/front_en.3.400.jpg",
+    "price": 2.49,
+    "weight": "591 ml",
+    "ingredients": [
+      "water",
+      "sugar",
+      "dextrose",
+      "citric acid",
+      "salt",
+      "natural flavor"
+    ],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "PepsiCo",
+    "manufacturedIn": "USA",
+    "aboutProduct": "Electrolyte sports drink."
+  },
+  {
+    "itemNumber": 1009,
+    "upc": "4902430780010",
+    "productName": "Pocari Sweat Isotonic Drink",
+    "imageURL": "https://images.openfoodfacts.org/images/products/490/243/078/0010/front_en.3.400.jpg",
+    "price": 2.79,
+    "weight": "500 ml",
+    "ingredients": [
+      "water",
+      "sugar",
+      "citric acid",
+      "sodium chloride",
+      "potassium chloride"
+    ],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "Otsuka Pharmaceutical",
+    "manufacturedIn": "Japan",
+    "aboutProduct": "Isotonic hydration drink."
+  },
+  {
+    "itemNumber": 1010,
+    "upc": "044000032029",
+    "productName": "Oreo Original Cookies",
+    "imageURL": "https://images.openfoodfacts.org/images/products/044/000/032/029/front_en.5.400.jpg",
+    "price": 3.99,
+    "weight": "303 g",
+    "ingredients": [
+      "enriched wheat flour",
+      "sugar",
+      "palm oil",
+      "cocoa",
+      "high fructose corn syrup",
+      "soy lecithin"
+    ],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "Mondelez International",
+    "manufacturedIn": "USA",
+    "aboutProduct": "Chocolate sandwich cookies."
+  },
+  {
+    "itemNumber": 1011,
+    "upc": "028400064505",
+    "productName": "Lay's Classic Potato Chips",
+    "imageURL": "https://images.openfoodfacts.org/images/products/028/400/064/505/front_en.4.400.jpg",
+    "price": 3.49,
+    "weight": "235 g",
+    "ingredients": ["potatoes", "vegetable oil", "salt"],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "Frito-Lay",
+    "manufacturedIn": "USA",
+    "aboutProduct": "Classic salted potato chips."
+  },
+  {
+    "itemNumber": 1012,
+    "upc": "028400064529",
+    "productName": "Doritos Nacho Cheese Chips",
+    "imageURL": "https://images.openfoodfacts.org/images/products/028/400/064/529/front_en.4.400.jpg",
+    "price": 4.29,
+    "weight": "210 g",
+    "ingredients": [
+      "corn",
+      "vegetable oil",
+      "cheddar cheese",
+      "buttermilk",
+      "salt",
+      "spices"
+    ],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "Frito-Lay",
+    "manufacturedIn": "USA",
+    "aboutProduct": "Nacho cheese flavored tortilla chips."
+  },
+  {
+    "itemNumber": 1013,
+    "upc": "016000275410",
+    "productName": "Kellogg's Frosted Flakes",
+    "imageURL": "https://images.openfoodfacts.org/images/products/016/000/275/410/front_en.4.400.jpg",
+    "price": 4.99,
+    "weight": "425 g",
+    "ingredients": [
+      "milled corn",
+      "sugar",
+      "malt flavoring",
+      "salt",
+      "vitamins",
+      "iron"
+    ],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "Kellogg Company",
+    "manufacturedIn": "USA",
+    "aboutProduct": "Sweetened corn flake cereal."
+  },
+  {
+    "itemNumber": 1014,
+    "upc": "030000561516",
+    "productName": "Kraft Macaroni & Cheese Dinner",
+    "imageURL": "https://images.openfoodfacts.org/images/products/030/000/561/516/front_en.4.400.jpg",
+    "price": 2.49,
+    "weight": "200 g",
+    "ingredients": [
+      "macaroni",
+      "wheat flour",
+      "cheese powder",
+      "milk protein",
+      "salt"
+    ],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "Kraft Heinz",
+    "manufacturedIn": "USA",
+    "aboutProduct": "Macaroni pasta with cheese sauce mix."
+  },
+  {
+    "itemNumber": 1015,
+    "upc": "048000001234",
+    "productName": "Pop-Tarts Strawberry",
+    "imageURL": "https://images.openfoodfacts.org/images/products/048/000/001/234/front_en.4.400.jpg",
+    "price": 3.79,
+    "weight": "384 g",
+    "ingredients": [
+      "enriched flour",
+      "corn syrup",
+      "sugar",
+      "palm oil",
+      "strawberries"
+    ],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "Kellogg Company",
+    "manufacturedIn": "USA",
+    "aboutProduct": "Strawberry filled toaster pastries."
+  },
+  {
+    "itemNumber": 1016,
+    "upc": "034000052356",
+    "productName": "Skippy Creamy Peanut Butter",
+    "imageURL": "https://images.openfoodfacts.org/images/products/034/000/052/356/front_en.4.400.jpg",
+    "price": 4.29,
+    "weight": "462 g",
+    "ingredients": [
+      "roasted peanuts",
+      "sugar",
+      "hydrogenated vegetable oil",
+      "salt"
+    ],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "Hormel Foods",
+    "manufacturedIn": "USA",
+    "aboutProduct": "Creamy peanut butter spread."
+  },
+  {
+    "itemNumber": 1017,
+    "upc": "037000373925",
+    "productName": "Pringles Original",
+    "imageURL": "https://images.openfoodfacts.org/images/products/037/000/373/925/front_en.4.400.jpg",
+    "price": 3.99,
+    "weight": "158 g",
+    "ingredients": [
+      "dried potatoes",
+      "vegetable oil",
+      "corn flour",
+      "wheat starch",
+      "salt"
+    ],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "Kellogg Company",
+    "manufacturedIn": "USA",
+    "aboutProduct": "Stackable potato crisps."
+  },
+  {
+    "itemNumber": 1018,
+    "upc": "040000000452",
+    "productName": "Nutella Hazelnut Spread",
+    "imageURL": "https://images.openfoodfacts.org/images/products/040/000/000/452/front_en.4.400.jpg",
+    "price": 5.49,
+    "weight": "400 g",
+    "ingredients": [
+      "sugar",
+      "palm oil",
+      "hazelnuts",
+      "cocoa",
+      "skim milk powder"
+    ],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "Ferrero",
+    "manufacturedIn": "Italy",
+    "aboutProduct": "Chocolate hazelnut spread."
+  },
+  {
+    "itemNumber": 1019,
+    "upc": "041570109843",
+    "productName": "Nature Valley Oats 'n Honey Bars",
+    "imageURL": "https://images.openfoodfacts.org/images/products/041/570/109/843/front_en.4.400.jpg",
+    "price": 3.89,
+    "weight": "252 g",
+    "ingredients": ["whole grain oats", "sugar", "canola oil", "honey", "salt"],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "General Mills",
+    "manufacturedIn": "USA",
+    "aboutProduct": "Crunchy granola bars with oats and honey."
+  },
+  {
+    "itemNumber": 1020,
+    "upc": "041570110000",
+    "productName": "Cheerios Oat Cereal",
+    "imageURL": "https://images.openfoodfacts.org/images/products/041/570/110/000/front_en.4.400.jpg",
+    "price": 4.59,
+    "weight": "340 g",
+    "ingredients": [
+      "whole grain oats",
+      "corn starch",
+      "sugar",
+      "salt",
+      "vitamin e"
+    ],
+    "manufacturedDate": "",
+    "expiryDate": "",
+    "manufactureer": "General Mills",
+    "manufacturedIn": "USA",
+    "aboutProduct": "Whole grain oat breakfast cereal."
+  }
+]
