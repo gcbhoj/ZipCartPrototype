@@ -28,8 +28,4 @@ import { CartComponent } from '../components/cart/cart.component';
 export class Tab2Page implements OnInit {
   constructor(private router: Router) {}
   ngOnInit() {}
-
-  goToScanItemsPage() {
-    this.router.navigate(['/scanitems']);
-  }
 }

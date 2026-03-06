@@ -12,6 +12,20 @@ export const routes: Routes = [
           import('../tab1/tab1.page').then((m) => m.Tab1Page),
       },
       {
+        path: 'scanItems',
+        loadComponent: () =>
+          import('../pages/scanitems/scanitems.page').then(
+            (m) => m.ScanitemsPage,
+          ),
+      },
+      {
+        path: 'fruitsAndVeg',
+        loadComponent: () =>
+          import('../pages/fruits-and-veg/fruits-and-veg.page').then(
+            (m) => m.FruitsAndVegPage,
+          ),
+      },
+      {
         path: 'tab2',
         loadComponent: () =>
           import('../tab2/tab2.page').then((m) => m.Tab2Page),
