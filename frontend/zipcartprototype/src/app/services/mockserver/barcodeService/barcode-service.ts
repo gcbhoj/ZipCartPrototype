@@ -7,7 +7,7 @@ import { BarCodeScannerResultDTO } from 'src/app/classes/BarCodeScannerResultDTO
   providedIn: 'root',
 })
 export class BarcodeService {
-  private backendUrl: string = 'http://localhost:3000/mockserver/cart/';
+  private backendUrl: string = 'http://localhost:3000/mockserver/scanner/';
   private backendUrlEmulator: string = 'http://10.0.2.2:3000/mockserver/cart/';
   private backendUrlDevice: string = 'http://10.0.0.89:3000/mockserver/cart/';
 
