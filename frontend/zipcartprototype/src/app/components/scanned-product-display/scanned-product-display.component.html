@@ -10,7 +10,7 @@
         />
       </ion-col>
 
-      <ion-col size="4">
+      <ion-col>
         <strong>Product Name</strong>
         <p>Lay's Chips</p>
 
@@ -18,7 +18,7 @@
         <p>$0.75</p>
       </ion-col>
 
-      <ion-col size="4">
+      <ion-col>
         <strong>Taxes</strong>
         <p>$0.25</p>
 
@@ -39,14 +39,35 @@
         <!-- Dates -->
         <ion-grid>
           <ion-row>
-            <ion-col size="6">
+            <ion-col>
               <strong>Manufacture Date</strong>
               <p>12 Jan 2025</p>
             </ion-col>
 
-            <ion-col size="6">
+            <ion-col>
               <strong>Expiry Date</strong>
               <p>12 Jan 2027</p>
+            </ion-col>
+
+            <ion-col>
+              <strong>Weight</strong>
+              <p>1lb</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <strong>Manufactured In</strong>
+            </ion-col>
+
+            <ion-col>
+              <strong>Canada</strong>
+            </ion-col>
+
+            <ion-col>
+              <strong>Manufacturer</strong>
+            </ion-col>
+            <ion-col>
+              <strong>Coca-Cola Canada</strong>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -56,7 +77,7 @@
           <ion-accordion-group>
             <ion-accordion value="detail1">
               <ion-item slot="header">
-                <ion-label>Product Detail 1</ion-label>
+                <ion-label>About the Product</ion-label>
               </ion-item>
               <div slot="content" class="ion-padding">
                 Detailed specification
@@ -65,7 +86,16 @@
 
             <ion-accordion value="detail2">
               <ion-item slot="header">
-                <ion-label>Product Detail 2</ion-label>
+                <ion-label>Ingredients</ion-label>
+              </ion-item>
+              <div slot="content" class="ion-padding">
+                Additional product info
+              </div>
+            </ion-accordion>
+
+            <ion-accordion value="detail3">
+              <ion-item slot="header">
+                <ion-label>Specification</ion-label>
               </ion-item>
               <div slot="content" class="ion-padding">
                 Additional product info

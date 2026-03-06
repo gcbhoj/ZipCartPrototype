@@ -7,6 +7,7 @@
 <ion-content [fullscreen]="true" scrollY="false">
   <div class="page-container">
     <app-barcodescanner [disabled]="productDisplayed"></app-barcodescanner>
+    <ion-button (click)="sendBarCode()">sendBarcode Test Only</ion-button>
     <app-scanned-product-display></app-scanned-product-display>
   </div>
 </ion-content>
