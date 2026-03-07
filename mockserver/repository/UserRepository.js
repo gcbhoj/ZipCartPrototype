@@ -4,7 +4,12 @@ import { writeData } from "../utils/writer.js";
 import { updateData } from "../utils/updater.js";
 import { deleteData } from "../utils/remover.js";
 
-const filePath = "./data/users.json";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const filePath = path.join(__dirname, "../data/users.json");
 
 // cache (optional but useful)
 const users = new Map();

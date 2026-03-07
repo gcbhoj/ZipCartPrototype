@@ -3,7 +3,12 @@ import UnpackagedProduct from "../models/UnPackagedProductModel.js";
 import Cart from "../models/CartModel.js";
 import { readData } from "../utils/reader.js";
 
-const filePath = "./data/cart.json";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const filePath = path.join(__dirname, "../data/cart.json");
 
 const carts = new Map();
 

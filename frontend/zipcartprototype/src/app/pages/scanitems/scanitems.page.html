@@ -1,10 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Scan BarCode</ion-title>
+    <ion-icon name="arrow-back"></ion-icon> <ion-title>Scan BarCode</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" scrollY="false">
+<ion-content>
   <div class="page-container">
     <app-barcodescanner [disabled]="productDisplayed"></app-barcodescanner>
     <ion-button (click)="sendBarCode()">sendBarcode Test Only</ion-button>
@@ -23,7 +23,13 @@
         </ion-col>
 
         <ion-col size="6">
-          <ion-button expand="block" color="medium"> Cancel </ion-button>
+          <ion-button
+            expand="block"
+            color="medium"
+            (click)="removeScannedItem()"
+          >
+            Cancel
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

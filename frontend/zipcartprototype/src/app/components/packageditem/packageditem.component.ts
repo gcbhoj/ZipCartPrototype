@@ -1,14 +1,9 @@
+/**
+ * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
+ */
 import { Component, OnInit } from '@angular/core';
 import { PackagedProduct } from 'src/app/classes/PackagedProduct';
-import {
-  IonButton,
-  IonCard,
-  IonCardContent,
-  IonGrid,
-  IonRow,
-  IonCol,
-  IonAvatar,
-} from '@ionic/angular/standalone';
+import { IONIC_UI } from 'src/UIImports';
 import { CommonModule } from '@angular/common';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 
@@ -17,19 +12,12 @@ import { Datasharing } from 'src/app/services/datasharing/datasharing';
   templateUrl: './packageditem.component.html',
   styleUrls: ['./packageditem.component.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    IonButton,
-    IonCard,
-    IonCardContent,
-    IonGrid,
-    IonRow,
-    IonCol,
-    IonAvatar,
-  ],
+  imports: [CommonModule, IONIC_UI],
 })
 export class PackageditemComponent implements OnInit {
+  //initializing the cart id to store when received from cart page to create post request
   cartId: string | null = '';
+  //initializing the products array to store received products
   products: PackagedProduct[] = [];
   constructor(private dataSharing: Datasharing) {}
 
