@@ -21,7 +21,8 @@
     "expiryDate": "",
     "manufactureer": "Coca-Cola Canada",
     "manufacturedIn": "Canada",
-    "aboutProduct": "Classic cola flavored carbonated soft drink."
+    "aboutProduct": "Classic cola flavored carbonated soft drink.",
+    "quantity": 1
   },
   {
     "itemNumber": 1002,
@@ -42,7 +43,8 @@
     "expiryDate": "",
     "manufactureer": "The Coca-Cola Company",
     "manufacturedIn": "USA",
-    "aboutProduct": "Lemon-lime flavored soda."
+    "aboutProduct": "Lemon-lime flavored soda.",
+    "quantity": 1
   },
   {
     "itemNumber": 1003,
@@ -64,7 +66,8 @@
     "expiryDate": "",
     "manufactureer": "The Coca-Cola Company",
     "manufacturedIn": "USA",
-    "aboutProduct": "Orange flavored soda drink."
+    "aboutProduct": "Orange flavored soda drink.",
+    "quantity": 1
   },
   {
     "itemNumber": 1004,
@@ -85,7 +88,8 @@
     "expiryDate": "",
     "manufactureer": "PepsiCo",
     "manufacturedIn": "USA",
-    "aboutProduct": "Classic cola beverage."
+    "aboutProduct": "Classic cola beverage.",
+    "quantity": 1
   },
   {
     "itemNumber": 1005,
@@ -106,7 +110,8 @@
     "expiryDate": "",
     "manufactureer": "PepsiCo",
     "manufacturedIn": "USA",
-    "aboutProduct": "Citrus flavored soft drink."
+    "aboutProduct": "Citrus flavored soft drink.",
+    "quantity": 1
   },
   {
     "itemNumber": 1006,
@@ -127,7 +132,8 @@
     "expiryDate": "",
     "manufactureer": "Keurig Dr Pepper",
     "manufacturedIn": "USA",
-    "aboutProduct": "Soft drink with unique blend of flavors."
+    "aboutProduct": "Soft drink with unique blend of flavors.",
+    "quantity": 1
   },
   {
     "itemNumber": 1007,
@@ -147,7 +153,8 @@
     "expiryDate": "",
     "manufactureer": "Arizona Beverage Company",
     "manufacturedIn": "USA",
-    "aboutProduct": "Sweetened green tea beverage with honey."
+    "aboutProduct": "Sweetened green tea beverage with honey.",
+    "quantity": 1
   },
   {
     "itemNumber": 1008,
@@ -168,7 +175,8 @@
     "expiryDate": "",
     "manufactureer": "PepsiCo",
     "manufacturedIn": "USA",
-    "aboutProduct": "Electrolyte sports drink."
+    "aboutProduct": "Electrolyte sports drink.",
+    "quantity": 1
   },
   {
     "itemNumber": 1009,
@@ -188,7 +196,8 @@
     "expiryDate": "",
     "manufactureer": "Otsuka Pharmaceutical",
     "manufacturedIn": "Japan",
-    "aboutProduct": "Isotonic hydration drink."
+    "aboutProduct": "Isotonic hydration drink.",
+    "quantity": 1
   },
   {
     "itemNumber": 1010,
@@ -209,7 +218,8 @@
     "expiryDate": "",
     "manufactureer": "Mondelez International",
     "manufacturedIn": "USA",
-    "aboutProduct": "Chocolate sandwich cookies."
+    "aboutProduct": "Chocolate sandwich cookies.",
+    "quantity": 1
   },
   {
     "itemNumber": 1011,
@@ -223,7 +233,8 @@
     "expiryDate": "",
     "manufactureer": "Frito-Lay",
     "manufacturedIn": "USA",
-    "aboutProduct": "Classic salted potato chips."
+    "aboutProduct": "Classic salted potato chips.",
+    "quantity": 1
   },
   {
     "itemNumber": 1012,
@@ -244,7 +255,8 @@
     "expiryDate": "",
     "manufactureer": "Frito-Lay",
     "manufacturedIn": "USA",
-    "aboutProduct": "Nacho cheese flavored tortilla chips."
+    "aboutProduct": "Nacho cheese flavored tortilla chips.",
+    "quantity": 1
   },
   {
     "itemNumber": 1013,
@@ -265,7 +277,8 @@
     "expiryDate": "",
     "manufactureer": "Kellogg Company",
     "manufacturedIn": "USA",
-    "aboutProduct": "Sweetened corn flake cereal."
+    "aboutProduct": "Sweetened corn flake cereal.",
+    "quantity": 1
   },
   {
     "itemNumber": 1014,
@@ -285,7 +298,8 @@
     "expiryDate": "",
     "manufactureer": "Kraft Heinz",
     "manufacturedIn": "USA",
-    "aboutProduct": "Macaroni pasta with cheese sauce mix."
+    "aboutProduct": "Macaroni pasta with cheese sauce mix.",
+    "quantity": 1
   },
   {
     "itemNumber": 1015,
@@ -305,7 +319,8 @@
     "expiryDate": "",
     "manufactureer": "Kellogg Company",
     "manufacturedIn": "USA",
-    "aboutProduct": "Strawberry filled toaster pastries."
+    "aboutProduct": "Strawberry filled toaster pastries.",
+    "quantity": 1
   },
   {
     "itemNumber": 1016,
@@ -324,7 +339,8 @@
     "expiryDate": "",
     "manufactureer": "Hormel Foods",
     "manufacturedIn": "USA",
-    "aboutProduct": "Creamy peanut butter spread."
+    "aboutProduct": "Creamy peanut butter spread.",
+    "quantity": 1
   },
   {
     "itemNumber": 1017,
@@ -344,7 +360,8 @@
     "expiryDate": "",
     "manufactureer": "Kellogg Company",
     "manufacturedIn": "USA",
-    "aboutProduct": "Stackable potato crisps."
+    "aboutProduct": "Stackable potato crisps.",
+    "quantity": 1
   },
   {
     "itemNumber": 1018,
@@ -364,7 +381,8 @@
     "expiryDate": "",
     "manufactureer": "Ferrero",
     "manufacturedIn": "Italy",
-    "aboutProduct": "Chocolate hazelnut spread."
+    "aboutProduct": "Chocolate hazelnut spread.",
+    "quantity": 1
   },
   {
     "itemNumber": 1019,
@@ -378,7 +396,8 @@
     "expiryDate": "",
     "manufactureer": "General Mills",
     "manufacturedIn": "USA",
-    "aboutProduct": "Crunchy granola bars with oats and honey."
+    "aboutProduct": "Crunchy granola bars with oats and honey.",
+    "quantity": 1
   },
   {
     "itemNumber": 1020,
@@ -398,6 +417,7 @@
     "expiryDate": "",
     "manufactureer": "General Mills",
     "manufacturedIn": "USA",
-    "aboutProduct": "Whole grain oat breakfast cereal."
+    "aboutProduct": "Whole grain oat breakfast cereal.",
+    "quantity": 1
   }
 ]

@@ -26,6 +26,7 @@ const retrieveProductByUPC = async (barCodeRequest) => {
     product.manufactureer,
     product.manufacturedIn,
     product.aboutProduct,
+    product.quantity,
   );
 
   return response;

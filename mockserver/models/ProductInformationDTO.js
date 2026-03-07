@@ -11,6 +11,7 @@ class ProductInformationDTO {
     manufacturer,
     aboutProduct,
     manufacturedIn,
+    quantity,
   ) {
     this.itemNumber = itemNumber;
     this.productName = productName;
@@ -23,6 +24,7 @@ class ProductInformationDTO {
     this.manufacturer = manufacturer;
     this.aboutProduct = aboutProduct;
     this.manufacturedIn = manufacturedIn;
+    this.quantity = quantity;
   }
 }
 

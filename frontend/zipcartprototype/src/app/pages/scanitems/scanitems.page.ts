@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { BarcodescannerComponent } from 'src/app/components/barcodescanner/barcodescanner.component';
+import { Datasharing } from 'src/app/services/datasharing/datasharing';
+import { BarCodeScannerResultDTO } from 'src/app/classes/BarCodeScannerResultDTO';
+import { ScannedProductDisplayComponent } from 'src/app/components/scanned-product-display/scanned-product-display.component';
+import { BarcodeService } from 'src/app/services/mockserver/barcodeService/barcode-service';
+import { PackagedProductInformation } from 'src/app/classes/PackagedProductInformation';
 import {
   IonContent,
   IonHeader,
@@ -12,11 +18,6 @@ import {
   IonRow,
   IonCol,
 } from '@ionic/angular/standalone';
-import { BarcodescannerComponent } from 'src/app/components/barcodescanner/barcodescanner.component';
-import { Datasharing } from 'src/app/services/datasharing/datasharing';
-import { BarCodeScannerResultDTO } from 'src/app/classes/BarCodeScannerResultDTO';
-import { ScannedProductDisplayComponent } from 'src/app/components/scanned-product-display/scanned-product-display.component';
-import { BarcodeService } from 'src/app/services/mockserver/barcodeService/barcode-service';
 
 @Component({
   selector: 'app-scanitems',
@@ -42,6 +43,20 @@ import { BarcodeService } from 'src/app/services/mockserver/barcodeService/barco
 //text: '5000112546415',
 export class ScanitemsPage implements OnInit {
   productDisplayed = false;
+  packagedProduct: PackagedProductInformation = {
+    itemNumber: 0,
+    productName: '',
+    imageURL: '',
+    price: 0,
+    weight: '',
+    ingredients: [],
+    manufacturedDate: new Date(),
+    expiryDate: new Date(),
+    manufacturer: '',
+    manufacturedIn: '',
+    aboutProduct: '',
+    quantity: 0,
+  };
 
   barCodeResults: BarCodeScannerResultDTO = {
     isValid: true,
@@ -81,11 +96,22 @@ export class ScanitemsPage implements OnInit {
       .getPackagedProductDetails(this.barCodeResults)
       .subscribe({
         next: (data) => {
-          console.log('Product Data:', data);
+          this.packagedProduct = data;
+          // initializing the share method
+          this.sharePackagedProductInformation();
+          //disables the scanner
+          this.onProductLoaded();
         },
         error: (err) => {
           console.error('Error:', err);
         },
       });
+  }
+
+  //sharing the received packaged product information to display in its component
+  sharePackagedProductInformation() {
+    if (this.packagedProduct) {
+      this.dataSharing.exchangePackagedProductInformation(this.packagedProduct);
+    }
   }
 }
