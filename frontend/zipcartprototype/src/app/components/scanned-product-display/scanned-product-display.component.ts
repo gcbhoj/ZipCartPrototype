@@ -12,6 +12,7 @@ import {
 } from '@ionic/angular/standalone';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { CommonModule } from '@angular/common';
+import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
 
 @Component({
   selector: 'app-scanned-product-display',
@@ -31,9 +32,14 @@ import { CommonModule } from '@angular/common';
   ],
 })
 export class ScannedProductDisplayComponent implements OnInit {
+  
   product!: PackagedProductInformation;
-  productQuantity: number = 0;
-  constructor(private dataSharing: Datasharing) {}
+  taxAmount: number = 0;
+  totalAmount: number = 0;
+  constructor(
+    private dataSharing: Datasharing,
+    private calculator: CalculatorService,
+  ) {}
 
   ngOnInit() {
     this.receiveProductInfo();
@@ -43,6 +49,11 @@ export class ScannedProductDisplayComponent implements OnInit {
     this.dataSharing.packagedProductInfo.subscribe((data) => {
       if (data) {
         this.product = data;
+        this.taxAmount = this.calculator.calculateTaxAmount(this.product.price);
+        this.totalAmount = this.calculator.calculateTotalAmount(
+          this.taxAmount,
+          this.product.price,
+        );
       }
     });
   }

@@ -23,7 +23,13 @@
         </ion-col>
 
         <ion-col size="6">
-          <ion-button expand="block" color="medium"> Cancel </ion-button>
+          <ion-button
+            expand="block"
+            color="medium"
+            (click)="removeScannedItem()"
+          >
+            Cancel
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

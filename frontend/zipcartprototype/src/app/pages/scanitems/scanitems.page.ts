@@ -18,6 +18,7 @@ import {
   IonRow,
   IonCol,
 } from '@ionic/angular/standalone';
+import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
 
 @Component({
   selector: 'app-scanitems',
@@ -40,7 +41,6 @@ import {
     IonCol,
   ],
 })
-//text: '5000112546415',
 export class ScanitemsPage implements OnInit {
   productDisplayed = false;
   packagedProduct: PackagedProductInformation = {
@@ -58,9 +58,34 @@ export class ScanitemsPage implements OnInit {
     quantity: 0,
   };
 
+  //barcodes of mock data stored in mock server NOTE:FOR TESTING PURPOSES ONLY
+
+  barcodes: string[] = [
+    '5000112546415',
+    '049000050158',
+    '049000028911',
+    '012000809151',
+    '012000161938',
+    '041508260003',
+    '070847000328',
+    '041800000038',
+    '4902430780010',
+    '044000032029',
+    '028400064505',
+    '028400064529',
+    '016000275410',
+    '030000561516',
+    '048000001234',
+    '034000052356',
+    '037000373925',
+    '040000000452',
+    '041570109843',
+    '041570110000',
+  ];
+
   barCodeResults: BarCodeScannerResultDTO = {
     isValid: true,
-    text: '041570110000',
+    text: '049000050158',
     format: '',
     contentType: '',
   };
@@ -68,6 +93,7 @@ export class ScanitemsPage implements OnInit {
   constructor(
     private dataSharing: Datasharing,
     private barCodeService: BarcodeService,
+    private calculator:CalculatorService
   ) {}
 
   ngOnInit() {
@@ -113,5 +139,31 @@ export class ScanitemsPage implements OnInit {
     if (this.packagedProduct) {
       this.dataSharing.exchangePackagedProductInformation(this.packagedProduct);
     }
+  }
+
+  //removing the scanned item when cancel is pressed
+  removeScannedItem() {
+    //creating a empty object
+    const emptyProduct: PackagedProductInformation = {
+      itemNumber: 0,
+      productName: '',
+      imageURL: '',
+      price: 0,
+      weight: '',
+      ingredients: [],
+      manufacturedDate: new Date(),
+      expiryDate: new Date(),
+      manufacturer: '',
+      manufacturedIn: '',
+      aboutProduct: '',
+      quantity: 0,
+    };
+
+    this.packagedProduct = emptyProduct;
+
+    // update shared observable
+    this.dataSharing.exchangePackagedProductInformation(emptyProduct);
+    // enabling the scanner
+    this.onProductCleared();
   }
 }
