@@ -1,33 +1,47 @@
+/**
+ * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
+ */
 import { Component, OnInit } from '@angular/core';
-import {
-  IonCard,
-  IonGrid,
-  IonRow,
-  IonCol,
-  IonItem,
-  IonLabel,
-  IonAccordion,
-  IonAccordionGroup,
-} from '@ionic/angular/standalone';
+import { PackagedProductInformation } from 'src/app/classes/PackagedProductInformation';
+import { IONIC_UI } from 'src/UIImports';
+import { Datasharing } from 'src/app/services/datasharing/datasharing';
+import { CommonModule } from '@angular/common';
+import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
 
 @Component({
   selector: 'app-scanned-product-display',
   templateUrl: './scanned-product-display.component.html',
   styleUrls: ['./scanned-product-display.component.scss'],
   standalone: true,
-  imports: [
-    IonCard,
-    IonGrid,
-    IonRow,
-    IonCol,
-    IonItem,
-    IonLabel,
-    IonAccordion,
-    IonAccordionGroup,
-  ],
+  imports: [IONIC_UI, CommonModule],
 })
 export class ScannedProductDisplayComponent implements OnInit {
-  constructor() {}
+  //Initializing the PackedProductInformation to map with incoming scanned result
+  product!: PackagedProductInformation;
+  //Initializing the tax amount variable
+  taxAmount: number = 0;
+  //Initializing total amount
+  totalAmount: number = 0;
+  constructor(
+    private dataSharing: Datasharing,
+    private calculator: CalculatorService,
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.receiveProductInfo();
+  }
+
+  //Receiving the product information shared by the scan items page.
+  receiveProductInfo() {
+    this.dataSharing.packagedProductInfo.subscribe((data) => {
+      if (data) {
+        this.product = data;
+        this.taxAmount = this.calculator.calculateTaxAmount(this.product.price);
+        this.totalAmount = this.calculator.calculateTotalAmount(
+          this.taxAmount,
+          this.product.price,
+        );
+      }
+    });
+  }
 }

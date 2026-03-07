@@ -1,35 +1,23 @@
+/**
+ * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
+ */
 import { Component, OnInit } from '@angular/core';
 import { UnPackagedProduct } from 'src/app/classes/UnPackagedProduct';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { CommonModule } from '@angular/common';
-import {
-  IonButton,
-  IonCard,
-  IonCardContent,
-  IonGrid,
-  IonRow,
-  IonCol,
-  IonAvatar,
-} from '@ionic/angular/standalone';
+import { IONIC_UI } from 'src/UIImports';
 
 @Component({
   selector: 'app-unpackageditem',
   templateUrl: './unpackageditem.component.html',
   styleUrls: ['./unpackageditem.component.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    IonButton,
-    IonCard,
-    IonCardContent,
-    IonGrid,
-    IonRow,
-    IonCol,
-    IonAvatar,
-  ],
+  imports: [CommonModule, IONIC_UI],
 })
 export class UnpackageditemComponent implements OnInit {
+  //Initializing the cart id to be received from cart page
   cartId: string | null = '';
+  //Initializing unpackaed array to received shared data from cart page
   products: UnPackagedProduct[] = [];
   constructor(private dataSharing: Datasharing) {}
 

@@ -1,11 +1,9 @@
+/**
+ * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
+ */
 import { Component, OnInit } from '@angular/core';
 import { LoginResponse } from 'src/app/classes/LoginResponseDTO';
-import {
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
-} from '@ionic/angular/standalone';
+import { IONIC_UI } from 'src/UIImports';
 import { Testservices } from 'src/app/services/mockserver/test/testservices';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 
@@ -14,7 +12,7 @@ import { Datasharing } from 'src/app/services/datasharing/datasharing';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   standalone: true,
-  imports: [IonCard, IonCardContent, IonCardHeader, IonCardTitle],
+  imports: [IONIC_UI],
 })
 export class LoginComponent implements OnInit {
   logIn: LoginResponse = {

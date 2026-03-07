@@ -1,8 +1,18 @@
+import BarCodeRequest from "../models/BarcodeRequestDTO.js";
+import { retrieveProductByUPC } from "../services/ProductServices.js";
+
 const retrieveProductDetails = async (req, res) => {
   try {
-    const product = {
-      productName: "Hello World",
-    };
+    const { isValid, text, format, contentType } = req.body;
+
+    const barCodeRequest = new BarCodeRequest(
+      isValid,
+      text,
+      format,
+      contentType,
+    );
+
+    const product = await retrieveProductByUPC(barCodeRequest);
 
     res.status(200).json(product);
   } catch (error) {

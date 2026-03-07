@@ -1,0 +1,10 @@
+.ingredients-columns ul {
+  column-count: 2; /* number of columns */
+  column-gap: 20px;
+  padding-left: 20px;
+}
+
+.ingredients-columns li {
+  break-inside: avoid;
+  margin-bottom: 5px;
+}

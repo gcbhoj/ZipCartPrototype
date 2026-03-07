@@ -9,7 +9,7 @@ const retrieveCartByUser = async (req, res) => {
     }
 
     const result = await getCartByUserId(userId);
-    console.log(result);
+    // console.log(result);
 
     if (!result || result.length === 0) {
       return res.status(404).json({ message: "No cart found for this user" });

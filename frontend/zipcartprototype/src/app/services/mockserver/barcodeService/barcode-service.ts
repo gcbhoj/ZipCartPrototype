@@ -7,9 +7,12 @@ import { BarCodeScannerResultDTO } from 'src/app/classes/BarCodeScannerResultDTO
   providedIn: 'root',
 })
 export class BarcodeService {
+  // change to the below backend url while working with web
   private backendUrl: string = 'http://localhost:3000/mockserver/scanner/';
-  private backendUrlEmulator: string = 'http://10.0.2.2:3000/mockserver/cart/';
-  private backendUrlDevice: string = 'http://10.0.0.89:3000/mockserver/cart/';
+  // change to the below backend url while working with emulator
+  private backendUrlEmulator: string = 'http://10.0.2.2:3000/mockserver/';
+  // change to the below backend url while working with device where the 0.0.0.0 is the users IPV4 Address
+  private backendUrlDevice: string = 'http://00.0.0.0:3000/mockserver/';
 
   constructor(private http: HttpClient) {}
 
