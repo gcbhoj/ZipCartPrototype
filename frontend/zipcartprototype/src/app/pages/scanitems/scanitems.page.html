@@ -1,6 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-icon name="arrow-back"></ion-icon> <ion-title>Scan BarCode</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goToHomePage()">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Scan Barcode</ion-title>
   </ion-toolbar>
 </ion-header>
 

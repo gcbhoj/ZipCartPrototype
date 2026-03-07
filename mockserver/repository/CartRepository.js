@@ -27,7 +27,6 @@ const getAllCarts = async () => {
           p.imageUrl,
           p.quantity,
           p.unitPrice,
-          p.totalPrice,
         ),
     );
 
@@ -40,19 +39,17 @@ const getAllCarts = async () => {
           u.imageUrl,
           u.weight,
           u.unitPrice,
-          u.totalPrice,
         ),
     );
 
     const cart = new Cart(
       c.cartId,
-      c.storeName,
+      c.retailerId,
       c.userId,
+      c.status,
+      c.budget,
       packagedProducts,
       unpackagedProducts,
-      c.status,
-      c.hst,
-      c.totalAmount,
       c.transactionDateAndTime,
     );
 
@@ -83,6 +80,9 @@ const getCartByUser = async (userId) => {
 
   return userCart || null; // return null if no cart found
 };
+
+const result = await getCartByUser("11121314-1516-1718-1920-212223242526");
+console.log(result);
 
 export { getCartByUser };
 // const result = await getCartByUser("1c78af65-695e-4048-835a-17d91331e147");

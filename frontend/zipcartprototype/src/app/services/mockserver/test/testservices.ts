@@ -10,9 +10,9 @@ import { LoginResponse } from 'src/app/classes/LoginResponseDTO';
 })
 export class Testservices {
   // change to the below backend url while working with web
-  private backendUrl: string = 'http://localhost:3000/mockServer/users/';
+  private backendUrl: string = 'http://localhost:3000/mockserver/users/';
   // change to the below backend url while working with emulator
-  private backendUrlEmulator: string = 'http://10.0.2.2:3000/mockServer/users/';
+  private backendUrlEmulator: string = 'http://10.0.2.2:3000/mockserver/users/';
   // change to the below backend url while working with device where the 0.0.0.0 is the users IPV4 Address
   private backendUrlDevice: string = 'http://0.0.0.0:3000/mockserver/users/';
 

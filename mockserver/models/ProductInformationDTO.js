@@ -2,6 +2,7 @@ class ProductInformationDTO {
   constructor(
     itemNumber,
     productName,
+    productId,
     imageURL,
     price,
     weight,
@@ -15,6 +16,7 @@ class ProductInformationDTO {
   ) {
     this.itemNumber = itemNumber;
     this.productName = productName;
+    this.productId = productId;
     this.imageURL = imageURL;
     this.price = price;
     this.weight = weight;

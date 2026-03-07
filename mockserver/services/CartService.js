@@ -13,16 +13,16 @@ const getCartByUserId = async (userId) => {
 
   return new CartDTO(
     cart.cartId,
+    cart.retailerId,
+    cart.budget,
     cart.userId,
     cart.packagedProducts,
     cart.unpackagedProducts,
-    cart.hst,
-    cart.totalAmount,
   );
 };
 
 export { getCartByUserId };
 
-// const result = await getCartByUserId("b0cc1cf8-bbf8-4e12-9c0a-c6513a50bb9a");
+// const result = await getCartByUserId("11121314-1516-1718-1920-212223242526");
 
 // console.log(result);

@@ -17,6 +17,7 @@ const retrieveProductByUPC = async (barCodeRequest) => {
   const response = new ProductInformationDTO(
     product.itemNumber,
     product.productName,
+    product.productId,
     product.imageURL,
     product.price,
     product.weight,
