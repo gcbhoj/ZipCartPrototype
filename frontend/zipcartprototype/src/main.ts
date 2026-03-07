@@ -1,3 +1,7 @@
+/**
+ * NOTE: TO ADD ICON IMPORT GLOBALLY ADD IT TO icons.ts FILE
+ * IT WILL BE READY TO USE DO NOT ADD HERE
+ */
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
 import {
@@ -14,12 +18,18 @@ import {
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 
-import { addIcons } from 'ionicons';
-import { scan } from 'ionicons/icons';
+import { loadIcons } from './icons';
 
-addIcons({
-  scan,
-});
+loadIcons();
+
+// import { addIcons } from 'ionicons';
+// import { scan, arrowBack } from 'ionicons/icons';
+
+// Register icons BEFORE bootstrapping the app
+// addIcons({
+//   arrowBack,
+//   scan,
+// });
 
 bootstrapApplication(AppComponent, {
   providers: [

@@ -1,3 +1,7 @@
+/**
+ * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,17 +11,7 @@ import { BarCodeScannerResultDTO } from 'src/app/classes/BarCodeScannerResultDTO
 import { ScannedProductDisplayComponent } from 'src/app/components/scanned-product-display/scanned-product-display.component';
 import { BarcodeService } from 'src/app/services/mockserver/barcodeService/barcode-service';
 import { PackagedProductInformation } from 'src/app/classes/PackagedProductInformation';
-import {
-  IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonButton,
-  IonFooter,
-  IonGrid,
-  IonRow,
-  IonCol,
-} from '@ionic/angular/standalone';
+import { IONIC_UI } from 'src/UIImports';
 import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
 
 @Component({
@@ -26,19 +20,11 @@ import { CalculatorService } from 'src/app/services/calculatorService/calculator
   styleUrls: ['./scanitems.page.scss'],
   standalone: true,
   imports: [
-    IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
     CommonModule,
     FormsModule,
     BarcodescannerComponent,
     ScannedProductDisplayComponent,
-    IonButton,
-    IonFooter,
-    IonGrid,
-    IonRow,
-    IonCol,
+    IONIC_UI,
   ],
 })
 export class ScanitemsPage implements OnInit {
@@ -93,7 +79,7 @@ export class ScanitemsPage implements OnInit {
   constructor(
     private dataSharing: Datasharing,
     private barCodeService: BarcodeService,
-    private calculator:CalculatorService
+    private calculator: CalculatorService,
   ) {}
 
   ngOnInit() {

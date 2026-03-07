@@ -1,3 +1,6 @@
+/**
+ * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
+ */
 import { Component, OnInit } from '@angular/core';
 import { PackagedProduct } from '../../classes/PackagedProduct';
 import { UnPackagedProduct } from './../../classes/UnPackagedProduct';
@@ -30,7 +33,7 @@ export class CartComponent implements OnInit {
   packagedProduct: PackagedProduct[] = [];
   // initializing the unpackaged product component as an empty array to receive and share
   unpackagedProduct: UnPackagedProduct[] = [];
-  //initializing variables to store and display 
+  //initializing variables to store and display
   totalPackagedProduct: number = 0;
   totalUnPackagedProduct: number = 0;
   totalCartAmountBeforeTax: number = 0;
