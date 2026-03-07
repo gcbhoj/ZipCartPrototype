@@ -61,8 +61,10 @@ export class CartComponent implements OnInit {
   fetchCartByUser(userId: string) {
     //receiving cartid from cart service
     this.cartService.getCartByUserId(userId);
+
     //subscribing to the cart service for any updates on the cart
     this.cartService.cart$.subscribe((cart: Cart | null) => {
+      
       if (cart) {
         this.completeCart = cart;
         this.packagedProduct = cart.packagedProducts;
@@ -70,32 +72,40 @@ export class CartComponent implements OnInit {
       }
       //sharing the cart id
       this.shareCartId();
+
       //sharing packaged product
       this.sharePackagedProduct();
+
       //sharing unpackaged product
       this.shareUnPackagedProduct();
+
       //calculating the total amount of the packaged product in the cart
       this.totalPackagedProduct =
         this.calculator.calculateTotalAmountPackagedItems(this.packagedProduct);
+      
       //calculating the total amount of the unpackaged product in the cart
       this.totalUnPackagedProduct =
         this.calculator.calculateTotalAmountUnPackagedItems(
           this.unpackagedProduct,
         );
+      
       // calculating the total amount for the cart items
       this.totalCartAmountBeforeTax = this.calculator.calculateTotalCartAmount(
         this.totalPackagedProduct,
         this.totalUnPackagedProduct,
       );
+
       // calculating the total tax amount with 13% HST
       this.taxAmount = this.calculator.calculateTaxAmount(
         this.totalCartAmountBeforeTax,
       );
+
       // calculating the total payable amount
       this.totalCartAmount = this.calculator.calculateTotalAmount(
         this.totalCartAmountBeforeTax,
         this.taxAmount,
       );
+
     });
   }
 

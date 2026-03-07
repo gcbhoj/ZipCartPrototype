@@ -14,6 +14,7 @@ const retrieveAllRetailers = async () => {
         retailer.retailerId,
         retailer.retailerName,
         retailer.retailerURL,
+        retailer.retailerLogoUrl,
       ),
   );
 
@@ -27,6 +28,7 @@ const retrieveRetailerById = async (retailerId) => {
     retailer.retailerId,
     retailer.retailerName,
     retailer.retailerURL,
+    retailer.retailerLogoUrl,
   );
 
   return response;

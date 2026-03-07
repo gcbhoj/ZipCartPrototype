@@ -21,6 +21,7 @@ import {
   IonAccordion,
   IonAccordionGroup,
   IonFabButton,
+  IonCardSubtitle,
 } from '@ionic/angular/standalone';
 
 // creating an array of exports to avoid duplicate imports at every single component
@@ -48,4 +49,5 @@ export const IONIC_UI = [
   IonAccordion,
   IonAccordionGroup,
   IonFabButton,
+  IonCardSubtitle,
 ];

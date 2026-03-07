@@ -13,7 +13,7 @@ import {
   BarcodeFormat,
   BarcodeValueType,
 } from '@capacitor-mlkit/barcode-scanning';
-import { AlertController } from '@ionic/angular';
+import { AlertServices } from 'src/app/services/alertService/alert-services';
 @Component({
   selector: 'app-barcodescanner',
   templateUrl: './barcodescanner.component.html',
@@ -32,7 +32,7 @@ export class BarcodescannerComponent implements OnInit {
   barcodeResults: BarCodeScannerResultDTO[] = [];
 
   constructor(
-    private alertController: AlertController,
+    private alertService: AlertServices,
     private dataSharing: Datasharing,
   ) {}
 
@@ -67,13 +67,11 @@ export class BarcodescannerComponent implements OnInit {
     /*NOTE: MUST BE REMOVED AFTER TESTING WITH COMPLETE PRODUCT
     Displays a success alert with a ok button with the scanning results
     */
-    const alert = await this.alertController.create({
-      header: 'Barcode Read Successfully',
-      message: JSON.stringify(results[0], null, 2),
-      buttons: ['OK'],
-    });
-
-    await alert.present();
+    await this.alertService.showAlert(
+      'Barcode Read Successfully',
+      JSON.stringify(results[0], null, 2),
+      ['OK'],
+    );
   }
 
   // Requests camera permission required for barcode scanning
@@ -85,12 +83,11 @@ export class BarcodescannerComponent implements OnInit {
 
   // Displays alert if camera permission is denied
   async presentAlert(): Promise<void> {
-    const alert = await this.alertController.create({
-      header: 'Permission denied',
-      message: 'Please grant camera permission to use the barcode scanner.',
-      buttons: ['OK'],
-    });
-    await alert.present();
+    await this.alertService.showAlert(
+      'Permission Denied',
+      'Please grant camera permission to use the barcode scanner',
+      ['OK'],
+    );
   }
   // Mapping ML Kit Barcode object into application DTO format
   mapToDto(barcode: Barcode): BarCodeScannerResultDTO {

@@ -6,15 +6,42 @@
 
 <ion-content>
   <app-login></app-login>
+
   <div class="top-section">
     <ion-button (click)="goToTestPage()">Test Page</ion-button>
   </div>
+  <div>
+    <h4>Select Store to Start Shopping</h4>
+  </div>
 
-  <div class="menu_buttons">
-    <h2>Select Store</h2>
+  <div class="retailer-container">
+    <ion-card *ngFor="let retailer of retailers">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row class="ion-align-items-center ion-justify-content-center">
+            <!-- Retailer Logo -->
+            <ion-col size="4" class="logo-col">
+              <img src="{{retailer.retailerLogoUrl}}" class="retailer-logo" />
+            </ion-col>
 
-    <ion-button expand="block" (click)="startShopping()">Walmart</ion-button>
-    <ion-button expand="block">Costco</ion-button>
-    <ion-button expand="block">Fresh Co</ion-button>
+            <!-- Button + Website -->
+            <ion-col size="8" class="info-col">
+              <span hidden>{{retailer.retailerId}}</span>
+              <ion-button expand="block" (click)="startShopping(retailer.retailerId)">
+                {{ retailer.retailerName }}
+              </ion-button>
+
+              <a
+                [href]="retailer.retailerURL"
+                target="_blank"
+                class="retailer-link"
+              >
+                {{ retailer.retailerName }}
+              </a>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

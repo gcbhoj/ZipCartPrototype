@@ -14,7 +14,7 @@ app.use(cors());
 app.use("/mockserver/users", userRoutes);
 app.use("/mockserver/cart", cartRoutes);
 app.use("/mockserver/scanner", scannerRoutes);
-app.use("/mockserver/", retailerRoutes);
+app.use("/mockserver", retailerRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);

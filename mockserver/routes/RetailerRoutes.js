@@ -3,6 +3,6 @@ const retailerRoutes = express.Router();
 
 import { fetchAllRetailers } from "../controllers/RetailerController.js";
 
-retailerRoutes.get("/retailers/", fetchAllRetailers);
+retailerRoutes.get("/retailers", fetchAllRetailers);
 
 export default retailerRoutes;

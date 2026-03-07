@@ -1,8 +1,9 @@
 class RetailerResponseDTO {
-  constructor(retailerId, retailerName, retailerURL) {
+  constructor(retailerId, retailerName, retailerURL, retailerLogoUrl) {
     this.retailerId = retailerId;
     this.retailerName = retailerName;
     this.retailerURL = retailerURL;
+    this.retailerLogoUrl = retailerLogoUrl;
   }
 }
 
