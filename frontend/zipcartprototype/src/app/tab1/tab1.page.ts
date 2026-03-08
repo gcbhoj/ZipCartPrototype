@@ -50,6 +50,7 @@ export class Tab1Page implements OnInit {
   ngOnInit(): void {
     this.receiveLoginResponse();
     this.dataSharing.vendorButtonState$.subscribe((state) => {
+      console.log('Vendor button state:', state);
       this.isEnabled = state;
     });
   }
@@ -57,8 +58,18 @@ export class Tab1Page implements OnInit {
   goToTestPage() {
     this.router.navigate(['/testpage']);
   }
+  // startShopping(retailerId: string) {
+  //   const dto = this.mapToStartShoppingDTO(
+  //     this.login.userId,
+  //     retailerId,
+  //     this.budget,
+  //   );
+
+  //   this.initializeCartForShopper(dto);
+  // }
 
   startShopping(retailerId: string) {
+    this.disableRetailerButton();
     this.alertService.showBudgetConfirmation(
       // OK pressed
       () => {
@@ -69,9 +80,9 @@ export class Tab1Page implements OnInit {
               'Budget Set',
               this.budget
                 ? `You have set a budget of ${this.budget}.
-You can change your budget from the profile section.`
+  You can change your budget from the profile section.`
                 : `No budget was set for this transaction.
-You can set or change your budget later from the profile section.`,
+  You can set or change your budget later from the profile section.`,
               ['OK'],
             );
           }
@@ -94,7 +105,6 @@ You can set or change your budget later from the profile section.`,
         );
 
         this.initializeCartForShopper(dto);
-        this.disableRetailerButton();
       },
     );
   }
@@ -105,7 +115,6 @@ You can set or change your budget later from the profile section.`,
       if (data) {
         this.login = data;
         this.receiveRetailers();
-        this.shareCartInitResponse();
       }
     });
   }
@@ -133,6 +142,7 @@ You can set or change your budget later from the profile section.`,
 
   // calling the cart services to initialize a new table
   initializeCartForShopper(shoppingDTO: StartShopping) {
+    this.disableRetailerButton();
     this.cartService.initializeCart(shoppingDTO).subscribe((response) => {
       this.cartInitResponse = response;
       this.shareCartInitResponse();
