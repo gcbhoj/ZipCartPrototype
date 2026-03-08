@@ -36,7 +36,7 @@ const updateData = async (filePath, updatedUser) => {
     // Write back to file
     await fs.writeFile(filePath, JSON.stringify(existingData, null, 2), "utf8");
 
-    console.log("User updated successfully!");
+    console.log("updated successfully!");
     return updatedUser;
   } catch (error) {
     console.error("Error updating file:", error);

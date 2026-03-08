@@ -5,6 +5,7 @@ import { readData } from "../utils/reader.js";
 
 import path from "path";
 import { fileURLToPath } from "url";
+import { writeData } from "../utils/writer.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -27,7 +28,6 @@ const getAllCarts = async () => {
           p.imageUrl,
           p.quantity,
           p.unitPrice,
-          p.totalPrice,
         ),
     );
 
@@ -40,19 +40,17 @@ const getAllCarts = async () => {
           u.imageUrl,
           u.weight,
           u.unitPrice,
-          u.totalPrice,
         ),
     );
 
     const cart = new Cart(
       c.cartId,
-      c.storeName,
+      c.retailerId,
       c.userId,
+      c.status,
+      c.budget,
       packagedProducts,
       unpackagedProducts,
-      c.status,
-      c.hst,
-      c.totalAmount,
       c.transactionDateAndTime,
     );
 
@@ -70,21 +68,23 @@ const getCartById = async (cartId) => {
   return carts.get(cartId) || null;
 };
 
-const getCartByUser = async (userId) => {
-  // Make sure carts are loaded
-  if (carts.size === 0) {
-    await getAllCarts();
+
+const addNewCart = async (cart) => {
+  const response = await writeData(filePath, cart);
+
+  if (!response) {
+    throw new Error("UNABLE TO INITIALIZE NEW SHOPPING CART");
   }
 
-  // Find the cart for this user
-  const userCart = Array.from(carts.values()).find(
-    (cart) => cart.userId === userId,
-  );
-
-  return userCart || null; // return null if no cart found
+  return response;
 };
 
-export { getCartByUser };
+// const cart = new Cart("xyz", "1111", "2222", "open", 500, [], [], new Date());
+
+// const result = await addNewCart(cart);
+// console.log(result);
+
+export { addNewCart, getCartById };
 // const result = await getCartByUser("1c78af65-695e-4048-835a-17d91331e147");
 // console.log(result);
 

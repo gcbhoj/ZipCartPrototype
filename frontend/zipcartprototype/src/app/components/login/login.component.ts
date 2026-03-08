@@ -16,7 +16,7 @@ import { Datasharing } from 'src/app/services/datasharing/datasharing';
 })
 export class LoginComponent implements OnInit {
   logIn: LoginResponse = {
-    userId: 'b0cc1cf8-bbf8-4e12-9c0a-c6513a50bb9a',
+    userId: '11121314-1516-1718-1920-212223242526',
     userName: '',
     message: '',
   };
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginUser(this.logIn.userId);
-    this.shareUserId();
+    this.shareLogInResponse();
   }
 
   // temporary implementaion for login with hardcoded user Id
@@ -42,9 +42,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // sharing user id to other components
-  shareUserId() {
-    const userId = this.logIn.userId;
-    this.dataSharing.exchangeUserId(userId);
+  // sharing login response object
+  shareLogInResponse() {
+    if (this.logIn) {
+      this.dataSharing.exchangeLoginResponse(this.logIn);
+    }
   }
 }

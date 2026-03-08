@@ -4,18 +4,18 @@ import UnpackagedProduct from "./UnPackagedProductModel.js";
 class CartDTO {
   constructor(
     cartId,
+    retailerId,
+    budget,
     userId,
     packagedProducts = [],
     unpackagedProducts = [],
-    hst,
-    totalAmount,
   ) {
     this.cartId = cartId;
+    this.retailerId = retailerId;
+    this.budget = budget;
     this.userId = userId;
     this.packagedProducts = packagedProducts;
     this.unpackagedProducts = unpackagedProducts;
-    this.hst = hst;
-    this.totalAmount = totalAmount;
   }
 }
 

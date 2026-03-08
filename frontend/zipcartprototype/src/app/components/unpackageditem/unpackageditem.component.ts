@@ -6,6 +6,7 @@ import { UnPackagedProduct } from 'src/app/classes/UnPackagedProduct';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { CommonModule } from '@angular/common';
 import { IONIC_UI } from 'src/UIImports';
+import { StartShoppingResponse } from 'src/app/classes/StartShoppingResponse';
 
 @Component({
   selector: 'app-unpackageditem',
@@ -15,28 +16,33 @@ import { IONIC_UI } from 'src/UIImports';
   imports: [CommonModule, IONIC_UI],
 })
 export class UnpackageditemComponent implements OnInit {
-  //Initializing the cart id to be received from cart page
-  cartId: string | null = '';
+  cartInitResponse: StartShoppingResponse = {
+    cartId: '',
+    retailerName: '',
+    budget: 0,
+    message: '',
+  };
   //Initializing unpackaed array to received shared data from cart page
   products: UnPackagedProduct[] = [];
   constructor(private dataSharing: Datasharing) {}
 
   ngOnInit() {
-    this.receiveCartId();
-  }
-
-  // Receiving the cart id IF IN CASE NEEDED
-  receiveCartId() {
-    this.dataSharing.currentCartId.subscribe((data) => {
-      this.cartId = data;
-      this.receiveUnPackagedProducts();
-    });
+    this.receiveCartInitResponse();
   }
 
   // Receiving the packaged products
   receiveUnPackagedProducts() {
     this.dataSharing.unPackagedProduct.subscribe((data) => {
       this.products = data;
+    });
+  }
+  // receiving cart initialization response
+  receiveCartInitResponse() {
+    this.dataSharing.startShoppingResponseDetails.subscribe((data) => {
+      if (data) {
+        this.cartInitResponse = data;
+        this.receiveUnPackagedProducts();
+      }
     });
   }
 }

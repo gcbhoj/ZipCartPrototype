@@ -6,7 +6,6 @@ class PackagedProduct {
     imageUrl,
     quantity,
     unitPrice,
-    totalPrice,
   ) {
     this.productId = productId;
     this.productName = productName;
@@ -14,7 +13,6 @@ class PackagedProduct {
     this.imageUrl = imageUrl;
     this.quantity = quantity;
     this.unitPrice = unitPrice;
-    this.totalPrice = totalPrice;
   }
 }
 

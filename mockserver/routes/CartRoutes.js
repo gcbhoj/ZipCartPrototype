@@ -1,8 +1,12 @@
 import express from "express";
 const cartRoutes = express.Router();
 
-import { retrieveCartByUser } from "../controllers/CartController.js";
+import {
+  fetchCartById,
+  initializeCartForShopper,
+} from "../controllers/CartController.js";
 
-cartRoutes.get("/retrieve/:userId", retrieveCartByUser);
+cartRoutes.get("/retrieve/:cartId", fetchCartById);
+cartRoutes.post("/initialize", initializeCartForShopper);
 
 export default cartRoutes;

@@ -12,7 +12,7 @@ import { ScannedProductDisplayComponent } from 'src/app/components/scanned-produ
 import { BarcodeService } from 'src/app/services/mockserver/barcodeService/barcode-service';
 import { PackagedProductInformation } from 'src/app/classes/PackagedProductInformation';
 import { IONIC_UI } from 'src/UIImports';
-import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-scanitems',
@@ -79,7 +79,7 @@ export class ScanitemsPage implements OnInit {
   constructor(
     private dataSharing: Datasharing,
     private barCodeService: BarcodeService,
-    private calculator: CalculatorService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -151,5 +151,10 @@ export class ScanitemsPage implements OnInit {
     this.dataSharing.exchangePackagedProductInformation(emptyProduct);
     // enabling the scanner
     this.onProductCleared();
+  }
+
+  // navigate to home page
+  goToHomePage() {
+    this.router.navigate(['/tabs/tab1']);
   }
 }
