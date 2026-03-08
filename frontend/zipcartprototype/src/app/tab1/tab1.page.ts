@@ -1,3 +1,4 @@
+import { LoginResponse } from './../classes/LoginResponseDTO';
 import { Retailer } from './../classes/Retailer';
 /**
  * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
@@ -12,8 +13,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AlertServices } from '../services/alertService/alert-services';
 import { StartShopping } from '../classes/StartShoppingDTO';
-import { isEmpty } from 'rxjs';
 import { Cartservices } from '../services/mockserver/cartservice/cartservices';
+import { StartShoppingResponse } from '../classes/StartShoppingResponse';
 
 @Component({
   selector: 'app-tab1',
@@ -23,10 +24,19 @@ import { Cartservices } from '../services/mockserver/cartservice/cartservices';
   imports: [IONIC_UI, LoginComponent, CommonModule, FormsModule],
 })
 export class Tab1Page implements OnInit {
-  userId: string = '';
   retailers: Retailer[] = [];
   budget: number = 0;
-  cartId: string = '';
+  cartInitResponse: StartShoppingResponse = {
+    cartId: '',
+    retailerName: '',
+    budget: 0,
+    message: '',
+  };
+  login: LoginResponse = {
+    userId: '',
+    userName: '',
+    message: '',
+  };
 
   constructor(
     private router: Router,
@@ -37,7 +47,7 @@ export class Tab1Page implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.receiveUserId();
+    this.receiveLoginResponse();
   }
 
   goToTestPage() {
@@ -62,7 +72,7 @@ You can set or change your budget later from the profile section.`,
             );
           }
           const dto = this.mapToStartShoppingDTO(
-            this.userId,
+            this.login.userId,
             retailerId,
             this.budget,
           );
@@ -74,7 +84,7 @@ You can set or change your budget later from the profile section.`,
       // Cancel pressed
       () => {
         const dto = this.mapToStartShoppingDTO(
-          this.userId,
+          this.login.userId,
           retailerId,
           this.budget,
         );
@@ -84,12 +94,13 @@ You can set or change your budget later from the profile section.`,
     );
   }
 
-  // receiving userid of logged in user
-  receiveUserId() {
-    this.dataSharing.currentUserId.subscribe((data) => {
+  //receiving the login response via subscribing
+  receiveLoginResponse() {
+    this.dataSharing.loggedInUserInformation.subscribe((data) => {
       if (data) {
-        this.userId = data;
+        this.login = data;
         this.receiveRetailers();
+        this.shareCartInitResponse();
       }
     });
   }
@@ -115,15 +126,23 @@ You can set or change your budget later from the profile section.`,
     };
   }
 
+  // calling the cart services to initialize a new table
   initializeCartForShopper(shoppingDTO: StartShopping) {
     this.cartService.initializeCart(shoppingDTO).subscribe((response) => {
-      this.cartId = response.cartId;
-
-      this.alertService.showAlert('Cart Created', response.message, ['OK']);
-
-      console.log('Cart ID:', this.cartId);
+      this.cartInitResponse = response;
+      console.log(this.cartInitResponse);
+      this.shareCartInitResponse();
 
       this.router.navigate(['/scanitems']);
     });
+  }
+  // sharing the response object to cart component to retrieve
+  // products from the cart for display
+  shareCartInitResponse() {
+    if (this.cartInitResponse) {
+      this.dataSharing.exchangeCartInitializationResponse(
+        this.cartInitResponse,
+      );
+    }
   }
 }

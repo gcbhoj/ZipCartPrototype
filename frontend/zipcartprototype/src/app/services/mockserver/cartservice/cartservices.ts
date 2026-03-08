@@ -21,17 +21,17 @@ export class Cartservices {
 
   constructor(private http: HttpClient) {}
 
-  getCartByUserId(userId: string): void {
-    this.http.get<Cart>(`${this.backendUrl}/retrieve/${userId}`).subscribe({
-      next: (cart: Cart) => this.cartSubject.next(cart),
-      error: (err) => console.error('Failed to load Cart Items', err),
-    });
-  }
-
   initializeCart(dto: StartShopping): Observable<StartShoppingResponse> {
     return this.http.post<StartShoppingResponse>(
       `${this.backendUrl}/initialize`,
       dto,
     );
+  }
+
+  getCartByCartId(cartId: string): void {
+    this.http.get<Cart>(`${this.backendUrl}/retrieve/${cartId}`).subscribe({
+      next: (cart: Cart) => this.cartSubject.next(cart),
+      error: (err) => console.error('Failed to load Cart Items', err),
+    });
   }
 }

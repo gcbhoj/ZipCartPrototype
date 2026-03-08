@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginUser(this.logIn.userId);
-    this.shareUserId();
+    this.shareLogInResponse();
   }
 
   // temporary implementaion for login with hardcoded user Id
@@ -42,9 +42,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // sharing user id to other components
-  shareUserId() {
-    const userId = this.logIn.userId;
-    this.dataSharing.exchangeUserId(userId);
+  // sharing login response object
+  shareLogInResponse() {
+    if (this.logIn) {
+      this.dataSharing.exchangeLoginResponse(this.logIn);
+    }
   }
 }

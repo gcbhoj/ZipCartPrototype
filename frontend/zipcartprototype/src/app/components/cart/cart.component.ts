@@ -10,23 +10,35 @@ import { Datasharing } from '../../services/datasharing/datasharing';
 import { PackageditemComponent } from '../packageditem/packageditem.component';
 import { UnpackageditemComponent } from '../unpackageditem/unpackageditem.component';
 import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
+import { StartShoppingResponse } from 'src/app/classes/StartShoppingResponse';
+import { LoginResponse } from 'src/app/classes/LoginResponseDTO';
+import { CommonModule } from '@angular/common';
+import { car } from 'ionicons/icons';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
   standalone: true,
-  imports: [PackageditemComponent, UnpackageditemComponent],
+  imports: [PackageditemComponent, UnpackageditemComponent, CommonModule],
 })
 export class CartComponent implements OnInit {
-  //initializing user Id to receive user id after login
-  userId: string | null = '';
   /**
    * initializing cart id to receive the cart id to be shared to packaged product
    * and unpackaged componet to handle CRUD operations based on cart id
    *  */
+  cartInitResponse: StartShoppingResponse = {
+    cartId: '',
+    retailerName: '',
+    budget: 0,
+    message: '',
+  };
+  login: LoginResponse = {
+    userId: '',
+    userName: '',
+    message: '',
+  };
 
-  cartId!: string;
   // initializing the cart interface to share packaged product and unpackaged product
   completeCart!: Cart;
   //initializing the packaged product component as an empty array to receive and share
@@ -46,75 +58,65 @@ export class CartComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.receiveUserId();
+    this.receiveLoginResponse();
+    this.receiveCartInitResponse();
   }
-  // Receiving user Id from sharing services
-  receiveUserId() {
-    this.dataSharing.currentUserId.subscribe((data) => {
-      this.userId = data;
-      if (this.userId) {
-        this.fetchCartByUser(this.userId);
+
+  // receiving cart initialization response
+  receiveCartInitResponse() {
+    this.dataSharing.startShoppingResponseDetails.subscribe((data) => {
+      if (data) {
+        this.cartInitResponse = data;
+        this.fetchCartByCartId(this.cartInitResponse.cartId);
       }
     });
   }
-  // Fetching the cart by user Id
-  fetchCartByUser(userId: string) {
-    //receiving cartid from cart service
-    this.cartService.getCartByUserId(userId);
+  //receiving the login response via subscribing
+  receiveLoginResponse() {
+    this.dataSharing.loggedInUserInformation.subscribe((data) => {
+      if (data) {
+        this.login = data;
+      }
+    });
+  }
 
-    //subscribing to the cart service for any updates on the cart
+  fetchCartByCartId(cartId: string) {
+    this.cartService.getCartByCartId(cartId);
     this.cartService.cart$.subscribe((cart: Cart | null) => {
-      
       if (cart) {
         this.completeCart = cart;
+        console.log('Complete Cart', this.completeCart);
         this.packagedProduct = cart.packagedProducts;
         this.unpackagedProduct = cart.unpackagedProducts;
       }
-      //sharing the cart id
-      this.shareCartId();
-
-      //sharing packaged product
       this.sharePackagedProduct();
-
-      //sharing unpackaged product
       this.shareUnPackagedProduct();
-
-      //calculating the total amount of the packaged product in the cart
-      this.totalPackagedProduct =
-        this.calculator.calculateTotalAmountPackagedItems(this.packagedProduct);
-      
-      //calculating the total amount of the unpackaged product in the cart
-      this.totalUnPackagedProduct =
-        this.calculator.calculateTotalAmountUnPackagedItems(
-          this.unpackagedProduct,
-        );
-      
-      // calculating the total amount for the cart items
-      this.totalCartAmountBeforeTax = this.calculator.calculateTotalCartAmount(
-        this.totalPackagedProduct,
-        this.totalUnPackagedProduct,
-      );
-
-      // calculating the total tax amount with 13% HST
-      this.taxAmount = this.calculator.calculateTaxAmount(
-        this.totalCartAmountBeforeTax,
-      );
-
-      // calculating the total payable amount
-      this.totalCartAmount = this.calculator.calculateTotalAmount(
-        this.totalCartAmountBeforeTax,
-        this.taxAmount,
-      );
-
+      this.calculateTotals();
     });
   }
 
-  // using data sharing to share cartId
-  shareCartId() {
-    if (this.completeCart) {
-      this.cartId = this.completeCart.cartId;
-      this.dataSharing.exchangeCartId(this.cartId);
-    }
+  calculateTotals() {
+    this.totalPackagedProduct =
+      this.calculator.calculateTotalAmountPackagedItems(this.packagedProduct);
+
+    this.totalUnPackagedProduct =
+      this.calculator.calculateTotalAmountUnPackagedItems(
+        this.unpackagedProduct,
+      );
+
+    this.totalCartAmountBeforeTax = this.calculator.calculateTotalCartAmount(
+      this.totalPackagedProduct,
+      this.totalUnPackagedProduct,
+    );
+
+    this.taxAmount = this.calculator.calculateTaxAmount(
+      this.totalCartAmountBeforeTax,
+    );
+
+    this.totalCartAmount = this.calculator.calculateTotalAmount(
+      this.totalCartAmountBeforeTax,
+      this.taxAmount,
+    );
   }
 
   // sharing the packaged products received from the cart to display in packaged product component
