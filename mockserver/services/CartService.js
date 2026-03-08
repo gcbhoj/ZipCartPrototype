@@ -43,12 +43,7 @@ const initializeNewCart = async (cartInitializationRequest) => {
   const existingCart = await getOpenCartsByUser(request.userId);
 
   if (existingCart) {
-    const responseDTO = new CartInitializationResponse(
-      existingCart.cartId,
-      existingCart.retailerName,
-      existingCart.budget,
-      "YOU ALREADY HAVE AN OPEN CART. DEAL WITH IT FIRST",
-    );
+    throw new Error("YOU ALREADY HAVE AN OPEN CART. DEAL WITH IT FIRST");
   }
 
   const response = await addNewCart(newCart);

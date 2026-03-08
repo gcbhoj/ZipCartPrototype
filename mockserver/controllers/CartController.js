@@ -22,6 +22,8 @@ const initializeCartForShopper = async (req, res) => {
       case "CANNOT FIND RETAILOR BY GIVEN ID":
       case "UNABLE TO FIND CART BY ID":
         return res.status(400).json({ message: error.message });
+      case "YOU ALREADY HAVE AN OPEN CART. DEAL WITH IT FIRST":
+        return res.status(404).json({ message: error.message });
       case "UNABLE TO INITIALIZE NEW SHOPPING CART":
       case "UNABLE TO INITIALIZE CART":
       case "INTERNAL SERVER ERROR":

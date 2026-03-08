@@ -73,6 +73,10 @@ const getCartById = async (cartId) => {
 const addNewCart = async (cart) => {
   const response = await writeData(filePath, cart);
 
+    if (response) {
+      carts.set(cart.cartId, cart); // update in-memory cache
+    }
+
   return response;
 };
 

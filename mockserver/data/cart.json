@@ -94,5 +94,15 @@
         "unitPrice": 0.8
       }
     ]
+  },
+  {
+    "cartId": "26ac02a0-e65f-4d56-a74f-54c7c28dc47e",
+    "retailerId": "a1b2c3d4-e5f6-4789-90ab-abcdef123456",
+    "userId": "11121314-1516-1718-1920-212223242526",
+    "status": "open",
+    "budget": 10000,
+    "packagedProducts": [],
+    "unpackagedProducts": [],
+    "transactionDateAndTime": "2026-03-08T23:00:53.365Z"
   }
 ]

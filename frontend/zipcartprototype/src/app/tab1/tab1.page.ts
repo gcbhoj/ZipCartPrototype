@@ -3,7 +3,7 @@ import { Retailer } from './../classes/Retailer';
 /**
  * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { IONIC_UI } from 'src/UIImports';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../components/login/login.component';
@@ -15,6 +15,7 @@ import { AlertServices } from '../services/alertService/alert-services';
 import { StartShopping } from '../classes/StartShoppingDTO';
 import { Cartservices } from '../services/mockserver/cartservice/cartservices';
 import { StartShoppingResponse } from '../classes/StartShoppingResponse';
+import { ToastServices } from '../services/toastService/toast-services';
 
 @Component({
   selector: 'app-tab1',
@@ -45,12 +46,13 @@ export class Tab1Page implements OnInit {
     private retailerService: RetailerServices,
     private alertService: AlertServices,
     private cartService: Cartservices,
+    private toast: ToastServices,
+    private zone: NgZone,
   ) {}
 
   ngOnInit(): void {
     this.receiveLoginResponse();
     this.dataSharing.vendorButtonState$.subscribe((state) => {
-      console.log('Vendor button state:', state);
       this.isEnabled = state;
     });
   }
@@ -58,15 +60,6 @@ export class Tab1Page implements OnInit {
   goToTestPage() {
     this.router.navigate(['/testpage']);
   }
-  // startShopping(retailerId: string) {
-  //   const dto = this.mapToStartShoppingDTO(
-  //     this.login.userId,
-  //     retailerId,
-  //     this.budget,
-  //   );
-
-  //   this.initializeCartForShopper(dto);
-  // }
 
   startShopping(retailerId: string) {
     this.disableRetailerButton();
@@ -76,14 +69,8 @@ export class Tab1Page implements OnInit {
         this.alertService.showBudgetInput((budget) => {
           this.budget = budget | 0;
           if (this.budget > 0) {
-            this.alertService.showAlert(
-              'Budget Set',
-              this.budget
-                ? `You have set a budget of ${this.budget}.
-  You can change your budget from the profile section.`
-                : `No budget was set for this transaction.
-  You can set or change your budget later from the profile section.`,
-              ['OK'],
+            this.toast.showSuccess(
+              `You have set a budget of ${this.budget}.You can change your budget from the profile section.`,
             );
           }
           const dto = this.mapToStartShoppingDTO(
@@ -142,12 +129,18 @@ export class Tab1Page implements OnInit {
 
   // calling the cart services to initialize a new table
   initializeCartForShopper(shoppingDTO: StartShopping) {
-    this.disableRetailerButton();
-    this.cartService.initializeCart(shoppingDTO).subscribe((response) => {
-      this.cartInitResponse = response;
-      this.shareCartInitResponse();
-
-      // this.router.navigate(['/scanitems']);
+    this.cartService.initializeCart(shoppingDTO).subscribe({
+      next: (response) => {
+        this.cartInitResponse = response;
+        this.toast.showSuccess(response.message);
+        this.shareCartInitResponse();
+        // this.router.navigate(['/scanitems']);
+      },
+      error: (err) => {
+        const message = err?.error?.message || 'Unable to initialize cart';
+        this.enableRetailerButton();
+        this.toast.showError(message);
+      },
     });
   }
   // sharing the response object to cart component to retrieve
@@ -157,12 +150,16 @@ export class Tab1Page implements OnInit {
   }
 
   enableRetailerButton() {
-    this.dataSharing.updateRetailerButtonState(true);
+    this.zone.run(() => {
+      console.log('Button Enabled');
+      this.dataSharing.updateRetailerButtonState(true);
+    });
   }
 
-  // the following function disables the vendor button to prevent from multiple
-  // carts being created by a single user
   disableRetailerButton() {
-    this.dataSharing.updateRetailerButtonState(false);
+    this.zone.run(() => {
+      console.log('Button Disabled');
+      this.dataSharing.updateRetailerButtonState(false);
+    });
   }
 }
