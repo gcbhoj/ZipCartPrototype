@@ -4,23 +4,22 @@ import UnpackagedProduct from "./UnPackagedProductModel.js";
 class Cart {
   constructor(
     cartId,
-    storeName,
+    retailerId,
     userId,
+    status,
+    budget,
     packagedProducts = [],
     unpackagedProducts = [],
-    status,
-    hst,
-    totalAmount,
     transactionDateAndTime,
   ) {
     this.cartId = cartId;
-    this.storeName = storeName;
+    this.retailerId = retailerId;
     this.userId = userId;
+    this.status = status;
+    this.budget = budget;
     this.packagedProducts = packagedProducts;
     this.unpackagedProducts = unpackagedProducts;
-    this.status = status;
-    this.hst = hst;
-    this.totalAmount = totalAmount;
+
     this.transactionDateAndTime = transactionDateAndTime;
   }
 }

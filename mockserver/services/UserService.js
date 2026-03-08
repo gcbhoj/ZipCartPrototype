@@ -58,6 +58,9 @@ const retrieveAllUsers = async () => {
 
 const retrieveUserById = async (userId) => {
   const result = await getUserById(userId);
+  if (!result) {
+    throw new Error("CANNOT FIND USER BY GIVEN ID");
+  }
 
   const response = new RegistrationResponseModel(
     result.userId,

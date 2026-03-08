@@ -2,7 +2,9 @@ import { PackagedProduct } from './../../classes/PackagedProduct';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { BarCodeScannerResultDTO } from 'src/app/classes/BarCodeScannerResultDTO';
+import { LoginResponse } from 'src/app/classes/LoginResponseDTO';
 import { PackagedProductInformation } from 'src/app/classes/PackagedProductInformation';
+import { StartShoppingResponse } from 'src/app/classes/StartShoppingResponse';
 import { UnPackagedProduct } from 'src/app/classes/UnPackagedProduct';
 
 @Injectable({
@@ -10,15 +12,27 @@ import { UnPackagedProduct } from 'src/app/classes/UnPackagedProduct';
 })
 
 /***
- * Creating a data sharing service to share data between components and pages
+ * Creating a BehaviorSubject to store and share the cart initialization response
+across multiple components or pages in the application.
+
+BehaviorSubject is used because it always keeps the latest value and immediately
+provides it to any new subscribers.
+
+The initial value is set to null since the response from the backend will only
+be available after the cart initialization API is called.
+
+startShoppingResponse (private):
+  - Acts as the internal data holder that can be updated using .next().
+  - Only this service can modify the value.
+
+startShoppingResponseDetails (public Observable):
+  - Exposes the BehaviorSubject as a read-only Observable to other components.
+  - Components can subscribe to it to receive updates whenever the cart
+    initialization response changes.
+  - Using asObservable() prevents external components from directly modifying
+    the BehaviorSubject value.
  */
 export class Datasharing {
-  private userIdSharing = new BehaviorSubject<string | null>(null);
-  currentUserId: Observable<string | null> = this.userIdSharing.asObservable();
-
-  private cartIdSharing = new BehaviorSubject<string | null>(null);
-  currentCartId: Observable<string | null> = this.cartIdSharing.asObservable();
-
   private packagedProductSharing = new BehaviorSubject<PackagedProduct[]>([]);
   packagedProduct: Observable<PackagedProduct[]> =
     this.packagedProductSharing.asObservable();
@@ -39,15 +53,29 @@ export class Datasharing {
   packagedProductInfo: Observable<PackagedProductInformation | null> =
     this.packagedProductInformation.asObservable();
 
+  // logged in user information
+  private loginResponseSharing = new BehaviorSubject<LoginResponse | null>(
+    null,
+  );
+  loggedInUserInformation: Observable<LoginResponse | null> =
+    this.loginResponseSharing.asObservable();
+
+  // newly created cart information
+  private startShoppingResponse =
+    new BehaviorSubject<StartShoppingResponse | null>(null);
+  startShoppingResponseDetails: Observable<StartShoppingResponse | null> =
+    this.startShoppingResponse.asObservable();
+
   constructor() {}
 
-  // exchanging userId between components
-  exchangeUserId(userId: string) {
-    this.userIdSharing.next(userId);
+  //exchanging start shopping response
+  exchangeCartInitializationResponse(response: StartShoppingResponse) {
+    this.startShoppingResponse.next(response);
   }
-  // exchanging cartId between components
-  exchangeCartId(cartId: string) {
-    this.cartIdSharing.next(cartId);
+
+  //exchanging the logged in user information for display
+  exchangeLoginResponse(response: LoginResponse) {
+    this.loginResponseSharing.next(response);
   }
 
   // exchanging packaged Product

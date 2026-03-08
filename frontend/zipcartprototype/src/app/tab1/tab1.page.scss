@@ -1,9 +1,37 @@
-.menu_buttons {
+.retailer-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+ion-card {
+  width: 90%;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  gap: 10px;
+  
+}
+
+.logo-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.retailer-logo {
+  max-width: 80px;
+  max-height: 80px;
+  object-fit: contain;
+}
+
+.info-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.retailer-link {
+  margin-top: 6px;
+  text-align: center;
+  font-size: 14px;
+  text-decoration: underline;
 }

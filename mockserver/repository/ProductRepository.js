@@ -33,4 +33,8 @@ const getProductByUPC = async (barCodeValue) => {
   return product;
 };
 
+// const result = await getProductByUPC("5000112546415");
+
+// console.log(result);
+
 export { getProductByUPC };
