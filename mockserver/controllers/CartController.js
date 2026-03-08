@@ -20,6 +20,7 @@ const initializeCartForShopper = async (req, res) => {
       case "CANNOT INITIALIZE CART INVALID INPUT":
       case "CANNOT FIND SHOPPER BY GIVEN ID":
       case "CANNOT FIND RETAILOR BY GIVEN ID":
+      case "UNABLE TO FIND CART BY ID":
         return res.status(400).json({ message: error.message });
       case "UNABLE TO INITIALIZE NEW SHOPPING CART":
       case "UNABLE TO INITIALIZE CART":
@@ -41,6 +42,8 @@ const fetchCartById = async (req, res) => {
     if (!response) {
       throw new Error("INTERNAL SERVER ERROR");
     }
+
+    return res.status(200).json(response);
   } catch (error) {
     switch (error.message) {
       case "CART ID IS REQUIRED":

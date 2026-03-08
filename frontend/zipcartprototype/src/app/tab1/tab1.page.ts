@@ -24,6 +24,7 @@ import { StartShoppingResponse } from '../classes/StartShoppingResponse';
   imports: [IONIC_UI, LoginComponent, CommonModule, FormsModule],
 })
 export class Tab1Page implements OnInit {
+  isEnabled: boolean = true;
   retailers: Retailer[] = [];
   budget: number = 0;
   cartInitResponse: StartShoppingResponse = {
@@ -48,6 +49,9 @@ export class Tab1Page implements OnInit {
 
   ngOnInit(): void {
     this.receiveLoginResponse();
+    this.dataSharing.vendorButtonState$.subscribe((state) => {
+      this.isEnabled = state;
+    });
   }
 
   goToTestPage() {
@@ -90,6 +94,7 @@ You can set or change your budget later from the profile section.`,
         );
 
         this.initializeCartForShopper(dto);
+        this.disableRetailerButton();
       },
     );
   }
@@ -130,19 +135,24 @@ You can set or change your budget later from the profile section.`,
   initializeCartForShopper(shoppingDTO: StartShopping) {
     this.cartService.initializeCart(shoppingDTO).subscribe((response) => {
       this.cartInitResponse = response;
-      console.log(this.cartInitResponse);
       this.shareCartInitResponse();
 
-      this.router.navigate(['/scanitems']);
+      // this.router.navigate(['/scanitems']);
     });
   }
   // sharing the response object to cart component to retrieve
   // products from the cart for display
   shareCartInitResponse() {
-    if (this.cartInitResponse) {
-      this.dataSharing.exchangeCartInitializationResponse(
-        this.cartInitResponse,
-      );
-    }
+    this.dataSharing.exchangeCartInitializationResponse(this.cartInitResponse);
+  }
+
+  enableRetailerButton() {
+    this.dataSharing.updateRetailerButtonState(true);
+  }
+
+  // the following function disables the vendor button to prevent from multiple
+  // carts being created by a single user
+  disableRetailerButton() {
+    this.dataSharing.updateRetailerButtonState(false);
   }
 }
