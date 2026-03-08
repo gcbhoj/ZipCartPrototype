@@ -94,25 +94,5 @@
         "unitPrice": 0.8
       }
     ]
-  },
-  {
-    "cartId": "27971996-cfed-4dcc-a78b-750526e4b831",
-    "retailerId": "a1b2c3d4-e5f6-4789-90ab-abcdef123456",
-    "userId": "11121314-1516-1718-1920-212223242526",
-    "status": "open",
-    "budget": 0,
-    "packagedProducts": [],
-    "unpackagedProducts": [],
-    "transactionDateAndTime": "2026-03-08T20:16:49.942Z"
-  },
-  {
-    "cartId": "bf17b804-6551-4f33-8637-d6f48c8cd9bb",
-    "retailerId": "a1b2c3d4-e5f6-4789-90ab-abcdef123456",
-    "userId": "11121314-1516-1718-1920-212223242526",
-    "status": "open",
-    "budget": 100,
-    "packagedProducts": [],
-    "unpackagedProducts": [],
-    "transactionDateAndTime": "2026-03-08T20:18:33.634Z"
   }
 ]
