@@ -73,9 +73,9 @@ const getCartById = async (cartId) => {
 const addNewCart = async (cart) => {
   const response = await writeData(filePath, cart);
 
-    if (response) {
-      carts.set(cart.cartId, cart); // update in-memory cache
-    }
+  if (response) {
+    carts.set(cart.cartId, cart); // update in-memory cache
+  }
 
   return response;
 };
@@ -94,7 +94,67 @@ const getOpenCartsByUser = async (userId) => {
   return null;
 };
 
-// const result = await getOpenCartsByUser("11121314-1516-1718-1920-212223242526");
-// console.log(result);
+import fs from "node:fs/promises";
 
+const addPackagedItemToCart = async (cartId, packagedProduct) => {
+  if (carts.size === 0) {
+    await getAllCarts();
+  }
+
+  const cart = carts.get(cartId);
+
+  if (!cart) {
+    throw new Error("CART NOT FOUND");
+  }
+
+  if (!cart.packagedProducts) {
+    cart.packagedProducts = [];
+    throw new Error("INVALID DATA");
+  }
+
+  cart.packagedProducts.push(packagedProduct);
+
+  // overwrite file manually
+  await fs.writeFile(
+    filePath,
+    JSON.stringify(Array.from(carts.values()), null, 2),
+    "utf8",
+  );
+
+  return cart;
+};
+
+const addUnpackagedItemToCart = async (cartId, unpackagedProduct) => {
+  if (carts.size == 0) {
+    await getAllCarts();
+  }
+
+  const cart = carts.get(cartId);
+
+  if (!cart) {
+    throw new Error("CART NOT FOUND");
+  }
+
+  if (!cart.unpackagedProducts) {
+    cart.unpackagedProducts = [];
+    throw new Error("INVALID DATA");
+  }
+
+  cart.unpackagedProducts.push(unpackagedProduct);
+
+  await fs.writeFile(
+    filePath,
+    JSON.stringify(Array.from(carts.values()), null, 2),
+    "utf8",
+  );
+
+  return cart;
+};
+
+const product = new UnpackagedProduct("xyz", "hello", "123", "king", 1, 2.5);
+const result = await addUnpackagedItemToCart(
+  "88fcd838-7040-472d-b506-0f4bf3ef4ca1",
+  product,
+);
+console.log(result);
 export { addNewCart, getCartById, getOpenCartsByUser };
