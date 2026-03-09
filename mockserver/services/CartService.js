@@ -5,14 +5,12 @@ import CartDTO from "../models/CartDTO.js";
 import {
   addNewCart,
   getCartById,
+  getOpenCartsByUser,
 } from "../repository/CartRepository.js";
 import { v4 as uuidv4 } from "uuid";
-import CartInitializationRequest from "../models/CartInitializationRequest.js";
 import CartInitializationResponse from "../models/CartInitializationResponseDTO.js";
 import { getRetailerById } from "../repository/RetailerRepository.js";
 import { retrieveUserById } from "./UserService.js";
-
-
 
 const initializeNewCart = async (cartInitializationRequest) => {
   if (!cartInitializationRequest) {
@@ -42,6 +40,12 @@ const initializeNewCart = async (cartInitializationRequest) => {
     throw new Error("CANNOT FIND RETAILOR BY GIVEN ID");
   }
 
+  const existingCart = await getOpenCartsByUser(request.userId);
+
+  if (existingCart) {
+    throw new Error("YOU ALREADY HAVE AN OPEN CART. DEAL WITH IT FIRST");
+  }
+
   const response = await addNewCart(newCart);
 
   if (!response) {
@@ -66,7 +70,7 @@ const retrieveCartById = async (cartId) => {
   const result = await getCartById(cartId);
 
   if (!result) {
-    throw new Error("UNABLE TO RETRIEVE CART BY GIVEN ID")
+    throw new Error("UNABLE TO RETRIEVE CART BY GIVEN ID");
   }
 
   return result;
