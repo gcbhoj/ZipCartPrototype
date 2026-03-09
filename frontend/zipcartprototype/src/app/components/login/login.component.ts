@@ -6,6 +6,7 @@ import { LoginResponse } from 'src/app/classes/LoginResponseDTO';
 import { IONIC_UI } from 'src/UIImports';
 import { Testservices } from 'src/app/services/mockserver/test/testservices';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
+import { ToastServices } from 'src/app/services/toastService/toast-services';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private testService: Testservices,
     private dataSharing: Datasharing,
+    private toast: ToastServices,
   ) {}
 
   ngOnInit() {
@@ -35,9 +37,11 @@ export class LoginComponent implements OnInit {
     this.testService.logInUser(userId).subscribe({
       next: (result: LoginResponse) => {
         this.logIn = result;
+        this.toast.showSuccess(this.logIn.message);
       },
       error: (err) => {
-        console.error('Login failed:', err);
+        const message = err?.error?.message || 'Unable to login';
+        this.toast.showError(message);
       },
     });
   }

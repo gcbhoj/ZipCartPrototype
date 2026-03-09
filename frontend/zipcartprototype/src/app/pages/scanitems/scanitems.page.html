@@ -1,17 +1,11 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" >
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="goToHomePage()">
-        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-
     <ion-title>Scan Barcode</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="page-container">
+  <div class="page-container" >
     <app-barcodescanner [disabled]="productDisplayed"></app-barcodescanner>
     <ion-button (click)="sendBarCode()">sendBarcode Test Only</ion-button>
     <app-scanned-product-display></app-scanned-product-display>

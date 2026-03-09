@@ -65,44 +65,96 @@ const getCartById = async (cartId) => {
     await getAllCarts();
   }
 
-  return carts.get(cartId) || null;
-};
+  const result = carts.get(cartId);
 
+  return result;
+};
 
 const addNewCart = async (cart) => {
   const response = await writeData(filePath, cart);
 
-  if (!response) {
-    throw new Error("UNABLE TO INITIALIZE NEW SHOPPING CART");
+  if (response) {
+    carts.set(cart.cartId, cart); // update in-memory cache
   }
 
   return response;
 };
 
-// const cart = new Cart("xyz", "1111", "2222", "open", 500, [], [], new Date());
+const getOpenCartsByUser = async (userId) => {
+  if (carts.size === 0) {
+    await getAllCarts();
+  }
 
-// const result = await addNewCart(cart);
-// console.log(result);
+  for (const cart of carts.values()) {
+    if (cart.userId === userId && cart.status === "open") {
+      return cart;
+    }
+  }
 
-export { addNewCart, getCartById };
-// const result = await getCartByUser("1c78af65-695e-4048-835a-17d91331e147");
-// console.log(result);
+  return null;
+};
 
-// const result = await getAllCarts();
+import fs from "node:fs/promises";
 
-// result.forEach((cart) => {
-//   console.log("Cart:", cart.cartId);
+const addPackagedItemToCart = async (cartId, packagedProduct) => {
+  if (carts.size === 0) {
+    await getAllCarts();
+  }
 
-//   console.log("Packaged Products:");
-//   cart.packagedProducts.forEach((p) => {
-//     console.log(p);
-//   });
+  const cart = carts.get(cartId);
 
-//   console.log("Unpackaged Products:");
-//   cart.unpackagedProducts.forEach((u) => {
-//     console.log(u);
-//   });
-// });
+  if (!cart) {
+    throw new Error("CART NOT FOUND");
+  }
 
-// const result = await getAllCarts();
-// console.log(result);
+  if (!cart.packagedProducts) {
+    cart.packagedProducts = [];
+    throw new Error("INVALID DATA");
+  }
+
+  cart.packagedProducts.push(packagedProduct);
+
+  // overwrite file manually
+  await fs.writeFile(
+    filePath,
+    JSON.stringify(Array.from(carts.values()), null, 2),
+    "utf8",
+  );
+
+  return cart;
+};
+
+const addUnpackagedItemToCart = async (cartId, unpackagedProduct) => {
+  if (carts.size == 0) {
+    await getAllCarts();
+  }
+
+  const cart = carts.get(cartId);
+
+  if (!cart) {
+    throw new Error("CART NOT FOUND");
+  }
+
+  if (!cart.unpackagedProducts) {
+    cart.unpackagedProducts = [];
+    throw new Error("INVALID DATA");
+  }
+
+  cart.unpackagedProducts.push(unpackagedProduct);
+
+  await fs.writeFile(
+    filePath,
+    JSON.stringify(Array.from(carts.values()), null, 2),
+    "utf8",
+  );
+
+  return cart;
+};
+
+const product = new UnpackagedProduct("xyz", "hello", "123", "king", 1, 2.5);
+const result = await addUnpackagedItemToCart(
+  "88fcd838-7040-472d-b506-0f4bf3ef4ca1",
+  product,
+);
+console.log(result);
+export { addNewCart, getCartById, getOpenCartsByUser };

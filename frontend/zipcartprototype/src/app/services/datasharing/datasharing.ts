@@ -66,6 +66,9 @@ export class Datasharing {
   startShoppingResponseDetails: Observable<StartShoppingResponse | null> =
     this.startShoppingResponse.asObservable();
 
+  private vendorButtonState = new BehaviorSubject<boolean>(true);
+  vendorButtonState$ = this.vendorButtonState.asObservable();
+
   constructor() {}
 
   //exchanging start shopping response
@@ -100,5 +103,9 @@ export class Datasharing {
     packgedProductInfo: PackagedProductInformation,
   ) {
     this.packagedProductInformation.next(packgedProductInfo);
+  }
+
+  updateRetailerButtonState(state: boolean) {
+    this.vendorButtonState.next(state);
   }
 }

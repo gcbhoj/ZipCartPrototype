@@ -60,6 +60,7 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.receiveLoginResponse();
     this.receiveCartInitResponse();
+    this.fetchCartByCartId(this.cartInitResponse.cartId);
   }
 
   // receiving cart initialization response
@@ -67,7 +68,6 @@ export class CartComponent implements OnInit {
     this.dataSharing.startShoppingResponseDetails.subscribe((data) => {
       if (data) {
         this.cartInitResponse = data;
-        this.fetchCartByCartId(this.cartInitResponse.cartId);
       }
     });
   }
@@ -85,7 +85,6 @@ export class CartComponent implements OnInit {
     this.cartService.cart$.subscribe((cart: Cart | null) => {
       if (cart) {
         this.completeCart = cart;
-        console.log('Complete Cart', this.completeCart);
         this.packagedProduct = cart.packagedProducts;
         this.unpackagedProduct = cart.unpackagedProducts;
       }

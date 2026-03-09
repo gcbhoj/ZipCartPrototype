@@ -8,7 +8,9 @@
   <app-login></app-login>
 
   <div class="top-section">
-    <ion-button (click)="goToTestPage()">Test Page</ion-button>
+    <ion-button (click)="enableRetailerButton()"
+      >Enable Vendor Button</ion-button
+    >
   </div>
   <div>
     <h4>Select Store to Start Shopping</h4>
@@ -27,7 +29,11 @@
             <!-- Button + Website -->
             <ion-col size="8" class="info-col">
               <span hidden>{{retailer.retailerId}}</span>
-              <ion-button expand="block" (click)="startShopping(retailer.retailerId)">
+              <ion-button
+                expand="block"
+                [disabled]="!isEnabled"
+                (click)="startShopping(retailer.retailerId)"
+              >
                 {{ retailer.retailerName }}
               </ion-button>
 
