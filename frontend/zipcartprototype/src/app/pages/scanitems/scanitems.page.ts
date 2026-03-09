@@ -71,7 +71,7 @@ export class ScanitemsPage implements OnInit {
 
   barCodeResults: BarCodeScannerResultDTO = {
     isValid: true,
-    text: '049000050158',
+    text: '041508260003',
     format: '',
     contentType: '',
   };

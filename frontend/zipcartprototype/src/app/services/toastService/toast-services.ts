@@ -12,6 +12,7 @@ export class ToastServices {
       duration: 2000,
       color: 'success',
       position: 'top',
+      icon: 'thumbs-up',
     });
 
     await toast.present();
@@ -23,6 +24,7 @@ export class ToastServices {
       duration: 2000,
       color: 'danger',
       position: 'top',
+      icon: 'thumbs-down',
     });
 
     await toast.present();

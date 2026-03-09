@@ -1,5 +1,3 @@
-import { LoginResponse } from './../classes/LoginResponseDTO';
-import { Retailer } from './../classes/Retailer';
 /**
  * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
  */
@@ -16,7 +14,8 @@ import { StartShopping } from '../classes/StartShoppingDTO';
 import { Cartservices } from '../services/mockserver/cartservice/cartservices';
 import { StartShoppingResponse } from '../classes/StartShoppingResponse';
 import { ToastServices } from '../services/toastService/toast-services';
-
+import { LoginResponse } from './../classes/LoginResponseDTO';
+import { Retailer } from './../classes/Retailer';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -134,7 +133,7 @@ export class Tab1Page implements OnInit {
         this.cartInitResponse = response;
         this.toast.showSuccess(response.message);
         this.shareCartInitResponse();
-        // this.router.navigate(['/scanitems']);
+        // this.router.navigate(['/tabs/scanItems']);
       },
       error: (err) => {
         const message = err?.error?.message || 'Unable to initialize cart';
@@ -149,16 +148,19 @@ export class Tab1Page implements OnInit {
     this.dataSharing.exchangeCartInitializationResponse(this.cartInitResponse);
   }
 
+  // enableRetailerButton() {
+  //   console.log('BUTTON ENABLED');
+  //   this.dataSharing.updateRetailerButtonState(true);
+  // }
+
   enableRetailerButton() {
     this.zone.run(() => {
-      console.log('Button Enabled');
       this.dataSharing.updateRetailerButtonState(true);
     });
   }
 
   disableRetailerButton() {
     this.zone.run(() => {
-      console.log('Button Disabled');
       this.dataSharing.updateRetailerButtonState(false);
     });
   }
