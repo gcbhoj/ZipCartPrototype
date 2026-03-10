@@ -1,2 +1,60 @@
-//TODO FRONTEND DEV
-1 const BARCODE = "5000112546415";
+//TODO API ENDPOints Required
+
+1. Mocking User Login
+Get User by Id
+Request Type: Get
+
+REQUEST : string
+
+RESPONSE DTO FORMAT(java class)
+userId: string
+userName: string
+message: string
+
+2. Retailer Information
+
+Get All Retailer
+Request Type: Get
+
+Response Type: Array
+Response DTO FORMAT(java class)
+
+  retailerId: string;
+  retailerName: string;
+  retailerURL: string;
+  retailerLogoUrl: string;
+
+2. Initialize Cart
+Request Type: POST
+REQUEST DTO FORMAT (java class):
+  userId: string;
+  retailerId: string;
+  budget: number;
+RESPONSE DTO FORMAT (java class):
+  cartId: string;
+  retailerName: string;
+  budget: number;
+  message: string;
+
+3. ScanProductsByBarcode
+Request Type: POST
+
+REQUEST DTO FORMAT (java class):
+  isValid: boolean;
+  text: string;
+  format: string;
+  contentType: string;
+
+RESPONSE DTO FORMAT (java class):
+  itemNumber: number;
+  productName: string;
+  imageURL: string;
+  price: number;
+  weight: string;
+  ingredients: [];
+  manufacturedDate: Date;
+  expiryDate: Date;
+  manufacturer: string;
+  manufacturedIn: string;
+  aboutProduct: string;
+  quantity: number;
