@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BarCodeScannerResultDTO } from 'src/app/classes/BarCodeScannerResultDTO';
+import { BarCodeScannerResultDTO } from 'src/app/classes/DTOs/BarCodeScannerResultDTO';
 
 @Injectable({
   providedIn: 'root',

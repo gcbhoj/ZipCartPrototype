@@ -10,12 +10,12 @@ import { RetailerServices } from '../services/mockserver/retailerService/retaile
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AlertServices } from '../services/alertService/alert-services';
-import { StartShopping } from '../classes/StartShoppingDTO';
+import { StartShopping } from '../classes/DTOs/StartShoppingDTO';
 import { Cartservices } from '../services/mockserver/cartservice/cartservices';
-import { StartShoppingResponse } from '../classes/StartShoppingResponse';
+import { StartShoppingResponse } from '../classes/DTOs/StartShoppingResponse';
 import { ToastServices } from '../services/toastService/toast-services';
-import { LoginResponse } from './../classes/LoginResponseDTO';
-import { Retailer } from './../classes/Retailer';
+import { LoginResponse } from '../classes/DTOs/LoginResponseDTO';
+import { Retailer } from '../classes/Models/Retailer';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',

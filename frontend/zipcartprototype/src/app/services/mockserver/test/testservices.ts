@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
-import { UserDisplay } from 'src/app/classes/UserDisplayDTO';
-import { RegisterUser } from 'src/app/classes/RegisterUserDTO';
-import { LoginResponse } from 'src/app/classes/LoginResponseDTO';
+import { UserDisplay } from 'src/app/classes/DTOs/UserDisplayDTO';
+import { RegisterUser } from 'src/app/classes/DTOs/RegisterUserDTO';
+import { LoginResponse } from 'src/app/classes/DTOs/LoginResponseDTO';
 
 @Injectable({
   providedIn: 'root',

@@ -12,7 +12,7 @@ import {
   IonToolbar,
   IonTitle,
 } from '@ionic/angular/standalone';
-import { UserDisplay } from 'src/app/classes/UserDisplayDTO';
+import { UserDisplay } from 'src/app/classes/DTOs/UserDisplayDTO';
 
 @Component({
   selector: 'app-viewalluser',

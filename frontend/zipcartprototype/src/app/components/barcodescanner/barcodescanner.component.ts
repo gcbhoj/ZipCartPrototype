@@ -3,7 +3,7 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BarCodeScannerResultDTO } from 'src/app/classes/BarCodeScannerResultDTO';
+import { BarCodeScannerResultDTO } from 'src/app/classes/DTOs/BarCodeScannerResultDTO';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { Input } from '@angular/core';
 import { IONIC_UI } from 'src/UIImports';

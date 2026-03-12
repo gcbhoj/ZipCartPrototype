@@ -2,11 +2,11 @@
  * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
  */
 import { Component, OnInit } from '@angular/core';
-import { UnPackagedProduct } from 'src/app/classes/UnPackagedProduct';
+import { UnPackagedProduct } from 'src/app/classes/Models/UnPackagedProduct';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { CommonModule } from '@angular/common';
 import { IONIC_UI } from 'src/UIImports';
-import { StartShoppingResponse } from 'src/app/classes/StartShoppingResponse';
+import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
 
 @Component({
   selector: 'app-unpackageditem',

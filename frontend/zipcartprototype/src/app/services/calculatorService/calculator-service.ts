@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { PackagedProduct } from 'src/app/classes/PackagedProduct';
-import { UnPackagedProduct } from 'src/app/classes/UnPackagedProduct';
+import { PackagedProduct } from 'src/app/classes/Models/PackagedProduct';
+import { UnPackagedProduct } from 'src/app/classes/Models/UnPackagedProduct';
 
 @Injectable({
   providedIn: 'root',
