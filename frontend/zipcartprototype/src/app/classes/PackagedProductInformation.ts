@@ -1,5 +1,5 @@
 export interface PackagedProductInformation {
-  itemNumber: number;
+  itemNumber: string;
   productName: string;
   imageURL: string;
   price: number;

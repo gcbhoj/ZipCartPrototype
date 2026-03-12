@@ -58,3 +58,13 @@ RESPONSE DTO FORMAT (java class):
   manufacturedIn: string;
   aboutProduct: string;
   quantity: number;
+
+4. Add Packaged Product to Cart
+Request Type 📃Patch
+
+REQUEST DTO FORMAT (java class):
+cartId:string;
+itemId: string;
+
+RESPONSE DTO FORMAT (java class):
+response:string
