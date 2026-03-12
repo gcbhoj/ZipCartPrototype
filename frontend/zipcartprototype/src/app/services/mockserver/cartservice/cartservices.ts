@@ -1,6 +1,8 @@
+import { AddPackagedProductResponse } from './../../../classes/AddPackagedProductResponseDTO';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AddPackagedProductRequest } from 'src/app/classes/AddPackagedProductRequestDTO';
 import { Cart } from 'src/app/classes/Cart';
 import { StartShopping } from 'src/app/classes/StartShoppingDTO';
 import { StartShoppingResponse } from 'src/app/classes/StartShoppingResponse';
@@ -35,5 +37,14 @@ export class Cartservices {
       },
       error: (err) => console.error('Failed to load Cart Items', err),
     });
+  }
+
+  addPackagedProductToCart(
+    request: AddPackagedProductRequest,
+  ): Observable<AddPackagedProductResponse> {
+    return this.http.patch<AddPackagedProductResponse>(
+      `${this.backendUrl}/add-packaged`,
+      request,
+    );
   }
 }
