@@ -2,6 +2,7 @@ import PackagedProduct from "../models/PackagedProductModel.js";
 import UnpackagedProduct from "../models/UnPackagedProductModel.js";
 import Cart from "../models/CartModel.js";
 import { readData } from "../utils/reader.js";
+import fs from "node:fs/promises";
 
 import path from "path";
 import { fileURLToPath } from "url";
@@ -94,7 +95,7 @@ const getOpenCartsByUser = async (userId) => {
   return null;
 };
 
-import fs from "node:fs/promises";
+
 
 const addPackagedItemToCart = async (cartId, packagedProduct) => {
   if (carts.size === 0) {
@@ -151,10 +152,11 @@ const addUnpackagedItemToCart = async (cartId, unpackagedProduct) => {
   return cart;
 };
 
-const product = new UnpackagedProduct("xyz", "hello", "123", "king", 1, 2.5);
-const result = await addUnpackagedItemToCart(
-  "88fcd838-7040-472d-b506-0f4bf3ef4ca1",
-  product,
-);
-console.log(result);
-export { addNewCart, getCartById, getOpenCartsByUser };
+
+export {
+  addNewCart,
+  getCartById,
+  getOpenCartsByUser,
+  addPackagedItemToCart,
+  addUnpackagedItemToCart,
+};
