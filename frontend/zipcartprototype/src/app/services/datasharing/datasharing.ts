@@ -1,11 +1,11 @@
-import { PackagedProduct } from './../../classes/PackagedProduct';
+import { PackagedProduct } from '../../classes/Models/PackagedProduct';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { BarCodeScannerResultDTO } from 'src/app/classes/BarCodeScannerResultDTO';
-import { LoginResponse } from 'src/app/classes/LoginResponseDTO';
-import { PackagedProductInformation } from 'src/app/classes/PackagedProductInformation';
-import { StartShoppingResponse } from 'src/app/classes/StartShoppingResponse';
-import { UnPackagedProduct } from 'src/app/classes/UnPackagedProduct';
+import { BarCodeScannerResultDTO } from 'src/app/classes/DTOs/BarCodeScannerResultDTO';
+import { LoginResponse } from 'src/app/classes/DTOs/LoginResponseDTO';
+import { PackagedProductInformation } from 'src/app/classes/Models/PackagedProductInformation';
+import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
+import { UnPackagedProduct } from 'src/app/classes/Models/UnPackagedProduct';
 
 @Injectable({
   providedIn: 'root',
@@ -121,6 +121,4 @@ export class Datasharing {
   updateRetailerButtonState(state: boolean) {
     this.vendorButtonState.next(state);
   }
-
-
 }

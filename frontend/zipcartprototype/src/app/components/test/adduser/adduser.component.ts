@@ -1,4 +1,4 @@
-import { RegisterUser } from './../../../classes/RegisterUserDTO';
+import { RegisterUser } from '../../../classes/DTOs/RegisterUserDTO';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {

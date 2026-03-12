@@ -2,7 +2,7 @@
  * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
  */
 import { Component, OnInit } from '@angular/core';
-import { PackagedProductInformation } from 'src/app/classes/PackagedProductInformation';
+import { PackagedProductInformation } from 'src/app/classes/Models/PackagedProductInformation';
 import { IONIC_UI } from 'src/UIImports';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { CommonModule } from '@angular/common';

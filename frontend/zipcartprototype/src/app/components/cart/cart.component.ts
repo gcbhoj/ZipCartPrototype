@@ -2,18 +2,17 @@
  * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
  */
 import { Component, OnInit } from '@angular/core';
-import { PackagedProduct } from '../../classes/PackagedProduct';
-import { UnPackagedProduct } from './../../classes/UnPackagedProduct';
-import { Cart } from '../../classes/Cart';
+import { PackagedProduct } from '../../classes/Models/PackagedProduct';
+import { UnPackagedProduct } from '../../classes/Models/UnPackagedProduct';
+import { Cart } from 'src/app/classes/Models/Cart';
 import { Cartservices } from '../../services/mockserver/cartservice/cartservices';
 import { Datasharing } from '../../services/datasharing/datasharing';
 import { PackageditemComponent } from '../packageditem/packageditem.component';
 import { UnpackageditemComponent } from '../unpackageditem/unpackageditem.component';
 import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
-import { StartShoppingResponse } from 'src/app/classes/StartShoppingResponse';
-import { LoginResponse } from 'src/app/classes/LoginResponseDTO';
+import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
+import { LoginResponse } from 'src/app/classes/DTOs/LoginResponseDTO';
 import { CommonModule } from '@angular/common';
-import { car } from 'ionicons/icons';
 
 @Component({
   selector: 'app-cart',

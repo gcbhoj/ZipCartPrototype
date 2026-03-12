@@ -96,22 +96,22 @@
     "transactionDateAndTime": "2026-02-05"
   },
   {
-    "cartId": "0e7d3c5c-d52d-44c5-854a-61d7af063c15",
+    "cartId": "38837d54-77cc-4561-8622-9cdbc5bfaff9",
     "retailerId": "a1b2c3d4-e5f6-4789-90ab-abcdef123456",
     "userId": "11121314-1516-1718-1920-212223242526",
     "status": "open",
     "budget": 0,
     "packagedProducts": [
       {
-        "productId": "65b03f4c-c49f-4c55-a1c8-93794dc98375",
-        "productName": "Dr Pepper",
-        "itemNumber": "8f7399d6-0afa-4dd9-82a3-4db0448d6e5e",
-        "imageUrl": "https://images.openfoodfacts.org/images/products/041/508/260/003/front_en.3.400.jpg",
+        "productId": "a1b2c3d4-e5f6-4789-90ab-abcdef000002",
+        "productName": "Coca-Cola",
+        "itemNumber": "ef363a67-f33c-4c80-b27b-816195975f37",
+        "imageUrl": "https://images.openfoodfacts.org/images/products/500/011/254/6415/front_de.137.400.jpg",
         "quantity": 1,
-        "unitPrice": 4.79
+        "unitPrice": 5
       }
     ],
     "unpackagedProducts": [],
-    "transactionDateAndTime": "2026-03-12T20:24:38.270Z"
+    "transactionDateAndTime": "2026-03-12T23:20:34.018Z"
   }
 ]

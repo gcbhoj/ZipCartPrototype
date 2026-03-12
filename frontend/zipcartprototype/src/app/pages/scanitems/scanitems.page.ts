@@ -1,4 +1,4 @@
-import { AddPackagedProductRequest } from 'src/app/classes/AddPackagedProductRequestDTO';
+import { AddPackagedProductRequest } from 'src/app/classes/DTOs/AddPackagedProductRequestDTO';
 /**
  * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
  */
@@ -8,13 +8,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BarcodescannerComponent } from 'src/app/components/barcodescanner/barcodescanner.component';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
-import { BarCodeScannerResultDTO } from 'src/app/classes/BarCodeScannerResultDTO';
+import { BarCodeScannerResultDTO } from 'src/app/classes/DTOs/BarCodeScannerResultDTO';
 import { ScannedProductDisplayComponent } from 'src/app/components/scanned-product-display/scanned-product-display.component';
 import { BarcodeService } from 'src/app/services/mockserver/barcodeService/barcode-service';
-import { PackagedProductInformation } from 'src/app/classes/PackagedProductInformation';
+import { PackagedProductInformation } from 'src/app/classes/Models/PackagedProductInformation';
 import { IONIC_UI } from 'src/UIImports';
 import { Router } from '@angular/router';
-import { StartShoppingResponse } from 'src/app/classes/StartShoppingResponse';
+import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
 import { ToastServices } from 'src/app/services/toastService/toast-services';
 import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
 
@@ -32,6 +32,8 @@ import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservic
   ],
 })
 export class ScanitemsPage implements OnInit {
+  addItemsToCartButtonEnabled: boolean = true;
+
   productDisplayed = false;
   packagedProduct: PackagedProductInformation = {
     itemNumber: '',
@@ -87,7 +89,7 @@ export class ScanitemsPage implements OnInit {
 
   barCodeResults: BarCodeScannerResultDTO = {
     isValid: true,
-    text: '041508260003',
+    text: '5000112546415',
     format: '',
     contentType: '',
   };
@@ -104,6 +106,9 @@ export class ScanitemsPage implements OnInit {
     this.receiveBarcodeDetails();
     this.receiveCartInitResponse();
   }
+  /**
+   * DATA SHARING
+   */
 
   receiveBarcodeDetails() {
     this.dataSharing.barcodeDetails.subscribe((data) => {
@@ -113,13 +118,29 @@ export class ScanitemsPage implements OnInit {
     });
   }
 
-  onProductLoaded() {
-    this.productDisplayed = true;
+  //sharing the received packaged product information to display in its component
+  sharePackagedProductInformation() {
+    if (this.packagedProduct) {
+      this.dataSharing.exchangePackagedProductInformation(this.packagedProduct);
+      this.scannedPackagedProductRequest.itemId =
+        this.packagedProduct.itemNumber;
+    }
   }
 
-  onProductCleared() {
-    this.productDisplayed = false;
+  // receiving cart initialization response
+  receiveCartInitResponse() {
+    this.dataSharing.startShoppingResponseDetails.subscribe((data) => {
+      if (data) {
+        this.cartInitResponse = data;
+        this.scannedPackagedProductRequest.cartId =
+          this.cartInitResponse.cartId;
+      }
+    });
   }
+
+  /**
+   *  API REQUESTS
+   */
 
   // posting the received bar code to receive the product details
   sendBarCode() {
@@ -134,7 +155,10 @@ export class ScanitemsPage implements OnInit {
           this.onProductLoaded();
         },
         error: (err) => {
-          this.toast.showError(err.message);
+          const message =
+            err?.error?.message ||
+            'FAILED TO GET PRODUCT BY SCANNING. PLEASE TRY AGAIN';
+          this.toast.showError(message);
         },
       });
   }
@@ -145,38 +169,19 @@ export class ScanitemsPage implements OnInit {
       .addPackagedProductToCart(this.scannedPackagedProductRequest)
       .subscribe({
         next: (response) => {
-          console.log('Product added to cart', response);
+          this.toast.showSuccess(response.response);
+          this.removeScannedItem();
         },
         error: (err) => {
-          console.error('Failed to add product', err);
+          const message = err?.error?.message || 'FAILED TO ADD ITEM TO CART';
+          this.toast.showError(message);
         },
       });
   }
 
-  //sharing the received packaged product information to display in its component
-  sharePackagedProductInformation() {
-    if (this.packagedProduct) {
-      this.dataSharing.exchangePackagedProductInformation(this.packagedProduct);
-      this.scannedPackagedProductRequest.itemId =
-        this.packagedProduct.itemNumber;
-      console.log('Add product request ', this.scannedPackagedProductRequest);
-    }
-  }
-
-  // receiving cart initialization response
-  receiveCartInitResponse() {
-    this.dataSharing.startShoppingResponseDetails.subscribe((data) => {
-      if (data) {
-        this.cartInitResponse = data;
-        this.scannedPackagedProductRequest.cartId =
-          this.cartInitResponse.cartId;
-        console.log(
-          'Cart Init Receiving Scan Items Page',
-          this.cartInitResponse,
-        );
-      }
-    });
-  }
+  /**
+   * FUNCTIONALITIES
+   */
 
   //removing the scanned item when cancel is pressed
   removeScannedItem() {
@@ -202,10 +207,21 @@ export class ScanitemsPage implements OnInit {
     this.dataSharing.exchangePackagedProductInformation(emptyProduct);
     // enabling the scanner
     this.onProductCleared();
+    this.addItemsToCartButtonEnabled = false;
   }
 
   // navigate to home page
   goToHomePage() {
     this.router.navigate(['/tabs/tab1']);
+  }
+
+  // enabling and disabling the scanner to avoid multiple scanning
+
+  onProductLoaded() {
+    this.productDisplayed = true;
+  }
+
+  onProductCleared() {
+    this.productDisplayed = false;
   }
 }
