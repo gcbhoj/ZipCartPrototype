@@ -1,11 +1,11 @@
-import { AddPackagedProductResponse } from './../../../classes/AddPackagedProductResponseDTO';
+import { AddPackagedProductResponse } from '../../../classes/DTOs/AddPackagedProductResponseDTO';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AddPackagedProductRequest } from 'src/app/classes/AddPackagedProductRequestDTO';
-import { Cart } from 'src/app/classes/Cart';
-import { StartShopping } from 'src/app/classes/StartShoppingDTO';
-import { StartShoppingResponse } from 'src/app/classes/StartShoppingResponse';
+import { AddPackagedProductRequest } from 'src/app/classes/DTOs/AddPackagedProductRequestDTO';
+import { Cart } from 'src/app/classes/Models/Cart';
+import { StartShopping } from 'src/app/classes/DTOs/StartShoppingDTO';
+import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
 
 @Injectable({
   providedIn: 'root',

@@ -2,7 +2,7 @@
  * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
  */
 import { Component, OnInit } from '@angular/core';
-import { LoginResponse } from 'src/app/classes/LoginResponseDTO';
+import { LoginResponse } from 'src/app/classes/DTOs/LoginResponseDTO';
 import { IONIC_UI } from 'src/UIImports';
 import { Testservices } from 'src/app/services/mockserver/test/testservices';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
