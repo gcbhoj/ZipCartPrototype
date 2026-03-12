@@ -94,33 +94,5 @@
       }
     ],
     "transactionDateAndTime": "2026-02-05"
-  },
-  {
-    "cartId": "88fcd838-7040-472d-b506-0f4bf3ef4ca1",
-    "retailerId": "a1b2c3d4-e5f6-4789-90ab-abcdef123456",
-    "userId": "11121314-1516-1718-1920-212223242526",
-    "status": "open",
-    "budget": 0,
-    "packagedProducts": [
-      {
-        "productId": "xyz",
-        "productName": "hello",
-        "itemNumber": "123",
-        "imageUrl": "king",
-        "quantity": 1,
-        "unitPrice": 2.5
-      }
-    ],
-    "unpackagedProducts": [
-      {
-        "productId": "xyz",
-        "productName": "hello",
-        "itemNumber": "123",
-        "imageUrl": "king",
-        "weight": 1,
-        "unitPrice": 2.5
-      }
-    ],
-    "transactionDateAndTime": "2026-03-09T02:15:25.666Z"
   }
 ]
