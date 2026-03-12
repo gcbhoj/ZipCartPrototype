@@ -9,6 +9,6 @@ import {
 
 cartRoutes.get("/retrieve/:cartId", fetchCartById);
 cartRoutes.post("/initialize", initializeCartForShopper);
-cartRoutes.post("/add-packaged", addPackagedProduct);
+cartRoutes.patch("/add-packaged", addPackagedProduct);
 
 export default cartRoutes;

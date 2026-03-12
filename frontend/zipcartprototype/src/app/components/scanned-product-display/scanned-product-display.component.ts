@@ -22,6 +22,10 @@ export class ScannedProductDisplayComponent implements OnInit {
   taxAmount: number = 0;
   //Initializing total amount
   totalAmount: number = 0;
+
+  //Initializing  item id to be passed to the
+  selectedPackagedProductItemId: string = '';
+
   constructor(
     private dataSharing: Datasharing,
     private calculator: CalculatorService,
@@ -41,6 +45,7 @@ export class ScannedProductDisplayComponent implements OnInit {
           this.taxAmount,
           this.product.price,
         );
+        this.selectedPackagedProductItemId = this.product.itemNumber;
       }
     });
   }
