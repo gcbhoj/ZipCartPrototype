@@ -1,6 +1,10 @@
-import { getProductByUPC } from "../repository/ProductRepository.js";
+import {
+  getProductByUPC,
+  getProductByItemNumber,
+} from "../repository/ProductRepository.js";
 import ProductInformationDTO from "../models/ProductInformationDTO.js";
 import BarCodeRequest from "../models/BarcodeRequestDTO.js";
+import PackagedProduct from "../models/PackagedProductModel.js";
 
 const retrieveProductByUPC = async (barCodeRequest) => {
   if (barCodeRequest.isValid == false) {
@@ -33,4 +37,33 @@ const retrieveProductByUPC = async (barCodeRequest) => {
   return response;
 };
 
-export { retrieveProductByUPC };
+const retrieveProductByItemNumber = async (itemNumber) => {
+  if (!itemNumber) {
+    throw new Error("ITEM NUMBER IS REQUIRED");
+  }
+
+  const retrievedProduct = await getProductByItemNumber(itemNumber);
+
+  if (!retrievedProduct) {
+    throw new Error("NO ITEM FOUND BY ITEM NUMBER");
+  }
+
+  const product = new PackagedProduct(
+    retrievedProduct.productId,
+    retrievedProduct.productName,
+    retrievedProduct.itemNumber,
+    retrievedProduct.imageURL,
+    retrievedProduct.quantity,
+    retrievedProduct.price,
+  );
+
+  return product;
+};
+
+// const result = await retrieveProductByItemNumber(
+//   "fd86e5b3-37f0-497d-a9bb-b01e80123a91",
+// );
+
+// console.log(result);
+
+export { retrieveProductByUPC, retrieveProductByItemNumber };
