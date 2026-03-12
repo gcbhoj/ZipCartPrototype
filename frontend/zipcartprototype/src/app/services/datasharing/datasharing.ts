@@ -66,9 +66,16 @@ export class Datasharing {
   startShoppingResponseDetails: Observable<StartShoppingResponse | null> =
     this.startShoppingResponse.asObservable();
 
+  // vendor button state
   private vendorButtonState = new BehaviorSubject<boolean>(true);
   vendorButtonState$ = this.vendorButtonState.asObservable();
 
+  // Packaged product item id sharing
+  private packagedProductItemIdSharing = new BehaviorSubject<string | null>(
+    null,
+  );
+  packagedProductItemId$: Observable<string | null> =
+    this.packagedProductItemIdSharing.asObservable();
   constructor() {}
 
   //exchanging start shopping response
@@ -100,12 +107,20 @@ export class Datasharing {
 
   //exchanging the packaged product information
   exchangePackagedProductInformation(
-    packgedProductInfo: PackagedProductInformation,
+    packagedProductInfo: PackagedProductInformation,
   ) {
-    this.packagedProductInformation.next(packgedProductInfo);
+    this.packagedProductInformation.next(packagedProductInfo);
   }
-
+  /**
+   *
+   * @param state
+   * to initialize one user one cart vendor button gets disabled
+   * to reintialize this service can be called once the transaction is complete
+   * to enable shoppers to start a new transaction.
+   */
   updateRetailerButtonState(state: boolean) {
     this.vendorButtonState.next(state);
   }
+
+
 }

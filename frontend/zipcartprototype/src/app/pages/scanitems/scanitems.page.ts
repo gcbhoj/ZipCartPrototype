@@ -13,6 +13,7 @@ import { BarcodeService } from 'src/app/services/mockserver/barcodeService/barco
 import { PackagedProductInformation } from 'src/app/classes/PackagedProductInformation';
 import { IONIC_UI } from 'src/UIImports';
 import { Router } from '@angular/router';
+import { StartShoppingResponse } from 'src/app/classes/StartShoppingResponse';
 
 @Component({
   selector: 'app-scanitems',
@@ -30,7 +31,7 @@ import { Router } from '@angular/router';
 export class ScanitemsPage implements OnInit {
   productDisplayed = false;
   packagedProduct: PackagedProductInformation = {
-    itemNumber: 0,
+    itemNumber: '',
     productName: '',
     imageURL: '',
     price: 0,
@@ -43,6 +44,15 @@ export class ScanitemsPage implements OnInit {
     aboutProduct: '',
     quantity: 0,
   };
+
+  scannedProductItemId: string = '';
+
+    cartInitResponse: StartShoppingResponse = {
+      cartId: '',
+      retailerName: '',
+      budget: 0,
+      message: '',
+    };
 
   //barcodes of mock data stored in mock server NOTE:FOR TESTING PURPOSES ONLY
 
@@ -111,6 +121,8 @@ export class ScanitemsPage implements OnInit {
           this.packagedProduct = data;
           // initializing the share method
           this.sharePackagedProductInformation();
+          this.scannedProductItemId = this.packagedProduct.itemNumber;
+          console.log(this.scannedProductItemId);
           //disables the scanner
           this.onProductLoaded();
         },
@@ -131,7 +143,7 @@ export class ScanitemsPage implements OnInit {
   removeScannedItem() {
     //creating a empty object
     const emptyProduct: PackagedProductInformation = {
-      itemNumber: 0,
+      itemNumber: '',
       productName: '',
       imageURL: '',
       price: 0,
@@ -157,4 +169,6 @@ export class ScanitemsPage implements OnInit {
   goToHomePage() {
     this.router.navigate(['/tabs/tab1']);
   }
+
+
 }
