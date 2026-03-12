@@ -6,10 +6,13 @@ import {
   addNewCart,
   getCartById,
   getOpenCartsByUser,
+  addPackagedItemToCart,
+  addUnpackagedItemToCart,
 } from "../repository/CartRepository.js";
 import { v4 as uuidv4 } from "uuid";
 import CartInitializationResponse from "../models/CartInitializationResponseDTO.js";
 import { getRetailerById } from "../repository/RetailerRepository.js";
+import { retrieveProductByItemNumber } from "../services/ProductServices.js";
 import { retrieveUserById } from "./UserService.js";
 
 const initializeNewCart = async (cartInitializationRequest) => {
@@ -76,4 +79,34 @@ const retrieveCartById = async (cartId) => {
   return result;
 };
 
-export { initializeNewCart, retrieveCartById };
+const addPackagedProductToCart = async (cartId, itemId) => {
+  if (!cartId) {
+    throw new Error("CART ID IS REQUIRED");
+  }
+
+  if (!itemId) {
+    throw new Error("ITEM ID IS REQUIRED");
+  }
+
+  const product = await retrieveProductByItemNumber(itemId);
+
+  if (!product) {
+    throw new Error("NO PRODUCT FOUND BY ITEM ID");
+  }
+
+  const result = await addPackagedItemToCart(cartId, product);
+
+  if (!result) {
+    throw new Error("UNABLE TO ADD ITEM TO CART");
+  }
+
+  return "PRODUCT SUCCESSFULLY ADDED TO CART";
+};
+
+// const response = await addPackagedProductToCart(
+//   "1a9586d6-de98-41ff-a763-954425756b8e",
+//   "0fb9aca5-326b-4df0-89f8-8b3cf81c12ee",
+// );
+// console.log(response);
+
+export { initializeNewCart, retrieveCartById, addPackagedProductToCart };

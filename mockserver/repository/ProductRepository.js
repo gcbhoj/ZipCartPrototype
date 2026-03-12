@@ -33,8 +33,23 @@ const getProductByUPC = async (barCodeValue) => {
   return product;
 };
 
-// const result = await getProductByUPC("5000112546415");
+const getProductByItemNumber = async (itemNumber) => {
+  if (products.size == 0) {
+    await getAllProductInformation();
+  }
+  for (const product of products.values()) {
+    if (product.itemNumber === itemNumber) {
+      return product;
+    }
+  }
+
+  return null;
+};
+
+// const result = await getProductByItemNumber(
+//   "fd86e5b3-37f0-497d-a9bb-b01e80123a91",
+// );
 
 // console.log(result);
 
-export { getProductByUPC };
+export { getProductByUPC, getProductByItemNumber };
