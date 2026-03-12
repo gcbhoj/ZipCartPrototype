@@ -1,3 +1,4 @@
+import { AddPackagedProductRequest } from 'src/app/classes/AddPackagedProductRequestDTO';
 /**
  * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
  */
@@ -14,6 +15,8 @@ import { PackagedProductInformation } from 'src/app/classes/PackagedProductInfor
 import { IONIC_UI } from 'src/UIImports';
 import { Router } from '@angular/router';
 import { StartShoppingResponse } from 'src/app/classes/StartShoppingResponse';
+import { ToastServices } from 'src/app/services/toastService/toast-services';
+import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
 
 @Component({
   selector: 'app-scanitems',
@@ -45,14 +48,17 @@ export class ScanitemsPage implements OnInit {
     quantity: 0,
   };
 
-  scannedProductItemId: string = '';
+  cartInitResponse: StartShoppingResponse = {
+    cartId: '',
+    retailerName: '',
+    budget: 0,
+    message: '',
+  };
 
-    cartInitResponse: StartShoppingResponse = {
-      cartId: '',
-      retailerName: '',
-      budget: 0,
-      message: '',
-    };
+  scannedPackagedProductRequest: AddPackagedProductRequest = {
+    cartId: '',
+    itemId: '',
+  };
 
   //barcodes of mock data stored in mock server NOTE:FOR TESTING PURPOSES ONLY
 
@@ -90,10 +96,13 @@ export class ScanitemsPage implements OnInit {
     private dataSharing: Datasharing,
     private barCodeService: BarcodeService,
     private router: Router,
+    private toast: ToastServices,
+    private cartService: Cartservices,
   ) {}
 
   ngOnInit() {
     this.receiveBarcodeDetails();
+    this.receiveCartInitResponse();
   }
 
   receiveBarcodeDetails() {
@@ -121,13 +130,25 @@ export class ScanitemsPage implements OnInit {
           this.packagedProduct = data;
           // initializing the share method
           this.sharePackagedProductInformation();
-          this.scannedProductItemId = this.packagedProduct.itemNumber;
-          console.log(this.scannedProductItemId);
           //disables the scanner
           this.onProductLoaded();
         },
         error: (err) => {
-          console.error('Error:', err);
+          this.toast.showError(err.message);
+        },
+      });
+  }
+
+  //Adding the scanned items to cart
+  addScannedItemToCart() {
+    this.cartService
+      .addPackagedProductToCart(this.scannedPackagedProductRequest)
+      .subscribe({
+        next: (response) => {
+          console.log('Product added to cart', response);
+        },
+        error: (err) => {
+          console.error('Failed to add product', err);
         },
       });
   }
@@ -136,7 +157,25 @@ export class ScanitemsPage implements OnInit {
   sharePackagedProductInformation() {
     if (this.packagedProduct) {
       this.dataSharing.exchangePackagedProductInformation(this.packagedProduct);
+      this.scannedPackagedProductRequest.itemId =
+        this.packagedProduct.itemNumber;
+      console.log('Add product request ', this.scannedPackagedProductRequest);
     }
+  }
+
+  // receiving cart initialization response
+  receiveCartInitResponse() {
+    this.dataSharing.startShoppingResponseDetails.subscribe((data) => {
+      if (data) {
+        this.cartInitResponse = data;
+        this.scannedPackagedProductRequest.cartId =
+          this.cartInitResponse.cartId;
+        console.log(
+          'Cart Init Receiving Scan Items Page',
+          this.cartInitResponse,
+        );
+      }
+    });
   }
 
   //removing the scanned item when cancel is pressed
@@ -169,6 +208,4 @@ export class ScanitemsPage implements OnInit {
   goToHomePage() {
     this.router.navigate(['/tabs/tab1']);
   }
-
-
 }
