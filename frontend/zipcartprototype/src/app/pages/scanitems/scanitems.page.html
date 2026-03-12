@@ -8,7 +8,9 @@
   <div class="page-container">
     <app-barcodescanner [disabled]="productDisplayed"></app-barcodescanner>
     <ion-button (click)="sendBarCode()">sendBarcode Test Only</ion-button>
-    <app-scanned-product-display></app-scanned-product-display>
+    <app-scanned-product-display
+      *ngIf="productDisplayed"
+    ></app-scanned-product-display>
   </div>
 </ion-content>
 
@@ -30,7 +32,7 @@
           <ion-button
             expand="block"
             color="medium"
-            (click)="removeScannedItem()"
+            (click)="onProductCleared()"
           >
             Cancel
           </ion-button>

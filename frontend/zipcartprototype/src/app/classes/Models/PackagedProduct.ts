@@ -11,5 +11,5 @@ export interface PackagedProduct {
   imageUrl: string;
   quantity: number;
   unitPrice: number;
-  totalPrice: number;
 }
+//TODO:
