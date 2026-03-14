@@ -59,14 +59,18 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.receiveLoginResponse();
     this.receiveCartInitResponse();
-    this.fetchCartByCartId(this.cartInitResponse.cartId);
   }
+  /**
+   * DATA SHARING
+   */
 
   // receiving cart initialization response
   receiveCartInitResponse() {
     this.dataSharing.startShoppingResponseDetails.subscribe((data) => {
       if (data) {
         this.cartInitResponse = data;
+        this.fetchCartByCartId(this.cartInitResponse.cartId);
+        console.log(this.cartInitResponse.cartId);
       }
     });
   }
@@ -78,6 +82,22 @@ export class CartComponent implements OnInit {
       }
     });
   }
+
+  // sharing the packaged products received from the cart to display in packaged product component
+  sharePackagedProduct() {
+    this.dataSharing.exchangePackagedProduct(this.packagedProduct);
+  }
+
+  // sharing the unpackaged products received from the cart to display in unpackaged product component
+  shareUnPackagedProduct() {
+    this.dataSharing.exchangeUnPackagedProduct(this.unpackagedProduct);
+  }
+
+  /**
+   *
+   * @param cartId
+   *  GET REQUEST TO FETCH CART BY ID
+   */
 
   fetchCartByCartId(cartId: string) {
     this.cartService.getCartByCartId(cartId);
@@ -92,6 +112,10 @@ export class CartComponent implements OnInit {
       this.calculateTotals();
     });
   }
+
+  /**
+   * CALLING CALCULATOR SERVICE TO CALCULATE THE TOTAL AMOUNT AND TAXES PAYABLE
+   */
 
   calculateTotals() {
     this.totalPackagedProduct =
@@ -115,15 +139,5 @@ export class CartComponent implements OnInit {
       this.totalCartAmountBeforeTax,
       this.taxAmount,
     );
-  }
-
-  // sharing the packaged products received from the cart to display in packaged product component
-  sharePackagedProduct() {
-    this.dataSharing.exchangePackagedProduct(this.packagedProduct);
-  }
-
-  // sharing the unpackaged products received from the cart to display in unpackaged product component
-  shareUnPackagedProduct() {
-    this.dataSharing.exchangeUnPackagedProduct(this.unpackagedProduct);
   }
 }

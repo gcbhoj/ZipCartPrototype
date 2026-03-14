@@ -8,6 +8,7 @@ import {
   home,
   cart,
   person,
+  cameraOutline,
 } from 'ionicons/icons';
 
 //Organizing ion icons import to have a claen main.ts file
@@ -19,7 +20,7 @@ export function loadIcons() {
     alert,
     thumbsDown,
     home,
-
+    cameraOutline,
     cart,
     person,
   });

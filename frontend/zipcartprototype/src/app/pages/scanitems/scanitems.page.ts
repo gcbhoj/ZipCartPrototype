@@ -170,6 +170,8 @@ export class ScanitemsPage implements OnInit {
       .subscribe({
         next: (response) => {
           this.toast.showSuccess(response.response);
+
+          this.cartService.getCartByCartId(this.cartInitResponse.cartId);
           this.removeScannedItem();
         },
         error: (err) => {
