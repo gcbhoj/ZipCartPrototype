@@ -6,7 +6,9 @@ import {
   retrieveCartById,
   initializeNewCart,
   addPackagedProductToCart,
+  updatePackagedProductItemQuantity,
 } from "../services/CartService.js";
+import UpdatePackagedProductQuantityResponse from "../models/UpdatePackagedProductResponseDTO.js";
 
 const initializeCartForShopper = async (req, res) => {
   try {
@@ -93,4 +95,43 @@ const addPackagedProduct = async (req, res) => {
   }
 };
 
-export { fetchCartById, initializeCartForShopper,addPackagedProduct };
+const updatePackedProductQuantity = async (req, res) => {
+  try {
+    const { cartId, itemId, quantity } = req.body;
+
+    const result = await updatePackagedProductItemQuantity(
+      cartId,
+      itemId,
+      quantity,
+    );
+
+    if (!result) {
+      throw new Error("INTERNAL SERVER ERROR");
+    }
+
+    const response = new UpdatePackagedProductQuantityResponse(result);
+
+    return res.status(200).json(response);
+  } catch (error) {
+    switch (error) {
+      case "CART NOT FOUND":
+      case "ITEM NOT FOUND":
+      case "CART ID IS REQUIRED":
+      case "ITEM ID IS REQUIRED":
+      case "QUANTITY IS REQUIRED AND MUST BE A NUMBER":
+      case "UNABLE TO UPDATE ITEM QUANTITY":
+        return res.status(400).json({ message: error.message });
+      case "INTERNAL SERVER ERROR":
+        return res.status(500).json({ message: error.message });
+      default:
+        return res.status(500).json({ message: error.message });
+    }
+  }
+};
+
+export {
+  fetchCartById,
+  initializeCartForShopper,
+  addPackagedProduct,
+  updatePackedProductQuantity,
+};

@@ -95,8 +95,6 @@ const getOpenCartsByUser = async (userId) => {
   return null;
 };
 
-
-
 const addPackagedItemToCart = async (cartId, packagedProduct) => {
   if (carts.size === 0) {
     await getAllCarts();
@@ -123,6 +121,66 @@ const addPackagedItemToCart = async (cartId, packagedProduct) => {
   );
 
   return cart;
+};
+
+const setPackagedProductQty = async (cartId, itemNumber, quantity) => {
+  if (carts.size === 0) {
+    await getAllCarts();
+  }
+
+  const cart = carts.get(cartId);
+
+  if (!cart) {
+    throw new Error("CART NOT FOUND");
+  }
+
+  const product = cart.packagedProducts.find(
+    (p) => p.itemNumber === itemNumber,
+  );
+
+  if (!product) {
+    throw new Error("ITEM NOT FOUND");
+  }
+
+  // Replace quantity instead of increasing it
+  product.quantity = quantity;
+
+  await fs.writeFile(
+    filePath,
+    JSON.stringify(Array.from(carts.values()), null, 2),
+    "utf8",
+  );
+
+  return product;
+};
+const removePackageItemFromCart = async (cartId, itemNumber) => {
+  if (carts.size === 0) {
+    await getAllCarts();
+  }
+
+  const cart = carts.get(cartId);
+
+  if (!cart) {
+    throw new Error("CART NOT FOUND");
+  }
+
+  const index = cart.packagedProducts.findIndex(
+    (product) => product.itemNumber === itemNumber,
+  );
+
+  if (index === -1) {
+    throw new Error("ITEM NOT FOUND");
+  }
+
+  const removedItem = cart.packagedProducts.splice(index, 1)[0];
+
+  await fs.writeFile(
+    filePath,
+    JSON.stringify(Array.from(carts.values()), null, 2),
+    "utf8",
+  );
+
+  return removedItem;
 };
 
 const addUnpackagedItemToCart = async (cartId, unpackagedProduct) => {
@@ -152,6 +210,11 @@ const addUnpackagedItemToCart = async (cartId, unpackagedProduct) => {
   return cart;
 };
 
+// const cartId = "b2c3d4e5-f6a7-4890-91bc-def123456789";
+// const itemNumber = "411c3366-81ba-47ee-9932-0576f641c5e7";
+
+// const response = await setPackagedProductQty(cartId, itemNumber, 5);
+// console.log(response);
 
 export {
   addNewCart,
@@ -159,4 +222,6 @@ export {
   getOpenCartsByUser,
   addPackagedItemToCart,
   addUnpackagedItemToCart,
+  setPackagedProductQty,
+  removePackageItemFromCart,
 };

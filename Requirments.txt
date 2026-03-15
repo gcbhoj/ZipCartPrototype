@@ -64,7 +64,18 @@ Request Type 📃Patch
 
 REQUEST DTO FORMAT (java class):
 cartId:string;
-itemId: string;
+itemNumber: string;
 
 RESPONSE DTO FORMAT (java class):
 response:string
+
+5. SetPackaged Product quantity
+Request Type: 📃Patch
+
+REQUEST DTO FORMAT 
+carId:string;
+itemNumber:string;
+quantity:number;
+
+RESPONSE DTO FORMAT
+result:string

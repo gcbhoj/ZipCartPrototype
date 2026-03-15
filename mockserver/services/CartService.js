@@ -7,6 +7,8 @@ import {
   getCartById,
   getOpenCartsByUser,
   addPackagedItemToCart,
+  setPackagedProductQty,
+  removePackageItemFromCart,
   addUnpackagedItemToCart,
 } from "../repository/CartRepository.js";
 import { v4 as uuidv4 } from "uuid";
@@ -103,10 +105,33 @@ const addPackagedProductToCart = async (cartId, itemId) => {
   return "PRODUCT SUCCESSFULLY ADDED TO CART";
 };
 
-// const response = await addPackagedProductToCart(
-//   "1a9586d6-de98-41ff-a763-954425756b8e",
-//   "0fb9aca5-326b-4df0-89f8-8b3cf81c12ee",
-// );
+const updatePackagedProductItemQuantity = async (cartId, itemId, quantity) => {
+  if (!cartId) {
+    throw new Error("CART ID IS REQUIRED");
+  }
+  if (!itemId) {
+    throw new Error("ITEM ID IS REQUIRED");
+  }
+  if (!quantity && quantity !== isNaN) {
+    throw new Error("QUANTITY IS REQUIRED AND MUST BE A NUMBER");
+  }
+  const result = await setPackagedProductQty(cartId, itemId, quantity);
+
+  if (!result) {
+    throw new Error("UNABLE TO UPDATE ITEM QUANTITY");
+  }
+  return "PRODUCT QUANTITY UPDATED SUCCESSFULLY";
+};
+
+// const cartId = "b2c3d4e5-f6a7-4890-91bc-def123456789";
+// const itemNumber = "411c3366-81ba-47ee-9932-0576f641c5e7";
+
+// const response = await updatePackagedProductItemQuantity(cartId, itemNumber, 5);
 // console.log(response);
 
-export { initializeNewCart, retrieveCartById, addPackagedProductToCart };
+export {
+  initializeNewCart,
+  retrieveCartById,
+  addPackagedProductToCart,
+  updatePackagedProductItemQuantity,
+};
