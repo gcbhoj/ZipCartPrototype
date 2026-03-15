@@ -44,7 +44,8 @@ export class CartComponent implements OnInit {
   packagedProduct: PackagedProduct[] = [];
   // initializing the unpackaged product component as an empty array to receive and share
   unpackagedProduct: UnPackagedProduct[] = [];
-  //initializing variables to store and display
+  //initializing variables to store and display product total
+
   totalPackagedProduct: number = 0;
   totalUnPackagedProduct: number = 0;
   totalCartAmountBeforeTax: number = 0;
@@ -59,6 +60,7 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.receiveLoginResponse();
     this.receiveCartInitResponse();
+    this.receivePackagedProductTotal();
   }
   /**
    * DATA SHARING
@@ -70,7 +72,6 @@ export class CartComponent implements OnInit {
       if (data) {
         this.cartInitResponse = data;
         this.fetchCartByCartId(this.cartInitResponse.cartId);
-        console.log(this.cartInitResponse.cartId);
       }
     });
   }
@@ -93,6 +94,16 @@ export class CartComponent implements OnInit {
     this.dataSharing.exchangeUnPackagedProduct(this.unpackagedProduct);
   }
 
+  // receive Packaged Product total
+  receivePackagedProductTotal() {
+    this.dataSharing.PackagedProductTotal$.subscribe((data) => {
+      if (data) {
+        this.totalPackagedProduct = data;
+        console.log(this.totalPackagedProduct);
+      }
+    });
+  }
+
   /**
    *
    * @param cartId
@@ -109,35 +120,10 @@ export class CartComponent implements OnInit {
       }
       this.sharePackagedProduct();
       this.shareUnPackagedProduct();
-      this.calculateTotals();
     });
   }
 
   /**
    * CALLING CALCULATOR SERVICE TO CALCULATE THE TOTAL AMOUNT AND TAXES PAYABLE
    */
-
-  calculateTotals() {
-    this.totalPackagedProduct =
-      this.calculator.calculateTotalAmountPackagedItems(this.packagedProduct);
-
-    this.totalUnPackagedProduct =
-      this.calculator.calculateTotalAmountUnPackagedItems(
-        this.unpackagedProduct,
-      );
-
-    this.totalCartAmountBeforeTax = this.calculator.calculateTotalCartAmount(
-      this.totalPackagedProduct,
-      this.totalUnPackagedProduct,
-    );
-
-    this.taxAmount = this.calculator.calculateTaxAmount(
-      this.totalCartAmountBeforeTax,
-    );
-
-    this.totalCartAmount = this.calculator.calculateTotalAmount(
-      this.totalCartAmountBeforeTax,
-      this.taxAmount,
-    );
-  }
 }

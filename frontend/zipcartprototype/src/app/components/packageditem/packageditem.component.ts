@@ -7,6 +7,7 @@ import { IONIC_UI } from 'src/UIImports';
 import { CommonModule } from '@angular/common';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
+import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
 
 @Component({
   selector: 'app-packageditem',
@@ -16,6 +17,9 @@ import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingRespons
   imports: [CommonModule, IONIC_UI],
 })
 export class PackageditemComponent implements OnInit {
+  //TODO: SHARE THE PACKAGED PRODUCT TOTAL TO CART COMPONENT
+  productTotal: number = 0;
+
   cartInitResponse: StartShoppingResponse = {
     cartId: '',
     retailerName: '',
@@ -24,7 +28,10 @@ export class PackageditemComponent implements OnInit {
   };
   //initializing the products array to store received products
   products: PackagedProduct[] = [];
-  constructor(private dataSharing: Datasharing) {}
+  constructor(
+    private dataSharing: Datasharing,
+    private calculator: CalculatorService,
+  ) {}
 
   ngOnInit() {
     this.receiveCartInitResponse();
@@ -34,6 +41,8 @@ export class PackageditemComponent implements OnInit {
   receivePackagedProducts() {
     this.dataSharing.packagedProduct.subscribe((data) => {
       this.products = data;
+
+      this.calculateProductTotalBeforeTaxes();
     });
   }
 
@@ -45,5 +54,18 @@ export class PackageditemComponent implements OnInit {
         this.receivePackagedProducts();
       }
     });
+  }
+
+  calculateProductTotalBeforeTaxes() {
+    if (this.products && this.products.length > 0) {
+      this.productTotal = this.calculator.calculateProductTotalWithoutTaxes(
+        this.products,
+      );
+      this.shareProductsTotal();
+    }
+  }
+
+  shareProductsTotal() {
+    this.dataSharing.exchangePackagedProductTotal(this.productTotal);
   }
 }
