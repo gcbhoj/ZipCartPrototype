@@ -169,7 +169,7 @@ export class ScanitemsPage implements OnInit {
       .addPackagedProductToCart(this.scannedPackagedProductRequest)
       .subscribe({
         next: (response) => {
-          this.toast.showSuccess(response.response);
+          this.toast.showSuccess(response.result);
 
           this.cartService.getCartByCartId(this.cartInitResponse.cartId);
           this.removeScannedItem();

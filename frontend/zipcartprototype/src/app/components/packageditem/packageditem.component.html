@@ -44,7 +44,12 @@
             (click)="decreaseProductQuantity(product.itemNumber)"
             >-</ion-button
           >
-          <ion-button size="small" color="danger">Remove</ion-button>
+          <ion-button
+            size="small"
+            color="danger"
+            (click)="removeProduct(product.itemNumber)"
+            >Remove</ion-button
+          >
         </ion-col>
       </ion-row>
     </ion-grid>

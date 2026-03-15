@@ -1,4 +1,4 @@
-import { AddPackagedProductResponse } from '../../../classes/DTOs/AddPackagedProductResponseDTO';
+import { RemovePackagedProductRequest } from './../../../classes/DTOs/RemovePackagedProuctRequestDTO';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -7,7 +7,7 @@ import { Cart } from 'src/app/classes/Models/Cart';
 import { StartShopping } from 'src/app/classes/DTOs/StartShoppingDTO';
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
 import { UpdatePackagedProduct } from 'src/app/classes/DTOs/UpdatePackagedProductRequestDTO';
-import { UpdatePackagedProductResponse } from 'src/app/classes/DTOs/UpdatePackagedProductResponseDTO';
+import { GetSingleResponse } from 'src/app/classes/DTOs/SingleResponseObjectDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -43,8 +43,8 @@ export class Cartservices {
 
   addPackagedProductToCart(
     request: AddPackagedProductRequest,
-  ): Observable<AddPackagedProductResponse> {
-    return this.http.patch<AddPackagedProductResponse>(
+  ): Observable<GetSingleResponse> {
+    return this.http.patch<GetSingleResponse>(
       `${this.backendUrl}/add-packaged`,
       request,
     );
@@ -52,9 +52,18 @@ export class Cartservices {
 
   updatePackagedProductQuantity(
     request: UpdatePackagedProduct,
-  ): Observable<UpdatePackagedProductResponse> {
-    return this.http.patch<UpdatePackagedProductResponse>(
+  ): Observable<GetSingleResponse> {
+    return this.http.patch<GetSingleResponse>(
       `${this.backendUrl}/update-qty`,
+      request,
+    );
+  }
+
+  removePackagedProduct(
+    request: RemovePackagedProductRequest,
+  ): Observable<GetSingleResponse> {
+    return this.http.patch<GetSingleResponse>(
+      `${this.backendUrl}/remove-pkg`,
       request,
     );
   }

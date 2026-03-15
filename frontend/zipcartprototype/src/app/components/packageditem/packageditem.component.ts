@@ -13,6 +13,7 @@ import { AlertServices } from 'src/app/services/alertService/alert-services';
 import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
 import { UpdatePackagedProduct } from 'src/app/classes/DTOs/UpdatePackagedProductRequestDTO';
 import { ToastServices } from 'src/app/services/toastService/toast-services';
+import { RemovePackagedProductRequest } from 'src/app/classes/DTOs/RemovePackagedProuctRequestDTO';
 
 @Component({
   selector: 'app-packageditem',
@@ -86,12 +87,20 @@ export class PackageditemComponent implements OnInit {
     }
     this.callServices(itemId, quantity);
   }
+  /**
+   * SERVICE CALLS TO UPDATE AND REMOVE PRODUCT
+   * @param itemId
+   * @param quantity
+   */
+
+  // SERVICE CALL TO UPDATE
 
   callServices(itemId: string, quantity: number) {
     let request = this.prepareRequest(itemId, quantity);
     this.cartService.updatePackagedProductQuantity(request).subscribe({
       next: (response) => {
         this.toast.showSuccess(response.result);
+        this.cartService.getCartByCartId(this.cartInitResponse.cartId);
       },
       error: (err) => {
         const message = err?.error?.message || 'FAILED TO UPDATE ITEM';
@@ -99,26 +108,29 @@ export class PackageditemComponent implements OnInit {
       },
     });
   }
+  // SERVICE CALL TO REMOVE
 
-  // decreaseProductQuantity() {
-  //   this.products.forEach((product) => {
-  //     if ('quantity' in product) {
-  //       product.quantity--;
-  //       if (product.quantity === 1) {
-  //         this.alertService.showProductRemovalAlert(
-  //           () => {
-  //             //TODO: IMPLEMENT REMOVE LOGIC AND IMPLEMENT HERE
-  //             console.log('OK HAS BEEN PRESSED');
-  //           },
-  //           () => {
-  //             product.quantity = 1;
-  //           },
-  //         );
-  //       }
-  //       this.calculateProductTotalBeforeTaxes();
-  //     }
-  //   });
-  // }
+  removeProduct(itemId: string) {
+    let request = this.prepareRequestForRemoval(itemId);
+    this.cartService.removePackagedProduct(request).subscribe({
+      next: (response) => {
+        this.toast.showSuccess(response.result);
+        // ✅ remove locally so UI updates
+        this.products = this.products.filter(
+          (product) => product.itemNumber !== itemId,
+        );
+        this.calculateProductTotalBeforeTaxes();
+        this.cartService.getCartByCartId(this.cartInitResponse.cartId);
+        this.dataSharing.exchangePackagedProductTotal((this.productTotal = 0));
+
+        console.log(this.productTotal);
+      },
+      error: (err) => {
+        const message = err?.error?.message || 'FAILED TO REMOVE ITEM';
+        this.toast.showError(message);
+      },
+    });
+  }
 
   /**
    * CALCULATOR SERVICES
@@ -135,6 +147,13 @@ export class PackageditemComponent implements OnInit {
   /**
    * DATA PREPARATION
    */
+
+  prepareRequestForRemoval(itemId: string): RemovePackagedProductRequest {
+    return {
+      cartId: this.cartInitResponse.cartId,
+      itemId: itemId,
+    };
+  }
   prepareRequest(itemId: string, quantity: number): UpdatePackagedProduct {
     return {
       cartId: this.cartInitResponse.cartId,
@@ -172,14 +191,12 @@ export class PackageditemComponent implements OnInit {
       return product.quantity;
     }
     if (newQuantity === 0) {
-      this.alertService.showProductRemovalAlert(
-        () => {
-          console.log('OK PRESSED REMOVE THE ITEM');
-        },
-        () => {
-          return (product.quantity = 1);
-        },
+      this.alertService.showAlert(
+        'PRODUCT BELOW ZERO',
+        'IF YOU WISH TO REMOVE THE ITEM FROM CART. PRESS REMOVE BUTTON',
+        ['OK'],
       );
+      return product.quantity;
     }
     product.quantity = newQuantity;
 
