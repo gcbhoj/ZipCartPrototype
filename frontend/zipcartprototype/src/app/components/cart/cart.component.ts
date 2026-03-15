@@ -99,23 +99,8 @@ export class CartComponent implements OnInit {
     this.dataSharing.PackagedProductTotal$.subscribe((data) => {
       if (data !== null) {
         this.totalPackagedProduct = data;
-        console.log('PACKAGED PRODUCT TOTAL', this.totalPackagedProduct);
       }
-      this.totalCartAmountBeforeTax = this.calculator.performAddition(
-        this.totalPackagedProduct,
-        this.totalUnPackagedProduct,
-      );
-      this.taxAmount = this.calculator.calculateTaxAmount(
-        this.totalCartAmountBeforeTax,
-      );
-      console.log('CART TAX AMOUNT', this.taxAmount);
-
-      this.totalCartAmount = this.calculator.performAddition(
-        this.taxAmount,
-        this.totalCartAmountBeforeTax,
-      );
-
-      console.log('TOTAL AMOUNT AFTER TAX', this.totalCartAmount);
+      this.performCalculations();
     });
   }
 
@@ -141,4 +126,18 @@ export class CartComponent implements OnInit {
   /**
    * CALLING CALCULATOR SERVICE TO CALCULATE THE TOTAL AMOUNT AND TAXES PAYABLE
    */
+
+  performCalculations() {
+    this.totalCartAmountBeforeTax = this.calculator.performAddition(
+      this.totalPackagedProduct,
+      this.totalUnPackagedProduct,
+    );
+    this.taxAmount = this.calculator.calculateTaxAmount(
+      this.totalCartAmountBeforeTax,
+    );
+    this.totalCartAmount = this.calculator.performAddition(
+      this.taxAmount,
+      this.totalCartAmountBeforeTax,
+    );
+  }
 }

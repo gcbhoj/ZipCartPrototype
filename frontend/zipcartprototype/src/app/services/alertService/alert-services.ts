@@ -54,6 +54,26 @@ export class AlertServices {
     await alert.present();
   }
 
+  async showProductRemovalAlert(onOk: () => void, onCancel: () => void) {
+    const alert = await this.alertController.create({
+      header: 'REMOVE PRODUCT',
+      message: 'WOULD YOU LIKE TO REMOVE THE PRODUCT',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => onCancel(),
+        },
+        {
+          text: 'OK',
+          handler: () => onOk(),
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   async showAlert(header: string, message: string, buttons: string[] = ['OK']) {
     const alert = await this.alertController.create({
       header,

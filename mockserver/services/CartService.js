@@ -71,7 +71,6 @@ const retrieveCartById = async (cartId) => {
   }
 
   const result = await getCartById(cartId);
-  console.log(result);
 
   if (!result) {
     throw new Error("UNABLE TO RETRIEVE CART BY GIVEN ID");
