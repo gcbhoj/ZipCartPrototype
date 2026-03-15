@@ -14,7 +14,8 @@ export class Testservices {
   // change to the below backend url while working with emulator
   private backendUrlEmulator: string = 'http://10.0.2.2:3000/mockserver/users/';
   // change to the below backend url while working with device where the 0.0.0.0 is the users IPV4 Address
-  private backendUrlDevice: string = 'http://0.0.0.0:3000/mockserver/users/';
+  private backendUrlDevice: string =
+    'http://99.217.41.87:3000/mockserver/users/';
 
   // ✅ BehaviorSubject to hold user list
   private usersSubject = new BehaviorSubject<UserDisplay[]>([]);

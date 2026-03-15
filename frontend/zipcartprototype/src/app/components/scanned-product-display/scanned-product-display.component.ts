@@ -41,7 +41,7 @@ export class ScannedProductDisplayComponent implements OnInit {
       if (data) {
         this.product = data;
         this.taxAmount = this.calculator.calculateTaxAmount(this.product.price);
-        this.totalAmount = this.calculator.calculateTotalAmount(
+        this.totalAmount = this.calculator.performAddition(
           this.taxAmount,
           this.product.price,
         );

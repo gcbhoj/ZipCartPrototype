@@ -44,7 +44,8 @@ export class CartComponent implements OnInit {
   packagedProduct: PackagedProduct[] = [];
   // initializing the unpackaged product component as an empty array to receive and share
   unpackagedProduct: UnPackagedProduct[] = [];
-  //initializing variables to store and display
+  //initializing variables to store and display product total
+
   totalPackagedProduct: number = 0;
   totalUnPackagedProduct: number = 0;
   totalCartAmountBeforeTax: number = 0;
@@ -59,14 +60,18 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.receiveLoginResponse();
     this.receiveCartInitResponse();
-    this.fetchCartByCartId(this.cartInitResponse.cartId);
+    this.receivePackagedProductTotal();
   }
+  /**
+   * DATA SHARING
+   */
 
   // receiving cart initialization response
   receiveCartInitResponse() {
     this.dataSharing.startShoppingResponseDetails.subscribe((data) => {
       if (data) {
         this.cartInitResponse = data;
+        this.fetchCartByCartId(this.cartInitResponse.cartId);
       }
     });
   }
@@ -79,6 +84,32 @@ export class CartComponent implements OnInit {
     });
   }
 
+  // sharing the packaged products received from the cart to display in packaged product component
+  sharePackagedProduct() {
+    this.dataSharing.exchangePackagedProduct(this.packagedProduct);
+  }
+
+  // sharing the unpackaged products received from the cart to display in unpackaged product component
+  shareUnPackagedProduct() {
+    this.dataSharing.exchangeUnPackagedProduct(this.unpackagedProduct);
+  }
+
+  // receive Packaged Product total
+  receivePackagedProductTotal() {
+    this.dataSharing.PackagedProductTotal$.subscribe((data) => {
+      if (data !== null) {
+        this.totalPackagedProduct = data;
+      }
+      this.performCalculations();
+    });
+  }
+
+  /**
+   *
+   * @param cartId
+   *  GET REQUEST TO FETCH CART BY ID
+   */
+
   fetchCartByCartId(cartId: string) {
     this.cartService.getCartByCartId(cartId);
     this.cartService.cart$.subscribe((cart: Cart | null) => {
@@ -89,41 +120,24 @@ export class CartComponent implements OnInit {
       }
       this.sharePackagedProduct();
       this.shareUnPackagedProduct();
-      this.calculateTotals();
     });
   }
 
-  calculateTotals() {
-    this.totalPackagedProduct =
-      this.calculator.calculateTotalAmountPackagedItems(this.packagedProduct);
+  /**
+   * CALLING CALCULATOR SERVICE TO CALCULATE THE TOTAL AMOUNT AND TAXES PAYABLE
+   */
 
-    this.totalUnPackagedProduct =
-      this.calculator.calculateTotalAmountUnPackagedItems(
-        this.unpackagedProduct,
-      );
-
-    this.totalCartAmountBeforeTax = this.calculator.calculateTotalCartAmount(
+  performCalculations() {
+    this.totalCartAmountBeforeTax = this.calculator.performAddition(
       this.totalPackagedProduct,
       this.totalUnPackagedProduct,
     );
-
     this.taxAmount = this.calculator.calculateTaxAmount(
       this.totalCartAmountBeforeTax,
     );
-
-    this.totalCartAmount = this.calculator.calculateTotalAmount(
-      this.totalCartAmountBeforeTax,
+    this.totalCartAmount = this.calculator.performAddition(
       this.taxAmount,
+      this.totalCartAmountBeforeTax,
     );
-  }
-
-  // sharing the packaged products received from the cart to display in packaged product component
-  sharePackagedProduct() {
-    this.dataSharing.exchangePackagedProduct(this.packagedProduct);
-  }
-
-  // sharing the unpackaged products received from the cart to display in unpackaged product component
-  shareUnPackagedProduct() {
-    this.dataSharing.exchangeUnPackagedProduct(this.unpackagedProduct);
   }
 }

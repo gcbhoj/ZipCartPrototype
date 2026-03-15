@@ -76,6 +76,13 @@ export class Datasharing {
   );
   packagedProductItemId$: Observable<string | null> =
     this.packagedProductItemIdSharing.asObservable();
+
+  // Packaged product total sharing from packaged item component to cart component
+
+  private packagedProductTotalSharing = new BehaviorSubject<number | null>(
+    null,
+  );
+  PackagedProductTotal$ = this.packagedProductTotalSharing.asObservable();
   constructor() {}
 
   //exchanging start shopping response
@@ -120,5 +127,10 @@ export class Datasharing {
    */
   updateRetailerButtonState(state: boolean) {
     this.vendorButtonState.next(state);
+  }
+
+  //exchanging packaged product total
+  exchangePackagedProductTotal(total: number) {
+    this.packagedProductTotalSharing.next(total);
   }
 }
