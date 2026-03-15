@@ -22,15 +22,6 @@ import { loadIcons } from './icons';
 
 loadIcons();
 
-// import { addIcons } from 'ionicons';
-// import { scan, arrowBack } from 'ionicons/icons';
-
-// Register icons BEFORE bootstrapping the app
-// addIcons({
-//   arrowBack,
-//   scan,
-// });
-
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

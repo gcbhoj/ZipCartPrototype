@@ -94,24 +94,5 @@
       }
     ],
     "transactionDateAndTime": "2026-02-05"
-  },
-  {
-    "cartId": "38837d54-77cc-4561-8622-9cdbc5bfaff9",
-    "retailerId": "a1b2c3d4-e5f6-4789-90ab-abcdef123456",
-    "userId": "11121314-1516-1718-1920-212223242526",
-    "status": "open",
-    "budget": 0,
-    "packagedProducts": [
-      {
-        "productId": "a1b2c3d4-e5f6-4789-90ab-abcdef000002",
-        "productName": "Coca-Cola",
-        "itemNumber": "ef363a67-f33c-4c80-b27b-816195975f37",
-        "imageUrl": "https://images.openfoodfacts.org/images/products/500/011/254/6415/front_de.137.400.jpg",
-        "quantity": 1,
-        "unitPrice": 5
-      }
-    ],
-    "unpackagedProducts": [],
-    "transactionDateAndTime": "2026-03-12T23:20:34.018Z"
   }
 ]

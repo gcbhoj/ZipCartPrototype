@@ -11,5 +11,6 @@ export interface PackagedProduct {
   imageUrl: string;
   quantity: number;
   unitPrice: number;
+  taxBeforeTax: number
 }
 //TODO:

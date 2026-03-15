@@ -69,7 +69,7 @@ export class Tab1Page implements OnInit {
           this.budget = budget | 0;
           if (this.budget > 0) {
             this.toast.showSuccess(
-              `You have set a budget of ${this.budget}.You can change your budget from the profile section.`,
+              `BUDGET SET: ${this.budget}. CHANGE FROM PROFILE PAGE(CHANGE THE PROFILE TO LINK)`,
             );
           }
           const dto = this.mapToStartShoppingDTO(

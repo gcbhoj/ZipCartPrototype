@@ -1,5 +1,5 @@
+import { PackagedProduct } from './../../classes/Models/PackagedProduct';
 import { Injectable } from '@angular/core';
-import { PackagedProduct } from 'src/app/classes/Models/PackagedProduct';
 import { UnPackagedProduct } from 'src/app/classes/Models/UnPackagedProduct';
 
 @Injectable({
@@ -7,6 +7,33 @@ import { UnPackagedProduct } from 'src/app/classes/Models/UnPackagedProduct';
 })
 export class CalculatorService {
   TAX_PERCENT: number = 0.13;
+
+  calculateProductTotalWithoutTaxes(
+    products: (PackagedProduct | UnPackagedProduct)[],
+  ): number {
+    let total = 0;
+
+    products.forEach((product) => {
+      let productTotal = 0;
+
+      // Packaged scenario
+      if ('unitPrice' in product && 'quantity' in product) {
+        productTotal = product.unitPrice * product.quantity;
+      }
+
+      // Unpackaged scenario (weight-based)
+      if ('pricePerKg' in product && 'weight' in product) {
+        productTotal = product.unitPrice * product.weight;
+      }
+
+      // Store inside object
+      (product as any).taxBeforeTax = productTotal;
+
+      total += productTotal;
+    });
+
+    return total;
+  }
 
   // calculating tax amount with 13 % HST
   calculateTaxAmount(unitPrice: number): number {
@@ -44,48 +71,12 @@ export class CalculatorService {
     return Number(totalAmount.toFixed(2));
   }
 
-  //calculating total amount of the packaged items in the cart
-  calculateTotalAmountPackagedItems(
-    packagedProducts: PackagedProduct[],
-  ): number {
-    let totalAmount: number = 0;
-
-    packagedProducts.forEach((product) => {
-      totalAmount += this.calculateTotalProductPrice(
-        product.unitPrice,
-        product.quantity,
-      );
-    });
-
-    return Number(totalAmount.toFixed(2));
-  }
-
-  //calculating total amount of the packaged items in the cart
-  calculateTotalAmountUnPackagedItems(
-    packagedProducts: UnPackagedProduct[],
-  ): number {
-    let totalAmount: number = 0;
-
-    packagedProducts.forEach((product) => {
-      totalAmount += this.calculateTotalProductPrice(
-        product.unitPrice,
-        product.weight,
-      );
-    });
-
-    return Number(totalAmount.toFixed(2));
-  }
-
-  //calculate totalCartAmount
-  calculateTotalCartAmount(
-    totalPackagedProduct: number,
-    totalUnPackagedProduct: number,
-  ): number {
-    if (!totalUnPackagedProduct || !totalUnPackagedProduct) {
-      return 0;
+  performAddition(firstNumber: number, secondNumber: number): number {
+    if (typeof firstNumber === 'number' && typeof secondNumber === 'number') {
+      let total = firstNumber + secondNumber;
+      return Number(total.toFixed(2));
     }
-    let totalAmount = totalPackagedProduct + totalUnPackagedProduct;
 
-    return Number(totalAmount.toFixed(2));
+    return 0;
   }
 }

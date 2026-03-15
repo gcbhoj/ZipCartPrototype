@@ -10,5 +10,4 @@ export interface UnPackagedProduct {
   imageUrl: string;
   weight: number;
   unitPrice: number;
-  totalPrice: number;
 }
