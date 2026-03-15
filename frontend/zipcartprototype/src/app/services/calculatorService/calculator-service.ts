@@ -8,7 +8,7 @@ import { UnPackagedProduct } from 'src/app/classes/Models/UnPackagedProduct';
 export class CalculatorService {
   TAX_PERCENT: number = 0.13;
 
-   calculateProductTotalWithoutTaxes(
+  calculateProductTotalWithoutTaxes(
     products: (PackagedProduct | UnPackagedProduct)[],
   ): number {
     let total = 0;
@@ -71,16 +71,12 @@ export class CalculatorService {
     return Number(totalAmount.toFixed(2));
   }
 
-   //calculate totalCartAmount
-  calculateTotalCartAmount(
-    totalPackagedProduct: number,
-    totalUnPackagedProduct: number,
-  ): number {
-    if (!totalUnPackagedProduct || !totalUnPackagedProduct) {
-      return 0;
+  performAddition(firstNumber: number, secondNumber: number): number {
+    if (typeof firstNumber === 'number' && typeof secondNumber === 'number') {
+      let total = firstNumber + secondNumber;
+      return Number(total.toFixed(2));
     }
-    let totalAmount = totalPackagedProduct + totalUnPackagedProduct;
 
-    return Number(totalAmount.toFixed(2));
+    return 0;
   }
 }

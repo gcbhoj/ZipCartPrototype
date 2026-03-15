@@ -97,10 +97,25 @@ export class CartComponent implements OnInit {
   // receive Packaged Product total
   receivePackagedProductTotal() {
     this.dataSharing.PackagedProductTotal$.subscribe((data) => {
-      if (data) {
+      if (data !== null) {
         this.totalPackagedProduct = data;
-        console.log(this.totalPackagedProduct);
+        console.log('PACKAGED PRODUCT TOTAL', this.totalPackagedProduct);
       }
+      this.totalCartAmountBeforeTax = this.calculator.performAddition(
+        this.totalPackagedProduct,
+        this.totalUnPackagedProduct,
+      );
+      this.taxAmount = this.calculator.calculateTaxAmount(
+        this.totalCartAmountBeforeTax,
+      );
+      console.log('CART TAX AMOUNT', this.taxAmount);
+
+      this.totalCartAmount = this.calculator.performAddition(
+        this.taxAmount,
+        this.totalCartAmountBeforeTax,
+      );
+
+      console.log('TOTAL AMOUNT AFTER TAX', this.totalCartAmount);
     });
   }
 

@@ -36,6 +36,9 @@ export class PackageditemComponent implements OnInit {
   ngOnInit() {
     this.receiveCartInitResponse();
   }
+  /**
+   * DATA SHARING COMPONENTS
+   */
 
   // Receiving the packaged products
   receivePackagedProducts() {
@@ -55,6 +58,14 @@ export class PackageditemComponent implements OnInit {
       }
     });
   }
+  // sharing the total amount from the packaged products in cart
+  shareProductsTotal() {
+    this.dataSharing.exchangePackagedProductTotal(this.productTotal);
+  }
+
+  /**
+   * CALCULATOR SERVICES
+   */
 
   calculateProductTotalBeforeTaxes() {
     if (this.products && this.products.length > 0) {
@@ -63,9 +74,5 @@ export class PackageditemComponent implements OnInit {
       );
       this.shareProductsTotal();
     }
-  }
-
-  shareProductsTotal() {
-    this.dataSharing.exchangePackagedProductTotal(this.productTotal);
   }
 }
