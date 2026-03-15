@@ -123,10 +123,27 @@ const updatePackagedProductItemQuantity = async (cartId, itemId, quantity) => {
   return "PRODUCT QUANTITY UPDATED SUCCESSFULLY";
 };
 
+const removePackagedItem = async (cartId, itemId) => {
+  if (!cartId) {
+    throw new Error("CART ID IS REQUIRED");
+  }
+
+  if (!itemId) {
+    throw new Error("ITEM ID IS REQUIRED");
+  }
+  const result = await removePackageItemFromCart(cartId, itemId);
+
+  if (!result) {
+    throw new Error("UNABLE TO UPDATE PRODUCT");
+  }
+
+  return "PRODUCT REMOVED SUCCESSFULLY";
+};
+
 // const cartId = "b2c3d4e5-f6a7-4890-91bc-def123456789";
 // const itemNumber = "411c3366-81ba-47ee-9932-0576f641c5e7";
 
-// const response = await updatePackagedProductItemQuantity(cartId, itemNumber, 5);
+// const response = await removePackagedItem(cartId, itemNumber);
 // console.log(response);
 
 export {
@@ -134,4 +151,5 @@ export {
   retrieveCartById,
   addPackagedProductToCart,
   updatePackagedProductItemQuantity,
+  removePackagedItem,
 };

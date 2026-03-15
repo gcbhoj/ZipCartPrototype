@@ -7,8 +7,10 @@ import {
   initializeNewCart,
   addPackagedProductToCart,
   updatePackagedProductItemQuantity,
+  removePackagedItem,
 } from "../services/CartService.js";
 import UpdatePackagedProductQuantityResponse from "../models/UpdatePackagedProductResponseDTO.js";
+import RemovePackagedProductResponse from "../models/RemovePackagedProductResponseDTO.js";
 
 const initializeCartForShopper = async (req, res) => {
   try {
@@ -129,9 +131,39 @@ const updatePackedProductQuantity = async (req, res) => {
   }
 };
 
+const deletePackagedProduct = async (req, res) => {
+  try {
+    const { cartId, itemId } = req.body;
+
+    const result = await removePackagedItem(cartId, itemId);
+
+    if (!result) {
+      throw new Error("INTERNAL SERVER ERROR");
+    }
+
+    const response = new RemovePackagedProductResponse(result);
+
+    return res.status(200).json(response);
+  } catch (error) {
+    switch (error) {
+      case "CART NOT FOUND":
+      case "ITEM NOT FOUND":
+      case "CART ID IS REQUIRED":
+      case "ITEM ID IS REQUIRED":
+        return res.status(400).json({ message: error.message });
+      case "UNABLE TO UPDATE PRODUCT":
+      case "INTERNAL SERVER ERROR":
+        return res.status(500).json({ message: error.message });
+      default:
+        return res.status(500).json({ message: error.message });
+    }
+  }
+};
+
 export {
   fetchCartById,
   initializeCartForShopper,
   addPackagedProduct,
   updatePackedProductQuantity,
+  deletePackagedProduct,
 };
