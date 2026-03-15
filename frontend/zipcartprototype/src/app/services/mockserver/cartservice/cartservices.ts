@@ -6,6 +6,8 @@ import { AddPackagedProductRequest } from 'src/app/classes/DTOs/AddPackagedProdu
 import { Cart } from 'src/app/classes/Models/Cart';
 import { StartShopping } from 'src/app/classes/DTOs/StartShoppingDTO';
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
+import { UpdatePackagedProduct } from 'src/app/classes/DTOs/UpdatePackagedProductRequestDTO';
+import { UpdatePackagedProductResponse } from 'src/app/classes/DTOs/UpdatePackagedProductResponseDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -44,6 +46,15 @@ export class Cartservices {
   ): Observable<AddPackagedProductResponse> {
     return this.http.patch<AddPackagedProductResponse>(
       `${this.backendUrl}/add-packaged`,
+      request,
+    );
+  }
+
+  updatePackagedProductQuantity(
+    request: UpdatePackagedProduct,
+  ): Observable<UpdatePackagedProductResponse> {
+    return this.http.patch<UpdatePackagedProductResponse>(
+      `${this.backendUrl}/update-qty`,
       request,
     );
   }

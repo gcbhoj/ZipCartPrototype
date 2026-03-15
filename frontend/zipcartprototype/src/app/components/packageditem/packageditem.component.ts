@@ -10,6 +10,9 @@ import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingRespons
 import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
 import { IncreaseProductQuantity } from 'src/app/classes/DTOs/IncreaseProductQuantityDTO';
 import { AlertServices } from 'src/app/services/alertService/alert-services';
+import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
+import { UpdatePackagedProduct } from 'src/app/classes/DTOs/UpdatePackagedProductRequestDTO';
+import { ToastServices } from 'src/app/services/toastService/toast-services';
 
 @Component({
   selector: 'app-packageditem',
@@ -27,12 +30,15 @@ export class PackageditemComponent implements OnInit {
     budget: 0,
     message: '',
   };
+
   //initializing the products array to store received products
   products: PackagedProduct[] = [];
   constructor(
     private dataSharing: Datasharing,
     private calculator: CalculatorService,
     private alertService: AlertServices,
+    private cartService: Cartservices,
+    private toast: ToastServices,
   ) {}
 
   ngOnInit() {
@@ -68,34 +74,51 @@ export class PackageditemComponent implements OnInit {
    * HANDLING INCREASE AND DECREASE OF PRODUCT QUANTITY
    */
 
-  increaseProductQuantity() {
-    this.products.forEach((product) => {
-      if ('quantity' in product) {
-        product.quantity++;
-        this.calculateProductTotalBeforeTaxes();
-      }
+  increaseProductQuantity(itemId: string) {
+    let quantity = this.increaseQuantity(itemId);
+    this.callServices(itemId, quantity);
+  }
+
+  decreaseProductQuantity(itemId: string) {
+    let quantity = this.decreaseQuantity(itemId);
+    if (quantity === 0) {
+      return;
+    }
+    this.callServices(itemId, quantity);
+  }
+
+  callServices(itemId: string, quantity: number) {
+    let request = this.prepareRequest(itemId, quantity);
+    this.cartService.updatePackagedProductQuantity(request).subscribe({
+      next: (response) => {
+        this.toast.showSuccess(response.result);
+      },
+      error: (err) => {
+        const message = err?.error?.message || 'FAILED TO UPDATE ITEM';
+        this.toast.showError(message);
+      },
     });
   }
 
-  decreaseProductQuantity() {
-    this.products.forEach((product) => {
-      if ('quantity' in product) {
-        product.quantity--;
-        if (product.quantity === 1) {
-          this.alertService.showProductRemovalAlert(
-            () => {
-              //TODO: IMPLEMENT REMOVE LOGIC AND IMPLEMENT HERE
-              console.log('OK HAS BEEN PRESSED');
-            },
-            () => {
-              product.quantity = 1;
-            },
-          );
-        }
-        this.calculateProductTotalBeforeTaxes();
-      }
-    });
-  }
+  // decreaseProductQuantity() {
+  //   this.products.forEach((product) => {
+  //     if ('quantity' in product) {
+  //       product.quantity--;
+  //       if (product.quantity === 1) {
+  //         this.alertService.showProductRemovalAlert(
+  //           () => {
+  //             //TODO: IMPLEMENT REMOVE LOGIC AND IMPLEMENT HERE
+  //             console.log('OK HAS BEEN PRESSED');
+  //           },
+  //           () => {
+  //             product.quantity = 1;
+  //           },
+  //         );
+  //       }
+  //       this.calculateProductTotalBeforeTaxes();
+  //     }
+  //   });
+  // }
 
   /**
    * CALCULATOR SERVICES
@@ -108,5 +131,60 @@ export class PackageditemComponent implements OnInit {
       );
       this.shareProductsTotal();
     }
+  }
+  /**
+   * DATA PREPARATION
+   */
+  prepareRequest(itemId: string, quantity: number): UpdatePackagedProduct {
+    return {
+      cartId: this.cartInitResponse.cartId,
+      itemId: itemId,
+      quantity: quantity,
+    };
+  }
+  increaseQuantity(itemId: string): number {
+    const product = this.products.find(
+      (product) => product.itemNumber === itemId,
+    );
+    if (!product) {
+      return 0;
+    }
+
+    const newQuantity = product.quantity + 1;
+    product.quantity = newQuantity;
+
+    this.calculateProductTotalBeforeTaxes();
+
+    return newQuantity;
+  }
+
+  decreaseQuantity(itemId: string): number {
+    const product = this.products.find(
+      (product) => product.itemNumber === itemId,
+    );
+    if (!product) {
+      return 0;
+    }
+
+    const newQuantity = product.quantity - 1;
+
+    if (newQuantity < 0) {
+      return product.quantity;
+    }
+    if (newQuantity === 0) {
+      this.alertService.showProductRemovalAlert(
+        () => {
+          console.log('OK PRESSED REMOVE THE ITEM');
+        },
+        () => {
+          return (product.quantity = 1);
+        },
+      );
+    }
+    product.quantity = newQuantity;
+
+    this.calculateProductTotalBeforeTaxes();
+
+    return newQuantity;
   }
 }
