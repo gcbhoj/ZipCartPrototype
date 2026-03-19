@@ -173,6 +173,7 @@ export class ScanitemsPage implements OnInit {
 
           this.cartService.getCartByCartId(this.cartInitResponse.cartId);
           this.removeScannedItem();
+          this.addItemsToCartButtonEnabled = true;
         },
         error: (err) => {
           const message = err?.error?.message || 'FAILED TO ADD ITEM TO CART';

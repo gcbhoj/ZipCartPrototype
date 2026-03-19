@@ -14,7 +14,7 @@
   </div>
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="productDisplayed">
   <ion-toolbar>
     <ion-grid>
       <ion-row>
@@ -22,6 +22,7 @@
           <ion-button
             expand="block"
             color="primary"
+            [disabled]="!productDisplayed || !addItemsToCartButtonEnabled"
             (click)="addScannedItemToCart()"
           >
             Add Item to Cart
@@ -32,7 +33,7 @@
           <ion-button
             expand="block"
             color="medium"
-            (click)="onProductCleared()"
+            (click)="removeScannedItem()"
           >
             Cancel
           </ion-button>

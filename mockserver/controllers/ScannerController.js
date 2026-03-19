@@ -5,6 +5,8 @@ const retrieveProductDetails = async (req, res) => {
   try {
     const { isValid, text, format, contentType } = req.body;
 
+    console.log(isValid, text, format, contentType);
+
     const barCodeRequest = new BarCodeRequest(
       isValid,
       text,

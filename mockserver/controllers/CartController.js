@@ -16,6 +16,7 @@ const initializeCartForShopper = async (req, res) => {
   try {
     const { userId, retailerId, budget } = req.body;
     const request = new CartInitializationRequest(userId, retailerId, budget);
+    console.log(request);
     const response = await initializeNewCart(request);
     if (!response) {
       throw new Error("INTERNAL SERVER ERROR");

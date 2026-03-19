@@ -33,12 +33,14 @@ export class Cartservices {
   }
 
   getCartByCartId(cartId: string): void {
-    this.http.get<Cart>(`${this.backendUrl}/retrieve/${cartId}`).subscribe({
-      next: (cart: Cart) => {
-        this.cartSubject.next(cart);
-      },
-      error: (err) => console.error('Failed to load Cart Items', err),
-    });
+    this.http
+      .get<Cart>(`${this.backendUrl}/retrieve/${cartId}`)
+      .subscribe({
+        next: (cart: Cart) => {
+          this.cartSubject.next(cart);
+        },
+        error: (err) => console.error('Failed to load Cart Items', err),
+      });
   }
 
   addPackagedProductToCart(
