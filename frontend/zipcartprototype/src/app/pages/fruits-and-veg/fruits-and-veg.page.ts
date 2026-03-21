@@ -55,9 +55,6 @@ export class FruitsAndVegPage implements OnInit {
             formData.append('file', file);
             formData.append('imageId', imageId);
 
-            console.log('Blob:', blob);
-            console.log('File:', file);
-
             // ✅ Upload
             this.uploadImage(formData);
           } catch (error) {
@@ -69,7 +66,7 @@ export class FruitsAndVegPage implements OnInit {
   }
 
   /**
-   * API CALL
+   * SERVICE CALLS
    */
   uploadImage(formData: FormData) {
     this.cartService.getProductByImage(formData).subscribe({
@@ -77,7 +74,8 @@ export class FruitsAndVegPage implements OnInit {
         this.toast.showSuccess(res);
       },
       error: (err) => {
-        this.toast.showError(err.message);
+        const message = err?.error?.message || 'Veg UnIdentified';
+        this.toast.showError(message);
       },
     });
   }

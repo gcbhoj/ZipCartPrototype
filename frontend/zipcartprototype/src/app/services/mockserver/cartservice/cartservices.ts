@@ -18,6 +18,8 @@ export class Cartservices {
   // change to the below backend url while working with device where the 0.0.0.0 is the users IPV4 Address
   private backendUrlDevice: string = 'http://10.0.0.87:3000/mockserver/cart';
 
+  private pythonURL: string = 'http://10.0.0.87:5001/api/py/predict_fruits_veg';
+
   private cartSubject = new BehaviorSubject<Cart | null>(null);
   cart$: Observable<Cart | null> = this.cartSubject.asObservable();
 
@@ -51,9 +53,8 @@ export class Cartservices {
   }
 
   getProductByImage(formData: FormData): Observable<any> {
-    console.log(formData);
     return this.http.post<any>(
-      `${this.backendUrlDevice}/upload`, // adjust endpoint
+      `${this.pythonURL}`, // adjust endpoint
       formData,
     );
   }

@@ -18,6 +18,8 @@ def identify_fruit_veg_image():
         return jsonify({"error": "No file part"}), 400
 
     file = request.files['file']
+    
+    print(file)
 
     if file.filename == '':
         return jsonify({"error": "No selected file"}), 400
@@ -30,10 +32,16 @@ def identify_fruit_veg_image():
     try:
         file.save(temp_file_path)
         result = identify_image(temp_file_path)
-        return jsonify(result), 200
+        
+        if isinstance(result,set):
+            result = list(result)
+        
+        return jsonify({"success":True,
+                        "data":result}), 200
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({
+            "success":False,"error": str(e)}), 500
 
     finally:
         if os.path.exists(temp_file_path):
