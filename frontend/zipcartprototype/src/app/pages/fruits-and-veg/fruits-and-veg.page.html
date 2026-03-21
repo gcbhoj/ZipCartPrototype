@@ -11,6 +11,7 @@
     </ion-toolbar>
   </ion-header>
   <div class="camera_border"><app-camera></app-camera></div>
-  <div><ion-button>Upload Image</ion-button></div>
 
+  <!-- ✅ Correct image display -->
+  <img *ngIf="imageURL" [src]="imageURL" />
 </ion-content>

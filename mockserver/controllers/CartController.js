@@ -7,6 +7,7 @@ import {
   initializeNewCart,
   addPackagedProductToCart,
 } from "../services/CartService.js";
+import fs from "fs";
 
 const initializeCartForShopper = async (req, res) => {
   try {
@@ -93,4 +94,43 @@ const addPackagedProduct = async (req, res) => {
   }
 };
 
-export { fetchCartById, initializeCartForShopper,addPackagedProduct };
+const getProductByImage = async (req, res) => {
+  try {
+    const imageId = req.body.imageId;
+    const file = req.file;
+
+    console.log(imageId, file);
+
+    if (!file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+
+    // final path (same directory you want)
+    const newPath = `imageUploads/${imageId}.jpg`;
+
+    // ensure folder exists
+    if (!fs.existsSync("imageUploads")) {
+      fs.mkdirSync("imageUploads");
+    }
+
+    // move file to your desired folder
+    fs.renameSync(file.path, newPath);
+
+    console.log("Saved file to:", newPath);
+
+    return res.status(200).json({
+      message: "Image saved successfully",
+      imageId: imageId,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Upload failed" });
+  }
+};
+
+export {
+  fetchCartById,
+  initializeCartForShopper,
+  addPackagedProduct,
+  getProductByImage,
+};

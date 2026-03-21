@@ -83,6 +83,11 @@ export class Datasharing {
     null,
   );
   PackagedProductTotal$ = this.packagedProductTotalSharing.asObservable();
+
+  // sharing the image from camera component to fruits and veg page
+  private imageSharing = new BehaviorSubject<string | null>(null);
+  imageSharing$ = this.imageSharing.asObservable();
+
   constructor() {}
 
   //exchanging start shopping response
@@ -132,5 +137,10 @@ export class Datasharing {
   //exchanging packaged product total
   exchangePackagedProductTotal(total: number) {
     this.packagedProductTotalSharing.next(total);
+  }
+
+  //exchange the captured product image from camera sharing service
+  exchangeUnpackagedProductImage(imageURL: string) {
+    this.imageSharing.next(imageURL);
   }
 }
