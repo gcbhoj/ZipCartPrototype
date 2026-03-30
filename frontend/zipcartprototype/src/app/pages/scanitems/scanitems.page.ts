@@ -1,4 +1,3 @@
-import { AddPackagedProductRequest } from 'src/app/classes/DTOs/AddPackagedProductRequestDTO';
 /**
  * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
  */
@@ -17,6 +16,7 @@ import { Router } from '@angular/router';
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
 import { ToastServices } from 'src/app/services/toastService/toast-services';
 import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
+import { PackagedProductRequests } from 'src/app/classes/DTOs/PackagedProductRequests';
 
 @Component({
   selector: 'app-scanitems',
@@ -57,7 +57,7 @@ export class ScanitemsPage implements OnInit {
     message: '',
   };
 
-  scannedPackagedProductRequest: AddPackagedProductRequest = {
+  scannedPackagedProductRequest: PackagedProductRequests = {
     cartId: '',
     itemId: '',
   };
@@ -169,7 +169,7 @@ export class ScanitemsPage implements OnInit {
       .addPackagedProductToCart(this.scannedPackagedProductRequest)
       .subscribe({
         next: (response) => {
-          this.toast.showSuccess(response.response);
+          this.toast.showSuccess(response.result);
 
           this.cartService.getCartByCartId(this.cartInitResponse.cartId);
           this.removeScannedItem();

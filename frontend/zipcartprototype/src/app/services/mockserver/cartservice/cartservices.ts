@@ -1,11 +1,11 @@
-import { AddPackagedProductResponse } from '../../../classes/DTOs/AddPackagedProductResponseDTO';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AddPackagedProductRequest } from 'src/app/classes/DTOs/AddPackagedProductRequestDTO';
 import { Cart } from 'src/app/classes/Models/Cart';
 import { StartShopping } from 'src/app/classes/DTOs/StartShoppingDTO';
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
+import { PackagedProductRequests } from 'src/app/classes/DTOs/PackagedProductRequests';
+import { PackagedProductResponse } from 'src/app/classes/DTOs/PackagedProductResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -42,11 +42,38 @@ export class Cartservices {
   }
 
   addPackagedProductToCart(
-    request: AddPackagedProductRequest,
-  ): Observable<AddPackagedProductResponse> {
-    return this.http.patch<AddPackagedProductResponse>(
+    request: PackagedProductRequests,
+  ): Observable<PackagedProductResponse> {
+    return this.http.patch<PackagedProductResponse>(
       `${this.backendUrl}/add-packaged`,
       request,
+    );
+  }
+
+  increasePackagedProductQuantity(
+    dto: PackagedProductRequests,
+  ): Observable<PackagedProductResponse> {
+    return this.http.post<PackagedProductResponse>(
+      `${this.backendUrl}/increase-packaged`,
+      dto,
+    );
+  }
+
+  decreasePackagedProductQuantity(
+    dto: PackagedProductRequests,
+  ): Observable<PackagedProductResponse> {
+    return this.http.post<PackagedProductResponse>(
+      `${this.backendUrl}/decrease-packaged`,
+      dto,
+    );
+  }
+
+  removePackagedProduct(
+    dto: PackagedProductRequests,
+  ): Observable<PackagedProductResponse> {
+    return this.http.patch<PackagedProductResponse>(
+      `${this.backendUrl}/remove-packaged`,
+      dto,
     );
   }
 

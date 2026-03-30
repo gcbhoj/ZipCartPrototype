@@ -19,6 +19,6 @@ cartRoutes.patch("/add-packaged", addPackagedProduct);
 cartRoutes.post("/upload", upload.single("file"), getProductByImage);
 cartRoutes.post("/increase-packaged", increaseQuantity);
 cartRoutes.post("/decrease-packaged", decreaseQuantity);
-cartRoutes.delete("/remove-packaged", removePackagedProduct);
+cartRoutes.patch("/remove-packaged", removePackagedProduct);
 
 export default cartRoutes;

@@ -100,12 +100,17 @@ const addPackagedProduct = async (req, res) => {
 const increaseQuantity = async (req, res) => {
   try {
     const { cartId, itemId } = req.body;
+    console.log(cartId, itemId);
 
     const result = await increasePackagedProductQuantity(cartId, itemId);
 
     if (!result) {
       throw new Error("INTERNAL SERVER ERROR");
     }
+
+    const response = new AddPackagedProductResponse(result);
+
+    return res.status(200).json(response);
   } catch (error) {
     switch (error) {
       case "CART NOT FOUND":
@@ -131,6 +136,10 @@ const decreaseQuantity = async (req, res) => {
     if (!result) {
       throw new Error("INTERNAL SERVER ERROR");
     }
+
+    const response = new AddPackagedProductResponse(result);
+
+    return res.status(200).json(response);
   } catch (error) {
     switch (error) {
       case "CART NOT FOUND":
@@ -156,6 +165,10 @@ const removePackagedProduct = async (req, res) => {
     if (!result) {
       throw new Error("INTERNAL SERVER ERROR");
     }
+
+    const response = new AddPackagedProductResponse(result);
+
+    return res.status(200).json(response);
   } catch (error) {
     switch (error) {
       case "CART NOT FOUND":

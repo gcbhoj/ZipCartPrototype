@@ -1,5 +1,3 @@
-import PackagedProduct from "../models/PackagedProductModel.js";
-import UnpackagedProduct from "../models/UnPackagedProductModel.js";
 import Cart from "../models/CartModel.js";
 import CartDTO from "../models/CartDTO.js";
 import {
