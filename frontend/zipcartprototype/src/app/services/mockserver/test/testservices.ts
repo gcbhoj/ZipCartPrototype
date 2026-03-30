@@ -24,17 +24,15 @@ export class Testservices {
 
   // ✅ Load users from backend and update BehaviorSubject
   loadAllUsers(): void {
-    this.http
-      .get<UserDisplay[]>(this.backendUrlDevice + 'get_all_users')
-      .subscribe({
-        next: (users) => this.usersSubject.next(users),
-        error: (err) => console.error('Failed to load users', err),
-      });
+    this.http.get<UserDisplay[]>(this.backendUrl + 'get_all_users').subscribe({
+      next: (users) => this.usersSubject.next(users),
+      error: (err) => console.error('Failed to load users', err),
+    });
   }
 
   // ✅ Add new user and refresh list automatically
   addNewUser(user: RegisterUser): Observable<any> {
-    return this.http.post<any>(this.backendUrlDevice + 'register', user).pipe(
+    return this.http.post<any>(this.backendUrl + 'register', user).pipe(
       tap(() => {
         this.loadAllUsers(); // refresh users after add
       }),
@@ -43,7 +41,7 @@ export class Testservices {
 
   logInUser(userId: string) {
     return this.http.get<LoginResponse>(
-      this.backendUrlDevice + 'authenticate/' + userId,
+      this.backendUrl + 'authenticate/' + userId,
     );
   }
 }

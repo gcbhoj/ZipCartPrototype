@@ -7,6 +7,9 @@ import {
   getCartById,
   getOpenCartsByUser,
   addPackagedItemToCart,
+  increasePackagedItemQuantity,
+  decreasePackagedItemQuantity,
+  removePackagedProduct,
   addUnpackagedItemToCart,
 } from "../repository/CartRepository.js";
 import { v4 as uuidv4 } from "uuid";
@@ -103,10 +106,67 @@ const addPackagedProductToCart = async (cartId, itemId) => {
   return "PRODUCT SUCCESSFULLY ADDED TO CART";
 };
 
+const increasePackagedProductQuantity = async (cartId, itemId) => {
+  if (!cartId) {
+    throw new Error("CART ID IS REQUIRED");
+  }
+
+  if (!itemId) {
+    throw new Error("ITEM ID IS REQUIRED");
+  }
+
+  const product = await increasePackagedItemQuantity(cartId, itemId);
+
+  if (!product) {
+    throw new Error("UNABLE TO INCREASE PRODUCT QUANTITY");
+  }
+
+  return "PRODUCT QUANTITY INCREASED SUCCESSFULLY";
+};
+
+const decreasePackagedProductQuantity = async (cartId, itemId) => {
+  if (!cartId) {
+    throw new Error("CART ID IS REQUIRED");
+  }
+
+  if (!itemId) {
+    throw new Error("ITEM ID IS REQUIRED");
+  }
+
+  const product = await decreasePackagedItemQuantity(cartId, itemId);
+
+  if (!product) {
+    throw new Error("UNABLE TO INCREASE PRODUCT QUANTITY");
+  }
+
+  return "PRODUCT QUANTITY DECREASED SUCCESSFULLY";
+};
+
+const removePackagedItem = async (cartId, itemId) => {
+  if (!cartId) {
+    throw new Error("CART ID IS REQUIRED");
+  }
+
+  if (!itemId) {
+    throw new Error("ITEM ID IS REQUIRED");
+  }
+
+  const product = await removePackagedProduct(cartId, itemId);
+
+  return "PRODUCT REMOVED SUCCESSFULLY";
+};
+
 // const response = await addPackagedProductToCart(
 //   "1a9586d6-de98-41ff-a763-954425756b8e",
 //   "0fb9aca5-326b-4df0-89f8-8b3cf81c12ee",
 // );
 // console.log(response);
 
-export { initializeNewCart, retrieveCartById, addPackagedProductToCart };
+export {
+  initializeNewCart,
+  retrieveCartById,
+  addPackagedProductToCart,
+  increasePackagedProductQuantity,
+  decreasePackagedProductQuantity,
+  removePackagedItem,
+};

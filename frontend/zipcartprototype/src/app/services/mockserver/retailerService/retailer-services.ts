@@ -18,7 +18,7 @@ export class RetailerServices {
   retailer$: Observable<Retailer[]> = this.retailerInfoSubject.asObservable();
 
   fetchAllRetailers() {
-    this.http.get<Retailer[]>(`${this.backendUrlDevice}/retailers/`).subscribe({
+    this.http.get<Retailer[]>(`${this.backendUrl}/retailers/`).subscribe({
       next: (retailers) => {
         this.retailerInfoSubject.next(retailers);
       },

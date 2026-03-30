@@ -27,27 +27,25 @@ export class Cartservices {
 
   initializeCart(dto: StartShopping): Observable<StartShoppingResponse> {
     return this.http.post<StartShoppingResponse>(
-      `${this.backendUrlDevice}/initialize`,
+      `${this.backendUrl}/initialize`,
       dto,
     );
   }
 
   getCartByCartId(cartId: string): void {
-    this.http
-      .get<Cart>(`${this.backendUrlDevice}/retrieve/${cartId}`)
-      .subscribe({
-        next: (cart: Cart) => {
-          this.cartSubject.next(cart);
-        },
-        error: (err) => console.error('Failed to load Cart Items', err),
-      });
+    this.http.get<Cart>(`${this.backendUrl}/retrieve/${cartId}`).subscribe({
+      next: (cart: Cart) => {
+        this.cartSubject.next(cart);
+      },
+      error: (err) => console.error('Failed to load Cart Items', err),
+    });
   }
 
   addPackagedProductToCart(
     request: AddPackagedProductRequest,
   ): Observable<AddPackagedProductResponse> {
     return this.http.patch<AddPackagedProductResponse>(
-      `${this.backendUrlDevice}/add-packaged`,
+      `${this.backendUrl}/add-packaged`,
       request,
     );
   }

@@ -21,6 +21,6 @@ export class BarcodeService {
   getPackagedProductDetails(
     barcodeResult: BarCodeScannerResultDTO,
   ): Observable<any> {
-    return this.http.post<any>(this.backendUrlDevice + 'scan', barcodeResult);
+    return this.http.post<any>(this.backendUrl + 'scan', barcodeResult);
   }
 }
