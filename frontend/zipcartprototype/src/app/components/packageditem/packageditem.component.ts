@@ -124,40 +124,6 @@ export class PackageditemComponent implements OnInit {
     }
   }
 
-  // decreaseProductQuantity(itemId: string) {
-  //   this.products.forEach((product) => {
-  //     if ('quantity' in product) {
-  //       this.prepareData(itemId);
-  //       this.cartService
-  //         .decreasePackagedProductQuantity(this.apiRequests)
-  //         .subscribe({
-  //           next: (response) => {
-  //             this.toast.showSuccess(response.result);
-
-  //             this.cartService.getCartByCartId(this.cartInitResponse.cartId);
-  //           },
-  //           error: (err) => {
-  //             const message =
-  //               err?.error?.message || 'Unable to Decrease Quantity';
-  //             this.toast.showError(message);
-  //           },
-  //         });
-  //       if (product.quantity === 1) {
-  //         this.alertService.showProductRemovalAlert(
-  //           () => {
-  //             this.removePackagedProduct(product.itemNumber);
-
-  //           },
-  //           () => {
-  //             product.quantity = 1;
-  //           },
-  //         );
-  //       }
-  //       this.calculateProductTotalBeforeTaxes();
-  //     }
-  //   });
-  // }
-
   removePackagedProduct(itemId: string) {
     this.prepareData(itemId);
     this.cartService.removePackagedProduct(this.apiRequests).subscribe({

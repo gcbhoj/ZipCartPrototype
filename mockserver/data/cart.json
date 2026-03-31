@@ -94,15 +94,5 @@
       }
     ],
     "transactionDateAndTime": "2026-02-05"
-  },
-  {
-    "cartId": "45a1ca9d-3c2b-48a8-bc1f-c4159e6f4774",
-    "retailerId": "a1b2c3d4-e5f6-4789-90ab-abcdef123456",
-    "userId": "11121314-1516-1718-1920-212223242526",
-    "status": "open",
-    "budget": 0,
-    "packagedProducts": [],
-    "unpackagedProducts": [],
-    "transactionDateAndTime": "2026-03-30T18:30:54.896Z"
   }
 ]

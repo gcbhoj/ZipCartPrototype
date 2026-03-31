@@ -11,7 +11,8 @@
     </ion-toolbar>
   </ion-header>
   <div class="camera_border"><app-camera></app-camera></div>
-
-  <!-- ✅ Correct image display -->
-  <img *ngIf="imageURL" [src]="imageURL" />
+  <div style="width: 50px; height: 50px">
+    <!-- ✅ Correct image display -->
+    <img *ngIf="imageURL" [src]="imageURL" />
+  </div>
 </ion-content>
