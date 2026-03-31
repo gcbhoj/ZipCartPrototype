@@ -5,7 +5,6 @@
     <div class="header-col store-info">
       <strong>Store</strong>
       <p>{{ cartInitResponse.retailerName }}</p>
-      <ion-button (click)="completeShopping()">Complete Shopping</ion-button>
     </div>
 
     <!-- Column 2: Budget -->
@@ -16,9 +15,10 @@
 
     <!-- Column 3: store Information -->
     <div class="header-col login">
-      <p>Location</p>
+      <ion-button (click)="completeShopping()">CheckOut</ion-button>
     </div>
   </div>
+  <div></div>
 
   <!-- SCROLLABLE PRODUCTS AREA -->
   <div class="cart-products">

@@ -1,4 +1,6 @@
 from flask import Flask
+from flask_cors import CORS
+
 from controllers.BarCodeController.BarCodeController import bar_code_controller
 from controllers.ExternalPostsController.WeightPoststoSpring import post_to_spring
 from controllers.MLController.frutis_veg_identify import ml_controller
@@ -6,6 +8,17 @@ from controllers.MLController.frutis_veg_identify import ml_controller
 
 
 app = Flask(__name__)
+
+
+
+
+CORS(app, resources={
+    r"/api/*": {
+        "origins": ["http://localhost:8100"],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type"]
+    }
+})
 
 
 

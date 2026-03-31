@@ -17,6 +17,13 @@ import { v4 as uuidv4 } from 'uuid';
   imports: [IONIC_UI, CommonModule, FormsModule, CameraComponent],
 })
 export class FruitsAndVegPage implements OnInit {
+  imageUrlMock = '/assets/images/trialImages/image1.jpg';
+  imageArray: string[] = [
+    '../../../assets/images/trialImages/image1.jpg',
+    '../../../assets/images/trialImages/image2.jpg',
+    '../../../assets/images/trialImages/image3.jpg',
+    '../../../assets/images/trialImages/image4.jpg',
+  ];
   imageURL: string = '';
 
   constructor(
@@ -83,5 +90,33 @@ export class FruitsAndVegPage implements OnInit {
   async convertUrlToBlob(imageUrl: string): Promise<Blob> {
     const response = await fetch(imageUrl);
     return await response.blob();
+  }
+  /**
+   * SEND IMAGE BUTTON FUNCTIONS
+   */
+
+  async sendImageButton() {
+    try {
+      // ✅ Convert URL → Blob
+      const blob = await this.convertUrlToBlob(this.imageUrlMock);
+
+      // ✅ Generate ID
+      const imageId = uuidv4();
+
+      // ✅ Convert Blob → File
+      const file = new File([blob], `${imageId}.jpg`, {
+        type: blob.type || 'image/jpeg',
+      });
+
+      // ✅ Create FormData
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('imageId', imageId);
+
+      // ✅ Upload
+      this.uploadImage(formData);
+    } catch (error) {
+      console.error('Error converting image:', error);
+    }
   }
 }
