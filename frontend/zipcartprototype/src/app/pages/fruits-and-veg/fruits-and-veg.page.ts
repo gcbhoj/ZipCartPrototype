@@ -26,13 +26,14 @@ import { PythonResponseComponent } from 'src/app/components/python-response/pyth
   ],
 })
 export class FruitsAndVegPage implements OnInit {
-  imageUrlMock = '/assets/images/trialImages/image2.jpg';
-  imageArray: string[] = [
-    '../../../assets/images/trialImages/image1.jpg',
-    '../../../assets/images/trialImages/image2.jpg',
-    '../../../assets/images/trialImages/image3.jpg',
-    '../../../assets/images/trialImages/image4.jpg',
-  ];
+  imageUrlMock = '';
+  imageArray = {
+    image1: '/assets/images/trialImages/image1.jpg',
+    image2: '/assets/images/trialImages/image2.jpg',
+    image3: '/assets/images/trialImages/image3.jpg',
+    image4: '/assets/images/trialImages/image4.jpg',
+  };
+
   imageURL: string = '';
 
   constructor(
@@ -87,7 +88,10 @@ export class FruitsAndVegPage implements OnInit {
   uploadImage(formData: FormData) {
     this.cartService.getProductByImage(formData).subscribe({
       next: (res) => {
-        console.log(res);
+        if (res) {
+          this.dataSharing.exchangeMockImage(this.imageUrlMock);
+          this.dataSharing.exchangePythonResponse(res);
+        }
       },
       error: (err) => {
         const message = err?.error?.message || 'Veg UnIdentified';
@@ -106,6 +110,7 @@ export class FruitsAndVegPage implements OnInit {
 
   async sendImageButton() {
     try {
+      this.getRandomImage();
       // ✅ Convert URL → Blob
       const blob = await this.convertUrlToBlob(this.imageUrlMock);
 
@@ -127,5 +132,14 @@ export class FruitsAndVegPage implements OnInit {
     } catch (error) {
       console.error('Error converting image:', error);
     }
+  }
+
+  // Call this method to pick a random image
+  getRandomImage() {
+    const keys = Object.keys(this.imageArray) as Array<
+      keyof typeof this.imageArray
+    >;
+    const randomKey = keys[Math.floor(Math.random() * keys.length)];
+    this.imageUrlMock = this.imageArray[randomKey];
   }
 }

@@ -65,7 +65,7 @@ def predictImage(image_path, threshold=0.6):
         return {
             "success": True,
             "data": result,
-            "top-predictions": top_preds
+            "topPredictions": top_preds
         }
 
     except Exception as e:

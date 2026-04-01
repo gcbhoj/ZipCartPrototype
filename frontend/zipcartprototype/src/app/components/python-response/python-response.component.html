@@ -3,9 +3,7 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <img
-            alt="Silhouette of mountains"
-            src="https://ionicframework.com/docs/img/demos/card-media.png"
+          <img alt="Sent Image" src="{{ sendImageURL }}" class="sent-image"
         /></ion-col>
         <ion-col>
           <ion-row
@@ -26,9 +24,9 @@
     <ion-title>Top Predictions</ion-title>
     <ion-grid>
       <ion-row>
-        <ion-col *ngFor="let pred of response.topPredictions">
-          <ion-card-subtitle>{{ pred.productName }}</ion-card-subtitle>
-          <ion-card-subtitle>{{ pred.confidence }}</ion-card-subtitle>
+        <ion-col *ngFor="let item of response.topPredictions">
+          <ion-card-subtitle>{{ item.productName }}</ion-card-subtitle>
+          <ion-card-subtitle>{{ item.confidence }}</ion-card-subtitle>
         </ion-col>
       </ion-row>
     </ion-grid>
