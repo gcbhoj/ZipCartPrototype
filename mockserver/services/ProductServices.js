@@ -1,6 +1,7 @@
 import {
   getProductByUPC,
   getProductByItemNumber,
+  getProductByName,
 } from "../repository/ProductRepository.js";
 import ProductInformationDTO from "../models/ProductInformationDTO.js";
 import BarCodeRequest from "../models/BarcodeRequestDTO.js";
@@ -60,10 +61,38 @@ const retrieveProductByItemNumber = async (itemNumber) => {
   return product;
 };
 
-// const result = await retrieveProductByItemNumber(
-//   "fd86e5b3-37f0-497d-a9bb-b01e80123a91",
-// );
+const retrieveProductByName = async (productName) => {
+  if (!productName) {
+    throw new Error("PRODUCT NAME IS REQUIRED");
+  }
+
+  const retrievedProduct = await getProductByName(productName);
+
+  if (!retrievedProduct) {
+    throw new Error("NO PRODUCT FOUND BY GIVEN NAME");
+  }
+
+  const product = new ProductInformationDTO(
+    retrievedProduct.itemNumber,
+    retrievedProduct.productName,
+    retrievedProduct.productId,
+    retrievedProduct.imageURL,
+    retrievedProduct.price,
+    retrievedProduct.weight,
+    retrievedProduct.ingredients,
+    retrievedProduct.manufacturedDate,
+    retrievedProduct.expiryDate,
+    retrievedProduct.manufactureer,
+    retrievedProduct.aboutProduct,
+    retrievedProduct.manufacturedIn,
+    retrievedProduct.quantity,
+  );
+
+  return product;
+};
+
+// const result = await retrieveProductByName("apple");
 
 // console.log(result);
 
-export { retrieveProductByUPC, retrieveProductByItemNumber };
+export { retrieveProductByUPC, retrieveProductByItemNumber, getProductByName };

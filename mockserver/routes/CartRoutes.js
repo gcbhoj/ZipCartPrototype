@@ -9,16 +9,16 @@ import {
   increaseQuantity,
   decreaseQuantity,
   removePackagedProduct,
-  getProductByImage,
+  retrieveProductByProductName,
 } from "../controllers/CartController.js";
 const upload = multer({ dest: "uploads/" });
 
 cartRoutes.get("/retrieve/:cartId", fetchCartById);
 cartRoutes.post("/initialize", initializeCartForShopper);
 cartRoutes.patch("/add-packaged", addPackagedProduct);
-cartRoutes.post("/upload", upload.single("file"), getProductByImage);
 cartRoutes.post("/increase-packaged", increaseQuantity);
 cartRoutes.post("/decrease-packaged", decreaseQuantity);
 cartRoutes.patch("/remove-packaged", removePackagedProduct);
+cartRoutes.get("/getByName/:productName", retrieveProductByProductName);
 
 export default cartRoutes;

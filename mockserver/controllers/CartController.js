@@ -10,6 +10,7 @@ import {
   decreasePackagedProductQuantity,
   removePackagedItem,
 } from "../services/CartService.js";
+import { getProductByName } from "../services/ProductServices.js";
 import fs from "fs";
 
 const initializeCartForShopper = async (req, res) => {
@@ -185,37 +186,27 @@ const removePackagedProduct = async (req, res) => {
   }
 };
 
-const getProductByImage = async (req, res) => {
+const retrieveProductByProductName = async (req, res) => {
   try {
-    const imageId = req.body.imageId;
-    const file = req.file;
+    const { productName } = req.params;
 
-    console.log(imageId, file);
+    const result = await getProductByName(productName);
 
-    if (!file) {
-      return res.status(400).json({ message: "No file uploaded" });
+    if (!result) {
+      throw new Error("INTERNAL SERVER ERROR");
     }
 
-    // final path (same directory you want)
-    const newPath = `imageUploads/${imageId}.jpg`;
-
-    // ensure folder exists
-    if (!fs.existsSync("imageUploads")) {
-      fs.mkdirSync("imageUploads");
-    }
-
-    // move file to your desired folder
-    fs.renameSync(file.path, newPath);
-
-    console.log("Saved file to:", newPath);
-
-    return res.status(200).json({
-      message: "Image saved successfully",
-      imageId: imageId,
-    });
+    return res.status(200).json(result);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Upload failed" });
+    switch (error) {
+      case "PRODUCT NAME IS REQUIRED":
+      case "NO PRODUCT FOUND BY GIVEN NAME":
+        return res.status(400).json({ message: error.message });
+      case "INTERNAL SERVER ERROR":
+        return res.status(500).json({ message: error.message });
+      default:
+        return res.status(500).json({ message: error.message });
+    }
   }
 };
 
@@ -226,5 +217,5 @@ export {
   increaseQuantity,
   decreaseQuantity,
   removePackagedProduct,
-  getProductByImage,
+  retrieveProductByProductName,
 };
