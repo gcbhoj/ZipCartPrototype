@@ -9,6 +9,7 @@ import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservic
 import { ToastServices } from 'src/app/services/toastService/toast-services';
 import { v4 as uuidv4 } from 'uuid';
 import { WeighedProductDisplayComponent } from 'src/app/components/weighed-product-display/weighed-product-display.component';
+import { PythonResponseComponent } from 'src/app/components/python-response/python-response.component';
 
 @Component({
   selector: 'app-fruits-and-veg',
@@ -21,6 +22,7 @@ import { WeighedProductDisplayComponent } from 'src/app/components/weighed-produ
     FormsModule,
     CameraComponent,
     WeighedProductDisplayComponent,
+    PythonResponseComponent,
   ],
 })
 export class FruitsAndVegPage implements OnInit {
@@ -85,7 +87,6 @@ export class FruitsAndVegPage implements OnInit {
   uploadImage(formData: FormData) {
     this.cartService.getProductByImage(formData).subscribe({
       next: (res) => {
-        this.toast.showSuccess(res);
         console.log(res);
       },
       error: (err) => {

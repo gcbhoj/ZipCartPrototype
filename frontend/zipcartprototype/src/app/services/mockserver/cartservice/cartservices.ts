@@ -6,6 +6,7 @@ import { StartShopping } from 'src/app/classes/DTOs/StartShoppingDTO';
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
 import { PackagedProductRequests } from 'src/app/classes/DTOs/PackagedProductRequests';
 import { PackagedProductResponse } from 'src/app/classes/DTOs/PackagedProductResponse';
+import { PythonResponse } from 'src/app/classes/DTOs/PythonResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -77,8 +78,8 @@ export class Cartservices {
     );
   }
 
-  getProductByImage(formData: FormData): Observable<any> {
-    return this.http.post<any>(
+  getProductByImage(formData: FormData): Observable<PythonResponse> {
+    return this.http.post<PythonResponse>(
       `${this.pythonURL}`, // adjust endpoint
       formData,
     );
