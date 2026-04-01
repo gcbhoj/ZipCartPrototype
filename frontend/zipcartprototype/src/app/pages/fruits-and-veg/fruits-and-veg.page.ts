@@ -8,13 +8,20 @@ import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
 import { ToastServices } from 'src/app/services/toastService/toast-services';
 import { v4 as uuidv4 } from 'uuid';
+import { WeighedProductDisplayComponent } from 'src/app/components/weighed-product-display/weighed-product-display.component';
 
 @Component({
   selector: 'app-fruits-and-veg',
   templateUrl: './fruits-and-veg.page.html',
   styleUrls: ['./fruits-and-veg.page.scss'],
   standalone: true,
-  imports: [IONIC_UI, CommonModule, FormsModule, CameraComponent],
+  imports: [
+    IONIC_UI,
+    CommonModule,
+    FormsModule,
+    CameraComponent,
+    WeighedProductDisplayComponent,
+  ],
 })
 export class FruitsAndVegPage implements OnInit {
   imageUrlMock = '/assets/images/trialImages/image1.jpg';

@@ -10,7 +10,7 @@ import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { BarCodeScannerResultDTO } from 'src/app/classes/DTOs/BarCodeScannerResultDTO';
 import { ScannedProductDisplayComponent } from 'src/app/components/scanned-product-display/scanned-product-display.component';
 import { BarcodeService } from 'src/app/services/mockserver/barcodeService/barcode-service';
-import { PackagedProductInformation } from 'src/app/classes/Models/PackagedProductInformation';
+import { ProductInformation } from 'src/app/classes/Models/PackagedProductInformation';
 import { IONIC_UI } from 'src/UIImports';
 import { Router } from '@angular/router';
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
@@ -35,7 +35,7 @@ export class ScanitemsPage implements OnInit {
   addItemsToCartButtonEnabled: boolean = true;
 
   productDisplayed = false;
-  packagedProduct: PackagedProductInformation = {
+  packagedProduct: ProductInformation = {
     itemNumber: '',
     productName: '',
     imageURL: '',
@@ -188,7 +188,7 @@ export class ScanitemsPage implements OnInit {
   //removing the scanned item when cancel is pressed
   removeScannedItem() {
     //creating a empty object
-    const emptyProduct: PackagedProductInformation = {
+    const emptyProduct: ProductInformation = {
       itemNumber: '',
       productName: '',
       imageURL: '',

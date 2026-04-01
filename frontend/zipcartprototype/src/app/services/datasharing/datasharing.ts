@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { BarCodeScannerResultDTO } from 'src/app/classes/DTOs/BarCodeScannerResultDTO';
 import { LoginResponse } from 'src/app/classes/DTOs/LoginResponseDTO';
-import { PackagedProductInformation } from 'src/app/classes/Models/PackagedProductInformation';
+import { ProductInformation } from 'src/app/classes/Models/PackagedProductInformation';
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
 import { UnPackagedProduct } from 'src/app/classes/Models/UnPackagedProduct';
 
@@ -49,8 +49,8 @@ export class Datasharing {
     this.unPackagedProductSharing.asObservable();
 
   private packagedProductInformation =
-    new BehaviorSubject<PackagedProductInformation | null>(null);
-  packagedProductInfo: Observable<PackagedProductInformation | null> =
+    new BehaviorSubject<ProductInformation | null>(null);
+  packagedProductInfo: Observable<ProductInformation | null> =
     this.packagedProductInformation.asObservable();
 
   // logged in user information
@@ -118,9 +118,7 @@ export class Datasharing {
   }
 
   //exchanging the packaged product information
-  exchangePackagedProductInformation(
-    packagedProductInfo: PackagedProductInformation,
-  ) {
+  exchangePackagedProductInformation(packagedProductInfo: ProductInformation) {
     this.packagedProductInformation.next(packagedProductInfo);
   }
   /**

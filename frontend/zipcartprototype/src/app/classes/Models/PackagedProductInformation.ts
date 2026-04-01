@@ -1,4 +1,4 @@
-export interface PackagedProductInformation {
+export interface ProductInformation {
   itemNumber: string;
   productName: string;
   imageURL: string;
