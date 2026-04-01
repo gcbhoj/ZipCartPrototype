@@ -24,7 +24,7 @@ import { WeighedProductDisplayComponent } from 'src/app/components/weighed-produ
   ],
 })
 export class FruitsAndVegPage implements OnInit {
-  imageUrlMock = '/assets/images/trialImages/image1.jpg';
+  imageUrlMock = '/assets/images/trialImages/image2.jpg';
   imageArray: string[] = [
     '../../../assets/images/trialImages/image1.jpg',
     '../../../assets/images/trialImages/image2.jpg',
@@ -86,6 +86,7 @@ export class FruitsAndVegPage implements OnInit {
     this.cartService.getProductByImage(formData).subscribe({
       next: (res) => {
         this.toast.showSuccess(res);
+        console.log(res);
       },
       error: (err) => {
         const message = err?.error?.message || 'Veg UnIdentified';
