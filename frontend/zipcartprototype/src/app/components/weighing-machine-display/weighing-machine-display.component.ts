@@ -1,6 +1,6 @@
 import { WeighProductResponse } from './../../classes/DTOs/WeighProductResponseDTO';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, model, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { MachineData } from 'src/app/classes/Models/MachineData';
@@ -8,6 +8,7 @@ import { AlertServices } from 'src/app/services/alertService/alert-services';
 import { MachineService } from 'src/app/services/mockserver/machineServices/machine-service';
 import { Input } from '@angular/core';
 import { WeighProductRequest } from 'src/app/classes/DTOs/WeighProductRequestDTO';
+import { LiveWeightComponent } from '../live-weight/live-weight.component';
 
 @Component({
   selector: 'app-weighing-machine-display',
@@ -40,7 +41,7 @@ export class WeighingMachineDisplayComponent implements OnInit {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  confirm(machineId: string) {
+  async confirm(machineId: string) {
     this.selectedMachine = machineId;
     this.prepareToGetLiveWeight();
     console.log(this.request);
@@ -49,6 +50,7 @@ export class WeighingMachineDisplayComponent implements OnInit {
       'OPEN A NEW MODAL WITH RESPONSE',
       ['OK'],
     );
+    await this.openModal();
     return this.modalCtrl.dismiss(machineId, 'confirm');
   }
 
@@ -79,5 +81,23 @@ export class WeighingMachineDisplayComponent implements OnInit {
       itemId: this.itemId,
       machineId: this.selectedMachine,
     };
+  }
+
+  /**
+   * OPENING THE LIVE WEIGHT MODAL
+   */
+
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: LiveWeightComponent,
+    });
+
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      console.log('ITEM ADDED TO CART SUCCESSFULLY');
+    }
   }
 }

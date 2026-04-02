@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { LiveWeightComponent } from '../components/live-weight/live-weight.component';
 
 @Component({
   selector: 'app-tab3',

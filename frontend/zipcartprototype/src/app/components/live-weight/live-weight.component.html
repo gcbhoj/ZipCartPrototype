@@ -1,3 +1,58 @@
-<p>
-  live-weight works!
-</p>
+<div class="center-container" *ngIf="response">
+  <ion-card class="product-card">
+    <ion-card-header>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <img
+              src="/assets/images/trialImages/image1.jpg"
+              class="product-img"
+            />
+          </ion-col>
+
+          <ion-col>
+            <ion-card-title>
+              Product Name:<br />
+              <span class="value">{{ response.productName }}</span>
+            </ion-card-title>
+            <hr />
+
+            <ion-card-subtitle>
+              Live Weight:<br />
+              <span class="value">{{ response.liveWeight }} grams</span>
+            </ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-grid>
+        <ion-row class="ion-text-center">
+          <ion-col>
+            <strong>Unit Price</strong>
+            <p>{{ response.unitPrice }}</p>
+          </ion-col>
+
+          <ion-col>
+            <strong>Taxes</strong>
+            <p></p>
+          </ion-col>
+
+          <ion-col>
+            <strong>Total</strong>
+            <p></p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+
+    <div class="button-group">
+      <ion-button fill="outline" color="medium" (click)="cancel()">
+        Cancel
+      </ion-button>
+
+      <ion-button color="primary" (click)="confirm()"> Add To Cart </ion-button>
+    </div>
+  </ion-card>
+</div>

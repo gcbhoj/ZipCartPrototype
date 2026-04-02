@@ -1,6 +1,7 @@
 export interface WeighProductResponse {
-  itemId: string;
-  liveWeight: string;
+  itemNumber: string;
+  productName: string;
+  liveWeight: number;
   unitPrice: number;
   imageURL: string;
 }
