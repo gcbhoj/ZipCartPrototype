@@ -17,6 +17,7 @@ export class WeighedProductDisplayComponent implements OnInit {
   isMachineWindowOpen = false;
   products: ProductInformation[] = [];
   selectedMachine: string = '';
+  selectedProductItemNumber: string = '';
 
   constructor(
     private dataSharing: Datasharing,
@@ -44,9 +45,13 @@ export class WeighedProductDisplayComponent implements OnInit {
   /**
    * BUTTON FUNCTIONALITIES
    */
+  // Opening the Available Machines for user to select
   async openModal() {
     const modal = await this.modalCtrl.create({
       component: WeighingMachineDisplayComponent,
+      componentProps: {
+        itemId: this.selectedProductItemNumber,
+      },
     });
     modal.present();
 
@@ -56,5 +61,11 @@ export class WeighedProductDisplayComponent implements OnInit {
       this.selectedMachine = data;
       console.log(this.selectedMachine);
     }
+  }
+
+  // retrieving the currently selected product Id
+  async retrieveSelectedProductItemId(itemId: string) {
+    this.selectedProductItemNumber = itemId;
+    await this.openModal();
   }
 }

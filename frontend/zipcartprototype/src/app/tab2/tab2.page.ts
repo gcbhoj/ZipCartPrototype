@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { IONIC_UI } from 'src/UIImports';
 import { Router } from '@angular/router';
 import { CartComponent } from '../components/cart/cart.component';
 import { IonicModule } from '@ionic/angular';
