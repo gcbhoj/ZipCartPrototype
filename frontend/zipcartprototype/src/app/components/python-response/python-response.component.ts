@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 import { PythonResponse } from 'src/app/classes/DTOs/PythonResponse';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
-import { IONIC_UI } from 'src/UIImports';
 
 @Component({
   selector: 'app-python-response',
   templateUrl: './python-response.component.html',
   styleUrls: ['./python-response.component.scss'],
-  imports: [IONIC_UI, CommonModule, FormsModule],
+  imports: [IonicModule, CommonModule, FormsModule],
   standalone: true,
 })
 export class PythonResponseComponent implements OnInit {

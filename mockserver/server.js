@@ -4,8 +4,8 @@ import userRoutes from "./routes/UserRoutes.js";
 import cartRoutes from "./routes/CartRoutes.js";
 import scannerRoutes from "./routes/ScannerRoutes.js";
 import retailerRoutes from "./routes/RetailerRoutes.js";
+import machineRoutes from "./routes/MachineRoutes.js";
 import multer from "multer";
-
 
 const app = express();
 const PORT = 3000;
@@ -17,6 +17,7 @@ app.use("/mockserver/users", userRoutes);
 app.use("/mockserver/cart", cartRoutes);
 app.use("/mockserver/scanner", scannerRoutes);
 app.use("/mockserver", retailerRoutes);
+app.use("/mockserver/machines", machineRoutes);
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running at http://localhost:${PORT}`);

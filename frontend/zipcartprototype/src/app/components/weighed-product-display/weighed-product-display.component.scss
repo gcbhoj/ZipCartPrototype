@@ -1,0 +1,59 @@
+.top-icon {
+  font-size: 45px;
+  color: aqua;
+
+  /* blink animation */
+  animation: smoothBlink 1.5s infinite ease-in-out;
+
+  float: right; /* simpler for single icons */
+}
+
+@keyframes smoothBlink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.ingredients-columns ul {
+  column-count: 2; /* number of columns */
+  column-gap: 20px;
+  padding-left: 20px;
+}
+
+.ingredients-columns li {
+  break-inside: avoid;
+  margin-bottom: 5px;
+}
+
+.products-container {
+  max-height: 80vh; /* or any height you want */
+  overflow-y: auto; /* enable vertical scroll */
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* spacing between cards */
+}
+
+/* optional: hide horizontal scrollbar if needed */
+.products-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.products-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+}
+.custom-modal {
+  --height: 30%;
+  --width: 80%;
+  --border-radius: 12px;
+  --backdrop-opacity: 0.4;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

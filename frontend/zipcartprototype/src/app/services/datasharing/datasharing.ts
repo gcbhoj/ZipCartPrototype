@@ -89,6 +89,12 @@ export class Datasharing {
   private imageSharing = new BehaviorSubject<string | null>(null);
   imageSharing$ = this.imageSharing.asObservable();
 
+  private shareProductInformationArray = new BehaviorSubject<
+    ProductInformation[] | null
+  >(null);
+  shareProductInformationArray$ =
+    this.shareProductInformationArray.asObservable();
+
   //sharing the image from send image button
   private shareTrialImage = new BehaviorSubject<string | null>(null);
   shareTrialImage$ = this.shareTrialImage.asObservable();
@@ -151,6 +157,11 @@ export class Datasharing {
   //exchange the captured product image from camera sharing service
   exchangeUnpackagedProductImage(imageURL: string) {
     this.imageSharing.next(imageURL);
+  }
+
+  //exchanging the product information retreived from image upload
+  exchangeProductInformationArray(products: ProductInformation[]) {
+    this.shareProductInformationArray.next(products);
   }
 
   // exchanging the image URL of the image from send image button

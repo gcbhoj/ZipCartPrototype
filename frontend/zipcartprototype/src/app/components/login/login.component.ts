@@ -1,19 +1,16 @@
-/**
- * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
- */
 import { Component, OnInit } from '@angular/core';
 import { LoginResponse } from 'src/app/classes/DTOs/LoginResponseDTO';
-import { IONIC_UI } from 'src/UIImports';
 import { Testservices } from 'src/app/services/mockserver/test/testservices';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { ToastServices } from 'src/app/services/toastService/toast-services';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   standalone: true,
-  imports: [IONIC_UI],
+  imports: [IonicModule],
 })
 export class LoginComponent implements OnInit {
   logIn: LoginResponse = {

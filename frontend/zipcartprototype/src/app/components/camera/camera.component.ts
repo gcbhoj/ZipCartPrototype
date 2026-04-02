@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { IONIC_UI } from 'src/UIImports';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { CommonModule } from '@angular/common';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-camera',
   templateUrl: './camera.component.html',
   styleUrls: ['./camera.component.scss'],
   standalone: true,
-  imports: [IONIC_UI, CommonModule],
+  imports: [IonicModule, CommonModule],
 })
 export class CameraComponent implements OnInit {
   constructor(private dataSharing: Datasharing) {}

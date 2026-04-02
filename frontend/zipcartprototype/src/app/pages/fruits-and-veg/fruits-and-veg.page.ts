@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IONIC_UI } from 'src/UIImports';
 import { CameraComponent } from 'src/app/components/camera/camera.component';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
@@ -10,6 +9,7 @@ import { ToastServices } from 'src/app/services/toastService/toast-services';
 import { v4 as uuidv4 } from 'uuid';
 import { WeighedProductDisplayComponent } from 'src/app/components/weighed-product-display/weighed-product-display.component';
 import { PythonResponseComponent } from 'src/app/components/python-response/python-response.component';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-fruits-and-veg',
@@ -17,7 +17,7 @@ import { PythonResponseComponent } from 'src/app/components/python-response/pyth
   styleUrls: ['./fruits-and-veg.page.scss'],
   standalone: true,
   imports: [
-    IONIC_UI,
+    IonicModule,
     CommonModule,
     FormsModule,
     CameraComponent,
@@ -26,12 +26,14 @@ import { PythonResponseComponent } from 'src/app/components/python-response/pyth
   ],
 })
 export class FruitsAndVegPage implements OnInit {
+  isProcessing = false;
   imageUrlMock = '';
   imageArray = {
     image1: '/assets/images/trialImages/image1.jpg',
     image2: '/assets/images/trialImages/image2.jpg',
     image3: '/assets/images/trialImages/image3.jpg',
     image4: '/assets/images/trialImages/image4.jpg',
+    image5: '/assets/images/trialImages/image5.jpg',
   };
 
   imageURL: string = '';
@@ -91,11 +93,14 @@ export class FruitsAndVegPage implements OnInit {
         if (res) {
           this.dataSharing.exchangeMockImage(this.imageUrlMock);
           this.dataSharing.exchangePythonResponse(res);
+          this.getProductByProductName(res.data.productName);
         }
+        this.isProcessing = false;
       },
       error: (err) => {
         const message = err?.error?.message || 'Veg UnIdentified';
         this.toast.showError(message);
+        this.isProcessing = false;
       },
     });
   }
@@ -104,11 +109,28 @@ export class FruitsAndVegPage implements OnInit {
     const response = await fetch(imageUrl);
     return await response.blob();
   }
+
+  getProductByProductName(productName: string) {
+    this.cartService.getProductByName(productName).subscribe({
+      next: (res) => {
+        this.dataSharing.exchangeProductInformationArray(res);
+      },
+      error: (err) => {
+        const message =
+          err?.error?.message || 'Unable to retrieve product By Name';
+        this.toast.showError(message);
+      },
+    });
+  }
   /**
    * SEND IMAGE BUTTON FUNCTIONS
    */
 
   async sendImageButton() {
+    if (this.isProcessing) {
+      return;
+    }
+    this.isProcessing = true;
     try {
       this.getRandomImage();
       // ✅ Convert URL → Blob
@@ -131,6 +153,7 @@ export class FruitsAndVegPage implements OnInit {
       this.uploadImage(formData);
     } catch (error) {
       console.error('Error converting image:', error);
+      this.isProcessing = false;
     }
   }
 
