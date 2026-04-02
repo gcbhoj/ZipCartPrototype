@@ -1,0 +1,34 @@
+<ion-card>
+  <ion-card-header>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <img alt="Sent Image" src="{{ sendImageURL }}" class="sent-image"
+        /></ion-col>
+        <ion-col>
+          <ion-row
+            ><ion-card-title>{{
+              response.data.productName
+            }}</ion-card-title></ion-row
+          >
+          <ion-row
+            ><ion-card-subtitle>{{
+              response.data.confidence
+            }}</ion-card-subtitle></ion-row
+          >
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-title>Top Predictions</ion-title>
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let item of response.topPredictions">
+          <ion-card-subtitle>{{ item.productName }}</ion-card-subtitle>
+          <ion-card-subtitle>{{ item.confidence }}</ion-card-subtitle>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { BarCodeScannerResultDTO } from 'src/app/classes/DTOs/BarCodeScannerResultDTO';
 import { LoginResponse } from 'src/app/classes/DTOs/LoginResponseDTO';
-import { PackagedProductInformation } from 'src/app/classes/Models/PackagedProductInformation';
+import { ProductInformation } from 'src/app/classes/Models/PackagedProductInformation';
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
 import { UnPackagedProduct } from 'src/app/classes/Models/UnPackagedProduct';
+import { PythonResponse } from 'src/app/classes/DTOs/PythonResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -49,8 +50,8 @@ export class Datasharing {
     this.unPackagedProductSharing.asObservable();
 
   private packagedProductInformation =
-    new BehaviorSubject<PackagedProductInformation | null>(null);
-  packagedProductInfo: Observable<PackagedProductInformation | null> =
+    new BehaviorSubject<ProductInformation | null>(null);
+  packagedProductInfo: Observable<ProductInformation | null> =
     this.packagedProductInformation.asObservable();
 
   // logged in user information
@@ -83,6 +84,21 @@ export class Datasharing {
     null,
   );
   PackagedProductTotal$ = this.packagedProductTotalSharing.asObservable();
+
+  // sharing the image from camera component to fruits and veg page
+  private imageSharing = new BehaviorSubject<string | null>(null);
+  imageSharing$ = this.imageSharing.asObservable();
+
+  //sharing the image from send image button
+  private shareTrialImage = new BehaviorSubject<string | null>(null);
+  shareTrialImage$ = this.shareTrialImage.asObservable();
+
+  // sharing python response from fruits and veg to python response
+  private sharePythonResponse = new BehaviorSubject<PythonResponse | null>(
+    null,
+  );
+  sharePythonResponse$ = this.sharePythonResponse.asObservable();
+
   constructor() {}
 
   //exchanging start shopping response
@@ -113,9 +129,7 @@ export class Datasharing {
   }
 
   //exchanging the packaged product information
-  exchangePackagedProductInformation(
-    packagedProductInfo: PackagedProductInformation,
-  ) {
+  exchangePackagedProductInformation(packagedProductInfo: ProductInformation) {
     this.packagedProductInformation.next(packagedProductInfo);
   }
   /**
@@ -132,5 +146,20 @@ export class Datasharing {
   //exchanging packaged product total
   exchangePackagedProductTotal(total: number) {
     this.packagedProductTotalSharing.next(total);
+  }
+
+  //exchange the captured product image from camera sharing service
+  exchangeUnpackagedProductImage(imageURL: string) {
+    this.imageSharing.next(imageURL);
+  }
+
+  // exchanging the image URL of the image from send image button
+  exchangeMockImage(imageURL: string) {
+    this.shareTrialImage.next(imageURL);
+  }
+
+  // exchange python response
+  exchangePythonResponse(response: PythonResponse) {
+    this.sharePythonResponse.next(response);
   }
 }

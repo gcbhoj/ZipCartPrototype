@@ -1,3 +1,4 @@
+import { ExploreContainerComponent } from './../../explore-container/explore-container.component';
 /**
  * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
  */
@@ -8,8 +9,10 @@ import { CommonModule } from '@angular/common';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
 import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
-import { IncreaseProductQuantity } from 'src/app/classes/DTOs/IncreaseProductQuantityDTO';
 import { AlertServices } from 'src/app/services/alertService/alert-services';
+import { ToastServices } from 'src/app/services/toastService/toast-services';
+import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
+import { PackagedProductRequests } from 'src/app/classes/DTOs/PackagedProductRequests';
 
 @Component({
   selector: 'app-packageditem',
@@ -29,10 +32,17 @@ export class PackageditemComponent implements OnInit {
   };
   //initializing the products array to store received products
   products: PackagedProduct[] = [];
+
+  apiRequests: PackagedProductRequests = {
+    cartId: '',
+    itemId: '',
+  };
   constructor(
     private dataSharing: Datasharing,
     private calculator: CalculatorService,
     private alertService: AlertServices,
+    private cartService: Cartservices,
+    private toast: ToastServices,
   ) {}
 
   ngOnInit() {
@@ -68,32 +78,65 @@ export class PackageditemComponent implements OnInit {
    * HANDLING INCREASE AND DECREASE OF PRODUCT QUANTITY
    */
 
-  increaseProductQuantity() {
-    this.products.forEach((product) => {
-      if ('quantity' in product) {
-        product.quantity++;
-        this.calculateProductTotalBeforeTaxes();
-      }
-    });
+  increaseProductQuantity(itemId: string) {
+    this.prepareData(itemId);
+    this.cartService
+      .increasePackagedProductQuantity(this.apiRequests)
+      .subscribe({
+        next: (response) => {
+          this.toast.showSuccess(response.result);
+          console.log(response.result);
+          this.cartService.getCartByCartId(this.cartInitResponse.cartId);
+        },
+        error: (err) => {
+          const message = err?.error?.message || 'Unable to Increase Quantity';
+          this.toast.showError(message);
+        },
+      });
+  }
+  decreaseProductQuantity(itemId: string) {
+    const product = this.products.find((p) => p.itemNumber === itemId);
+    if (!product) return;
+
+    if (product.quantity > 1) {
+      this.prepareData(product.itemNumber);
+      this.cartService
+        .decreasePackagedProductQuantity(this.apiRequests)
+        .subscribe({
+          next: (response) => {
+            this.toast.showSuccess(response.result);
+            this.cartService.getCartByCartId(this.cartInitResponse.cartId);
+          },
+          error: (err) => {
+            const message =
+              err?.error?.message || 'Unable to Decrease Quantity';
+            this.toast.showError(message);
+          },
+        });
+    }
+
+    if (product.quantity === 1) {
+      this.alertService.showAlert(
+        'REMOVE PRODUCT',
+        'USE THE REMOVE BUTTON TO REMOVE THE PRODUCT',
+      );
+      product.quantity = 1;
+    }
   }
 
-  decreaseProductQuantity() {
-    this.products.forEach((product) => {
-      if ('quantity' in product) {
-        product.quantity--;
-        if (product.quantity === 1) {
-          this.alertService.showProductRemovalAlert(
-            () => {
-              //TODO: IMPLEMENT REMOVE LOGIC AND IMPLEMENT HERE
-              console.log('OK HAS BEEN PRESSED');
-            },
-            () => {
-              product.quantity = 1;
-            },
-          );
-        }
-        this.calculateProductTotalBeforeTaxes();
-      }
+  removePackagedProduct(itemId: string) {
+    this.prepareData(itemId);
+    this.cartService.removePackagedProduct(this.apiRequests).subscribe({
+      next: (response) => {
+        this.toast.showSuccess(response.result);
+        this.cartService.getCartByCartId(this.cartInitResponse.cartId);
+        this.productTotal = 0;
+        this.shareProductsTotal();
+      },
+      error: (err) => {
+        const message = err?.error?.message || 'Unable to Remove Product';
+        this.toast.showError(message);
+      },
     });
   }
 
@@ -108,5 +151,15 @@ export class PackageditemComponent implements OnInit {
       );
       this.shareProductsTotal();
     }
+  }
+
+  /**
+   * DATA PREPRATION FOR TRANSFER
+   */
+  prepareData(itemId: string) {
+    this.apiRequests.cartId = this.cartInitResponse.cartId;
+    this.apiRequests.itemId = itemId;
+
+    console.log(this.apiRequests);
   }
 }

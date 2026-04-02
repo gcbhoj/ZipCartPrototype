@@ -11,6 +11,14 @@
     </ion-toolbar>
   </ion-header>
   <div class="camera_border"><app-camera></app-camera></div>
-  <div><ion-button>Upload Image</ion-button></div>
+  <div style="width: 50px; height: 50px">
+    <!-- ✅ Correct image display -->
+    <img *ngIf="imageURL" [src]="imageURL" />
+  </div>
+  <div class="button-container">
+    <ion-button (click)="sendImageButton()">Send Image</ion-button>
+  </div>
 
+  <app-weighed-product-display></app-weighed-product-display>
+  <app-python-response></app-python-response>
 </ion-content>

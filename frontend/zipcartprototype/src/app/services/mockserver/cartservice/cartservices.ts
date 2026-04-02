@@ -1,11 +1,12 @@
-import { AddPackagedProductResponse } from '../../../classes/DTOs/AddPackagedProductResponseDTO';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AddPackagedProductRequest } from 'src/app/classes/DTOs/AddPackagedProductRequestDTO';
 import { Cart } from 'src/app/classes/Models/Cart';
 import { StartShopping } from 'src/app/classes/DTOs/StartShoppingDTO';
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
+import { PackagedProductRequests } from 'src/app/classes/DTOs/PackagedProductRequests';
+import { PackagedProductResponse } from 'src/app/classes/DTOs/PackagedProductResponse';
+import { PythonResponse } from 'src/app/classes/DTOs/PythonResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,9 @@ export class Cartservices {
   // change to the below backend url while working with emulator
   private backendUrlEmulator: string = 'http://10.0.2.2:3000/mockserver/cart';
   // change to the below backend url while working with device where the 0.0.0.0 is the users IPV4 Address
-  private backendUrlDevice: string = 'http://99.217.41.87:3000/mockserver/cart';
+  private backendUrlDevice: string = 'http://10.0.0.87:3000/mockserver/cart';
+
+  private pythonURL: string = 'http://localhost:5001/api/py/predict_fruits_veg';
 
   private cartSubject = new BehaviorSubject<Cart | null>(null);
   cart$: Observable<Cart | null> = this.cartSubject.asObservable();
@@ -40,11 +43,45 @@ export class Cartservices {
   }
 
   addPackagedProductToCart(
-    request: AddPackagedProductRequest,
-  ): Observable<AddPackagedProductResponse> {
-    return this.http.patch<AddPackagedProductResponse>(
+    request: PackagedProductRequests,
+  ): Observable<PackagedProductResponse> {
+    return this.http.patch<PackagedProductResponse>(
       `${this.backendUrl}/add-packaged`,
       request,
+    );
+  }
+
+  increasePackagedProductQuantity(
+    dto: PackagedProductRequests,
+  ): Observable<PackagedProductResponse> {
+    return this.http.post<PackagedProductResponse>(
+      `${this.backendUrl}/increase-packaged`,
+      dto,
+    );
+  }
+
+  decreasePackagedProductQuantity(
+    dto: PackagedProductRequests,
+  ): Observable<PackagedProductResponse> {
+    return this.http.post<PackagedProductResponse>(
+      `${this.backendUrl}/decrease-packaged`,
+      dto,
+    );
+  }
+
+  removePackagedProduct(
+    dto: PackagedProductRequests,
+  ): Observable<PackagedProductResponse> {
+    return this.http.patch<PackagedProductResponse>(
+      `${this.backendUrl}/remove-packaged`,
+      dto,
+    );
+  }
+
+  getProductByImage(formData: FormData): Observable<PythonResponse> {
+    return this.http.post<PythonResponse>(
+      `${this.pythonURL}`, // adjust endpoint
+      formData,
     );
   }
 }

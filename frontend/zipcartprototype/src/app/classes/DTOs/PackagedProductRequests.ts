@@ -3,7 +3,7 @@
  * add the packaged product to initialized cart
  */
 
-export interface AddPackagedProductRequest {
+export interface PackagedProductRequests {
   cartId: string;
   itemId: string;
 }

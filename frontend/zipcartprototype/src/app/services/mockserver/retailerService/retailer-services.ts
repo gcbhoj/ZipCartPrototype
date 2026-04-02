@@ -12,7 +12,7 @@ export class RetailerServices {
   // change to the below backend url while working with emulator
   private backendUrlEmulator: string = 'http://10.0.2.2:3000/mockserver';
   // change to the below backend url while working with device where the 0.0.0.0 is the users IPV4 Address
-  private backendUrlDevice: string = 'http://99.217.41.87:3000/mockserver';
+  private backendUrlDevice: string = 'http://10.0.0.87:3000/mockserver';
   constructor(private http: HttpClient) {}
   private retailerInfoSubject = new BehaviorSubject<Retailer[]>([]);
   retailer$: Observable<Retailer[]> = this.retailerInfoSubject.asObservable();

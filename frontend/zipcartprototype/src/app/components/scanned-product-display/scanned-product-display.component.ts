@@ -2,7 +2,7 @@
  * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
  */
 import { Component, OnInit } from '@angular/core';
-import { PackagedProductInformation } from 'src/app/classes/Models/PackagedProductInformation';
+import { ProductInformation } from 'src/app/classes/Models/PackagedProductInformation';
 import { IONIC_UI } from 'src/UIImports';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { CommonModule } from '@angular/common';
@@ -17,7 +17,7 @@ import { CalculatorService } from 'src/app/services/calculatorService/calculator
 })
 export class ScannedProductDisplayComponent implements OnInit {
   //Initializing the PackedProductInformation to map with incoming scanned result
-  product!: PackagedProductInformation;
+  product!: ProductInformation;
   //Initializing the tax amount variable
   taxAmount: number = 0;
   //Initializing total amount
