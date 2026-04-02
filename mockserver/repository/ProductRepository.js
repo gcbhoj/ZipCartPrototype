@@ -51,13 +51,15 @@ const getProductByName = async (productName) => {
     await getAllProductInformation();
   }
 
+  const matchedProducts = [];
+
   for (const product of products.values()) {
     if (product.productName == productName) {
-      return product;
+      matchedProducts.push(product);
     }
   }
 
-  return null;
+  return matchedProducts;
 };
 
 // const result = await getProductByName("banana");

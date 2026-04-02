@@ -1,8 +1,4 @@
-/**
- * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
- */
 import { Component, NgZone, OnInit } from '@angular/core';
-import { IONIC_UI } from 'src/UIImports';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../components/login/login.component';
 import { Datasharing } from '../services/datasharing/datasharing';
@@ -16,12 +12,13 @@ import { StartShoppingResponse } from '../classes/DTOs/StartShoppingResponse';
 import { ToastServices } from '../services/toastService/toast-services';
 import { LoginResponse } from '../classes/DTOs/LoginResponseDTO';
 import { Retailer } from '../classes/Models/Retailer';
+import { IonicModule } from '@ionic/angular';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [IONIC_UI, LoginComponent, CommonModule, FormsModule],
+  imports: [IonicModule, LoginComponent, CommonModule, FormsModule],
 })
 export class Tab1Page implements OnInit {
   isEnabled: boolean = true;

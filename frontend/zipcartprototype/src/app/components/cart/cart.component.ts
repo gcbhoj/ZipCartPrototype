@@ -1,6 +1,3 @@
-/**
- * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
- */
 import { Component, OnInit } from '@angular/core';
 import { PackagedProduct } from '../../classes/Models/PackagedProduct';
 import { UnPackagedProduct } from '../../classes/Models/UnPackagedProduct';
@@ -13,14 +10,19 @@ import { CalculatorService } from 'src/app/services/calculatorService/calculator
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
 import { LoginResponse } from 'src/app/classes/DTOs/LoginResponseDTO';
 import { CommonModule } from '@angular/common';
-import { IonButton } from "@ionic/angular/standalone";
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
   standalone: true,
-  imports: [PackageditemComponent, UnpackageditemComponent, CommonModule, IonButton],
+  imports: [
+    PackageditemComponent,
+    UnpackageditemComponent,
+    CommonModule,
+    IonicModule,
+  ],
 })
 export class CartComponent implements OnInit {
   /**
@@ -107,7 +109,7 @@ export class CartComponent implements OnInit {
 
   /**
    *API CALLS
-   * 
+   *
    * @param cartId
    *  GET REQUEST TO FETCH CART BY ID
    */
@@ -123,12 +125,11 @@ export class CartComponent implements OnInit {
       this.sharePackagedProduct();
       this.shareUnPackagedProduct();
     });
-
   }
 
   // COMPLETE SHOPPING
   completeShopping() {
-    console.log("SHOPPING IS COMPLETE")
+    console.log('SHOPPING IS COMPLETE');
   }
 
   /**

@@ -1,0 +1,23 @@
+/* Center the content vertically and horizontally */
+.center-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical centering */
+  align-items: center;     /* horizontal centering */
+  height: 100%;
+  text-align: center;
+}
+
+.machines-container {
+  width: 80%;           /* limit width of machine buttons */
+  margin-bottom: 20px;  /* spacing before cancel button */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;            /* space between buttons */
+}
+
+.logo-img {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+}

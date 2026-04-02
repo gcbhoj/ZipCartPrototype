@@ -16,7 +16,16 @@
     <img *ngIf="imageURL" [src]="imageURL" />
   </div>
   <div class="button-container">
-    <ion-button (click)="sendImageButton()">Send Image</ion-button>
+    <ion-button
+      expand="block"
+      (click)="sendImageButton()"
+      [disabled]="isProcessing"
+    >
+      <ion-spinner *ngIf="isProcessing" name="crescent"></ion-spinner>
+
+      <span *ngIf="!isProcessing">Send Image</span>
+      <span *ngIf="isProcessing">Processing...</span>
+    </ion-button>
   </div>
 
   <app-weighed-product-display></app-weighed-product-display>

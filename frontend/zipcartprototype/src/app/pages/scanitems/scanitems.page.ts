@@ -1,7 +1,3 @@
-/**
- * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
- */
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -11,12 +7,12 @@ import { BarCodeScannerResultDTO } from 'src/app/classes/DTOs/BarCodeScannerResu
 import { ScannedProductDisplayComponent } from 'src/app/components/scanned-product-display/scanned-product-display.component';
 import { BarcodeService } from 'src/app/services/mockserver/barcodeService/barcode-service';
 import { ProductInformation } from 'src/app/classes/Models/PackagedProductInformation';
-import { IONIC_UI } from 'src/UIImports';
 import { Router } from '@angular/router';
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
 import { ToastServices } from 'src/app/services/toastService/toast-services';
 import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
 import { PackagedProductRequests } from 'src/app/classes/DTOs/PackagedProductRequests';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-scanitems',
@@ -28,7 +24,7 @@ import { PackagedProductRequests } from 'src/app/classes/DTOs/PackagedProductReq
     FormsModule,
     BarcodescannerComponent,
     ScannedProductDisplayComponent,
-    IONIC_UI,
+    IonicModule,
   ],
 })
 export class ScanitemsPage implements OnInit {

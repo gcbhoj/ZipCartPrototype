@@ -1,19 +1,16 @@
-/**
- * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
- */
 import { Component, OnInit } from '@angular/core';
 import { ProductInformation } from 'src/app/classes/Models/PackagedProductInformation';
-import { IONIC_UI } from 'src/UIImports';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { CommonModule } from '@angular/common';
 import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-scanned-product-display',
   templateUrl: './scanned-product-display.component.html',
   styleUrls: ['./scanned-product-display.component.scss'],
   standalone: true,
-  imports: [IONIC_UI, CommonModule],
+  imports: [IonicModule, CommonModule],
 })
 export class ScannedProductDisplayComponent implements OnInit {
   //Initializing the PackedProductInformation to map with incoming scanned result

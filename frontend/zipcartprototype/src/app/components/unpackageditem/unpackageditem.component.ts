@@ -1,19 +1,16 @@
-/**
- * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
- */
 import { Component, OnInit } from '@angular/core';
 import { UnPackagedProduct } from 'src/app/classes/Models/UnPackagedProduct';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { CommonModule } from '@angular/common';
-import { IONIC_UI } from 'src/UIImports';
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-unpackageditem',
   templateUrl: './unpackageditem.component.html',
   styleUrls: ['./unpackageditem.component.scss'],
   standalone: true,
-  imports: [CommonModule, IONIC_UI],
+  imports: [CommonModule, IonicModule],
 })
 export class UnpackageditemComponent implements OnInit {
   cartInitResponse: StartShoppingResponse = {

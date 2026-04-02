@@ -1,10 +1,6 @@
 import { ExploreContainerComponent } from './../../explore-container/explore-container.component';
-/**
- * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
- */
 import { Component, OnInit } from '@angular/core';
 import { PackagedProduct } from 'src/app/classes/Models/PackagedProduct';
-import { IONIC_UI } from 'src/UIImports';
 import { CommonModule } from '@angular/common';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
@@ -13,13 +9,14 @@ import { AlertServices } from 'src/app/services/alertService/alert-services';
 import { ToastServices } from 'src/app/services/toastService/toast-services';
 import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
 import { PackagedProductRequests } from 'src/app/classes/DTOs/PackagedProductRequests';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-packageditem',
   templateUrl: './packageditem.component.html',
   styleUrls: ['./packageditem.component.scss'],
   standalone: true,
-  imports: [CommonModule, IONIC_UI],
+  imports: [CommonModule, IonicModule],
 })
 export class PackageditemComponent implements OnInit {
   productTotal: number = 0;

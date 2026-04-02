@@ -66,29 +66,32 @@ const retrieveProductByName = async (productName) => {
     throw new Error("PRODUCT NAME IS REQUIRED");
   }
 
-  const retrievedProduct = await getProductByName(productName);
+  const retrievedProducts = await getProductByName(productName);
 
-  if (!retrievedProduct) {
+  if (!retrievedProducts || retrievedProducts.length == 0) {
     throw new Error("NO PRODUCT FOUND BY GIVEN NAME");
   }
 
-  const product = new ProductInformationDTO(
-    retrievedProduct.itemNumber,
-    retrievedProduct.productName,
-    retrievedProduct.productId,
-    retrievedProduct.imageURL,
-    retrievedProduct.price,
-    retrievedProduct.weight,
-    retrievedProduct.ingredients,
-    retrievedProduct.manufacturedDate,
-    retrievedProduct.expiryDate,
-    retrievedProduct.manufactureer,
-    retrievedProduct.aboutProduct,
-    retrievedProduct.manufacturedIn,
-    retrievedProduct.quantity,
+  const productsList = retrievedProducts.map(
+    (p) =>
+      new ProductInformationDTO(
+        p.itemNumber,
+        p.productName,
+        p.productId,
+        p.imageURL,
+        p.price,
+        p.weight,
+        p.ingredients,
+        p.manufacturedDate,
+        p.expiryDate,
+        p.manufactureer,
+        p.aboutProduct,
+        p.manufacturedIn,
+        p.quantity,
+      ),
   );
 
-  return product;
+  return productsList;
 };
 
 // const result = await retrieveProductByName("apple");
