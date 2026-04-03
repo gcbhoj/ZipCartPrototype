@@ -130,3 +130,24 @@ RESPONSE DTO FORMAT Array(java class)
   manufacturedIn: string;
   aboutProduct: string;
   quantity: number;
+
+10. Get Product weight
+Request Type: POST
+
+REQUEST FORMAT (java class)
+  machineId: string;
+  itemId: string;
+
+RESPONSE FORMAT (java Class)
+  itemNumber: string;
+  productName: string;
+  liveWeight: number;
+  unitPrice: number;
+  imageURL: string;
+
+11. Add Weighed Product to Cart
+Request Type: POST
+
+REQUEST FORMAT(java class)
+  itemId: string;
+  weight: number;
