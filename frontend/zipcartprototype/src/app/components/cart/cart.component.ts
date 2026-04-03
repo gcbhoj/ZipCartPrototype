@@ -71,6 +71,7 @@ export class CartComponent implements OnInit, OnDestroy {
     this.receiveLoginResponse();
     this.receiveCartInitResponse();
     this.receivePackagedProductTotal();
+    this.receiveUnPackagedProductTotal();
   }
   /**
    * DATA SHARING
@@ -118,6 +119,17 @@ export class CartComponent implements OnInit, OnDestroy {
       }
       this.performCalculations();
     });
+  }
+  // receive unpackaged Product total
+  receiveUnPackagedProductTotal() {
+    this.dataSharing.unPackagedProductTotal$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        if (data) {
+          this.totalUnPackagedProduct = data;
+        }
+        this.performCalculations();
+      });
   }
 
   enableRetailerButton() {

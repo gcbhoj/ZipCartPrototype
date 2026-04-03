@@ -102,33 +102,5 @@
       }
     ],
     "transactionDateAndTime": "2026-02-05"
-  },
-  {
-    "cartId": "ab46dbef-644a-41c0-ab59-6e45b49cc88b",
-    "retailerId": "a1b2c3d4-e5f6-4789-90ab-abcdef123456",
-    "userId": "11121314-1516-1718-1920-212223242526",
-    "status": "open",
-    "budget": 0,
-    "packagedProducts": [
-      {
-        "productId": "a1b2c3d4-e5f6-4789-90ab-abcdef000002",
-        "productName": "Coca-Cola",
-        "itemNumber": "ef363a67-f33c-4c80-b27b-816195975f37",
-        "imageUrl": "https://images.openfoodfacts.org/images/products/500/011/254/6415/front_de.137.400.jpg",
-        "quantity": 1,
-        "unitPrice": 5
-      }
-    ],
-    "unpackagedProducts": [
-      {
-        "productId": "c1111111-2222-3333-4444-555555555555",
-        "productName": "orange",
-        "itemNumber": "1a2b3c4d-0003-4f5e-b123-abcdef000003",
-        "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Orange-Fruit-Pieces.jpg",
-        "weight": "0.53",
-        "unitPrice": 1.29
-      }
-    ],
-    "transactionDateAndTime": "2026-04-03T03:13:29.433Z"
   }
 ]

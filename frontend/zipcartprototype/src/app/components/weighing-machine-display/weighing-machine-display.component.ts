@@ -85,7 +85,7 @@ export class WeighingMachineDisplayComponent implements OnInit, OnDestroy {
           if (data) {
             this.liveWeight = data;
 
-            await this.openModal(); // ✅ NOW SAFE
+            await this.openModal(); // open second modal
           }
         },
         error: (err) => {
@@ -154,12 +154,11 @@ export class WeighingMachineDisplayComponent implements OnInit, OnDestroy {
     this.alert.showPreWeighConfirmationAlert(
       async () => {
         this.getProductLiveWeightAndOpenModal();
-        return this.modalCtrl.dismiss(null, 'cancel');
       },
       () => {
-        console.log('Cancel pressed');
         this.modalCtrl.dismiss(null, 'cancel');
       },
     );
+    this.modalCtrl.dismiss(null, 'cancel');
   }
 }

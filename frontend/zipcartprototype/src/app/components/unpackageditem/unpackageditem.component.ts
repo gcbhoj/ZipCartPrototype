@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
 import { IonicModule } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
+import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
 
 @Component({
   selector: 'app-unpackageditem',
@@ -23,7 +24,12 @@ export class UnpackageditemComponent implements OnInit, OnDestroy {
   };
   //Initializing unpackaed array to received shared data from cart page
   products: UnPackagedProduct[] = [];
-  constructor(private dataSharing: Datasharing) {}
+
+  productTotal: number = 0;
+  constructor(
+    private dataSharing: Datasharing,
+    private calculator: CalculatorService,
+  ) {}
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
@@ -31,7 +37,12 @@ export class UnpackageditemComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.receiveCartInitResponse();
+    this.receiveUnPackagedProducts();
   }
+
+  /**
+   * DATA SHARING
+   */
 
   // Receiving the packaged products
   receiveUnPackagedProducts() {
@@ -39,6 +50,9 @@ export class UnpackageditemComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
         this.products = data;
+        console.log(this.products);
+        this.calculateProductTotalBeforeTaxes();
+        console.log('Unpackaged Products Total:', this.productTotal);
       });
   }
   // receiving cart initialization response
@@ -48,8 +62,28 @@ export class UnpackageditemComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         if (data) {
           this.cartInitResponse = data;
-          this.receiveUnPackagedProducts();
         }
       });
+  }
+
+  // sharing unpackaed product total
+  shareProductsTotal() {
+    this.dataSharing.exchangeUnPackagedProductTotal(this.productTotal);
+  }
+  /**
+   * TOTAL CALCULATIONS
+   */
+
+  calculateProductTotalBeforeTaxes() {
+    if (this.products && this.products.length > 0) {
+      this.productTotal = this.calculator.calculateProductTotalWithoutTaxes(
+        this.products,
+      );
+      this.shareProductsTotal();
+    }
+  }
+
+  calculateTotal(weight: number, unitPrice: number): number {
+    return this.calculator.calculateTotalProductPrice(unitPrice, weight);
   }
 }

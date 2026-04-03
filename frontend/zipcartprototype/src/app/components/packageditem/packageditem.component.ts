@@ -22,6 +22,7 @@ import { Subject, takeUntil } from 'rxjs';
 export class PackageditemComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   productTotal: number = 0;
+  total: number = 0;
 
   cartInitResponse: StartShoppingResponse = {
     cartId: '',
@@ -50,6 +51,7 @@ export class PackageditemComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.receiveCartInitResponse();
+    this.receivePackagedProducts();
   }
   /**
    * DATA SHARING COMPONENTS
@@ -73,7 +75,6 @@ export class PackageditemComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         if (data) {
           this.cartInitResponse = data;
-          this.receivePackagedProducts();
         }
       });
   }
@@ -161,8 +162,13 @@ export class PackageditemComponent implements OnInit, OnDestroy {
       this.productTotal = this.calculator.calculateProductTotalWithoutTaxes(
         this.products,
       );
+
       this.shareProductsTotal();
     }
+  }
+
+  calculateTotal(unitPrice: number, quantity: number): number {
+    return this.calculator.calculateTotalProductPrice(unitPrice, quantity);
   }
 
   /**
