@@ -10,6 +10,7 @@ import {
   decreasePackagedProductQuantity,
   removePackagedItem,
   getProductLiveWeight,
+  addWeighedItemToCart,
 } from "../services/CartService.js";
 import { getProductByName } from "../services/ProductServices.js";
 import fs from "fs";
@@ -235,6 +236,35 @@ const fetchProductLiveWeight = async (req, res) => {
   }
 };
 
+const addWeighedProductToCart = async (req, res) => {
+  try {
+    const { cartId, weight, itemId } = req.body;
+
+    const response = await addWeighedItemToCart(cartId, weight, itemId);
+
+    if (!response) {
+      throw new Error("INTERNAL SERVER ERROR");
+    }
+
+    return res.status(200).json(response);
+  } catch (error) {
+    switch (error) {
+      case "CART NOT FOUND":
+      case "INVALID DATA":
+      case "CART ID CANNOT BE NULL":
+      case "WEIGHT CANNOT BE NULL":
+      case "ITEM NUMBER CANNOT BE NULL":
+      case "NO CART FOUND BY GIVEN ID":
+      case "NO PRODUCT FOUND BY GIVEN ID":
+        return res.status(400).json({ message: error.message });
+      case "INTERNAL SERVER ERROR":
+        return res.status(500).json({ message: error.message });
+      default:
+        return res.status(500).json({ message: error.message });
+    }
+  }
+};
+
 export {
   fetchCartById,
   initializeCartForShopper,
@@ -244,4 +274,5 @@ export {
   removePackagedProduct,
   retrieveProductByProductName,
   fetchProductLiveWeight,
+  addWeighedProductToCart,
 };

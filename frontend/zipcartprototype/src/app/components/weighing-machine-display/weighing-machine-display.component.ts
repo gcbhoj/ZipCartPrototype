@@ -96,6 +96,23 @@ export class WeighingMachineDisplayComponent implements OnInit, OnDestroy {
       });
   }
 
+  addWeighedProduct(request: AddWeighedProduct) {
+    this.cartService
+      .addWeighedProduct(request)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          this.toast.showSuccess(response.result);
+          this.cartService.getCartByCartId(this.productRequest.cartId);
+        },
+        error: (err) => {
+          const message =
+            err?.error?.message || 'Unable to add product to cart';
+          this.toast.showError(message);
+        },
+      });
+  }
+
   /**
    * DATA PREPARATION
    */
@@ -122,11 +139,7 @@ export class WeighingMachineDisplayComponent implements OnInit, OnDestroy {
     if (role === 'confirm') {
       this.productRequest = data;
       console.log('Live Data', this.productRequest);
-      this.alert.showAlert(
-        'API CALL REQUEST',
-        `ADD UNPACKAGED ITEM TO CART ${this.productRequest}`,
-        ['OK'],
-      );
+      this.addWeighedProduct(this.productRequest);
     }
   }
 

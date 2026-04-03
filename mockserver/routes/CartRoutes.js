@@ -11,16 +11,18 @@ import {
   removePackagedProduct,
   retrieveProductByProductName,
   fetchProductLiveWeight,
+  addWeighedProductToCart,
 } from "../controllers/CartController.js";
 const upload = multer({ dest: "uploads/" });
 
 cartRoutes.get("/retrieve/:cartId", fetchCartById);
 cartRoutes.post("/initialize", initializeCartForShopper);
-cartRoutes.patch("/add-packaged", addPackagedProduct);
+cartRoutes.post("/add-packaged", addPackagedProduct);
 cartRoutes.post("/increase-packaged", increaseQuantity);
 cartRoutes.post("/decrease-packaged", decreaseQuantity);
 cartRoutes.patch("/remove-packaged", removePackagedProduct);
 cartRoutes.get("/getByName/:productName", retrieveProductByProductName);
 cartRoutes.post("/live-weight", fetchProductLiveWeight);
+cartRoutes.post("/add-weighed", addWeighedProductToCart);
 
 export default cartRoutes;

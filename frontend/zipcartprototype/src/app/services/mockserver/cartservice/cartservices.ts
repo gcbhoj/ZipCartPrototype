@@ -10,6 +10,7 @@ import { PythonResponse } from 'src/app/classes/DTOs/PythonResponse';
 import { ProductInformation } from 'src/app/classes/Models/PackagedProductInformation';
 import { WeighProductRequest } from 'src/app/classes/DTOs/WeighProductRequestDTO';
 import { WeighProductResponse } from 'src/app/classes/DTOs/WeighProductResponseDTO';
+import { AddWeighedProduct } from 'src/app/classes/DTOs/AddWeighedProductDTO';
 
 @Injectable({
   providedIn: 'root',
@@ -48,7 +49,7 @@ export class Cartservices {
   addPackagedProductToCart(
     request: PackagedProductRequests,
   ): Observable<PackagedProductResponse> {
-    return this.http.patch<PackagedProductResponse>(
+    return this.http.post<PackagedProductResponse>(
       `${this.backendUrl}/add-packaged`,
       request,
     );
@@ -97,6 +98,15 @@ export class Cartservices {
   getProductLiveWeight(request: WeighProductRequest) {
     return this.http.post<WeighProductResponse>(
       `${this.backendUrl}/live-weight`,
+      request,
+    );
+  }
+
+  addWeighedProduct(
+    request: AddWeighedProduct,
+  ): Observable<PackagedProductResponse> {
+    return this.http.post<PackagedProductResponse>(
+      `${this.backendUrl}/add-weighed`,
       request,
     );
   }

@@ -25,7 +25,8 @@ import { IonicModule } from '@ionic/angular';
     PythonResponseComponent,
   ],
 })
-export class FruitsAndVegPage implements OnInit {
+export class FruitsAndVegPage implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
   isProcessing = false;
   imageUrlMock = '';
   imageArray = {
@@ -43,6 +44,11 @@ export class FruitsAndVegPage implements OnInit {
     private cartService: Cartservices,
     private toast: ToastServices,
   ) {}
+  ngOnDestroy(): void {
+    // Signal teardown for any subscriptions that use takeUntil(this.destroy$)
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   ngOnInit() {
     this.receiveUnpackagedProductImage();
@@ -52,7 +58,7 @@ export class FruitsAndVegPage implements OnInit {
    * DATA SHARING & RECEIVING
    */
   receiveUnpackagedProductImage() {
-    this.dataSharing.imageSharing$.subscribe({
+    this.dataSharing.imageSharing$.pipe(takeUntil(this.destroy$)).subscribe({
       next: async (data) => {
         if (data) {
           this.imageURL = data;
@@ -88,21 +94,24 @@ export class FruitsAndVegPage implements OnInit {
    * SERVICE CALLS
    */
   uploadImage(formData: FormData) {
-    this.cartService.getProductByImage(formData).subscribe({
-      next: (res) => {
-        if (res) {
-          this.dataSharing.exchangeMockImage(this.imageUrlMock);
-          this.dataSharing.exchangePythonResponse(res);
-          this.getProductByProductName(res.data.productName);
-        }
-        this.isProcessing = false;
-      },
-      error: (err) => {
-        const message = err?.error?.message || 'Veg UnIdentified';
-        this.toast.showError(message);
-        this.isProcessing = false;
-      },
-    });
+    this.cartService
+      .getProductByImage(formData)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (res) => {
+          if (res) {
+            this.dataSharing.exchangeMockImage(this.imageUrlMock);
+            this.dataSharing.exchangePythonResponse(res);
+            this.getProductByProductName(res.data.productName);
+          }
+          this.isProcessing = false;
+        },
+        error: (err) => {
+          const message = err?.error?.message || 'Veg UnIdentified';
+          this.toast.showError(message);
+          this.isProcessing = false;
+        },
+      });
   }
 
   async convertUrlToBlob(imageUrl: string): Promise<Blob> {
@@ -111,16 +120,19 @@ export class FruitsAndVegPage implements OnInit {
   }
 
   getProductByProductName(productName: string) {
-    this.cartService.getProductByName(productName).subscribe({
-      next: (res) => {
-        this.dataSharing.exchangeProductInformationArray(res);
-      },
-      error: (err) => {
-        const message =
-          err?.error?.message || 'Unable to retrieve product By Name';
-        this.toast.showError(message);
-      },
-    });
+    this.cartService
+      .getProductByName(productName)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (res) => {
+          this.dataSharing.exchangeProductInformationArray(res);
+        },
+        error: (err) => {
+          const message =
+            err?.error?.message || 'Unable to retrieve product By Name';
+          this.toast.showError(message);
+        },
+      });
   }
   /**
    * SEND IMAGE BUTTON FUNCTIONS

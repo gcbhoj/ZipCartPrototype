@@ -17,6 +17,7 @@ import { retrieveProductByItemNumber } from "../services/ProductServices.js";
 import { retrieveUserById } from "./UserService.js";
 import { it } from "node:test";
 import LiveWeightResponse from "../models/LiveWeightResponseDTO.js";
+import UnPackagedProduct from "../models/UnPackagedProductModel.js";
 
 const initializeNewCart = async (cartInitializationRequest) => {
   if (!cartInitializationRequest) {
@@ -167,7 +168,7 @@ const getProductLiveWeight = async (machineId, itemId) => {
     throw new Error("NO PRODUCT FOUND BY GIVEN ITEM NUMBER");
   }
 
-  // 🔥 simulate weight (replace with real machine logic)
+  // simulate weight (replace with real machine logic)
   const weight = (Math.random() * 2).toFixed(2);
 
   const response = new LiveWeightResponse(
@@ -181,10 +182,51 @@ const getProductLiveWeight = async (machineId, itemId) => {
   return response;
 };
 
-// const response = await getProductLiveWeight(
-//   "33daec91-90e5-48ed-9f6d-fa121f4f6520",
-//   "1a2b3c4d-0005-4f5e-b123-abcdef000005",
-// );
+const addWeighedItemToCart = async (cartId, weight, itemNumber) => {
+  if (!cartId) {
+    throw new Error("CART ID CANNOT BE NULL");
+  }
+
+  if (!weight) {
+    throw new Error("WEIGHT CANNOT BE NULL");
+  }
+  if (!itemNumber) {
+    throw new Error("ITEM NUMBER CANNOT BE NULL");
+  }
+
+  const cart = await getCartById(cartId);
+
+  if (!cart) {
+    throw new Error("NO CART FOUND BY GIVEN ID");
+  }
+
+  const retrievedProduct = await retrieveProductByItemNumber(itemNumber);
+
+  if (!retrievedProduct) {
+    throw new Error("NO PRODUCT FOUND BY GIVEN ID");
+  }
+
+  const product = new UnPackagedProduct(
+    retrievedProduct.productId,
+    retrievedProduct.productName,
+    itemNumber,
+    retrievedProduct.imageUrl,
+    weight,
+    retrievedProduct.unitPrice,
+  );
+
+  const response = await addUnpackagedItemToCart(cartId, product);
+
+  if (!response) {
+    throw new Error("INTERNAL SERVER ERROR");
+  }
+
+  return "PRODUCT ADDED TO CART SUCCESSFULLY";
+};
+
+// const cartId = "b2c3d4e5-f6a7-4890-91bc-def123456789";
+// const itemId = "1a2b3c4d-0004-4f5e-b123-abcdef000004";
+// const response = await addWeighedItemToCart(cartId, 100, itemId);
 // console.log(response);
 
 export {
@@ -195,4 +237,5 @@ export {
   decreasePackagedProductQuantity,
   removePackagedItem,
   getProductLiveWeight,
+  addWeighedItemToCart,
 };

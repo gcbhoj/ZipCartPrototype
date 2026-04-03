@@ -1,11 +1,14 @@
 import { AddWeighedProduct } from './../../classes/DTOs/AddWeighedProductDTO';
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonicModule, ModalController } from '@ionic/angular';
+import { Subject, takeUntil } from 'rxjs';
+import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
 import { WeighProductResponse } from 'src/app/classes/DTOs/WeighProductResponseDTO';
 import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
+import { Datasharing } from 'src/app/services/datasharing/datasharing';
 
 @Component({
   selector: 'app-live-weight',
@@ -14,7 +17,9 @@ import { CalculatorService } from 'src/app/services/calculatorService/calculator
   standalone: true,
   imports: [IonicModule, FormsModule, CommonModule],
 })
-export class LiveWeightComponent implements OnInit {
+export class LiveWeightComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
+
   @Input() liveCart!: WeighProductResponse;
 
   priceBeforeTax: number = 0;
@@ -24,15 +29,44 @@ export class LiveWeightComponent implements OnInit {
   addProduct: AddWeighedProduct = {
     itemId: '',
     weight: 0,
+    cartId: '',
+  };
+
+  cartInit: StartShoppingResponse = {
+    cartId: '',
+    retailerName: '',
+    budget: 0,
+    message: '',
   };
   constructor(
     private modalCtrl: ModalController,
-    private router: Router,
     private calculator: CalculatorService,
+    private dataSharing: Datasharing,
   ) {}
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   ngOnInit() {
-    this.calculateTaxes();
+    this.receiveCartId();
+    if (this.liveCart) {
+      this.calculateTaxes();
+    }
+  }
+
+  /**
+   * DATA SHARING
+   */
+
+  receiveCartId() {
+    this.dataSharing.startShoppingResponseDetails
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        if (data) {
+          this.cartInit = data;
+        }
+      });
   }
 
   /**
@@ -44,18 +78,14 @@ export class LiveWeightComponent implements OnInit {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  confirm(weight: number, itemId: string) {
-    this.addProduct.itemId = itemId;
-    this.addProduct.weight = weight;
+  confirm() {
+    this.addProduct = {
+      itemId: this.liveCart.itemNumber,
+      weight: this.liveCart.liveWeight,
+      cartId: this.cartInit.cartId,
+    };
+
     return this.modalCtrl.dismiss(this.addProduct, 'confirm');
-  }
-
-  /**
-   * REDIRECTING TO FRUITS AND VEG PAGE
-   */
-
-  navigateToFruitsAndVegPage() {
-    this.router.navigate(['/fruits-and-veg']);
   }
 
   /**

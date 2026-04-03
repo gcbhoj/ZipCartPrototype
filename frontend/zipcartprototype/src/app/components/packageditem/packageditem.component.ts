@@ -1,5 +1,5 @@
 import { ExploreContainerComponent } from './../../explore-container/explore-container.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PackagedProduct } from 'src/app/classes/Models/PackagedProduct';
 import { CommonModule } from '@angular/common';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
@@ -10,6 +10,7 @@ import { ToastServices } from 'src/app/services/toastService/toast-services';
 import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
 import { PackagedProductRequests } from 'src/app/classes/DTOs/PackagedProductRequests';
 import { IonicModule } from '@ionic/angular';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-packageditem',
@@ -18,7 +19,8 @@ import { IonicModule } from '@ionic/angular';
   standalone: true,
   imports: [CommonModule, IonicModule],
 })
-export class PackageditemComponent implements OnInit {
+export class PackageditemComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
   productTotal: number = 0;
 
   cartInitResponse: StartShoppingResponse = {
@@ -41,6 +43,10 @@ export class PackageditemComponent implements OnInit {
     private cartService: Cartservices,
     private toast: ToastServices,
   ) {}
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   ngOnInit() {
     this.receiveCartInitResponse();
@@ -51,21 +57,25 @@ export class PackageditemComponent implements OnInit {
 
   // Receiving the packaged products
   receivePackagedProducts() {
-    this.dataSharing.packagedProduct.subscribe((data) => {
-      this.products = data;
+    this.dataSharing.packagedProduct
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        this.products = data;
 
-      this.calculateProductTotalBeforeTaxes();
-    });
+        this.calculateProductTotalBeforeTaxes();
+      });
   }
 
   // receiving cart initialization response
   receiveCartInitResponse() {
-    this.dataSharing.startShoppingResponseDetails.subscribe((data) => {
-      if (data) {
-        this.cartInitResponse = data;
-        this.receivePackagedProducts();
-      }
-    });
+    this.dataSharing.startShoppingResponseDetails
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        if (data) {
+          this.cartInitResponse = data;
+          this.receivePackagedProducts();
+        }
+      });
   }
   // sharing the total amount from the packaged products in cart
   shareProductsTotal() {
@@ -79,6 +89,7 @@ export class PackageditemComponent implements OnInit {
     this.prepareData(itemId);
     this.cartService
       .increasePackagedProductQuantity(this.apiRequests)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
           this.toast.showSuccess(response.result);
@@ -99,6 +110,7 @@ export class PackageditemComponent implements OnInit {
       this.prepareData(product.itemNumber);
       this.cartService
         .decreasePackagedProductQuantity(this.apiRequests)
+        .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: (response) => {
             this.toast.showSuccess(response.result);
@@ -123,18 +135,21 @@ export class PackageditemComponent implements OnInit {
 
   removePackagedProduct(itemId: string) {
     this.prepareData(itemId);
-    this.cartService.removePackagedProduct(this.apiRequests).subscribe({
-      next: (response) => {
-        this.toast.showSuccess(response.result);
-        this.cartService.getCartByCartId(this.cartInitResponse.cartId);
-        this.productTotal = 0;
-        this.shareProductsTotal();
-      },
-      error: (err) => {
-        const message = err?.error?.message || 'Unable to Remove Product';
-        this.toast.showError(message);
-      },
-    });
+    this.cartService
+      .removePackagedProduct(this.apiRequests)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          this.toast.showSuccess(response.result);
+          this.cartService.getCartByCartId(this.cartInitResponse.cartId);
+          this.productTotal = 0;
+          this.shareProductsTotal();
+        },
+        error: (err) => {
+          const message = err?.error?.message || 'Unable to Remove Product';
+          this.toast.showError(message);
+        },
+      });
   }
 
   /**
@@ -156,7 +171,5 @@ export class PackageditemComponent implements OnInit {
   prepareData(itemId: string) {
     this.apiRequests.cartId = this.cartInitResponse.cartId;
     this.apiRequests.itemId = itemId;
-
-    console.log(this.apiRequests);
   }
 }

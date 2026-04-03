@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BarcodescannerComponent } from 'src/app/components/barcodescanner/barcodescanner.component';
@@ -13,6 +13,7 @@ import { ToastServices } from 'src/app/services/toastService/toast-services';
 import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
 import { PackagedProductRequests } from 'src/app/classes/DTOs/PackagedProductRequests';
 import { IonicModule } from '@ionic/angular';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-scanitems',
@@ -27,7 +28,8 @@ import { IonicModule } from '@ionic/angular';
     IonicModule,
   ],
 })
-export class ScanitemsPage implements OnInit {
+export class ScanitemsPage implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
   addItemsToCartButtonEnabled: boolean = true;
 
   productDisplayed = false;
@@ -98,6 +100,12 @@ export class ScanitemsPage implements OnInit {
     private cartService: Cartservices,
   ) {}
 
+  ngOnDestroy(): void {
+    // ensure any subscribers using takeUntil(this.destroy$) are cleaned up
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   ngOnInit() {
     this.receiveBarcodeDetails();
     this.receiveCartInitResponse();
@@ -107,11 +115,13 @@ export class ScanitemsPage implements OnInit {
    */
 
   receiveBarcodeDetails() {
-    this.dataSharing.barcodeDetails.subscribe((data) => {
-      if (data) {
-        this.barCodeResults = data;
-      }
-    });
+    this.dataSharing.barcodeDetails
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        if (data) {
+          this.barCodeResults = data;
+        }
+      });
   }
 
   //sharing the received packaged product information to display in its component
@@ -125,13 +135,15 @@ export class ScanitemsPage implements OnInit {
 
   // receiving cart initialization response
   receiveCartInitResponse() {
-    this.dataSharing.startShoppingResponseDetails.subscribe((data) => {
-      if (data) {
-        this.cartInitResponse = data;
-        this.scannedPackagedProductRequest.cartId =
-          this.cartInitResponse.cartId;
-      }
-    });
+    this.dataSharing.startShoppingResponseDetails
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        if (data) {
+          this.cartInitResponse = data;
+          this.scannedPackagedProductRequest.cartId =
+            this.cartInitResponse.cartId;
+        }
+      });
   }
 
   /**
@@ -142,6 +154,7 @@ export class ScanitemsPage implements OnInit {
   sendBarCode() {
     this.barCodeService
       .getPackagedProductDetails(this.barCodeResults)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data) => {
           this.packagedProduct = data;
@@ -163,6 +176,7 @@ export class ScanitemsPage implements OnInit {
   addScannedItemToCart() {
     this.cartService
       .addPackagedProductToCart(this.scannedPackagedProductRequest)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
           this.toast.showSuccess(response.result);

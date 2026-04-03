@@ -60,7 +60,7 @@ RESPONSE DTO FORMAT (java class):
   quantity: number;
 
 4. Add Packaged Product to Cart
-Request Type 📃Patch
+Request Type 📃POST
 
 REQUEST DTO FORMAT (java class):
 cartId:string;
@@ -149,5 +149,6 @@ RESPONSE FORMAT (java Class)
 Request Type: POST
 
 REQUEST FORMAT(java class)
+  cartId: string
   itemId: string;
   weight: number;

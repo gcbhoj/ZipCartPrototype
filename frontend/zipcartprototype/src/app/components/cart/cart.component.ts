@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { PackagedProduct } from '../../classes/Models/PackagedProduct';
 import { UnPackagedProduct } from '../../classes/Models/UnPackagedProduct';
 import { Cart } from 'src/app/classes/Models/Cart';
@@ -11,6 +11,7 @@ import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingRespons
 import { LoginResponse } from 'src/app/classes/DTOs/LoginResponseDTO';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -24,7 +25,8 @@ import { IonicModule } from '@ionic/angular';
     IonicModule,
   ],
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
   /**
    * initializing cart id to receive the cart id to be shared to packaged product
    * and unpackaged componet to handle CRUD operations based on cart id
@@ -58,7 +60,12 @@ export class CartComponent implements OnInit {
     private cartService: Cartservices,
     private dataSharing: Datasharing,
     private calculator: CalculatorService,
+    private zone: NgZone,
   ) {}
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   ngOnInit() {
     this.receiveLoginResponse();
@@ -71,20 +78,24 @@ export class CartComponent implements OnInit {
 
   // receiving cart initialization response
   receiveCartInitResponse() {
-    this.dataSharing.startShoppingResponseDetails.subscribe((data) => {
-      if (data) {
-        this.cartInitResponse = data;
-        this.fetchCartByCartId(this.cartInitResponse.cartId);
-      }
-    });
+    this.dataSharing.startShoppingResponseDetails
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        if (data) {
+          this.cartInitResponse = data;
+          this.fetchCartByCartId(this.cartInitResponse.cartId);
+        }
+      });
   }
   //receiving the login response via subscribing
   receiveLoginResponse() {
-    this.dataSharing.loggedInUserInformation.subscribe((data) => {
-      if (data) {
-        this.login = data;
-      }
-    });
+    this.dataSharing.loggedInUserInformation
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        if (data) {
+          this.login = data;
+        }
+      });
   }
 
   // sharing the packaged products received from the cart to display in packaged product component
@@ -99,11 +110,19 @@ export class CartComponent implements OnInit {
 
   // receive Packaged Product total
   receivePackagedProductTotal() {
-    this.dataSharing.PackagedProductTotal$.subscribe((data) => {
+    this.dataSharing.PackagedProductTotal$.pipe(
+      takeUntil(this.destroy$),
+    ).subscribe((data) => {
       if (data !== null) {
         this.totalPackagedProduct = data;
       }
       this.performCalculations();
+    });
+  }
+
+  enableRetailerButton() {
+    this.zone.run(() => {
+      this.dataSharing.updateRetailerButtonState(true);
     });
   }
 
@@ -116,20 +135,23 @@ export class CartComponent implements OnInit {
 
   fetchCartByCartId(cartId: string) {
     this.cartService.getCartByCartId(cartId);
-    this.cartService.cart$.subscribe((cart: Cart | null) => {
-      if (cart) {
-        this.completeCart = cart;
-        this.packagedProduct = cart.packagedProducts;
-        this.unpackagedProduct = cart.unpackagedProducts;
-      }
-      this.sharePackagedProduct();
-      this.shareUnPackagedProduct();
-    });
+    this.cartService.cart$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((cart: Cart | null) => {
+        if (cart) {
+          this.completeCart = cart;
+          this.packagedProduct = cart.packagedProducts;
+          this.unpackagedProduct = cart.unpackagedProducts;
+        }
+        this.sharePackagedProduct();
+        this.shareUnPackagedProduct();
+      });
   }
 
   // COMPLETE SHOPPING
   completeShopping() {
     console.log('SHOPPING IS COMPLETE');
+    this.enableRetailerButton();
   }
 
   /**

@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { Subject, takeUntil } from 'rxjs';
 import { PythonResponse } from 'src/app/classes/DTOs/PythonResponse';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 
@@ -12,7 +13,8 @@ import { Datasharing } from 'src/app/services/datasharing/datasharing';
   imports: [IonicModule, CommonModule, FormsModule],
   standalone: true,
 })
-export class PythonResponseComponent implements OnInit {
+export class PythonResponseComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
   sendImageURL: string = '';
   response: PythonResponse = {
     success: false,
@@ -21,9 +23,13 @@ export class PythonResponseComponent implements OnInit {
   };
   constructor(private dataSharing: Datasharing) {}
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   ngOnInit() {
     this.receivePythonResponse();
-    console.log(this.response.topPredictions);
   }
 
   /**
@@ -31,19 +37,23 @@ export class PythonResponseComponent implements OnInit {
    */
 
   receivePythonResponse() {
-    this.dataSharing.sharePythonResponse$.subscribe((data) => {
-      if (data) {
-        this.response = data;
-        this.receiveMockImageURL();
-      }
-    });
+    this.dataSharing.sharePythonResponse$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        if (data) {
+          this.response = data;
+          this.receiveMockImageURL();
+        }
+      });
   }
 
   receiveMockImageURL() {
-    this.dataSharing.shareTrialImage$.subscribe((data) => {
-      if (data) {
-        this.sendImageURL = data;
-      }
-    });
+    this.dataSharing.shareTrialImage$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        if (data) {
+          this.sendImageURL = data;
+        }
+      });
   }
 }

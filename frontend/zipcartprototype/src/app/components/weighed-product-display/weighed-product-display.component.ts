@@ -1,7 +1,8 @@
 import { WeighingMachineDisplayComponent } from './../weighing-machine-display/weighing-machine-display.component';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { IonicModule, IonModal, ModalController } from '@ionic/angular';
+import { Subject, takeUntil } from 'rxjs';
 import { ProductInformation } from 'src/app/classes/Models/PackagedProductInformation';
 import { AlertServices } from 'src/app/services/alertService/alert-services';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
@@ -13,7 +14,8 @@ import { Datasharing } from 'src/app/services/datasharing/datasharing';
   imports: [CommonModule, IonicModule],
   standalone: true,
 })
-export class WeighedProductDisplayComponent implements OnInit {
+export class WeighedProductDisplayComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
   isMachineWindowOpen = false;
   products: ProductInformation[] = [];
   selectedMachine: string = '';
@@ -24,6 +26,10 @@ export class WeighedProductDisplayComponent implements OnInit {
     private alert: AlertServices,
     private modalCtrl: ModalController,
   ) {}
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   ngOnInit() {
     this.receiveProductInformation();
@@ -36,11 +42,13 @@ export class WeighedProductDisplayComponent implements OnInit {
    * DATA SHARING
    */
   receiveProductInformation() {
-    this.dataSharing.shareProductInformationArray$.subscribe((data) => {
-      if (data) {
-        this.products = data;
-      }
-    });
+    this.dataSharing.shareProductInformationArray$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        if (data) {
+          this.products = data;
+        }
+      });
   }
   /**
    * BUTTON FUNCTIONALITIES
