@@ -9,6 +9,7 @@ import {
   increasePackagedProductQuantity,
   decreasePackagedProductQuantity,
   removePackagedItem,
+  getProductLiveWeight,
 } from "../services/CartService.js";
 import { getProductByName } from "../services/ProductServices.js";
 import fs from "fs";
@@ -210,6 +211,30 @@ const retrieveProductByProductName = async (req, res) => {
   }
 };
 
+const fetchProductLiveWeight = async (req, res) => {
+  try {
+    const { machineId, itemId } = req.body;
+
+    const response = await getProductLiveWeight(machineId, itemId);
+
+    if (!response) {
+      throw new Error("INTERNAL SERVER ERROR");
+    }
+
+    return res.status(200).json(response);
+  } catch (error) {
+    switch (error) {
+      case "ITEM NUMBER CANNOT BE NULL":
+      case "NO PRODUCT FOUND BY GIVEN ITEM NUMBER":
+        return res.status(400).json({ message: error.message });
+      case "INTERNAL SERVER ERROR":
+        return res.status(500).json({ message: error.message });
+      default:
+        return res.status(500).json({ message: error.message });
+    }
+  }
+};
+
 export {
   fetchCartById,
   initializeCartForShopper,
@@ -218,4 +243,5 @@ export {
   decreaseQuantity,
   removePackagedProduct,
   retrieveProductByProductName,
+  fetchProductLiveWeight,
 };

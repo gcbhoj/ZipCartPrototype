@@ -59,7 +59,6 @@ export class WeighedProductDisplayComponent implements OnInit {
 
     if (role === 'confirm') {
       this.selectedMachine = data;
-      console.log(this.selectedMachine);
     }
   }
 

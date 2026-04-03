@@ -54,6 +54,25 @@ export class AlertServices {
     await alert.present();
   }
 
+  async showPreWeighConfirmationAlert(onOk: () => void, onCancel: () => void) {
+    const alert = await this.alertController.create({
+      header: 'Pre weight confirmation',
+      message: 'Please add the product to the selected machine and press OK',
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => onOk(),
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => onCancel(),
+        },
+      ],
+    });
+
+    await alert.present();
+  }
 
   async showAlert(header: string, message: string, buttons: string[] = ['OK']) {
     const alert = await this.alertController.create({

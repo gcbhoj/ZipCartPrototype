@@ -15,6 +15,8 @@ import CartInitializationResponse from "../models/CartInitializationResponseDTO.
 import { getRetailerById } from "../repository/RetailerRepository.js";
 import { retrieveProductByItemNumber } from "../services/ProductServices.js";
 import { retrieveUserById } from "./UserService.js";
+import { it } from "node:test";
+import LiveWeightResponse from "../models/LiveWeightResponseDTO.js";
 
 const initializeNewCart = async (cartInitializationRequest) => {
   if (!cartInitializationRequest) {
@@ -154,9 +156,34 @@ const removePackagedItem = async (cartId, itemId) => {
   return "PRODUCT REMOVED SUCCESSFULLY";
 };
 
-// const response = await addPackagedProductToCart(
-//   "1a9586d6-de98-41ff-a763-954425756b8e",
-//   "0fb9aca5-326b-4df0-89f8-8b3cf81c12ee",
+const getProductLiveWeight = async (machineId, itemId) => {
+  if (!itemId) {
+    throw new Error("ITEM NUMBER CANNOT BE NULL");
+  }
+
+  const product = await retrieveProductByItemNumber(itemId);
+
+  if (!product) {
+    throw new Error("NO PRODUCT FOUND BY GIVEN ITEM NUMBER");
+  }
+
+  // 🔥 simulate weight (replace with real machine logic)
+  const weight = (Math.random() * 2).toFixed(2);
+
+  const response = new LiveWeightResponse(
+    product.itemNumber,
+    product.productName,
+    weight,
+    product.unitPrice,
+    product.imageUrl,
+  );
+
+  return response;
+};
+
+// const response = await getProductLiveWeight(
+//   "33daec91-90e5-48ed-9f6d-fa121f4f6520",
+//   "1a2b3c4d-0005-4f5e-b123-abcdef000005",
 // );
 // console.log(response);
 
@@ -167,4 +194,5 @@ export {
   increasePackagedProductQuantity,
   decreasePackagedProductQuantity,
   removePackagedItem,
+  getProductLiveWeight,
 };

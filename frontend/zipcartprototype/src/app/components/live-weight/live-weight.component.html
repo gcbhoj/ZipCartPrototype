@@ -1,4 +1,4 @@
-<div class="center-container" *ngIf="response">
+<div class="center-container" *ngIf="liveCart">
   <ion-card class="product-card">
     <ion-card-header>
       <ion-grid>
@@ -13,13 +13,13 @@
           <ion-col>
             <ion-card-title>
               Product Name:<br />
-              <span class="value">{{ response.productName }}</span>
+              <span class="value">{{ liveCart.productName }}</span>
             </ion-card-title>
             <hr />
 
             <ion-card-subtitle>
               Live Weight:<br />
-              <span class="value">{{ response.liveWeight }} grams</span>
+              <span class="value">{{ liveCart.liveWeight }} grams</span>
             </ion-card-subtitle>
           </ion-col>
         </ion-row>
@@ -31,17 +31,17 @@
         <ion-row class="ion-text-center">
           <ion-col>
             <strong>Unit Price</strong>
-            <p>{{ response.unitPrice }}</p>
+            <p>{{ liveCart.unitPrice }}</p>
           </ion-col>
 
           <ion-col>
             <strong>Taxes</strong>
-            <p></p>
+            <p>{{ taxAmount }}</p>
           </ion-col>
 
           <ion-col>
             <strong>Total</strong>
-            <p></p>
+            <p>{{ totalAmount }}</p>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -52,7 +52,7 @@
         Cancel
       </ion-button>
 
-      <ion-button color="primary" (click)="confirm()"> Add To Cart </ion-button>
+      <ion-button color="primary" (click)="confirm(liveCart.liveWeight,liveCart.itemNumber)"> Add To Cart </ion-button>
     </div>
   </ion-card>
 </div>
