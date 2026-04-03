@@ -160,9 +160,10 @@ export class PackageditemComponent implements OnInit, OnDestroy {
       this.productTotal = this.calculator.calculateProductTotalWithoutTaxes(
         this.products,
       );
-
-      this.shareProductsTotal();
+    } else {
+      this.productTotal = 0;
     }
+    this.shareProductsTotal();
   }
 
   calculateTotal(unitPrice: number, quantity: number): number {

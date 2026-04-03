@@ -114,7 +114,7 @@ export class CartComponent implements OnInit, OnDestroy {
     this.dataSharing.PackagedProductTotal$.pipe(
       takeUntil(this.destroy$),
     ).subscribe((data) => {
-      if (data !== null) {
+      if (data !== null && data !== undefined) {
         this.totalPackagedProduct = data;
       }
       this.performCalculations();
@@ -125,7 +125,7 @@ export class CartComponent implements OnInit, OnDestroy {
     this.dataSharing.unPackagedProductTotal$
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
-        if (data) {
+        if (data !== null && data !== undefined) {
           this.totalUnPackagedProduct = data;
         }
         this.performCalculations();
@@ -154,9 +154,9 @@ export class CartComponent implements OnInit, OnDestroy {
           this.completeCart = cart;
           this.packagedProduct = cart.packagedProducts;
           this.unpackagedProduct = cart.unpackagedProducts;
+          this.sharePackagedProduct();
+          this.shareUnPackagedProduct();
         }
-        this.sharePackagedProduct();
-        this.shareUnPackagedProduct();
       });
   }
 
