@@ -6,6 +6,9 @@ import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingRespons
 import { IonicModule } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
 import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
+import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
+import { PackagedProductRequests } from 'src/app/classes/DTOs/PackagedProductRequests';
+import { ToastServices } from 'src/app/services/toastService/toast-services';
 
 @Component({
   selector: 'app-unpackageditem',
@@ -26,9 +29,16 @@ export class UnpackageditemComponent implements OnInit, OnDestroy {
   products: UnPackagedProduct[] = [];
 
   productTotal: number = 0;
+
+  request: PackagedProductRequests = {
+    cartId: '',
+    itemId: '',
+  };
   constructor(
     private dataSharing: Datasharing,
     private calculator: CalculatorService,
+    private cartService: Cartservices,
+    private toast: ToastServices,
   ) {}
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -50,9 +60,7 @@ export class UnpackageditemComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
         this.products = data;
-        console.log(this.products);
         this.calculateProductTotalBeforeTaxes();
-        console.log('Unpackaged Products Total:', this.productTotal);
       });
   }
   // receiving cart initialization response
@@ -66,7 +74,7 @@ export class UnpackageditemComponent implements OnInit, OnDestroy {
       });
   }
 
-  // sharing unpackaed product total
+  // sharing unpackaged product total
   shareProductsTotal() {
     this.dataSharing.exchangeUnPackagedProductTotal(this.productTotal);
   }
@@ -80,10 +88,52 @@ export class UnpackageditemComponent implements OnInit, OnDestroy {
         this.products,
       );
       this.shareProductsTotal();
+    } else {
+      this.productTotal = 0;
     }
   }
 
   calculateTotal(weight: number, unitPrice: number): number {
     return this.calculator.calculateTotalProductPrice(unitPrice, weight);
+  }
+
+  /**
+   * API CALLS
+   */
+
+  removeProduct(req: PackagedProductRequests) {
+    this.cartService
+      .removeWeighedProduct(req)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (res) => {
+          this.toast.showSuccess(res.result);
+          this.cartService.getCartByCartId(this.cartInitResponse.cartId);
+        },
+        error: (err) => {
+          const message = err?.error?.message || 'Unable to remove product';
+          this.toast.showError(message);
+        },
+      });
+  }
+
+  /**
+   * DATA PREPARATION
+   */
+
+  prepareData(itemId: string) {
+    this.request = {
+      cartId: this.cartInitResponse.cartId,
+      itemId: itemId,
+    };
+  }
+
+  /**
+   * BUTTON FUNCTIONALITIES
+   */
+
+  deleteProduct(itemId: string) {
+    this.prepareData(itemId);
+    this.removeProduct(this.request);
   }
 }

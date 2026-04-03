@@ -110,4 +110,13 @@ export class Cartservices {
       request,
     );
   }
+
+  removeWeighedProduct(
+    request: PackagedProductRequests,
+  ): Observable<PackagedProductResponse> {
+    return this.http.patch<PackagedProductResponse>(
+      `${this.backendUrl}/remove-weighed`,
+      request,
+    );
+  }
 }

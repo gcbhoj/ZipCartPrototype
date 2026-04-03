@@ -9,6 +9,7 @@ import {
   decreasePackagedItemQuantity,
   removePackagedProduct,
   addUnpackagedItemToCart,
+  removeUnPackagedProduct,
 } from "../repository/CartRepository.js";
 import { v4 as uuidv4 } from "uuid";
 import CartInitializationResponse from "../models/CartInitializationResponseDTO.js";
@@ -224,9 +225,29 @@ const addWeighedItemToCart = async (cartId, weight, itemNumber) => {
   return "PRODUCT ADDED TO CART SUCCESSFULLY";
 };
 
+const removeWeighedProduct = async (cartId, itemId) => {
+  if (!cartId) {
+    throw new Error("CART ID CANNOT BE EMPTY");
+  }
+
+  if (!itemId) {
+    throw new Error("ITEM ID CANNOT BE EMPTY");
+  }
+
+  const result = await removeUnPackagedProduct(cartId, itemId);
+
+  if (!result) {
+    throw new Error("INTERNAL SERVER ERROR");
+  }
+
+  return "PRODUCT REMOVED SUCCESSFULLY";
+};
+
 // const cartId = "b2c3d4e5-f6a7-4890-91bc-def123456789";
-// const itemId = "1a2b3c4d-0004-4f5e-b123-abcdef000004";
-// const response = await addWeighedItemToCart(cartId, 100, itemId);
+// const itemNumber = "d1111111-2222-3333-4444-555555555555";
+
+// const response = await removeWeighedProduct(cartId, itemNumber);
+
 // console.log(response);
 
 export {
@@ -238,4 +259,5 @@ export {
   removePackagedItem,
   getProductLiveWeight,
   addWeighedItemToCart,
+  removeWeighedProduct,
 };

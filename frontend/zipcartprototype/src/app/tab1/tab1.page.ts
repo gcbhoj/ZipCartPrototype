@@ -145,11 +145,6 @@ export class Tab1Page implements OnInit {
     this.dataSharing.exchangeCartInitializationResponse(this.cartInitResponse);
   }
 
-  // enableRetailerButton() {
-  //   console.log('BUTTON ENABLED');
-  //   this.dataSharing.updateRetailerButtonState(true);
-  // }
-
   enableRetailerButton() {
     this.zone.run(() => {
       this.dataSharing.updateRetailerButtonState(true);

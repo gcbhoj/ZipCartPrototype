@@ -143,8 +143,6 @@ export class PackageditemComponent implements OnInit, OnDestroy {
         next: (response) => {
           this.toast.showSuccess(response.result);
           this.cartService.getCartByCartId(this.cartInitResponse.cartId);
-          this.productTotal = 0;
-          this.shareProductsTotal();
         },
         error: (err) => {
           const message = err?.error?.message || 'Unable to Remove Product';

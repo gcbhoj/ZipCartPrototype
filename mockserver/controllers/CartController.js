@@ -11,6 +11,7 @@ import {
   removePackagedItem,
   getProductLiveWeight,
   addWeighedItemToCart,
+  removeWeighedProduct,
 } from "../services/CartService.js";
 import { getProductByName } from "../services/ProductServices.js";
 import fs from "fs";
@@ -240,13 +241,13 @@ const addWeighedProductToCart = async (req, res) => {
   try {
     const { cartId, weight, itemId } = req.body;
 
-    const response = await addWeighedItemToCart(cartId, weight, itemId);
+    const result = await addWeighedItemToCart(cartId, weight, itemId);
 
-    if (!response) {
+    if (!result) {
       throw new Error("INTERNAL SERVER ERROR");
     }
 
-    return res.status(200).json(response);
+    return res.status(200).json({ result });
   } catch (error) {
     switch (error) {
       case "CART NOT FOUND":
@@ -256,6 +257,32 @@ const addWeighedProductToCart = async (req, res) => {
       case "ITEM NUMBER CANNOT BE NULL":
       case "NO CART FOUND BY GIVEN ID":
       case "NO PRODUCT FOUND BY GIVEN ID":
+        return res.status(400).json({ message: error.message });
+      case "INTERNAL SERVER ERROR":
+        return res.status(500).json({ message: error.message });
+      default:
+        return res.status(500).json({ message: error.message });
+    }
+  }
+};
+
+const deleteWeighedProduct = async (req, res) => {
+  try {
+    const { cartId, itemId } = req.body;
+
+    const result = await removeWeighedProduct(cartId, itemId);
+
+    if (!result) {
+      throw new Error("INTERNAL SERVER ERROR");
+    }
+
+    return res.status(200).json({ result });
+  } catch (error) {
+    switch (error) {
+      case "CART NOT FOUND":
+      case "NO PRODUCTS IN CART":
+      case "CART ID CANNOT BE EMPTY":
+      case "ITEM ID CANNOT BE EMPTY":
         return res.status(400).json({ message: error.message });
       case "INTERNAL SERVER ERROR":
         return res.status(500).json({ message: error.message });
@@ -275,4 +302,5 @@ export {
   retrieveProductByProductName,
   fetchProductLiveWeight,
   addWeighedProductToCart,
+  deleteWeighedProduct,
 };

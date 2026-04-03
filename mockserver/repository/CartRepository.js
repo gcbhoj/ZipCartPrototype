@@ -246,6 +246,38 @@ const addUnpackagedItemToCart = async (cartId, unpackagedProduct) => {
 
   return cart;
 };
+const removeUnPackagedProduct = async (cartId, itemNumber) => {
+  if (carts.size === 0) {
+    await getAllCarts();
+  }
+
+  const cart = carts.get(cartId);
+
+  if (!cart) {
+    throw new Error("CART NOT FOUND");
+  }
+
+  if (!cart.unpackagedProducts || cart.unpackagedProducts.length === 0) {
+    throw new Error("NO PRODUCTS IN CART");
+  }
+
+  // ✅ find index of FIRST matching product
+  const index = cart.unpackagedProducts.findIndex(
+    (p) => p.itemNumber === itemNumber,
+  );
+
+  // ✅ remove ONLY ONE item
+  cart.unpackagedProducts.splice(index, 1);
+
+  // ✅ persist changes
+  await fs.writeFile(
+    filePath,
+    JSON.stringify(Array.from(carts.values()), null, 2),
+    "utf8",
+  );
+
+  return cart;
+};
 
 
 
@@ -258,4 +290,5 @@ export {
   decreasePackagedItemQuantity,
   removePackagedProduct,
   addUnpackagedItemToCart,
+  removeUnPackagedProduct,
 };

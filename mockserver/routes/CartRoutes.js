@@ -12,6 +12,7 @@ import {
   retrieveProductByProductName,
   fetchProductLiveWeight,
   addWeighedProductToCart,
+  deleteWeighedProduct,
 } from "../controllers/CartController.js";
 const upload = multer({ dest: "uploads/" });
 
@@ -24,5 +25,6 @@ cartRoutes.patch("/remove-packaged", removePackagedProduct);
 cartRoutes.get("/getByName/:productName", retrieveProductByProductName);
 cartRoutes.post("/live-weight", fetchProductLiveWeight);
 cartRoutes.post("/add-weighed", addWeighedProductToCart);
+cartRoutes.patch("/remove-weighed", deleteWeighedProduct);
 
 export default cartRoutes;
