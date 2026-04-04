@@ -1,23 +1,48 @@
-/* Center the content vertically and horizontally */
+/* HEADER */
+.header-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.header-container img {
+  height: 36px;
+  width: auto;
+  margin-right: 10px;
+}
+
+.header-container span {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* CENTER ENTIRE CONTENT */
+/* FULL CENTERING */
 .center-content {
   display: flex;
-  flex-direction: column;
-  justify-content: center; /* vertical centering */
-  align-items: center;     /* horizontal centering */
-  height: 100%;
+  justify-content: center; /* horizontal center */
+  align-items: center; /* vertical center */
+  height: 100vh;
+}
+
+/* WRAPPER (THIS IS KEY) */
+.content-wrapper {
+  width: 100%;
+  max-width: 400px;
   text-align: center;
 }
 
-.machines-container {
-  width: 80%;           /* limit width of machine buttons */
-  margin-bottom: 20px;  /* spacing before cancel button */
-  display: flex;
-  flex-direction: column;
-  gap: 15px;            /* space between buttons */
+/* MACHINE BUTTONS */
+.machines-container ion-button {
+  margin-bottom: 12px;
+  width: 100%;
+  font-weight: 600;
+  border-radius: 8px;
 }
 
-.logo-img {
-  width: 35px;
-  height: 35px;
-  object-fit: contain;
+/* CANCEL BUTTON */
+.cancel-btn {
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 8px;
 }

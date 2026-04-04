@@ -1,13 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="header-container">
+      <img src="/assets/images/ZipCartLogo.png" />
+      <span>Zip Cart</span>
+    </div>
+  </ion-toolbar>
+</ion-header>
 <div class="center-container" *ngIf="liveCart">
   <ion-card class="product-card">
     <ion-card-header>
       <ion-grid>
         <ion-row class="ion-align-items-center">
           <ion-col size="4">
-            <img
-              src="/assets/images/trialImages/image1.jpg"
-              class="product-img"
-            />
+            <img src="{{ liveCart.imageURL }}" class="product-img" />
           </ion-col>
 
           <ion-col>

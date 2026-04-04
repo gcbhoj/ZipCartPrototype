@@ -34,7 +34,6 @@ export class FruitsAndVegPage implements OnInit, OnDestroy {
     image2: '/assets/images/trialImages/image2.jpg',
     image3: '/assets/images/trialImages/image3.jpg',
     image4: '/assets/images/trialImages/image4.jpg',
-    image5: '/assets/images/trialImages/image5.jpg',
   };
 
   imageURL: string = '';
