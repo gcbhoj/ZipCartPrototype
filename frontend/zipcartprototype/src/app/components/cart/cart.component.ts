@@ -10,8 +10,9 @@ import { CalculatorService } from 'src/app/services/calculatorService/calculator
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
 import { LoginResponse } from 'src/app/classes/DTOs/LoginResponseDTO';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
+import { BarcodeDisplayComponent } from '../barcode-display/barcode-display.component';
 
 @Component({
   selector: 'app-cart',
@@ -60,6 +61,7 @@ export class CartComponent implements OnInit, OnDestroy {
     private cartService: Cartservices,
     private dataSharing: Datasharing,
     private calculator: CalculatorService,
+    private modalCtrl: ModalController,
     private zone: NgZone,
   ) {}
   ngOnDestroy(): void {
@@ -161,8 +163,9 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   // COMPLETE SHOPPING
-  completeShopping() {
+  async completeShopping() {
     console.log('SHOPPING IS COMPLETE');
+    this.openModal();
     this.enableRetailerButton();
   }
 
@@ -182,5 +185,22 @@ export class CartComponent implements OnInit, OnDestroy {
       this.taxAmount,
       this.totalCartAmountBeforeTax,
     );
+  }
+  /**
+   * MODAL TO DISPLAY THE FINAL BAR CODE
+   */
+
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: BarcodeDisplayComponent,
+    });
+
+    modal.present();
+
+    const { data, role } = await modal.onDidDismiss();
+
+    if (role === 'confirm') {
+      console.log('CONFIRM PRESSED');
+    }
   }
 }
