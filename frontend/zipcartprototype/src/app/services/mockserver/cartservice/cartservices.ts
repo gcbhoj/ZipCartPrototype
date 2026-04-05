@@ -119,4 +119,10 @@ export class Cartservices {
       request,
     );
   }
+
+  completeShopping(cartId: string): Observable<Blob> {
+    return this.http.get(`${this.backendUrl}/complete/${cartId}`, {
+      responseType: 'blob',
+    });
+  }
 }

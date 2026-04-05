@@ -19,6 +19,8 @@ import { retrieveUserById } from "./UserService.js";
 import { it } from "node:test";
 import LiveWeightResponse from "../models/LiveWeightResponseDTO.js";
 import UnPackagedProduct from "../models/UnPackagedProductModel.js";
+import { generateReceiptBarcode } from "./BarCodeGenerator.js";
+import fs from "fs";
 
 const initializeNewCart = async (cartInitializationRequest) => {
   if (!cartInitializationRequest) {
@@ -243,12 +245,49 @@ const removeWeighedProduct = async (cartId, itemId) => {
   return "PRODUCT REMOVED SUCCESSFULLY";
 };
 
-// const cartId = "b2c3d4e5-f6a7-4890-91bc-def123456789";
-// const itemNumber = "d1111111-2222-3333-4444-555555555555";
+/**
+ * Complete shopping process and generate QR code for the cart
+ * @param {string} cartId
+ * @returns {Promise<Buffer>} PNG buffer
+ */
 
-// const response = await removeWeighedProduct(cartId, itemNumber);
+const completeShopping = async (cartId) => {
+  if (!cartId) throw new Error("CART ID CANNOT BE NULL");
 
-// console.log(response);
+  const cart = await retrieveCartById(cartId);
+
+  // Remove image URLs to reduce QR size
+  const cleanCart = {
+    ...cart,
+    packagedProducts: (cart.packagedProducts || []).map(
+      ({ image, ...rest }) => rest,
+    ),
+    unpackagedProducts: (cart.unpackagedProducts || []).map(
+      ({ image, ...rest }) => rest,
+    ),
+  };
+
+  const cartString = JSON.stringify(cleanCart);
+
+  // Generate QR code PNG buffer
+  const qrBuffer = await generateReceiptBarcode(cartString);
+
+  return qrBuffer; // this is a PNG buffer
+};
+
+export default completeShopping;
+
+// // Usage with top-level async
+// (async () => {
+//   const cartId = "b2c3d4e5-f6a7-4890-91bc-def123456789";
+
+//   const response = await completeShopping(cartId);
+
+//   // Save the QR code to a PNG
+//   fs.writeFileSync("receipt-qr.png", response);
+
+//   console.log("QR code generated and saved as receipt-qr.png");
+// })();
 
 export {
   initializeNewCart,
@@ -260,4 +299,5 @@ export {
   getProductLiveWeight,
   addWeighedItemToCart,
   removeWeighedProduct,
+  completeShopping,
 };

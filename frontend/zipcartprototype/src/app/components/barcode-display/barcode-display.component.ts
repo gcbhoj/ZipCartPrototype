@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { IonButton } from '@ionic/angular/standalone';
 
@@ -9,6 +9,8 @@ import { IonButton } from '@ionic/angular/standalone';
   imports: [IonicModule],
 })
 export class BarcodeDisplayComponent implements OnInit {
+
+  @Input() finalImageSrc !:string
   constructor(private modalCtrl: ModalController) {}
 
   ngOnInit() {}

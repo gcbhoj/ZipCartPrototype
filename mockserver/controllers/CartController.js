@@ -12,6 +12,7 @@ import {
   getProductLiveWeight,
   addWeighedItemToCart,
   removeWeighedProduct,
+  completeShopping,
 } from "../services/CartService.js";
 import { getProductByName } from "../services/ProductServices.js";
 import fs from "fs";
@@ -292,6 +293,20 @@ const deleteWeighedProduct = async (req, res) => {
   }
 };
 
+const sendQRCOde = async (req, res) => {
+  try {
+    const { cartId } = req.params;
+
+    const qrBuffer = await completeShopping(cartId);
+
+    res.setHeader("Content-Type", "image/png"); // send as PNG
+    res.send(qrBuffer);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to generate QR code" });
+  }
+};
+
 export {
   fetchCartById,
   initializeCartForShopper,
@@ -303,4 +318,5 @@ export {
   fetchProductLiveWeight,
   addWeighedProductToCart,
   deleteWeighedProduct,
+  sendQRCOde,
 };

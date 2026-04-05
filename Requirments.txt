@@ -4,7 +4,7 @@
 Get User by Id
 Request Type: Get
 
-REQUEST : string
+REQUEST PAMRM : string
 
 RESPONSE DTO FORMAT(java class)
 userId: string
@@ -26,7 +26,7 @@ Response DTO FORMAT(java class)
 
 2. Initialize Cart
 Request Type: POST
-REQUEST DTO FORMAT (java class):
+REQUEST BODY DTO FORMAT (java class):
   userId: string;
   retailerId: string;
   budget: number;
@@ -39,7 +39,7 @@ RESPONSE DTO FORMAT (java class):
 3. ScanProductsByBarcode
 Request Type: POST
 
-REQUEST DTO FORMAT (java class):
+REQUEST BODY DTO FORMAT (java class):
   isValid: boolean;
   text: string;
   format: string;
@@ -62,7 +62,7 @@ RESPONSE DTO FORMAT (java class):
 4. Add Packaged Product to Cart
 Request Type 📃POST
 
-REQUEST DTO FORMAT (java class):
+REQUEST BODY DTO FORMAT (java class):
 cartId:string;
 itemId: string;
 
@@ -85,7 +85,7 @@ RESPONSE DTO FORMAT(java class)
 6. Increase Packaged Product Quantiy
 Request Type 📃Patch
 
-REQUEST DTO FORMAT (java class):
+REQUEST BODY  DTO FORMAT (java class):
 cartId:string;
 itemId: string;
 
@@ -95,7 +95,7 @@ result:string
 7. Decrease Packaged Product Quantiy
 Request Type 📃Patch
 
-REQUEST DTO FORMAT (java class):
+REQUEST BODY DTO FORMAT (java class):
 cartId:string;
 itemId: string;
 
@@ -105,7 +105,7 @@ result:string
 8. Remove Packaged Product 
 Request Type 📃Patch
 
-REQUEST DTO FORMAT (java class):
+REQUEST BODY DTO (java class):
 cartId:string;
 itemId: string;
 
@@ -115,7 +115,7 @@ result:string
 9. Identify Frutis & Veg
 Request Type: POST
 
-REQUEST FORMAT (formData: file)
+REQUEST FORMDATA (formData: file)
 
 RESPONSE DTO FORMAT Array(java class)
   itemNumber: number;
@@ -134,7 +134,7 @@ RESPONSE DTO FORMAT Array(java class)
 10. Get Product weight
 Request Type: POST
 
-REQUEST FORMAT (java class)
+REQUEST BODY (java class)
   machineId: string;
   itemId: string;
 
@@ -146,9 +146,20 @@ RESPONSE FORMAT (java Class)
   imageURL: string;
 
 11. Add Weighed Product to Cart
+
 Request Type: POST
 
 REQUEST FORMAT(java class)
   cartId: string
   itemId: string;
   weight: number;
+
+  RESPONSE DTO FORMAT (java class):
+result:string
+
+12. Remove Weighed Product From Cart
+Requst Type: PATCH
+
+Request PARAM: cartId
+
+RESPONSE: BLOB

@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
 import { BarcodeDisplayComponent } from '../barcode-display/barcode-display.component';
+import { ToastServices } from 'src/app/services/toastService/toast-services';
 
 @Component({
   selector: 'app-cart',
@@ -57,11 +58,14 @@ export class CartComponent implements OnInit, OnDestroy {
   totalCartAmountBeforeTax: number = 0;
   taxAmount: number = 0;
   totalCartAmount: number = 0;
+
+  finalImageSrc: string = '';
   constructor(
     private cartService: Cartservices,
     private dataSharing: Datasharing,
     private calculator: CalculatorService,
     private modalCtrl: ModalController,
+    private toast: ToastServices,
     private zone: NgZone,
   ) {}
   ngOnDestroy(): void {
@@ -164,9 +168,22 @@ export class CartComponent implements OnInit, OnDestroy {
 
   // COMPLETE SHOPPING
   async completeShopping() {
-    console.log('SHOPPING IS COMPLETE');
-    this.openModal();
-    this.enableRetailerButton();
+    this.cartService
+      .completeShopping(this.cartInitResponse.cartId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (blob: Blob) => {
+          this.finalImageSrc = URL.createObjectURL(blob);
+          this.openModal();
+          this.enableRetailerButton();
+        },
+        error: (err) => {
+          const message =
+            err?.error?.message ||
+            'Unable to generate Barcode. Please try again';
+          this.toast.showError(message);
+        },
+      });
   }
 
   /**
@@ -193,6 +210,9 @@ export class CartComponent implements OnInit, OnDestroy {
   async openModal() {
     const modal = await this.modalCtrl.create({
       component: BarcodeDisplayComponent,
+      componentProps: {
+        finalImageSrc: this.finalImageSrc,
+      },
     });
 
     modal.present();
