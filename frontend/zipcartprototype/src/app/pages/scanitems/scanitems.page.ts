@@ -14,6 +14,7 @@ import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservic
 import { PackagedProductRequests } from 'src/app/classes/DTOs/PackagedProductRequests';
 import { IonicModule } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
+import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
 
 @Component({
   selector: 'app-scanitems',
@@ -98,6 +99,7 @@ export class ScanitemsPage implements OnInit, OnDestroy {
     private router: Router,
     private toast: ToastServices,
     private cartService: Cartservices,
+    private calculator: CalculatorService,
   ) {}
 
   ngOnDestroy(): void {

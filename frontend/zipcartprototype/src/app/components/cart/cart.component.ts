@@ -138,6 +138,8 @@ export class CartComponent implements OnInit, OnDestroy {
       });
   }
 
+
+
   enableRetailerButton() {
     this.zone.run(() => {
       this.dataSharing.updateRetailerButtonState(true);
@@ -162,6 +164,7 @@ export class CartComponent implements OnInit, OnDestroy {
           this.unpackagedProduct = cart.unpackagedProducts;
           this.sharePackagedProduct();
           this.shareUnPackagedProduct();
+          this.performCalculations();
         }
       });
   }
