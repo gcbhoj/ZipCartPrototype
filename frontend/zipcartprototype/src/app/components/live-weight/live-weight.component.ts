@@ -2,7 +2,6 @@ import { AddWeighedProduct } from './../../classes/DTOs/AddWeighedProductDTO';
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';

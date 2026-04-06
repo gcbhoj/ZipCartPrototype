@@ -5,16 +5,16 @@ import { BarcodescannerComponent } from 'src/app/components/barcodescanner/barco
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { BarCodeScannerResultDTO } from 'src/app/classes/DTOs/BarCodeScannerResultDTO';
 import { ScannedProductDisplayComponent } from 'src/app/components/scanned-product-display/scanned-product-display.component';
-import { BarcodeService } from 'src/app/services/mockserver/barcodeService/barcode-service';
+import { BarcodeService } from 'src/app/services/springServices/barcodeServices/barcode-service';
 import { ProductInformation } from 'src/app/classes/Models/PackagedProductInformation';
 import { Router } from '@angular/router';
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
 import { ToastServices } from 'src/app/services/toastService/toast-services';
-import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
 import { PackagedProductRequests } from 'src/app/classes/DTOs/PackagedProductRequests';
 import { IonicModule } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
 import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
+import { CartService } from 'src/app/services/springServices/cartServices/cart-service';
 
 @Component({
   selector: 'app-scanitems',
@@ -98,8 +98,8 @@ export class ScanitemsPage implements OnInit, OnDestroy {
     private barCodeService: BarcodeService,
     private router: Router,
     private toast: ToastServices,
-    private cartService: Cartservices,
     private calculator: CalculatorService,
+    private cartServices: CartService,
   ) {}
 
   ngOnDestroy(): void {
@@ -176,14 +176,14 @@ export class ScanitemsPage implements OnInit, OnDestroy {
 
   //Adding the scanned items to cart
   addScannedItemToCart() {
-    this.cartService
+    this.cartServices
       .addPackagedProductToCart(this.scannedPackagedProductRequest)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
           this.toast.showSuccess(response.result);
 
-          this.cartService.getCartByCartId(this.cartInitResponse.cartId);
+          this.cartServices.getCartByCartId(this.cartInitResponse.cartId);
           this.removeScannedItem();
         },
         error: (err) => {

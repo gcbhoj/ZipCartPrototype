@@ -4,12 +4,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CameraComponent } from 'src/app/components/camera/camera.component';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
-import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
 import { ToastServices } from 'src/app/services/toastService/toast-services';
 import { v4 as uuidv4 } from 'uuid';
 import { WeighedProductDisplayComponent } from 'src/app/components/weighed-product-display/weighed-product-display.component';
 import { PythonResponseComponent } from 'src/app/components/python-response/python-response.component';
 import { IonicModule } from '@ionic/angular';
+import { CartService } from 'src/app/services/springServices/cartServices/cart-service';
 
 @Component({
   selector: 'app-fruits-and-veg',
@@ -40,7 +40,7 @@ export class FruitsAndVegPage implements OnInit, OnDestroy {
 
   constructor(
     private dataSharing: Datasharing,
-    private cartService: Cartservices,
+    private cartService: CartService,
     private toast: ToastServices,
   ) {}
   ngOnDestroy(): void {

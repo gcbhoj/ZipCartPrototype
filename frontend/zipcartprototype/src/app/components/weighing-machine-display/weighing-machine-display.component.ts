@@ -5,15 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { MachineData } from 'src/app/classes/Models/MachineData';
 import { AlertServices } from 'src/app/services/alertService/alert-services';
-import { MachineService } from 'src/app/services/mockserver/machineServices/machine-service';
 import { WeighProductRequest } from 'src/app/classes/DTOs/WeighProductRequestDTO';
 import { LiveWeightComponent } from '../live-weight/live-weight.component';
-import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
 import { ToastServices } from 'src/app/services/toastService/toast-services';
 import { Subject, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
 import { AddWeighedProduct } from 'src/app/classes/DTOs/AddWeighedProductDTO';
-
+import { MachineService } from 'src/app/services/springServices/machineServices/machine-service';
+import { CartService } from 'src/app/services/springServices/cartServices/cart-service';
 @Component({
   selector: 'app-weighing-machine-display',
   templateUrl: './weighing-machine-display.component.html',
@@ -42,7 +41,7 @@ export class WeighingMachineDisplayComponent implements OnInit, OnDestroy {
     private modalCtrl: ModalController,
     private alert: AlertServices,
     private machineService: MachineService,
-    private cartService: Cartservices,
+    private cartService: CartService,
     private toast: ToastServices,
     private router: Router,
   ) {}

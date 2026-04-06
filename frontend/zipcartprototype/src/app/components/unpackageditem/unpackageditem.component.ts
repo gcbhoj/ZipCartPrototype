@@ -6,9 +6,9 @@ import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingRespons
 import { IonicModule } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
 import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
-import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
 import { PackagedProductRequests } from 'src/app/classes/DTOs/PackagedProductRequests';
 import { ToastServices } from 'src/app/services/toastService/toast-services';
+import { CartService } from 'src/app/services/springServices/cartServices/cart-service';
 
 @Component({
   selector: 'app-unpackageditem',
@@ -37,7 +37,7 @@ export class UnpackageditemComponent implements OnInit, OnDestroy {
   constructor(
     private dataSharing: Datasharing,
     private calculator: CalculatorService,
-    private cartService: Cartservices,
+    private cartService: CartService,
     private toast: ToastServices,
   ) {}
   ngOnDestroy(): void {

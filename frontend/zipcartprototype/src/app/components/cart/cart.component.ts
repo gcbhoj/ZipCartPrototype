@@ -2,7 +2,6 @@ import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { PackagedProduct } from '../../classes/Models/PackagedProduct';
 import { UnPackagedProduct } from '../../classes/Models/UnPackagedProduct';
 import { Cart } from 'src/app/classes/Models/Cart';
-import { Cartservices } from '../../services/mockserver/cartservice/cartservices';
 import { Datasharing } from '../../services/datasharing/datasharing';
 import { PackageditemComponent } from '../packageditem/packageditem.component';
 import { UnpackageditemComponent } from '../unpackageditem/unpackageditem.component';
@@ -14,6 +13,8 @@ import { IonicModule, ModalController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
 import { BarcodeDisplayComponent } from '../barcode-display/barcode-display.component';
 import { ToastServices } from 'src/app/services/toastService/toast-services';
+import { BarcodeService } from 'src/app/services/springServices/barcodeServices/barcode-service';
+import { CartService } from 'src/app/services/springServices/cartServices/cart-service';
 
 @Component({
   selector: 'app-cart',
@@ -61,12 +62,13 @@ export class CartComponent implements OnInit, OnDestroy {
 
   finalImageSrc: string = '';
   constructor(
-    private cartService: Cartservices,
     private dataSharing: Datasharing,
     private calculator: CalculatorService,
     private modalCtrl: ModalController,
     private toast: ToastServices,
     private zone: NgZone,
+    private barCodeService: BarcodeService,
+    private cartServices: CartService,
   ) {}
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -138,8 +140,6 @@ export class CartComponent implements OnInit, OnDestroy {
       });
   }
 
-
-
   enableRetailerButton() {
     this.zone.run(() => {
       this.dataSharing.updateRetailerButtonState(true);
@@ -154,8 +154,8 @@ export class CartComponent implements OnInit, OnDestroy {
    */
 
   fetchCartByCartId(cartId: string) {
-    this.cartService.getCartByCartId(cartId);
-    this.cartService.cart$
+    this.cartServices.getCartByCartId(cartId);
+    this.cartServices.cart$
       .pipe(takeUntil(this.destroy$))
       .subscribe((cart: Cart | null) => {
         if (cart) {
@@ -171,7 +171,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
   // COMPLETE SHOPPING
   async completeShopping() {
-    this.cartService
+    this.cartServices
       .completeShopping(this.cartInitResponse.cartId)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoginResponse } from 'src/app/classes/DTOs/LoginResponseDTO';
-import { Testservices } from 'src/app/services/mockserver/test/testservices';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { ToastServices } from 'src/app/services/toastService/toast-services';
 import { IonicModule } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
+import { UserService } from 'src/app/services/springServices/userServices/user-service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     message: '',
   };
   constructor(
-    private testService: Testservices,
+    private userService: UserService,
     private dataSharing: Datasharing,
     private toast: ToastServices,
   ) {}
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   // temporary implementaion for login with hardcoded user Id
   loginUser(userId: string) {
-    this.testService
+    this.userService
       .logInUser(userId)
       .pipe(takeUntil(this.destroy$))
       .subscribe({

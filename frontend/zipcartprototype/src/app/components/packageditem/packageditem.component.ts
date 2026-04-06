@@ -7,10 +7,10 @@ import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingRespons
 import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
 import { AlertServices } from 'src/app/services/alertService/alert-services';
 import { ToastServices } from 'src/app/services/toastService/toast-services';
-import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
 import { PackagedProductRequests } from 'src/app/classes/DTOs/PackagedProductRequests';
 import { IonicModule } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
+import { CartService } from 'src/app/services/springServices/cartServices/cart-service';
 
 @Component({
   selector: 'app-packageditem',
@@ -41,8 +41,8 @@ export class PackageditemComponent implements OnInit, OnDestroy {
     private dataSharing: Datasharing,
     private calculator: CalculatorService,
     private alertService: AlertServices,
-    private cartService: Cartservices,
     private toast: ToastServices,
+    private cartServices: CartService,
   ) {}
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -88,14 +88,14 @@ export class PackageditemComponent implements OnInit, OnDestroy {
 
   increaseProductQuantity(itemId: string) {
     this.prepareData(itemId);
-    this.cartService
+    this.cartServices
       .increasePackagedProductQuantity(this.apiRequests)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
           this.toast.showSuccess(response.result);
           console.log(response.result);
-          this.cartService.getCartByCartId(this.cartInitResponse.cartId);
+          this.cartServices.getCartByCartId(this.cartInitResponse.cartId);
         },
         error: (err) => {
           const message = err?.error?.message || 'Unable to Increase Quantity';
@@ -109,13 +109,13 @@ export class PackageditemComponent implements OnInit, OnDestroy {
 
     if (product.quantity > 1) {
       this.prepareData(product.itemNumber);
-      this.cartService
+      this.cartServices
         .decreasePackagedProductQuantity(this.apiRequests)
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: (response) => {
             this.toast.showSuccess(response.result);
-            this.cartService.getCartByCartId(this.cartInitResponse.cartId);
+            this.cartServices.getCartByCartId(this.cartInitResponse.cartId);
           },
           error: (err) => {
             const message =
@@ -136,13 +136,13 @@ export class PackageditemComponent implements OnInit, OnDestroy {
 
   removePackagedProduct(itemId: string) {
     this.prepareData(itemId);
-    this.cartService
+    this.cartServices
       .removePackagedProduct(this.apiRequests)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
           this.toast.showSuccess(response.result);
-          this.cartService.getCartByCartId(this.cartInitResponse.cartId);
+          this.cartServices.getCartByCartId(this.cartInitResponse.cartId);
         },
         error: (err) => {
           const message = err?.error?.message || 'Unable to Remove Product';
