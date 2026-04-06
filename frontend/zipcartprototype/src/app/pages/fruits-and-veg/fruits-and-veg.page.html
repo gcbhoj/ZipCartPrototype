@@ -1,16 +1,47 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>fruitsAndVeg</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">fruitsAndVeg</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <div class="camera_border"><app-camera></app-camera></div>
-  <div><ion-button>Upload Image</ion-button></div>
+<ion-content class="bg">
+
+  <div class="container">
+
+    <!-- header (might convert to reusable later) -->
+    <div class="header">
+      <span class="menu">☰</span>
+      <h2>Fruits & Veg</h2>
+
+      <!-- logo looks tiny... maybe increase later -->
+      <img src="assets/images/ZipCartLogo2.png" class="logo" />
+    </div>
+
+    <!-- camera -->
+    <div class="camera-box" (click)="takePhoto()">
+      <div class="camera-icon">📷</div>
+      <p>Take Photo</p>
+    </div>
+
+    <!-- separator -->
+    <div class="or-text">Or</div>
+
+    <!-- upload -->
+    <div class="upload-btn" (click)="uploadImage()">
+      Upload Image
+    </div>
+
+    
+    <div class="product-card" *ngIf="product">
+
+      <img [src]="product.image" />
+
+      <div class="info">
+        <h3>{{ product.name }}</h3>
+        <p>Price: ${{ product.price }} /Kg</p>
+      </div>
+
+    </div>
+
+    <button class="add-btn" (click)="addToCart()">
+      Add Item to cart
+    </button>
+
+  </div>
 
 </ion-content>

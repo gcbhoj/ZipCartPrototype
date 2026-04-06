@@ -1,0 +1,50 @@
+.bg {
+  --background: url('/assets/images/2.png') no-repeat center/cover;
+}
+
+.card {
+  margin: 100px auto 0;
+  background: rgba(255,255,255,0.15);
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+}
+/* header */
+.custom-header {
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+
+  background: linear-gradient(to right, #b8ae9c, #d2c8b6);
+}
+.logo {
+  width: 60px;
+  margin-bottom: 10px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  color: white;
+  font-weight: 600;
+}
+
+
+.items div {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.summary {
+  margin-top: 10px;
+}
+
+.btn {
+  margin-top: 15px;
+  background: #666;
+  color: white;
+  border-radius: 20px;
+  padding: 10px;
+}

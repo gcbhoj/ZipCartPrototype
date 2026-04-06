@@ -1,0 +1,40 @@
+<ion-content class="auth-bg">
+
+  <div class="auth-container">
+
+    <!-- header -->
+    <div class="auth-header">
+      <span>☰</span>
+      <img src="assets/images/ZipCartLogo2.png" class="logo" />
+    </div>
+
+    <!-- title -->
+    <h2 class="app-title">ZipCart</h2>
+    <p class="subtitle">WELCOME BACK</p>
+
+    <!-- form -->
+    <div class="form">
+
+      <input type="email" placeholder="Email Address" [(ngModel)]="email" />
+
+      <input type="password" placeholder="Password" [(ngModel)]="password" />
+
+      <div class="row">
+        <label>
+          <input type="checkbox" /> Remember Me
+        </label>
+
+        <span class="link">Forgot Password?</span>
+      </div>
+
+      <button (click)="login()">Sign In</button>
+
+      <p class="bottom-text">
+        Don't have an account? <span (click)="goToSignup()">Create One</span>
+      </p>
+
+    </div>
+
+  </div>
+
+</ion-content>

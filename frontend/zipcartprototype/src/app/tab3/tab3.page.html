@@ -1,17 +1,55 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> Tab 3 </ion-title>
-  </ion-toolbar>
+
+<ion-header translucent="true" class="custom-header">
+  <div class="header">
+    <span class="menu">☰</span>
+    <h2>Profile</h2>
+    <img src="assets/images/ZipCartLogo2.png" class="logo" />
+  </div>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <h3>This page will dispaly</h3>
-  1. display a placeholder to display user profileimage and email address and
-  password 2. Button to add addtional information for address, phone 3. at the
-  top a nav bar with buttons to redirect to respective pages
+<ion-content fullscreen="true" class="profile-wrapper">
+ <div style="height: 10px;"></div> 
+
+  <div class="profile-box">
+
+
+    <div class="avatar">
+      <ion-icon name="person"></ion-icon>
+    </div>
+
+
+    <h2 class="user-name">Hanna Mahmood Peracha</h2>
+    <p class="user-email">hannaperacha@gmail.com</p>
+
+
+    <div class="btn-row">
+      <ion-button size="small">Edit Profile</ion-button>
+      <ion-button size="small" fill="outline">Change Password</ion-button>
+    </div>
+
+
+    <div class="info-block">
+      <p><strong>Account Information:</strong></p>
+      <p>Email: hannaperacha@gmail.com</p>
+      <p>Phone number: +1(437)-430-7860</p>
+      <p>Address: Mississauga, Ontario</p>
+
+    
+      <ion-button size="small">Update Information</ion-button>
+    </div>
+
+  </div>
+
+  <div class="activity-box">
+
+    <p class="section-title">Activity Insights:</p>
+
+    <ion-button expand="block" size="small">View Transaction History</ion-button>
+    <ion-button expand="block" size="small">Spending Insights</ion-button>
+    <ion-button expand="block" size="small">Saved Receipts</ion-button>
+
+    <ion-button expand="block" >Log Out</ion-button>
+
+  </div>
+
 </ion-content>

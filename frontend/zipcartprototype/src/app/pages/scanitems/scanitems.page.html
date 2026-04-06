@@ -1,43 +1,62 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Scan Barcode</ion-title>
-  </ion-toolbar>
+<ion-header translucent="true" class="custom-header">
+  <div class="header">
+    <span class="menu">☰</span>
+    <h2>Scan</h2>
+    <img src="assets/images/ZipCartLogo2.png" class="logo" />
+  </div>
 </ion-header>
 
-<ion-content>
-  <div class="page-container">
-    <app-barcodescanner [disabled]="productDisplayed"></app-barcodescanner>
-    <ion-button (click)="sendBarCode()">sendBarcode Test Only</ion-button>
-    <app-scanned-product-display
-      *ngIf="productDisplayed"
-    ></app-scanned-product-display>
+<ion-content fullscreen>
+
+  <div class="screen">
+
+
+    <div class="scanner-wrapper">
+      <div class="scanner">
+    
+        <p>Place QR Code Here</p>
+      </div>
+    </div>
+
+
+    <div class="scan-text">
+      Tap To Scan Item
+    </div>
+
+ 
+    <div class="card" *ngIf="productDisplayed">
+
+      <div class="image-box">
+        <img [src]="scannedProduct.image" />
+      </div>
+
+      <h2>{{ scannedProduct.name }}</h2>
+      <p>{{ scannedProduct.store }}</p>
+
+      <div class="price-row">
+        <span>Price</span>
+        <span class="price">${{ scannedProduct.price }}</span>
+      </div>
+
+      <div class="qty-row">
+        <span>Qty:</span>
+        <button (click)="decreaseQty()">-</button>
+        <span>{{ quantity }}</span>
+        <button (click)="increaseQty()">+</button>
+      </div>
+
+    </div>
+
+    <div class="buttons">
+      <button class="btn-main" (click)="addScannedItemToCart()">
+        Add Item to cart
+      </button>
+
+      <button class="btn-main" (click)="onProductCleared()">
+        Cancel
+      </button>
+    </div>
+
   </div>
+
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="6">
-          <ion-button
-            expand="block"
-            color="primary"
-            (click)="addScannedItemToCart()"
-          >
-            Add Item to Cart
-          </ion-button>
-        </ion-col>
-
-        <ion-col size="6">
-          <ion-button
-            expand="block"
-            color="medium"
-            (click)="onProductCleared()"
-          >
-            Cancel
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-toolbar>
-</ion-footer>

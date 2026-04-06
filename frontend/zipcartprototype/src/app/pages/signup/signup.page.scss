@@ -1,0 +1,148 @@
+
+ion-content {
+  --background: none;
+  background: url("/assets/images/2.png") no-repeat center/cover;
+}
+ion-content.auth-bg {
+
+  
+      margin: 100px auto 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.auth-container {
+  width: 100%;
+  max-width: 380px;
+        margin: 100px auto 20px;
+  padding: 20px;
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.15); // glass effect
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+
+  text-align: center;
+}
+
+// header section
+.auth-header {
+  margin-bottom: 10px;
+
+  .logo {
+    width: 60px;
+    margin-bottom: 5px;
+  }
+
+  span {
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+  }
+}
+
+
+.app-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.subtitle {
+  font-size: 12px;
+
+  margin-bottom: 15px;
+}
+
+// form inputs
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  input {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+
+    font-size: 14px;
+
+    background: rgba(255, 255, 255, 0.8);
+
+    margin-bottom: 2px;
+  }
+}
+
+// checkbox row
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .link {
+    color: #ccc;
+    cursor: pointer;
+  }
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+
+  background: #444;
+  color: white;
+  font-weight: bold;
+
+  transition: 0.3s;
+
+  &:hover {
+    background: #333;
+  }
+}
+
+
+.bottom-text {
+  margin-top: 10px;
+  font-size: 12px;
+
+
+  span {
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+/* header */
+.custom-header {
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+
+  background: linear-gradient(to right, #b8ae9c, #d2c8b6);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  color: white;
+  font-weight: 600;
+}
+
+.logo {
+  height: 28px;
+}

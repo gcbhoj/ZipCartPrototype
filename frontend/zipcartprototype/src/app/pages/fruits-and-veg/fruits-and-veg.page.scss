@@ -1,7 +1,179 @@
-.camera_border {
-  border: 1px solid red;
-  height: 30%;
+
+ion-content {
+  --padding-top: 0;
+}
+
+
+.bg {
+  --background: none;
+  background: url('/assets/images/2.png') no-repeat center/cover;
+  min-height: 100vh;
+}
+
+
+.container {
+  max-width: 420px;
+  margin: auto;
+  padding: 15px;
+
   display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 12px 15px;
+  border-radius: 12px;
+
+  background: linear-gradient(to right, #b8ae9c, #d2c8b6);
+  color: white;
+  font-weight: bold;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.menu {
+  font-size: 20px;
+}
+
+.logo {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+/* camera box */
+.camera-box {
+  height: 170px;
+  border: 2px solid #333;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  background: rgba(255,255,255,0.6);
+
+  cursor: pointer;
+  transition: 0.2s;
+
+  // felt nicer with shadow
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+.camera-icon {
+  font-size: 38px;
+}
+
+
+.or-text {
+  text-align: center;
+  background: white;
+  width: 60px;
+  margin: auto;
+  padding: 6px;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+
+.upload-btn {
+  border: 2px solid #333;
+  border-radius: 25px;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+
+  background: rgba(255,255,255,0.7);
+
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+/* product card */
+.product-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  background: rgba(255,255,255,0.95);
+  padding: 12px;
+  border-radius: 15px;
+
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+
+.info h3 {
+  margin: 0;
+}
+
+.info p {
+  margin: 4px 0 0;
+  font-weight: 500;
+}
+
+.add-btn {
+  background: #5a5a5a; 
+  color: white;
+  padding: 14px;
+  border-radius: 25px;
+  border: none;
+
+  font-weight: bold;
+  font-size: 16px;
+
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+
+@media (max-width: 600px) {
+  .camera-box {
+    height: 150px;
+  }
+
+  .product-card img {
+    width: 60px;
+    height: 60px;
+  }
 }

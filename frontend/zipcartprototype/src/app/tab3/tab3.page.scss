@@ -1,0 +1,148 @@
+
+/* background */
+ion-content {
+  --background: none;
+  background: url("/assets/images/2.png") no-repeat center/cover;
+}
+
+
+/* header */
+.custom-header {
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+
+  background: linear-gradient(to right, #b8ae9c, #d2c8b6);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  color: white;
+  font-weight: 600;
+}
+
+.logo {
+  height: 28px;
+}
+
+.profile-wrapper {
+        margin: 100px auto 20px;
+  --background: #d6c7a1; 
+  padding: 10px;
+}
+
+/* main card */
+.profile-box {
+        margin: 100px auto 20px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 15px;
+  text-align: center;
+
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+
+  margin-bottom: 15px;
+}
+
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ion-icon {
+    color: white;
+    font-size: 35px;
+  }
+}
+
+.user-name {
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.user-email {
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+/* buttons row */
+.btn-row {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+
+  ion-button {
+    font-size: 12px;
+  }
+}
+
+/* account info block */
+.info-block {
+    background: rgba(255,255,255,0.15);
+  padding: 10px;
+  border-radius: 15px;
+  text-align: left;
+  font-size: 12px;
+
+  ion-button {
+    margin-top: 8px;
+  }
+}
+
+/* second card */
+.activity-box {
+  background: rgba(255,255,255,0.15);
+  padding: 12px;
+  border-radius: 20px;
+  text-align: center;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+
+.section-title {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+
+.activity-box ion-button {
+  margin-bottom: 6px;
+}
+
+.profile-wrapper {
+  --background: transparent;
+  padding: 10px;
+}
+
+
+ion-header {
+  --background: linear-gradient(to right, #b8ae9c, #d2c8b6);
+}
+
+/* main profile card */
+.profile-box {
+  background: linear-gradient(to right, #b8ae9c, #d2c8b6);
+  border-radius: 20px;
+  padding: 20px 15px; 
+  text-align: center;
+  margin-bottom: 15px;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25); 
+}
+
+ion-button {
+  --background: #5a5a5a;
+  --color: #fff;
+}

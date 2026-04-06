@@ -1,0 +1,110 @@
+/* background */
+ion-content {
+  --background: none;
+  background: url("/assets/images/2.png") no-repeat center/cover;
+}
+ion-content.verify-bg {
+
+   margin: 100px auto 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.verify-container {
+  width: 90%;
+  max-width: 360px;
+  
+      margin: 100px auto 20px;
+
+  text-align: center;
+  padding: 20px;
+
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.header {
+  .logo {
+    width: 60px;
+    margin-bottom: 5px;
+  }
+
+  h2 {
+    margin: 0;
+  }
+
+  .title {
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+  }
+}
+
+.icon-box {
+  margin: 20px 0;
+
+  .mail-icon {
+    font-size: 60px;
+    color: #4facfe; 
+  }
+}
+
+.text {
+  font-size: 13px;
+  color: #eee;
+
+  h4 {
+    margin-bottom: 5px;
+  }
+
+  p {
+    margin: 4px 0;
+  }
+}
+
+button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+
+  border-radius: 20px;
+  border: none;
+
+  background: #444;
+  color: white;
+  font-weight: 600;
+
+  transition: 0.3s;
+}
+
+button.secondary {
+  background: #666;
+}
+/* header */
+.custom-header {
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+
+  background: linear-gradient(to right, #b8ae9c, #d2c8b6);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  color: white;
+  font-weight: 600;
+}
+
+.logo {
+  height: 28px;
+}
+.logo3{
+    height:100px;
+}

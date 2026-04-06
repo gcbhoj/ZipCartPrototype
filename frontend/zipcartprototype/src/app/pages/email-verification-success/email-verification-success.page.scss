@@ -1,0 +1,8 @@
+@import '../email-verification/email-verification.page.scss';
+
+// reuse same styles, just override icon
+
+.success-icon {
+  font-size: 60px;
+  color: #4caf50; 
+}

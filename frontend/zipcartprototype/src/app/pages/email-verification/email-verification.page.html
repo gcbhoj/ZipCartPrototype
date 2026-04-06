@@ -1,0 +1,44 @@
+<ion-header translucent="true" class="custom-header">
+  <div class="header">
+    <span class="menu">☰</span>
+    <h2>Email Verification </h2>
+    <img src="assets/images/ZipCartLogo2.png" class="logo" />
+  </div>
+</ion-header>
+
+<ion-content class="verify-bg">
+
+  <div class="verify-container">
+
+    <!-- header -->
+    <div class="header">
+      <img src="assets/images/ZipCartLogo2.png" class="logo2"/>
+     
+    </div>
+
+    <!-- icon -->
+    <div class="icon-box">
+       <img src="assets/images/EMAIL.png" class="logo3"/>
+    </div>
+
+    <!-- text -->
+    <div class="text">
+      <h4>Check Your Email</h4>
+      <p>
+        We sent a verification link to your email address.
+      </p>
+      <p>
+        Please open the email and click the verification link to activate your account.
+      </p>
+    </div>
+
+    <!-- buttons -->
+    <button (click)="resendEmail()">Resend Email</button>
+
+    <button class="secondary" (click)="backToLogin()">
+      Back To Login
+    </button>
+
+  </div>
+
+</ion-content>

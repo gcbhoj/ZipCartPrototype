@@ -1,0 +1,40 @@
+<ion-header translucent="true" class="custom-header">
+  <div class="header">
+    <span class="menu">☰</span>
+    <h2>Email Verification </h2>
+    <img src="assets/images/ZipCartLogo2.png" class="logo" />
+  </div>
+</ion-header>
+
+
+<ion-content class="auth-bg">
+
+  <div class="auth-container">
+
+    <div class="auth-header">
+
+      <img src="assets/images/ZipCartLogo2.png" class="logo2"/>
+    </div>
+
+   
+    <p class="subtitle">CREATE AN ACCOUNT</p>
+
+    <div class="form">
+
+      <input placeholder="Email Address" />
+      <input type="password" placeholder="Password" />
+      <input type="password" placeholder="Confirm Password" />
+
+      <small>Password must contain at least 8 characters</small>
+
+      <button (click)="signup()">Sign Up</button>
+
+      <p class="bottom-text">
+        Already have an account? <span (click)="goLogin()">Sign In</span>
+      </p>
+
+    </div>
+
+  </div>
+
+</ion-content>

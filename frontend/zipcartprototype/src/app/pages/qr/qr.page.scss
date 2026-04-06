@@ -1,0 +1,58 @@
+/* background */
+ion-content {
+  --background: none;
+  background: url("/assets/images/2.png") no-repeat center/cover;
+}
+
+.card {
+    margin: 100px auto 20px;
+    background: rgba(255,255,255,0.15);
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+
+.btn {
+  margin-top: 15px;
+  background: #666;
+  color: white;
+  border-radius: 20px;
+  padding: 10px;
+}
+.note {
+  font-size: 13px;
+  color: gray;
+}
+
+.btn {
+  margin-top: 10px;
+  background: #555;
+  color: white;
+  border-radius: 20px;
+}
+/* header */
+.custom-header {
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+
+  background: linear-gradient(to right, #b8ae9c, #d2c8b6);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  color: white;
+  font-weight: 600;
+}
+
+.logo {
+  height: 28px;
+}
+.qr{
+    width: 50px;
+    height: 50px;
+}

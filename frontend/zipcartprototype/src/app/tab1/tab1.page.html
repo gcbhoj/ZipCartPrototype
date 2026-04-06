@@ -1,53 +1,77 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>HOME</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="bg">
 
-<ion-content>
-  <app-login></app-login>
+  <div class="container">
 
-  <div class="top-section">
-    <ion-button (click)="enableRetailerButton()"
-      >Enable Vendor Button</ion-button
-    >
+
+    <div class="header">
+      <span class="menu">☰</span>
+      <h2>Home</h2>
+
+      <img src="assets/images/ZipCartLogo2.png" class="logo" />
+    </div>
+
+    <div class="top-section">
+    
+      <h2 class="welcome-text">WELCOME HAMNA 👋</h2>
+      <p class="sub-text">Select store to start shopping</p>
+    </div>
+
+    <!-- Search -->
+    <div class="search-container">
+
+      <input
+        type="text"
+        placeholder="🔍 Search Retailer"
+        class="search-bar"
+      />
+    </div>
+
+
+    <div class="registered-title">
+      Registered Retailers:
+    </div>
+
+    
+    <div class="retailer-container">
+
+     
+      <div *ngFor="let shop of retailers" class="retailer-card">
+
+   
+        <img
+          [src]="shop.retailerLogoUrl || 'assets/images/store.png'"
+          class="retailer-logo"
+        />
+
+        <div class="retailer-info">
+
+          <div class="retailer-name">
+            {{ shop.retailerName }}
+          </div>
+
+ 
+          <div class="retailer-location">
+            Mississauga
+          </div>
+
+          <!-- fake number for now -->
+          <div class="retailer-products">
+            1000 Products
+          </div>
+
+          <button
+            class="shop-btn"
+            (click)="startShopping(shop.retailerId)"
+          >
+            Select Store
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
-  <div>
-    <h4>Select Store to Start Shopping</h4>
-  </div>
 
-  <div class="retailer-container">
-    <ion-card *ngFor="let retailer of retailers">
-      <ion-card-content>
-        <ion-grid>
-          <ion-row class="ion-align-items-center ion-justify-content-center">
-            <!-- Retailer Logo -->
-            <ion-col size="4" class="logo-col">
-              <img src="{{retailer.retailerLogoUrl}}" class="retailer-logo" />
-            </ion-col>
-
-            <!-- Button + Website -->
-            <ion-col size="8" class="info-col">
-              <span hidden>{{retailer.retailerId}}</span>
-              <ion-button
-                expand="block"
-                [disabled]="!isEnabled"
-                (click)="startShopping(retailer.retailerId)"
-              >
-                {{ retailer.retailerName }}
-              </ion-button>
-
-              <a
-                [href]="retailer.retailerURL"
-                target="_blank"
-                class="retailer-link"
-              >
-                {{ retailer.retailerName }}
-              </a>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-content>
-    </ion-card>
-  </div>
 </ion-content>
