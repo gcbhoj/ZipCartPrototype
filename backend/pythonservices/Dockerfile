@@ -25,6 +25,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy your app code
 COPY . /app
 
+# Make sure MLModels folder is included
+COPY MLMODELS /app/MLMODELS
+
+# If you need test images, copy them too
+COPY Fruits_data /app/Fruits_data
+
 EXPOSE 5001
 
 CMD ["python", "server.py"]
