@@ -1,22 +1,20 @@
-import { AddPackagedProductRequest } from 'src/app/classes/DTOs/AddPackagedProductRequestDTO';
-/**
- * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
- */
-
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BarcodescannerComponent } from 'src/app/components/barcodescanner/barcodescanner.component';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { BarCodeScannerResultDTO } from 'src/app/classes/DTOs/BarCodeScannerResultDTO';
 import { ScannedProductDisplayComponent } from 'src/app/components/scanned-product-display/scanned-product-display.component';
-import { BarcodeService } from 'src/app/services/mockserver/barcodeService/barcode-service';
-import { PackagedProductInformation } from 'src/app/classes/Models/PackagedProductInformation';
-import { IONIC_UI } from 'src/UIImports';
+import { BarcodeService } from 'src/app/services/springServices/barcodeServices/barcode-service';
+import { ProductInformation } from 'src/app/classes/Models/PackagedProductInformation';
 import { Router } from '@angular/router';
 import { StartShoppingResponse } from 'src/app/classes/DTOs/StartShoppingResponse';
 import { ToastServices } from 'src/app/services/toastService/toast-services';
-import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservices';
+import { PackagedProductRequests } from 'src/app/classes/DTOs/PackagedProductRequests';
+import { IonicModule } from '@ionic/angular';
+import { Subject, takeUntil } from 'rxjs';
+import { CalculatorService } from 'src/app/services/calculatorService/calculator-service';
+import { CartService } from 'src/app/services/springServices/cartServices/cart-service';
 
 @Component({
   selector: 'app-scanitems',
@@ -28,14 +26,15 @@ import { Cartservices } from 'src/app/services/mockserver/cartservice/cartservic
     FormsModule,
     BarcodescannerComponent,
     ScannedProductDisplayComponent,
-    IONIC_UI,
+    IonicModule,
   ],
 })
-export class ScanitemsPage implements OnInit {
+export class ScanitemsPage implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
   addItemsToCartButtonEnabled: boolean = true;
 
   productDisplayed = false;
-  packagedProduct: PackagedProductInformation = {
+  packagedProduct: ProductInformation = {
     itemNumber: '',
     productName: '',
     imageURL: '',
@@ -57,7 +56,7 @@ export class ScanitemsPage implements OnInit {
     message: '',
   };
 
-  scannedPackagedProductRequest: AddPackagedProductRequest = {
+  scannedPackagedProductRequest: PackagedProductRequests = {
     cartId: '',
     itemId: '',
   };
@@ -99,8 +98,15 @@ export class ScanitemsPage implements OnInit {
     private barCodeService: BarcodeService,
     private router: Router,
     private toast: ToastServices,
-    private cartService: Cartservices,
+    private calculator: CalculatorService,
+    private cartServices: CartService,
   ) {}
+
+  ngOnDestroy(): void {
+    // ensure any subscribers using takeUntil(this.destroy$) are cleaned up
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   ngOnInit() {
     this.receiveBarcodeDetails();
@@ -111,11 +117,13 @@ export class ScanitemsPage implements OnInit {
    */
 
   receiveBarcodeDetails() {
-    this.dataSharing.barcodeDetails.subscribe((data) => {
-      if (data) {
-        this.barCodeResults = data;
-      }
-    });
+    this.dataSharing.barcodeDetails
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        if (data) {
+          this.barCodeResults = data;
+        }
+      });
   }
 
   //sharing the received packaged product information to display in its component
@@ -129,13 +137,15 @@ export class ScanitemsPage implements OnInit {
 
   // receiving cart initialization response
   receiveCartInitResponse() {
-    this.dataSharing.startShoppingResponseDetails.subscribe((data) => {
-      if (data) {
-        this.cartInitResponse = data;
-        this.scannedPackagedProductRequest.cartId =
-          this.cartInitResponse.cartId;
-      }
-    });
+    this.dataSharing.startShoppingResponseDetails
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        if (data) {
+          this.cartInitResponse = data;
+          this.scannedPackagedProductRequest.cartId =
+            this.cartInitResponse.cartId;
+        }
+      });
   }
 
   /**
@@ -146,6 +156,7 @@ export class ScanitemsPage implements OnInit {
   sendBarCode() {
     this.barCodeService
       .getPackagedProductDetails(this.barCodeResults)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (data) => {
           this.packagedProduct = data;
@@ -165,13 +176,14 @@ export class ScanitemsPage implements OnInit {
 
   //Adding the scanned items to cart
   addScannedItemToCart() {
-    this.cartService
+    this.cartServices
       .addPackagedProductToCart(this.scannedPackagedProductRequest)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
-          this.toast.showSuccess(response.response);
+          this.toast.showSuccess(response.result);
 
-          this.cartService.getCartByCartId(this.cartInitResponse.cartId);
+          this.cartServices.getCartByCartId(this.cartInitResponse.cartId);
           this.removeScannedItem();
         },
         error: (err) => {
@@ -188,7 +200,7 @@ export class ScanitemsPage implements OnInit {
   //removing the scanned item when cancel is pressed
   removeScannedItem() {
     //creating a empty object
-    const emptyProduct: PackagedProductInformation = {
+    const emptyProduct: ProductInformation = {
       itemNumber: '',
       productName: '',
       imageURL: '',

@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="header-container">
+      <img src="/assets/images/ZipCartLogo.png" alt="Logo" />
+      <span>ZipCart</span>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding center-content">
+  <!-- Machine selection buttons acting as Confirm -->
+  <div class="machines-container">
+    <ion-button
+      *ngFor="let machine of machines"
+      expand="block"
+      size="large"
+      (click)="confirm(machine.machineId)"
+    >
+      {{ machine.machineLocation }}
+    </ion-button>
+  </div>
+
+  <!-- Cancel button -->
+  <ion-button color="medium" expand="block" (click)="cancel()">
+    Cancel
+  </ion-button>
+</ion-content>

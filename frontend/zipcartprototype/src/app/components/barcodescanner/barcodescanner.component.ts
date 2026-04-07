@@ -1,12 +1,8 @@
-/**
- * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
- */
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BarCodeScannerResultDTO } from 'src/app/classes/DTOs/BarCodeScannerResultDTO';
 import { Datasharing } from 'src/app/services/datasharing/datasharing';
 import { Input } from '@angular/core';
-import { IONIC_UI } from 'src/UIImports';
 import {
   Barcode,
   BarcodeScanner,
@@ -14,12 +10,13 @@ import {
   BarcodeValueType,
 } from '@capacitor-mlkit/barcode-scanning';
 import { AlertServices } from 'src/app/services/alertService/alert-services';
+import { IonicModule } from '@ionic/angular';
 @Component({
   selector: 'app-barcodescanner',
   templateUrl: './barcodescanner.component.html',
   styleUrls: ['./barcodescanner.component.scss'],
   standalone: true,
-  imports: [CommonModule, IONIC_UI],
+  imports: [CommonModule, IonicModule],
 })
 export class BarcodescannerComponent implements OnInit {
   // Input property allows parent component to enable/disable the scanner

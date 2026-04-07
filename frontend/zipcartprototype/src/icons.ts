@@ -9,6 +9,8 @@ import {
   cart,
   person,
   cameraOutline,
+  add,
+  addCircleOutline,
 } from 'ionicons/icons';
 
 //Organizing ion icons import to have a claen main.ts file
@@ -23,5 +25,6 @@ export function loadIcons() {
     cameraOutline,
     cart,
     person,
+    addCircleOutline,
   });
 }

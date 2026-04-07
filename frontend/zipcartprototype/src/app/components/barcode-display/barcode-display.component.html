@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="header-container">
+      <img src="/assets/images/ZipCartLogo.png" />
+      <span>Zip Cart</span>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <img src="{{ finalImageSrc }}" />
+  </div>
+
+  <div>
+    <ion-button (click)="cancel()">Cancel</ion-button>
+    <ion-button (click)="confirm()">Confirm</ion-button>
+  </div>
+</ion-content>

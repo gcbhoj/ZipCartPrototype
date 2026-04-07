@@ -15,9 +15,10 @@
 
     <!-- Column 3: store Information -->
     <div class="header-col login">
-      <p>Location</p>
+      <ion-button (click)="completeShopping()">CheckOut</ion-button>
     </div>
   </div>
+  <div></div>
 
   <!-- SCROLLABLE PRODUCTS AREA -->
   <div class="cart-products">
@@ -27,6 +28,13 @@
 
   <!-- FOOTER -->
   <div class="cart-footer">
+    <div class="footer-cell">
+      <div>
+        <span>Before Tax</span>
+        <p>{{ totalCartAmountBeforeTax }}</p>
+      </div>
+    </div>
+
     <div class="footer-cell">
       <div>
         <span>Applicable Taxes</span>

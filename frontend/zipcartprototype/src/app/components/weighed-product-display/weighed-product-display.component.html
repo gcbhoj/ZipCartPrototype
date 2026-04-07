@@ -1,0 +1,121 @@
+<div class="products-container">
+  <ion-card *ngFor="let product of products">
+    <ion-grid>
+      <ion-icon
+        class="top-icon"
+        name="add-circle-outline"
+        (click)="retrieveSelectedProductItemId(product.itemNumber)"
+      ></ion-icon>
+      <!-- Image + Product Info -->
+      <ion-row class="ion-align-items-center">
+        <ion-col size="4">
+          <img
+            alt="Product Image"
+            src="{{ product.imageURL }}"
+            style="width: 100%; border-radius: 8px"
+          />
+        </ion-col>
+
+        <ion-col>
+          <strong>Product Name</strong>
+          <p>{{ product.productName }}</p>
+
+          <strong>Price</strong>
+          <p>{{ product.price }}</p>
+        </ion-col>
+
+        <ion-col>
+          <strong>Taxes</strong>
+          <p>taxAmount</p>
+
+          <strong>Total</strong>
+          <p>totalAmount</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- Accordion Section -->
+    <ion-accordion-group>
+      <ion-accordion value="details">
+        <ion-item slot="header">
+          <ion-label><strong>Product Details</strong></ion-label>
+        </ion-item>
+
+        <div slot="content">
+          <!-- Dates -->
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <strong>Manu Date</strong>
+                <p>{{ product.manufacturedDate }}</p>
+              </ion-col>
+
+              <ion-col>
+                <strong>Expiry Date</strong>
+                <p>{{ product.expiryDate }}</p>
+              </ion-col>
+
+              <ion-col>
+                <strong>Weight</strong>
+                <p>{{ product.weight }}</p>
+              </ion-col>
+              <ion-col>
+                <strong>Qty</strong>
+                <p>{{ product.quantity }}</p>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <strong>Product Of</strong>
+                <p>{{ product.manufacturedIn }}</p>
+              </ion-col>
+
+              <ion-col>
+                <strong>Manufacturer</strong>
+                <p>{{ product.manufacturer }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+          <!-- Scrollable Details -->
+          <div>
+            <ion-accordion-group>
+              <ion-accordion value="detail1">
+                <ion-item slot="header">
+                  <ion-label>About the Product</ion-label>
+                </ion-item>
+                <div slot="content" class="ion-padding">
+                  {{ product.aboutProduct }}
+                </div>
+              </ion-accordion>
+
+              <ion-accordion value="detail2">
+                <ion-item slot="header">
+                  <ion-label>Ingredients</ion-label>
+                </ion-item>
+
+                <div slot="content" class="ion-padding ingredients-columns">
+                  <ul>
+                    <li *ngFor="let ingredient of product.ingredients">
+                      {{ ingredient }}
+                    </li>
+                  </ul>
+                </div>
+              </ion-accordion>
+
+              <ion-accordion value="detail3">
+                <ion-item slot="header">
+                  <ion-label>Specification</ion-label>
+                </ion-item>
+                <div slot="content" class="ion-padding">
+                  Additional product info
+                </div>
+              </ion-accordion>
+            </ion-accordion-group>
+          </div>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+  </ion-card>
+</div>
+<!-- MODAL TO SELECT WEIGHING MACHINES -->

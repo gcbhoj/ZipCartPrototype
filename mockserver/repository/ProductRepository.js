@@ -46,10 +46,24 @@ const getProductByItemNumber = async (itemNumber) => {
   return null;
 };
 
-// const result = await getProductByItemNumber(
-//   "fd86e5b3-37f0-497d-a9bb-b01e80123a91",
-// );
+const getProductByName = async (productName) => {
+  if (products.size == 0) {
+    await getAllProductInformation();
+  }
+
+  const matchedProducts = [];
+
+  for (const product of products.values()) {
+    if (product.productName == productName) {
+      matchedProducts.push(product);
+    }
+  }
+
+  return matchedProducts;
+};
+
+// const result = await getProductByName("banana");
 
 // console.log(result);
 
-export { getProductByUPC, getProductByItemNumber };
+export { getProductByUPC, getProductByItemNumber, getProductByName };

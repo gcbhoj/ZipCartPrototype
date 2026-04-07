@@ -1,0 +1,42 @@
+[
+  {
+    "System Requirements": "Docker Installed",
+    "steps": [
+      {
+        "Step": 1,
+        "Command": "open Docker desktop",
+        "Description": "Move to the python services folder"
+      },
+      {
+        "Step": 2,
+        "Command": "cd backend\\pythonservices",
+        "Description": "navigate to pythonservices directory"
+      },
+      {
+        "Step": 3,
+        "Command": "docker image build -t zipcart-pythonservices .",
+        "Description": "building docker image"
+      },
+      {
+        "Step": 4,
+        "Command": "docker run -p 5001:5001 zipcart-pythonservices",
+        "Description": "run the docker image. Runs at port:5001"
+      },
+      {
+        "Step": 5,
+        "Command": "docker ps -a",
+        "Description": "lists all the containers in your docker desktop"
+      },
+      {
+        "Step": 6,
+        "Command": "docker stop <CONTAINER_ID>",
+        "Description": "copy and paste the container Id of zipcart-pythonservices. To stop the running image"
+      },
+      {
+        "Step": 7,
+        "command": "docker rm <CONTAINER_ID>",
+        "Description": "Removes the image from registry"
+      }
+    ]
+  }
+]

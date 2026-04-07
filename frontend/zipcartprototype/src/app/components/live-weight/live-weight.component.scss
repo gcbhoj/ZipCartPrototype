@@ -1,0 +1,59 @@
+/* CENTER THE CARD ON SCREEN */
+.center-container {
+  display: flex;
+  justify-content: center; /* horizontal center */
+  align-items: center; /* vertical center */
+  height: 100vh; /* full screen height */
+  padding: 16px;
+}
+
+/* CARD STYLING */
+.product-card {
+  width: 100%;
+  max-width: 420px; /* keeps it nicely sized */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* PRODUCT IMAGE */
+.product-img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* VALUE TEXT */
+.value {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* BUTTON GROUP */
+.button-group {
+  display: flex;
+  gap: 10px;
+  padding: 16px;
+}
+
+.button-group ion-button {
+  flex: 1;
+  border-radius: 8px;
+}
+
+/* HEADER STYLING */
+/* HEADER */
+.header-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.header-container img {
+  height: 36px;
+  width: auto;
+  margin-right: 10px;
+}
+
+.header-container span {
+  font-size: 20px;
+  font-weight: 600;
+}

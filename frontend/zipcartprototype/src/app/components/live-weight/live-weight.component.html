@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="header-container">
+      <img src="/assets/images/ZipCartLogo.png" />
+      <span>Zip Cart</span>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<div class="center-container" *ngIf="liveCart">
+  <ion-card class="product-card">
+    <ion-card-header>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <img src="{{ liveCart.imageURL }}" class="product-img" />
+          </ion-col>
+
+          <ion-col>
+            <ion-card-title>
+              Product Name:<br />
+              <span class="value">{{ liveCart.productName }}</span>
+            </ion-card-title>
+            <hr />
+
+            <ion-card-subtitle>
+              Live Weight:<br />
+              <span class="value">{{ liveCart.liveWeight }} grams</span>
+            </ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-grid>
+        <ion-row class="ion-text-center">
+          <ion-col>
+            <strong>Unit Price</strong>
+            <p>{{ liveCart.unitPrice }}</p>
+          </ion-col>
+
+          <ion-col>
+            <strong>Taxes</strong>
+            <p>{{ taxAmount }}</p>
+          </ion-col>
+
+          <ion-col>
+            <strong>Total</strong>
+            <p>{{ totalAmount }}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+
+    <div class="button-group">
+      <ion-button fill="outline" color="medium" (click)="cancel()">
+        Cancel
+      </ion-button>
+
+      <ion-button color="primary" (click)="confirm()"> Add To Cart </ion-button>
+    </div>
+  </ion-card>
+</div>

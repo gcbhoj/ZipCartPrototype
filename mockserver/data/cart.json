@@ -91,6 +91,14 @@
         "imageUrl": "https://www.google.com/images/carrot.jpg",
         "weight": 4,
         "unitPrice": 0.8
+      },
+      {
+        "productId": "d1111111-2222-3333-4444-555555555555",
+        "productName": "pineapple",
+        "itemNumber": "1a2b3c4d-0004-4f5e-b123-abcdef000004",
+        "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Pineapple_and_cross_section.jpg",
+        "weight": 100,
+        "unitPrice": 3.99
       }
     ],
     "transactionDateAndTime": "2026-02-05"

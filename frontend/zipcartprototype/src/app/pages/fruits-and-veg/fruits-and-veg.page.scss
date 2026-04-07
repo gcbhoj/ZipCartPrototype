@@ -1,7 +1,49 @@
 .camera_border {
-  border: 1px solid red;
   height: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.button-container {
+  width: 100%;
+  margin: 2px;
+}
+ion-button {
+  width: 100%;
+}
+
+/* HEADER WRAPPER */
+.header-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* TOP ROW (logo + name) */
+.header-top {
+  display: flex;
+  align-items: center;
+}
+
+.header-top img {
+  height: 30px;
+  margin-right: 8px;
+}
+
+.header-top span {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* BOTTOM ROW (HOME) */
+.header-bottom {
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 2px;
+  color: #666;
+  align-items: center;
+  justify-content: center;
+  text-transform: capitalize;
+  font: bolder;
 }

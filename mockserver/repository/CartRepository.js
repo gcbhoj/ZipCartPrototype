@@ -95,8 +95,6 @@ const getOpenCartsByUser = async (userId) => {
   return null;
 };
 
-
-
 const addPackagedItemToCart = async (cartId, packagedProduct) => {
   if (carts.size === 0) {
     await getAllCarts();
@@ -116,6 +114,103 @@ const addPackagedItemToCart = async (cartId, packagedProduct) => {
   cart.packagedProducts.push(packagedProduct);
 
   // overwrite file manually
+  await fs.writeFile(
+    filePath,
+    JSON.stringify(Array.from(carts.values()), null, 2),
+    "utf8",
+  );
+
+  return cart;
+};
+
+const increasePackagedItemQuantity = async (cartId, itemNumber) => {
+  if (carts.size === 0) {
+    await getAllCarts();
+  }
+
+  const cart = carts.get(cartId);
+
+  if (!cart) {
+    throw new Error("CART NOT FOUND");
+  }
+
+  const product = cart.packagedProducts.find(
+    (p) => p.itemNumber === itemNumber,
+  );
+
+  if (!product) {
+    throw new Error("PRODUCT NOT FOUND IN CART");
+  }
+
+  product.quantity += 1;
+
+  // persist changes
+  await fs.writeFile(
+    filePath,
+    JSON.stringify(Array.from(carts.values()), null, 2),
+    "utf8",
+  );
+
+  return cart;
+};
+
+const decreasePackagedItemQuantity = async (cartId, itemNumber) => {
+  if (carts.size === 0) {
+    await getAllCarts();
+  }
+
+  const cart = carts.get(cartId);
+
+  if (!cart) {
+    throw new Error("CART NOT FOUND");
+  }
+
+  const product = cart.packagedProducts.find(
+    (p) => p.itemNumber === itemNumber,
+  );
+
+  if (!product) {
+    throw new Error("PRODUCT NOT FOUND IN CART");
+  }
+
+  product.quantity -= 1;
+
+  // persist changes
+  await fs.writeFile(
+    filePath,
+    JSON.stringify(Array.from(carts.values()), null, 2),
+    "utf8",
+  );
+
+  return cart;
+};
+
+const removePackagedProduct = async (cartId, itemNumber) => {
+  if (carts.size === 0) {
+    await getAllCarts();
+  }
+
+  const cart = carts.get(cartId);
+
+  if (!cart) {
+    throw new Error("CART NOT FOUND");
+  }
+
+  if (!cart.packagedProducts || cart.packagedProducts.length === 0) {
+    throw new Error("NO PRODUCTS IN CART");
+  }
+
+  const initialLength = cart.packagedProducts.length;
+
+  cart.packagedProducts = cart.packagedProducts.filter(
+    (p) => p.itemNumber !== itemNumber,
+  );
+
+  if (cart.packagedProducts.length === initialLength) {
+    throw new Error("PRODUCT NOT FOUND IN CART");
+  }
+
+  // persist changes
   await fs.writeFile(
     filePath,
     JSON.stringify(Array.from(carts.values()), null, 2),
@@ -151,6 +246,39 @@ const addUnpackagedItemToCart = async (cartId, unpackagedProduct) => {
 
   return cart;
 };
+const removeUnPackagedProduct = async (cartId, itemNumber) => {
+  if (carts.size === 0) {
+    await getAllCarts();
+  }
+
+  const cart = carts.get(cartId);
+
+  if (!cart) {
+    throw new Error("CART NOT FOUND");
+  }
+
+  if (!cart.unpackagedProducts || cart.unpackagedProducts.length === 0) {
+    throw new Error("NO PRODUCTS IN CART");
+  }
+
+  // ✅ find index of FIRST matching product
+  const index = cart.unpackagedProducts.findIndex(
+    (p) => p.itemNumber === itemNumber,
+  );
+
+  // ✅ remove ONLY ONE item
+  cart.unpackagedProducts.splice(index, 1);
+
+  // ✅ persist changes
+  await fs.writeFile(
+    filePath,
+    JSON.stringify(Array.from(carts.values()), null, 2),
+    "utf8",
+  );
+
+  return cart;
+};
+
 
 
 export {
@@ -158,5 +286,9 @@ export {
   getCartById,
   getOpenCartsByUser,
   addPackagedItemToCart,
+  increasePackagedItemQuantity,
+  decreasePackagedItemQuantity,
+  removePackagedProduct,
   addUnpackagedItemToCart,
+  removeUnPackagedProduct,
 };

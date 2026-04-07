@@ -1,19 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>HOME</ion-title>
+    <div class="header-wrapper">
+      <!-- Row 1: Logo + Name -->
+      <div class="header-top">
+        <img src="/assets/images/ZipCartLogo.png" />
+        <span>Zip Cart</span>
+      </div>
+
+      <!-- Row 2: Page Title -->
+      <div class="header-bottom">HOME</div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <app-login></app-login>
 
-  <div class="top-section">
-    <ion-button (click)="enableRetailerButton()"
-      >Enable Vendor Button</ion-button
-    >
-  </div>
   <div>
-    <h4>Select Store to Start Shopping</h4>
+    <h4>Select Store</h4>
   </div>
 
   <div class="retailer-container">

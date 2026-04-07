@@ -22,7 +22,7 @@ export class CalculatorService {
       }
 
       // Unpackaged scenario (weight-based)
-      if ('pricePerKg' in product && 'weight' in product) {
+      if ('unitPrice' in product && 'weight' in product) {
         productTotal = product.unitPrice * product.weight;
       }
 

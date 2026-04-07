@@ -47,7 +47,7 @@ body {
 /* FOOTER - fixed at bottom with 2 columns */
 .cart-footer {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* 2 columns: taxes | total */
+  grid-template-columns: 1fr 1fr 1fr; /* 2 columns: taxes | total */
   align-items: center;
   justify-items: center;
   padding: 10px 5px;

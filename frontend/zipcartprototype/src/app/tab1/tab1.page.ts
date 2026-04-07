@@ -1,8 +1,4 @@
-/**
- * NOTE: TO IMPORT A NEW UI COMPONENT REGISTER THE COMPONENT IN UIImports.ts FILE
- */
 import { Component, NgZone, OnInit } from '@angular/core';
-import { IONIC_UI } from 'src/UIImports';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../components/login/login.component';
 import { Datasharing } from '../services/datasharing/datasharing';
@@ -16,12 +12,15 @@ import { StartShoppingResponse } from '../classes/DTOs/StartShoppingResponse';
 import { ToastServices } from '../services/toastService/toast-services';
 import { LoginResponse } from '../classes/DTOs/LoginResponseDTO';
 import { Retailer } from '../classes/Models/Retailer';
+import { IonicModule } from '@ionic/angular';
+import { CartService } from '../services/springServices/cartServices/cart-service';
+import { RetailerService } from '../services/springServices/retailerServices/retailer-service';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [IONIC_UI, LoginComponent, CommonModule, FormsModule],
+  imports: [IonicModule, LoginComponent, CommonModule, FormsModule],
 })
 export class Tab1Page implements OnInit {
   isEnabled: boolean = true;
@@ -47,6 +46,8 @@ export class Tab1Page implements OnInit {
     private cartService: Cartservices,
     private toast: ToastServices,
     private zone: NgZone,
+    private cartServices: CartService,
+    private retailerServices: RetailerService,
   ) {}
 
   ngOnInit(): void {
@@ -107,8 +108,8 @@ export class Tab1Page implements OnInit {
 
   // receiving the list of registered retailers
   receiveRetailers() {
-    this.retailerService.fetchAllRetailers();
-    this.retailerService.retailer$.subscribe((retailers: Retailer[]) => {
+    this.retailerServices.fetchAllRetailers();
+    this.retailerServices.retailer$.subscribe((retailers: Retailer[]) => {
       this.retailers = retailers;
     });
   }
@@ -128,7 +129,7 @@ export class Tab1Page implements OnInit {
 
   // calling the cart services to initialize a new table
   initializeCartForShopper(shoppingDTO: StartShopping) {
-    this.cartService.initializeCart(shoppingDTO).subscribe({
+    this.cartServices.initializeCart(shoppingDTO).subscribe({
       next: (response) => {
         this.cartInitResponse = response;
         this.toast.showSuccess(response.message);
@@ -147,11 +148,6 @@ export class Tab1Page implements OnInit {
   shareCartInitResponse() {
     this.dataSharing.exchangeCartInitializationResponse(this.cartInitResponse);
   }
-
-  // enableRetailerButton() {
-  //   console.log('BUTTON ENABLED');
-  //   this.dataSharing.updateRetailerButtonState(true);
-  // }
 
   enableRetailerButton() {
     this.zone.run(() => {

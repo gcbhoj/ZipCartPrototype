@@ -1,0 +1,22 @@
+[
+  {
+    "machineId": "33daec91-90e5-48ed-9f6d-fa121f4f6520",
+    "machineLocation": "East Corner",
+    "isActive": true
+  },
+  {
+    "machineId": "33daec91-90e5-48ed-9f6d-fa121f4f6520",
+    "machineLocation": "West Corner",
+    "isActive": true
+  },
+  {
+    "machineId": "10bd24ac-9337-4a31-b54f-39f7a78e2e22",
+    "machineLocation": "North Corner",
+    "isActive": true
+  },
+  {
+    "machineId": "10bd24ac-9337-4a31-b54f-39f7a78e2e22",
+    "machineLocation": "South Corner",
+    "isActive": false
+  }
+]
