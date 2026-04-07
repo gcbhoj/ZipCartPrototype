@@ -9,9 +9,9 @@ from models.FruitsvegPredictResultDTO import FruitsVegPredictResults
 # -------------------------------
 # Paths & Constants
 # -------------------------------
-base_dir = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(base_dir, "..", "..", "MLModels", "fruits_veg_identify.keras")
-TEST_DATA_DIR = os.path.join(base_dir, "..", "..", "Fruits_data", "test")
+base_dir = os.getenv("APP_BASE_PATH",os.getcwd())
+MODEL_PATH = os.path.join(base_dir, "MLMODELS", "fruits_veg_identify.keras")
+TEST_DATA_DIR = os.path.join(base_dir,"Fruits_data", "test")
 IMAGE_SIZE = 224
 
 # -------------------------------
