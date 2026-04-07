@@ -9,11 +9,11 @@ import { LoginResponse } from 'src/app/classes/DTOs/LoginResponseDTO';
 })
 export class UserService {
   // change to the below backend url while working with web
-  private backendUrl: string = 'http://localhost:3000/mockserver/users/';
+  private backendUrl: string = 'http://localhost:5000/mockserver/users/';
   // change to the below backend url while working with emulator
-  private backendUrlEmulator: string = 'http://10.0.2.2:3000/mockserver/users/';
+  private backendUrlEmulator: string = 'http://10.0.2.2:5000/mockserver/users/';
   // change to the below backend url while working with device where the 0.0.0.0 is the users IPV4 Address
-  private backendUrlDevice: string = 'http://10.0.0.87:3000/mockserver/users/';
+  private backendUrlDevice: string = 'http://10.0.0.87:5000/mockserver/users/';
 
   private userSubject = new BehaviorSubject<UserDisplay[]>([]);
   user$ = this.userSubject.asObservable();
