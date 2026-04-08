@@ -8,13 +8,11 @@ import { MachineData } from 'src/app/classes/Models/MachineData';
 })
 export class MachineService {
   // change to the below backend url while working with web
-  private backendUrl: string = 'http://localhost:5000/mockserver/machines';
+  private backendUrl: string = 'http://localhost:8080/api/machines';
   // change to the below backend url while working with emulator
-  private backendUrlEmulator: string =
-    'http://10.0.2.2:5000/mockserver/machines';
+  private backendUrlEmulator: string = 'http://10.0.2.2:8080/api/machines';
   // change to the below backend url while working with device where the 0.0.0.0 is the users IPV4 Address
-  private backendUrlDevice: string =
-    'http://10.0.0.87:5000/mockserver/machines';
+  private backendUrlDevice: string = 'http://10.0.0.87:8000/api/machines';
 
   private machineDataSubject = new BehaviorSubject<MachineData[]>([]);
   machineDataSubject$: Observable<MachineData[]> =
