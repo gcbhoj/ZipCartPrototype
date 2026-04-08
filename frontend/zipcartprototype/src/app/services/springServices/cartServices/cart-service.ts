@@ -23,7 +23,8 @@ export class CartService {
   // change to the below backend url while working with device where the 0.0.0.0 is the users IPV4 Address
   private backendUrlDevice: string = 'http://10.0.0.87:8080/api/cart';
 
-  private productURL: string = 'http://localhost:5001/api/product';
+  private productURL: string = 'http://localhost:8080/api/product';
+  private pythonURL: string = 'http://localhost:5001/api/py/predict_fruits_veg';
 
   private cartSubject = new BehaviorSubject<Cart | null>(null);
   cart$: Observable<Cart | null> = this.cartSubject.asObservable();
