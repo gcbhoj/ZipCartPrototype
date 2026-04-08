@@ -83,25 +83,25 @@ export class CartService {
     );
   }
 
-  getProductByImage(formData: FormData): Observable<ProductInformation[]> {
-    return this.http.post<ProductInformation[]>(
-      `${this.productURL}/scan-unpackaged-image`,
-      formData,
-    );
-  }
-
-  // getProductByImage(formData: FormData): Observable<PythonResponse> {
-  //   return this.http.post<PythonResponse>(
-  //     `${this.pythonURL}`, // adjust endpoint
+  // getProductByImage(formData: FormData): Observable<ProductInformation[]> {
+  //   return this.http.post<ProductInformation[]>(
+  //     `${this.productURL}/scan-unpackaged-image`,
   //     formData,
   //   );
   // }
 
-  // getProductByName(productName: string): Observable<ProductInformation[]> {
-  //   return this.http.get<ProductInformation[]>(
-  //     `${this.backendUrl}/getByName/${productName}`,
-  //   );
-  // }
+  getProductByImage(formData: FormData): Observable<PythonResponse> {
+    return this.http.post<PythonResponse>(
+      `${this.pythonURL}`, // adjust endpoint
+      formData,
+    );
+  }
+
+  getProductByName(productName: string): Observable<ProductInformation[]> {
+    return this.http.get<ProductInformation[]>(
+      `${this.backendUrl}/getByName/${productName}`,
+    );
+  }
 
   getProductLiveWeight(request: WeighProductRequest) {
     return this.http.post<WeighProductResponse>(
