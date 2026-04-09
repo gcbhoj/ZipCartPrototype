@@ -172,7 +172,7 @@ export class CartComponent implements OnInit, OnDestroy {
   // COMPLETE SHOPPING
   async completeShopping() {
     this.cartServices
-      .completeShopping(this.cartInitResponse.cartId)
+      .completeShopping(this.cartInitResponse.cartId, this.login.userId)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (blob: Blob) => {

@@ -24,6 +24,7 @@ export class WeighingMachineDisplayComponent implements OnInit, OnDestroy {
   @Input() itemId!: string;
 
   selectedMachine: string = '';
+  requestSelectedMachine: string = 'scale-01';
   machines: MachineData[] = [];
 
   request: WeighProductRequest = {
@@ -118,7 +119,7 @@ export class WeighingMachineDisplayComponent implements OnInit, OnDestroy {
   prepareToGetLiveWeight() {
     this.request = {
       itemId: this.itemId,
-      machineId: this.selectedMachine,
+      machineId: this.requestSelectedMachine,
     };
   }
 
@@ -137,7 +138,6 @@ export class WeighingMachineDisplayComponent implements OnInit, OnDestroy {
 
     if (role === 'confirm') {
       this.productRequest = data;
-      console.log('Live Data', this.productRequest);
       this.addWeighedProduct(this.productRequest);
     }
   }

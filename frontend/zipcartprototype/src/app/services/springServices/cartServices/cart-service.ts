@@ -132,8 +132,8 @@ export class CartService {
     );
   }
 
-  completeShopping(cartId: string): Observable<Blob> {
-    return this.http.get(`${this.backendUrl}/summary/${cartId}`, {
+  completeShopping(cartId: string, userId: string): Observable<Blob> {
+    return this.http.get(`${this.backendUrl}/summary/${cartId}/${userId}`, {
       responseType: 'blob',
     });
   }
