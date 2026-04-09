@@ -48,7 +48,7 @@ export class WeighingMachineDisplayComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.getAllMachines();
+    //this.getAllMachines();
   }
 
   ngOnDestroy() {
