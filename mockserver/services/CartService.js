@@ -171,8 +171,30 @@ const getProductLiveWeight = async (machineId, itemId) => {
     throw new Error("NO PRODUCT FOUND BY GIVEN ITEM NUMBER");
   }
 
+  const url = "http://localhost:8080/api/getWeight";
+
+  const body = {
+    machineId: "scale-01",
+    itemId: itemId,
+  };
+
+  // call backend
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to get weight from server: ${res.status}`);
+  }
+
+  const data = await res.json();
+
   // simulate weight (replace with real machine logic)
-  const weight = Number((0.5).toFixed(2)); // 0.50
+  const weight = Number(data.weight.toFixed(2)); // 0.50
 
   const response = new LiveWeightResponse(
     product.itemNumber,
