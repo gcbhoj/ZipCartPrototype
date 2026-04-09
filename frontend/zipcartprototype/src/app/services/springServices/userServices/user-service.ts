@@ -20,8 +20,6 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   logInUser(userId: string) {
-    return this.http.get<LoginResponse>(
-      this.backendUrl + 'authenticate/' + userId,
-    );
+    return this.http.get<LoginResponse>(this.backendUrl + userId);
   }
 }

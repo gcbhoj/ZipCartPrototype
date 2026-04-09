@@ -24,6 +24,8 @@ export class CartService {
   private backendUrlDevice: string = 'http://10.0.0.87:8080/api/cart';
 
   private productURL: string = 'http://localhost:8080/api/product';
+  private liveWeightURL: string = 'http://localhost:8080/api';
+
   private pythonURL: string = 'http://localhost:5001/api/py/predict_fruits_veg';
 
   private cartSubject = new BehaviorSubject<Cart | null>(null);
@@ -42,24 +44,26 @@ export class CartService {
     request: PackagedProductRequests,
   ): Observable<PackagedProductResponse> {
     return this.http.post<PackagedProductResponse>(
-      `${this.backendUrl}/add-item`,
+      `${this.backendUrl}/addPackagedProduct`,
       request,
     );
   }
 
   getCartByCartId(cartId: string): void {
-    this.http.get<Cart>(`${this.backendUrl}/summary/${cartId}`).subscribe({
-      next: (cart: Cart) => {
-        this.cartSubject.next(cart);
-      },
-      error: (err) => console.error('Failed to load Cart Items', err),
-    });
+    this.http
+      .get<Cart>(`${this.backendUrl}/viewCart?cartId=${cartId}`)
+      .subscribe({
+        next: (cart: Cart) => {
+          this.cartSubject.next(cart);
+        },
+        error: (err) => console.error('Failed to load Cart Items', err),
+      });
   }
 
   increasePackagedProductQuantity(
     dto: PackagedProductRequests,
   ): Observable<PackagedProductResponse> {
-    return this.http.post<PackagedProductResponse>(
+    return this.http.patch<PackagedProductResponse>(
       `${this.backendUrl}/increaseQuantity`,
       dto,
     );
@@ -68,7 +72,7 @@ export class CartService {
   decreasePackagedProductQuantity(
     dto: PackagedProductRequests,
   ): Observable<PackagedProductResponse> {
-    return this.http.post<PackagedProductResponse>(
+    return this.http.patch<PackagedProductResponse>(
       `${this.backendUrl}/decreaseQuantity`,
       dto,
     );
@@ -105,7 +109,7 @@ export class CartService {
 
   getProductLiveWeight(request: WeighProductRequest) {
     return this.http.post<WeighProductResponse>(
-      `${this.backendUrl}/receiveWeight`,
+      `${this.liveWeightURL}/getWeight`,
       request,
     );
   }
@@ -114,7 +118,7 @@ export class CartService {
     request: AddWeighedProduct,
   ): Observable<PackagedProductResponse> {
     return this.http.post<PackagedProductResponse>(
-      `${this.backendUrl}/add-unpackaged`,
+      `${this.backendUrl}/add-unpackaged-final`,
       request,
     );
   }
