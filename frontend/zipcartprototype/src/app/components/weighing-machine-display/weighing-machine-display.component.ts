@@ -119,7 +119,7 @@ export class WeighingMachineDisplayComponent implements OnInit, OnDestroy {
   prepareToGetLiveWeight() {
     this.request = {
       itemId: this.itemId,
-      machineId: this.requestSelectedMachine,
+      machineId: this.selectedMachine,
     };
   }
 

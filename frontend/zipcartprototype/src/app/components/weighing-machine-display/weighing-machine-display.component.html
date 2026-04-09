@@ -9,7 +9,7 @@
 
 <ion-content class="ion-padding center-content">
   <!-- Machine selection buttons acting as Confirm -->
-  <div class="machines-container">
+  <!-- <div class="machines-container">
     <ion-button
       *ngFor="let machine of machines"
       expand="block"
@@ -18,6 +18,12 @@
     >
       {{ machine.machineLocation }}
     </ion-button>
+  </div> -->
+
+  <div class="machines-container">
+    <ion-button (click)="confirm(requestSelectedMachine)">{{
+      requestSelectedMachine
+    }}</ion-button>
   </div>
 
   <!-- Cancel button -->
