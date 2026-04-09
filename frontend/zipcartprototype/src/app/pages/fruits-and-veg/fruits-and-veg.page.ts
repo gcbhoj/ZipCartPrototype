@@ -100,7 +100,7 @@ export class FruitsAndVegPage implements OnInit, OnDestroy {
         next: (res) => {
           if (res) {
             this.dataSharing.exchangeMockImage(this.imageUrlMock);
-            this.dataSharing.exchangeProductInformationArray(res);
+            this.dataSharing.exchangeProductInformationArray(res.predictions);
           }
           this.isProcessing = false;
         },
