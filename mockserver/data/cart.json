@@ -102,5 +102,15 @@
       }
     ],
     "transactionDateAndTime": "2026-02-05"
+  },
+  {
+    "cartId": "c6b3f22d-c7b6-454b-be71-ab9de2b86e86",
+    "retailerId": "a1b2c3d4-e5f6-4789-90ab-abcdef123456",
+    "userId": "11121314-1516-1718-1920-212223242526",
+    "status": "open",
+    "budget": 0,
+    "packagedProducts": [],
+    "unpackagedProducts": [],
+    "transactionDateAndTime": "2026-04-09T17:54:24.371Z"
   }
 ]
