@@ -17,17 +17,21 @@ import { WeighProductResponse } from 'src/app/classes/DTOs/WeighProductResponseD
 })
 export class CartService {
   // change to the below backend url while working with web
-  private backendUrl: string = 'http://localhost:8080/api/cart';
+  // change to the below backend url while working with web
+  private backendUrl: string = 'http://localhost:3000/mockserver/cart';
   // change to the below backend url while working with emulator
-  private backendUrlEmulator: string = 'http://10.0.2.2:8080/api/cart';
+  private backendUrlEmulator: string = 'http://10.0.2.2:3000/mockserver/cart';
   // change to the below backend url while working with device where the 0.0.0.0 is the users IPV4 Address
-  private backendUrlDevice: string = 'http://10.0.0.87:8080/api/cart';
+  private backendUrlDevice: string = 'http://10.0.0.87:3000/mockserver/cart';
 
+<<<<<<< HEAD
   private productURL: string = 'http://localhost:8080/api/product';
 <<<<<<< HEAD
   private pythonURL: string = 'http://localhost:5001/api/py/predict_fruit_veg';
 
 =======
+=======
+>>>>>>> bhoj
   private pythonURL: string = 'http://localhost:5001/api/py/predict_fruits_veg';
 >>>>>>> master
 
@@ -38,7 +42,7 @@ export class CartService {
 
   initializeCart(dto: StartShopping): Observable<StartShoppingResponse> {
     return this.http.post<StartShoppingResponse>(
-      `${this.backendUrl}/init`,
+      `${this.backendUrl}/initialize`,
       dto,
     );
   }
@@ -47,13 +51,13 @@ export class CartService {
     request: PackagedProductRequests,
   ): Observable<PackagedProductResponse> {
     return this.http.post<PackagedProductResponse>(
-      `${this.backendUrl}/add-item`,
+      `${this.backendUrl}/add-packaged`,
       request,
     );
   }
 
   getCartByCartId(cartId: string): void {
-    this.http.get<Cart>(`${this.backendUrl}/summary/${cartId}`).subscribe({
+    this.http.get<Cart>(`${this.backendUrl}/retrieve/${cartId}`).subscribe({
       next: (cart: Cart) => {
         this.cartSubject.next(cart);
       },
@@ -65,7 +69,7 @@ export class CartService {
     dto: PackagedProductRequests,
   ): Observable<PackagedProductResponse> {
     return this.http.post<PackagedProductResponse>(
-      `${this.backendUrl}/increaseQuantity`,
+      `${this.backendUrl}/increase-packaged`,
       dto,
     );
   }
@@ -74,7 +78,7 @@ export class CartService {
     dto: PackagedProductRequests,
   ): Observable<PackagedProductResponse> {
     return this.http.post<PackagedProductResponse>(
-      `${this.backendUrl}/decreaseQuantity`,
+      `${this.backendUrl}/decrease-packaged`,
       dto,
     );
   }
@@ -83,34 +87,34 @@ export class CartService {
     dto: PackagedProductRequests,
   ): Observable<PackagedProductResponse> {
     return this.http.patch<PackagedProductResponse>(
-      `${this.backendUrl}/remove-item`,
+      `${this.backendUrl}/remove-packaged`,
       dto,
     );
   }
 
-  getProductByImage(formData: FormData): Observable<ProductInformation[]> {
-    return this.http.post<ProductInformation[]>(
-      `${this.productURL}/scan-unpackaged-image`,
-      formData,
-    );
-  }
-
-  // getProductByImage(formData: FormData): Observable<PythonResponse> {
-  //   return this.http.post<PythonResponse>(
-  //     `${this.pythonURL}`, // adjust endpoint
+  // getProductByImage(formData: FormData): Observable<ProductInformation[]> {
+  //   return this.http.post<ProductInformation[]>(
+  //     `${this.productURL}/scan-unpackaged-image`,
   //     formData,
   //   );
   // }
 
-  // getProductByName(productName: string): Observable<ProductInformation[]> {
-  //   return this.http.get<ProductInformation[]>(
-  //     `${this.backendUrl}/getByName/${productName}`,
-  //   );
-  // }
+  getProductByImage(formData: FormData): Observable<PythonResponse> {
+    return this.http.post<PythonResponse>(
+      `${this.pythonURL}`, // adjust endpoint
+      formData,
+    );
+  }
+
+  getProductByName(productName: string): Observable<ProductInformation[]> {
+    return this.http.get<ProductInformation[]>(
+      `${this.backendUrl}/getByName/${productName}`,
+    );
+  }
 
   getProductLiveWeight(request: WeighProductRequest) {
     return this.http.post<WeighProductResponse>(
-      `${this.backendUrl}/receiveWeight`,
+      `${this.backendUrl}/live-weight`,
       request,
     );
   }
@@ -119,7 +123,7 @@ export class CartService {
     request: AddWeighedProduct,
   ): Observable<PackagedProductResponse> {
     return this.http.post<PackagedProductResponse>(
-      `${this.backendUrl}/add-unpackaged`,
+      `${this.backendUrl}/add-weighed`,
       request,
     );
   }
@@ -128,13 +132,13 @@ export class CartService {
     request: PackagedProductRequests,
   ): Observable<PackagedProductResponse> {
     return this.http.patch<PackagedProductResponse>(
-      `${this.backendUrl}/remove-item`,
+      `${this.backendUrl}/remove-weighed`,
       request,
     );
   }
 
   completeShopping(cartId: string): Observable<Blob> {
-    return this.http.get(`${this.backendUrl}/summary/${cartId}`, {
+    return this.http.get(`${this.backendUrl}/complete/${cartId}`, {
       responseType: 'blob',
     });
   }

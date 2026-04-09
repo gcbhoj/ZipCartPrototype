@@ -100,7 +100,8 @@ export class FruitsAndVegPage implements OnInit, OnDestroy {
         next: (res) => {
           if (res) {
             this.dataSharing.exchangeMockImage(this.imageUrlMock);
-            this.dataSharing.exchangeProductInformationArray(res);
+            this.dataSharing.exchangePythonResponse(res);
+            this.getProductByProductName(res.data.productName);
           }
           this.isProcessing = false;
         },
@@ -117,21 +118,21 @@ export class FruitsAndVegPage implements OnInit, OnDestroy {
     return await response.blob();
   }
 
-  // getProductByProductName(productName: string) {
-  //   this.cartService
-  //     .getProductByName(productName)
-  //     .pipe(takeUntil(this.destroy$))
-  //     .subscribe({
-  //       next: (res) => {
-  //         this.dataSharing.exchangeProductInformationArray(res);
-  //       },
-  //       error: (err) => {
-  //         const message =
-  //           err?.error?.message || 'Unable to retrieve product By Name';
-  //         this.toast.showError(message);
-  //       },
-  //     });
-  // }
+  getProductByProductName(productName: string) {
+    this.cartService
+      .getProductByName(productName)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (res) => {
+          this.dataSharing.exchangeProductInformationArray(res);
+        },
+        error: (err) => {
+          const message =
+            err?.error?.message || 'Unable to retrieve product By Name';
+          this.toast.showError(message);
+        },
+      });
+  }
   /**
    * SEND IMAGE BUTTON FUNCTIONS
    */
