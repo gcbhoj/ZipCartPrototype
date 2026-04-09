@@ -9,7 +9,7 @@ REQUEST PAMRM : string
 RESPONSE DTO FORMAT(java class)
 userId: string
 userName: string
-message: string
+message: string // Done
 
 2. Retailer Information
 
@@ -22,7 +22,7 @@ Response DTO FORMAT(java class)
   retailerId: string;
   retailerName: string;
   retailerURL: string;
-  retailerLogoUrl: string;
+  retailerLogoUrl: string; // Done
 
 2. Initialize Cart
 Request Type: POST
@@ -34,7 +34,7 @@ RESPONSE DTO FORMAT (java class):
   cartId: string;
   retailerName: string;
   budget: number;
-  message: string;
+  message: string; // Done
 
 3. ScanProductsByBarcode
 Request Type: POST
@@ -57,7 +57,7 @@ RESPONSE DTO FORMAT (java class):
   manufacturer: string;
   manufacturedIn: string;
   aboutProduct: string;
-  quantity: number;
+  quantity: number; // Done
 
 4. Add Packaged Product to Cart
 Request Type 📃POST
@@ -67,7 +67,7 @@ cartId:string;
 itemId: string;
 
 RESPONSE DTO FORMAT (java class):
-result:string
+result:string // Done
 
 5. Get Cart By Id
 Request Type : Get
@@ -80,7 +80,7 @@ RESPONSE DTO FORMAT(java class)
   packagedProducts: PackagedProduct[];
   unpackagedProducts: UnPackagedProduct[];
   hst: number;
-  totalAmount: number;
+  totalAmount: number; // Done
 
 6. Increase Packaged Product Quantiy
 Request Type 📃Patch
@@ -90,7 +90,7 @@ cartId:string;
 itemId: string;
 
 RESPONSE DTO FORMAT (java class):
-result:string
+result:string // Done
 
 7. Decrease Packaged Product Quantiy
 Request Type 📃Patch
@@ -100,7 +100,7 @@ cartId:string;
 itemId: string;
 
 RESPONSE DTO FORMAT (java class):
-result:string
+result:string // Done
 
 8. Remove Packaged Product 
 Request Type 📃Patch
@@ -110,7 +110,7 @@ cartId:string;
 itemId: string;
 
 RESPONSE DTO FORMAT (java class):
-result:string
+result:string // Done
 
 9. Identify Frutis & Veg
 Request Type: POST
