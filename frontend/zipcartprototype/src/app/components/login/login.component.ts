@@ -16,7 +16,7 @@ import { UserService } from 'src/app/services/springServices/userServices/user-s
 export class LoginComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   logIn: LoginResponse = {
-    userId: '11121314-1516-1718-1920-212223242526',
+    userId: '1',
     userName: '',
     message: '',
   };
