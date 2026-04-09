@@ -24,8 +24,12 @@ export class CartService {
   private backendUrlDevice: string = 'http://10.0.0.87:8080/api/cart';
 
   private productURL: string = 'http://localhost:8080/api/product';
+<<<<<<< HEAD
   private pythonURL: string = 'http://localhost:5001/api/py/predict_fruit_veg';
 
+=======
+  private pythonURL: string = 'http://localhost:5001/api/py/predict_fruits_veg';
+>>>>>>> master
 
   private cartSubject = new BehaviorSubject<Cart | null>(null);
   cart$: Observable<Cart | null> = this.cartSubject.asObservable();
