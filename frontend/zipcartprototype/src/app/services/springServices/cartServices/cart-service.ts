@@ -11,6 +11,7 @@ import { ProductInformation } from 'src/app/classes/Models/PackagedProductInform
 import { WeighProductRequest } from 'src/app/classes/DTOs/WeighProductRequestDTO';
 import { AddWeighedProduct } from 'src/app/classes/DTOs/AddWeighedProductDTO';
 import { WeighProductResponse } from 'src/app/classes/DTOs/WeighProductResponseDTO';
+import { ProductResponse } from 'src/app/classes/DTOs/ProductResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -87,8 +88,8 @@ export class CartService {
     );
   }
 
-  getProductByImage(formData: FormData): Observable<ProductInformation[]> {
-    return this.http.post<ProductInformation[]>(
+  getProductByImage(formData: FormData): Observable<ProductResponse> {
+    return this.http.post<ProductResponse>(
       `${this.productURL}/scan-unpackaged-image`,
       formData,
     );
