@@ -1,4 +1,4 @@
-package ca.sheridancollege.capstoneprototype.beans;
+package ca.sheridancollege.capstoneprototype.domain;
 
 import java.util.Date;
 
@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +20,7 @@ import lombok.NoArgsConstructor;
 public class Product {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long prodId;
 
     private String barcode;
@@ -42,3 +43,4 @@ public class Product {
     private Integer quantity;
 
 }
+

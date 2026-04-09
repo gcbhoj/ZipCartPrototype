@@ -1,18 +1,16 @@
 package ca.sheridancollege.capstoneprototype.response;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class InitCartResponseDTO {
+public class RetailerResponseDTO {
 
-	private String cartId;
+	private Long retailerId;
     private String retailerName;
-    private Double budget;
-    private String message;
+    private String retailerUrl;
+    private String retailerLogoUrl;
 }

@@ -1,17 +1,17 @@
-package ca.sheridancollege.capstoneprototype.service;
+package ca.sheridancollege.capstoneprototype.services;
 
 import org.springframework.stereotype.Service;
 
-import ca.sheridancollege.bijumonk.beans.User;
-import ca.sheridancollege.bijumonk.repositories.UserRepository;
-import ca.sheridancollege.bijumonk.response.GetUserResponseDTO;
+import ca.sheridancollege.capstoneprototype.domain.User;
+import ca.sheridancollege.capstoneprototype.repositories.UserRepository;
+import ca.sheridancollege.capstoneprototype.response.GetUserResponseDTO;
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
 public class UserService {
-
-    private final UserRepository userRepository;
+	
+	private final UserRepository userRepository;
 
     public GetUserResponseDTO getUserById(Long userId) {
         User user = userRepository.findById(userId)
@@ -23,4 +23,5 @@ public class UserService {
                 .message("User fetched successfully")
                 .build();
     }
+
 }

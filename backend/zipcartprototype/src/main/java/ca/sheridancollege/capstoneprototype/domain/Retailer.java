@@ -1,4 +1,4 @@
-package ca.sheridancollege.capstoneprototype.beans;
+package ca.sheridancollege.capstoneprototype.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -18,6 +18,7 @@ public class Retailer {
 
 	@Id
 	private Long retailerId;
-	
     private String retailerName;
+    private String retailerUrl;
+    private String retailerLogoUrl;
 }

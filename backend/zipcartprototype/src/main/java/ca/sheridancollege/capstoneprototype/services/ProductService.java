@@ -1,21 +1,21 @@
-package ca.sheridancollege.capstoneprototype.service;
+package ca.sheridancollege.capstoneprototype.services;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import ca.sheridancollege.bijumonk.beans.Product;
-import ca.sheridancollege.bijumonk.repositories.ProductRepository;
-import ca.sheridancollege.bijumonk.request.ScanProductRequestDTO;
-import ca.sheridancollege.bijumonk.response.ScanProductResponseDTO;
+import ca.sheridancollege.capstoneprototype.domain.Product;
+import ca.sheridancollege.capstoneprototype.repositories.ProductRepository;
+import ca.sheridancollege.capstoneprototype.request.ScanProductRequestDTO;
+import ca.sheridancollege.capstoneprototype.response.ScanProductResponseDTO;
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
 public class ProductService {
-
-	private ProductRepository productRepository;
+	
+private ProductRepository productRepository;
 	
 	
 	public ScanProductResponseDTO scanByBarcode(ScanProductRequestDTO request) {
@@ -44,4 +44,5 @@ public class ProductService {
                 .quantity(product.getQuantity())
                 .build();
     }
+
 }

@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class InitCartResponseDTO {
-
-	private String cartId;
-    private String retailerName;
-    private Double budget;
-    private String message;
+public class WeightResponseDTO {
+	
+	private String itemNumber;
+	private String productName;
+	private Double liveWeight;
+	private Double unitPrice;
+	private String imageURL;
 }

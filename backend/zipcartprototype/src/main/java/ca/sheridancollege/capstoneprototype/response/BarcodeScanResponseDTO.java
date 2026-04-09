@@ -1,7 +1,6 @@
 package ca.sheridancollege.capstoneprototype.response;
 
 import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor 
 @Builder
 public class BarcodeScanResponseDTO {
-    private List<String> barcodes;  
-    private String message;         
+
+	private List<String> barcodes;  
+    private String message;
 }

@@ -1,4 +1,4 @@
-package ca.sheridancollege.capstoneprototype.models;
+package ca.sheridancollege.capstoneprototype.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,12 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class FruitsVegPreditResponse {
+@Builder
+public class AddUnpackagedProductResponseDTO {
 	
-	private float confidence;
-	private String productName;
+	private String message;
 
 }

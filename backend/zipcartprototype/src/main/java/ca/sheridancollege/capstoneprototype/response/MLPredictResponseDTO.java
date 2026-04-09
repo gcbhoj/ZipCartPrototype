@@ -1,5 +1,7 @@
 package ca.sheridancollege.capstoneprototype.response;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +12,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor 
 @Builder
 public class MLPredictResponseDTO {
-    private String productName;   
-    private Double confidence;    
+
+	private List<PredictionItem> predictions; 
+
+	@Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class PredictionItem {
+        private String productName;
+        private Double confidence;
+    }
 }

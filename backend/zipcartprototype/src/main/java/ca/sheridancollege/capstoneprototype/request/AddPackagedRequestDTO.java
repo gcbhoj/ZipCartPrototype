@@ -1,17 +1,16 @@
 package ca.sheridancollege.capstoneprototype.request;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class InitCartRequestDTO {
+public class AddPackagedRequestDTO {
 
-	private String userId;
-    private String retailerId;
-    private Double budget;
+	 private String cartId;
+     private String itemId;
+     //private Integer quantity;
+     //private String itemType;   // "packaged" or "unpackaged"
 }

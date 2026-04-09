@@ -1,4 +1,4 @@
-package ca.sheridancollege.capstoneprototype.beans;
+package ca.sheridancollege.capstoneprototype.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "_cart_item")
 public class CartItem {
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartItemId;
 

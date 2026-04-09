@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ScanProductRequestDTO {
-    private boolean isValid;
+
+	private boolean isValid;
     private String text;        
     private String format;     
     private String contentType;

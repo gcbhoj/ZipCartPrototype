@@ -1,4 +1,4 @@
-package ca.sheridancollege.capstoneprototype.beans;
+package ca.sheridancollege.capstoneprototype.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
