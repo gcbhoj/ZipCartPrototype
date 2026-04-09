@@ -92,7 +92,9 @@ export class FruitsAndVegPage implements OnInit, OnDestroy {
   /**
    * SERVICE CALLS
    */
+
   uploadImage(formData: FormData) {
+    this.isProcessing = true;
     this.cartService
       .getProductByImage(formData)
       .pipe(takeUntil(this.destroy$))
