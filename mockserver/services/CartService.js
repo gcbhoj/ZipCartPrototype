@@ -172,7 +172,7 @@ const getProductLiveWeight = async (machineId, itemId) => {
   }
 
   // simulate weight (replace with real machine logic)
-  const weight = (Math.random() * 2).toFixed(2);
+  const weight = Number((0.5).toFixed(2)); // 0.50
 
   const response = new LiveWeightResponse(
     product.itemNumber,
