@@ -11,6 +11,7 @@ import { ProductInformation } from 'src/app/classes/Models/PackagedProductInform
 import { WeighProductRequest } from 'src/app/classes/DTOs/WeighProductRequestDTO';
 import { AddWeighedProduct } from 'src/app/classes/DTOs/AddWeighedProductDTO';
 import { WeighProductResponse } from 'src/app/classes/DTOs/WeighProductResponseDTO';
+import { ProductResponse } from 'src/app/classes/DTOs/ProductResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,16 @@ export class CartService {
   // change to the below backend url while working with device where the 0.0.0.0 is the users IPV4 Address
   private backendUrlDevice: string = 'http://10.0.0.87:3000/mockserver/cart';
 
+<<<<<<< HEAD
+  private productURL: string = 'http://localhost:8080/api/product';
+  private liveWeightURL: string = 'http://localhost:8080/api';
+
+<<<<<<< HEAD
+=======
+=======
+=======
+>>>>>>> bhoj
+>>>>>>> athul
   private pythonURL: string = 'http://localhost:5001/api/py/predict_fruits_veg';
 
   private cartSubject = new BehaviorSubject<Cart | null>(null);
@@ -42,25 +53,45 @@ export class CartService {
     request: PackagedProductRequests,
   ): Observable<PackagedProductResponse> {
     return this.http.post<PackagedProductResponse>(
+<<<<<<< HEAD
+      `${this.backendUrl}/addPackagedProduct`,
+=======
       `${this.backendUrl}/add-packaged`,
+>>>>>>> athul
       request,
     );
   }
 
   getCartByCartId(cartId: string): void {
+<<<<<<< HEAD
+    this.http
+      .get<Cart>(`${this.backendUrl}/viewCart?cartId=${cartId}`)
+      .subscribe({
+        next: (cart: Cart) => {
+          this.cartSubject.next(cart);
+        },
+        error: (err) => console.error('Failed to load Cart Items', err),
+      });
+=======
     this.http.get<Cart>(`${this.backendUrl}/retrieve/${cartId}`).subscribe({
       next: (cart: Cart) => {
         this.cartSubject.next(cart);
       },
       error: (err) => console.error('Failed to load Cart Items', err),
     });
+>>>>>>> athul
   }
 
   increasePackagedProductQuantity(
     dto: PackagedProductRequests,
   ): Observable<PackagedProductResponse> {
+<<<<<<< HEAD
+    return this.http.patch<PackagedProductResponse>(
+      `${this.backendUrl}/increaseQuantity`,
+=======
     return this.http.post<PackagedProductResponse>(
       `${this.backendUrl}/increase-packaged`,
+>>>>>>> athul
       dto,
     );
   }
@@ -68,8 +99,13 @@ export class CartService {
   decreasePackagedProductQuantity(
     dto: PackagedProductRequests,
   ): Observable<PackagedProductResponse> {
+<<<<<<< HEAD
+    return this.http.patch<PackagedProductResponse>(
+      `${this.backendUrl}/decreaseQuantity`,
+=======
     return this.http.post<PackagedProductResponse>(
       `${this.backendUrl}/decrease-packaged`,
+>>>>>>> athul
       dto,
     );
   }
@@ -83,9 +119,22 @@ export class CartService {
     );
   }
 
+<<<<<<< HEAD
+  getProductByImage(formData: FormData): Observable<ProductResponse> {
+    return this.http.post<ProductResponse>(
+      `${this.productURL}/scan-unpackaged-image`,
+      formData,
+    );
+  }
+
+  // getProductByImage(formData: FormData): Observable<PythonResponse> {
+  //   return this.http.post<PythonResponse>(
+  //     `${this.pythonURL}`, // adjust endpoint
+=======
   // getProductByImage(formData: FormData): Observable<ProductInformation[]> {
   //   return this.http.post<ProductInformation[]>(
   //     `${this.productURL}/scan-unpackaged-image`,
+>>>>>>> athul
   //     formData,
   //   );
   // }
@@ -105,7 +154,11 @@ export class CartService {
 
   getProductLiveWeight(request: WeighProductRequest) {
     return this.http.post<WeighProductResponse>(
+<<<<<<< HEAD
+      `${this.liveWeightURL}/getWeight`,
+=======
       `${this.backendUrl}/live-weight`,
+>>>>>>> athul
       request,
     );
   }
@@ -114,7 +167,11 @@ export class CartService {
     request: AddWeighedProduct,
   ): Observable<PackagedProductResponse> {
     return this.http.post<PackagedProductResponse>(
+<<<<<<< HEAD
+      `${this.backendUrl}/add-unpackaged-final`,
+=======
       `${this.backendUrl}/add-weighed`,
+>>>>>>> athul
       request,
     );
   }
@@ -128,8 +185,13 @@ export class CartService {
     );
   }
 
+<<<<<<< HEAD
+  completeShopping(cartId: string, userId: string): Observable<Blob> {
+    return this.http.get(`${this.backendUrl}/summary/${cartId}/${userId}`, {
+=======
   completeShopping(cartId: string): Observable<Blob> {
     return this.http.get(`${this.backendUrl}/complete/${cartId}`, {
+>>>>>>> athul
       responseType: 'blob',
     });
   }

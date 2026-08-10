@@ -92,7 +92,9 @@ export class FruitsAndVegPage implements OnInit, OnDestroy {
   /**
    * SERVICE CALLS
    */
+
   uploadImage(formData: FormData) {
+    this.isProcessing = true;
     this.cartService
       .getProductByImage(formData)
       .pipe(takeUntil(this.destroy$))
@@ -100,8 +102,12 @@ export class FruitsAndVegPage implements OnInit, OnDestroy {
         next: (res) => {
           if (res) {
             this.dataSharing.exchangeMockImage(this.imageUrlMock);
+<<<<<<< HEAD
+            this.dataSharing.exchangeProductInformationArray(res.predictions);
+=======
             this.dataSharing.exchangePythonResponse(res);
             this.getProductByProductName(res.data.productName);
+>>>>>>> athul
           }
           this.isProcessing = false;
         },
